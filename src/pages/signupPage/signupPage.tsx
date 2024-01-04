@@ -11,28 +11,13 @@ import {
   SignInContainer,
   SignInBtn,
 } from './style';
+import { changeInputValue } from '../../hooks/chageInputValue';
 
 const SignupPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEamil(e.target.value);
-  };
-
-  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const changeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
-  };
-
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
 
   return (
     <Container>
@@ -47,7 +32,9 @@ const SignupPage: React.FC = () => {
             type="email"
             placeholder="Enter ID or Email Address"
             value={email}
-            onChange={changeEmail}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setEamil)
+            }
           />
         </InputContainer>
 
@@ -57,7 +44,9 @@ const SignupPage: React.FC = () => {
             type="text"
             placeholder="Enter your name"
             value={name}
-            onChange={changeName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setName)
+            }
           />
         </InputContainer>
 
@@ -67,7 +56,9 @@ const SignupPage: React.FC = () => {
             type="text"
             placeholder="Enter user name"
             value={nickname}
-            onChange={changeNickname}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setNickname)
+            }
           />
           <WarnText>경고메세지</WarnText>
         </InputContainer>
@@ -78,7 +69,9 @@ const SignupPage: React.FC = () => {
             type="password"
             placeholder="Enter Password"
             value={password}
-            onChange={changePassword}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setPassword)
+            }
           />
           <WarnText>경고메세지</WarnText>
         </InputContainer>
