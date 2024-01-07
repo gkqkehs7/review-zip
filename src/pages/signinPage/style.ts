@@ -12,6 +12,7 @@ const Container = styled.div`
   background-size: cover;
 `;
 
+// *******Left******* //뷰포트 내에서 상단에 위치한 순으로 배치했음
 const Left = styled.div`
   // 왼쪽 절반 차지
   flex: 1;
@@ -95,10 +96,38 @@ const MilkyWay = styled.div`
   z-index: 2;
 `;
 
-//********************************************************** */
+const EtcContainer = styled.div`
+  height: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const SignUp = styled(Link)`
+  position: relative;
+  width: 4vw;
+  height: 2.5vh;
+  color: white;
+  z-index: 3;
+  margin: 44vh 0vw 0vh 20vw;
+
+  cursor: pointer;
+`;
+
+const ForgotPwd = styled(Link)`
+  position: relative;
+  width: 10vw;
+  height: 2.5vh;
+  color: white;
+  margin: -2.6vh 0vw 0vh 30vw;
+
+  z-index: 3;
+  cursor: pointer;
+`;
+
+// *******Right******* //뷰포트 내에서 상단에 위치한 순으로 배치했음
 
 const Right = styled.div`
-  // 오른쪽 절반 차지
   flex: 1;
   padding: 1vh 0vw 0vh 7.5vw;
 `;
@@ -124,13 +153,14 @@ const InputContainer = styled.div`
 
 const InputTitle = styled.div`
   font-weight: bold;
-  margin: 2vh 0px;
+  margin: 45px 0px;
   color: white;
 `;
 
 const Input = styled.input`
   width: 25vw; // input이 화면 전체 사용하기 위함
   box-sizing: border-box; // input이 화면 전체 사용하기 위함
+  margin: 5px 0;
   padding: 10px;
   color: white;
   font-weight: bold;
@@ -143,34 +173,47 @@ const Input = styled.input`
   }
 `;
 
-const WarnText = styled.div`
-  color: white;
-  text-decoration: underline;
-  margin: 2vh 0vw 0vh 0vw;
+// ********or Sign in with Css********
+const OrSignContainer = styled.h2`
+  width: 27.5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 6vh 0vw;
 `;
 
-const SignUpBtn = styled.h1`
+const OrSignBtn = styled.div`
+  color: white;
+  cursor: pointer;
+`;
+
+const KaKaoIcon = styled.div`
+  background-image: url('images/ri_kakao-talk-fill.png');
+  background-repeat: no-repeat;
+  width: 2vw;
+  height: 4vh;
+  margin: 0vh 0vw 0vh 0.5vw;
+`;
+//*************************************
+
+const SignInBtn = styled(Link)`
+  font-size: 300%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin: 4vh 2.5vw;
+  margin: 7vh 2.5vw;
   color: white;
   width: fit-content; // 버튼이 자신의 크기만큼만 차지하게 하기 위함
   cursor: pointer;
 `;
 
-const SignInContainer = styled.div`
-  width: 10vw;
+const PrivacyPolicy = styled.h2`
   display: flex;
   align-items: center;
-  color: white;
-  margin: 5vh 0vw 0vh 2.5vw;
-`;
-
-const SignInBtn = styled(Link)`
-  margin: 0 1vw;
-  color: white;
-  font-weight: bold;
+  color: #323a54;
+  width: fit-content;
+  margin: 5vh 2.5vw;
   cursor: pointer;
 `;
 
@@ -182,6 +225,10 @@ export default {
   InputTitle,
   Input,
   SignInBtn,
+  OrSignContainer,
+  OrSignBtn,
+  PrivacyPolicy,
+  KaKaoIcon,
   PurpleCloud,
   Union,
   Title,
@@ -189,8 +236,8 @@ export default {
   Ellipse,
   LargeStar,
   MiniStar,
-  WarnText,
-  SignUpBtn,
-  SignInContainer,
   PerkyMilkyway,
+  SignUp,
+  ForgotPwd,
+  EtcContainer,
 };

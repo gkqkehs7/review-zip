@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import styles from './style';
+import { changeInputValue } from '../../hooks/chageInputValue';
 
 const LeftSide = () => {
   return (
@@ -16,23 +17,14 @@ const LeftSide = () => {
       <styles.EtcContainer>
         <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
         {/* 링크 수정해야함 */}
-        <styles.ForgotPwd to="">Forgot the Password?</styles.ForgotPwd>
       </styles.EtcContainer>
     </styles.Left>
   );
 };
 
-const SigninPage = () => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEamil(e.target.value);
-  };
-
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+const FindpwdPage = () => {
+  const [name, setName] = useState<string>('');
+  const [telnumber, setTelnumber] = useState<string>('');
 
   return (
     <styles.Container>
@@ -42,23 +34,27 @@ const SigninPage = () => {
       <styles.Right>
         {/* 이메일 */}
         <styles.InputContainer>
-          <styles.InputTitle>EMAIL</styles.InputTitle>
+          <styles.InputTitle>성명</styles.InputTitle>
           <styles.Input
-            type="email"
+            type="text"
             pattern=".+@example\.com"
-            placeholder="Enter ID or Email Adress"
-            value={email}
-            onChange={changeEmail}
+            placeholder="홍길동"
+            value={name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setName)
+            }
           ></styles.Input>
         </styles.InputContainer>
         {/* 비밀 번호 */}
         <styles.InputContainer>
-          <styles.InputTitle>PASSWORD</styles.InputTitle>
+          <styles.InputTitle>휴대폰 번호</styles.InputTitle>
           <styles.Input
             type="password"
             placeholder="Enter UserName"
-            value={password}
-            onChange={changePassword}
+            value={telnumber}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setTelnumber)
+            }
           ></styles.Input>
         </styles.InputContainer>
         {/* 카카오톡 */}
@@ -67,12 +63,11 @@ const SigninPage = () => {
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="">&gt; SIGN IN</styles.SignInBtn>
-        {/* 개인정책 */}
+
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
     </styles.Container>
   );
 };
 
-export default SigninPage;
+export default FindpwdPage;
