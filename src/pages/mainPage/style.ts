@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { Swiper } from 'swiper/react';
 
-const Container = styled(Swiper)`
-  width: 100%;
-  height: 100%;
-`;
+const styles = {
+  Container: styled(Swiper)`
+    width: 100%;
+    height: 100%;
+  `,
+};
 
-export { Container };
+export default styles;

@@ -1,20 +1,21 @@
 import { SwiperSlide } from 'swiper/react';
 import { Pagination, Mousewheel } from 'swiper/modules';
-import { Container } from './style';
+import styles from './style';
 
-import MainTop from '../../components/mainTop/mainTop';
-import MainMiddle from '../../components/mainMiddle/mainMiddle';
-import MainBottom from '../../components/mainBottom/mainBottom';
+import MainTop from '../../components/mainPage/mainTop/mainTop';
+import MainMiddle from '../../components/mainPage/mainMiddle/mainMiddle';
+import MainBottom from '../../components/mainPage/mainBottom/mainBottom';
 
-export default function App() {
+const MainPage: React.FC = () => {
   return (
-    <Container
+    <styles.Container
+      modules={[Pagination, Mousewheel]}
       direction={'vertical'}
       pagination={{
         clickable: true,
       }}
-      modules={[Pagination, Mousewheel]}
       scrollbar={{ draggable: true }}
+      mousewheel={true}
     >
       {/* mainPage 화면 윗 부분 */}
       <SwiperSlide>
@@ -30,6 +31,8 @@ export default function App() {
       <SwiperSlide>
         <MainBottom />
       </SwiperSlide>
-    </Container>
+    </styles.Container>
   );
-}
+};
+
+export default MainPage;
