@@ -1,46 +1,50 @@
 import { useState } from 'react';
-import {
-  Container,
-  Left,
-  Right,
-  InputContainer,
-  InputTitle,
-  Input,
-  WarnText,
-  SignUpBtn,
-  SignInContainer,
-  SignInBtn,
-} from './style';
+import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
 
+const LeftSide = () => {
+  return (
+    <styles.Left>
+      <styles.Union />
+      <styles.Title />
+      <styles.PurpleCloud />
+      <styles.MilkyWay />
+      <styles.LargeStar />
+      <styles.MiniStar />
+      <styles.Ellipse />
+    </styles.Left>
+  );
+};
+
 const SignupPage: React.FC = () => {
-  const [email, setEamil] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   return (
-    <Container>
+    <styles.Container>
       {/* 왼쪽 */}
-      <Left>그림 넣는 부분</Left>
-
+      <LeftSide />
       {/* 오른쪽*/}
-      <Right>
-        <InputContainer>
-          <InputTitle>이메일</InputTitle>
-          <Input
-            type="email"
-            placeholder="Enter ID or Email Address"
-            value={email}
+      <styles.PerkyMilkyway />
+      <styles.Right>
+        <styles.InputContainer>
+          <styles.InputTitle>휴대폰 번호</styles.InputTitle>
+          <styles.Input
+            type="tel"
+            placeholder="010-1234-5678"
+            value={phoneNumber}
+            pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
+              changeInputValue(e, setPhoneNumber)
             }
           />
-        </InputContainer>
+        </styles.InputContainer>
 
-        <InputContainer>
-          <InputTitle>성명</InputTitle>
-          <Input
+        <styles.InputContainer>
+          <styles.InputTitle>성명</styles.InputTitle>
+          <styles.Input
             type="text"
             placeholder="Enter your name"
             value={name}
@@ -48,11 +52,11 @@ const SignupPage: React.FC = () => {
               changeInputValue(e, setName)
             }
           />
-        </InputContainer>
+        </styles.InputContainer>
 
-        <InputContainer>
-          <InputTitle>닉네임</InputTitle>
-          <Input
+        <styles.InputContainer>
+          <styles.InputTitle>사용자 닉네임</styles.InputTitle>
+          <styles.Input
             type="text"
             placeholder="Enter user name"
             value={nickname}
@@ -60,30 +64,32 @@ const SignupPage: React.FC = () => {
               changeInputValue(e, setNickname)
             }
           />
-          <WarnText>경고메세지</WarnText>
-        </InputContainer>
+        </styles.InputContainer>
 
-        <InputContainer>
-          <InputTitle>비밀번호</InputTitle>
-          <Input
+        <styles.InputContainer>
+          <styles.InputTitle>비밀번호</styles.InputTitle>
+          <styles.Input
             type="password"
             placeholder="Enter Password"
             value={password}
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setPassword)
             }
           />
-          <WarnText>경고메세지</WarnText>
-        </InputContainer>
+          <styles.WarnText>
+            대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.{' '}
+          </styles.WarnText>
+        </styles.InputContainer>
 
-        <SignUpBtn>&gt; SIGN UP</SignUpBtn>
+        <styles.SignUpBtn>&gt; SIGN UP</styles.SignUpBtn>
 
-        <SignInContainer>
+        <styles.SignInContainer>
           <p>계정이 있으신가요?</p>
-          <SignInBtn to="/signInPage">로그인</SignInBtn>
-        </SignInContainer>
-      </Right>
-    </Container>
+          <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
+        </styles.SignInContainer>
+      </styles.Right>
+    </styles.Container>
   );
 };
 

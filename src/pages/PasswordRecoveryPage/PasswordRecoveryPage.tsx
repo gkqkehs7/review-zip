@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
 
@@ -15,43 +15,43 @@ const LeftSide = () => {
       <styles.Ellipse />
       <styles.EtcContainer>
         <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        <styles.ForgotPwd to="">Forgot the Password?</styles.ForgotPwd>
       </styles.EtcContainer>
     </styles.Left>
   );
 };
 
-const SigninPage: React.FC = () => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+const PasswordRecoveryPage: React.FC = () => {
+  const [name, setName] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   return (
     <styles.Container>
+      {/* 정보 넣는 곳 */}
       <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
         {/* 이메일 */}
         <styles.InputContainer>
-          <styles.InputTitle>EMAIL</styles.InputTitle>
+          <styles.InputTitle>성명</styles.InputTitle>
           <styles.Input
-            type="email"
+            type="text"
             pattern=".+@example\.com"
-            placeholder="Enter ID or Email Adress"
-            value={email}
+            placeholder="홍길동"
+            value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
+              changeInputValue(e, setName)
             }
           />
         </styles.InputContainer>
         {/* 비밀 번호 */}
         <styles.InputContainer>
-          <styles.InputTitle>PASSWORD</styles.InputTitle>
+          <styles.InputTitle>휴대폰 번호</styles.InputTitle>
           <styles.Input
             type="password"
             placeholder="Enter UserName"
-            value={password}
+            value={phoneNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setPassword)
+              changeInputValue(e, setPhoneNumber)
             }
           />
         </styles.InputContainer>
@@ -61,12 +61,11 @@ const SigninPage: React.FC = () => {
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="">&gt; SIGN IN</styles.SignInBtn>
-        {/* 개인정책 */}
+
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
     </styles.Container>
   );
 };
 
-export default SigninPage;
+export default PasswordRecoveryPage;
