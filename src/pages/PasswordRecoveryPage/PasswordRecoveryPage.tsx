@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
 
 const LeftSide = () => {
   return (
     <styles.Left>
-      {/* 이미지 넣는 곳 */}
       <styles.Union />
       <styles.Title />
       <styles.PurpleCloud />
@@ -16,15 +15,14 @@ const LeftSide = () => {
       <styles.Ellipse />
       <styles.EtcContainer>
         <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        {/* 링크 수정해야함 */}
       </styles.EtcContainer>
     </styles.Left>
   );
 };
 
-const FindpwdPage = () => {
+const PasswordRecoveryPage: React.FC = () => {
   const [name, setName] = useState<string>('');
-  const [telnumber, setTelnumber] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   return (
     <styles.Container>
@@ -43,7 +41,7 @@ const FindpwdPage = () => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setName)
             }
-          ></styles.Input>
+          />
         </styles.InputContainer>
         {/* 비밀 번호 */}
         <styles.InputContainer>
@@ -51,11 +49,11 @@ const FindpwdPage = () => {
           <styles.Input
             type="password"
             placeholder="Enter UserName"
-            value={telnumber}
+            value={phoneNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setTelnumber)
+              changeInputValue(e, setPhoneNumber)
             }
-          ></styles.Input>
+          />
         </styles.InputContainer>
         {/* 카카오톡 */}
         <styles.OrSignContainer>
@@ -70,4 +68,4 @@ const FindpwdPage = () => {
   );
 };
 
-export default FindpwdPage;
+export default PasswordRecoveryPage;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import styles from './style';
+import { changeInputValue } from '../../hooks/chageInputValue';
 
 const LeftSide = () => {
   return (
     <styles.Left>
-      {/* 이미지 넣는 곳 */}
       <styles.Union />
       <styles.Title />
       <styles.PurpleCloud />
@@ -15,28 +15,18 @@ const LeftSide = () => {
       <styles.Ellipse />
       <styles.EtcContainer>
         <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        {/* 링크 수정해야함 */}
         <styles.ForgotPwd to="">Forgot the Password?</styles.ForgotPwd>
       </styles.EtcContainer>
     </styles.Left>
   );
 };
 
-const SigninPage = () => {
+const SigninPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEamil(e.target.value);
-  };
-
-  const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
   return (
     <styles.Container>
-      {/* 정보 넣는 곳 */}
       <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
@@ -48,8 +38,10 @@ const SigninPage = () => {
             pattern=".+@example\.com"
             placeholder="Enter ID or Email Adress"
             value={email}
-            onChange={changeEmail}
-          ></styles.Input>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setEamil)
+            }
+          />
         </styles.InputContainer>
         {/* 비밀 번호 */}
         <styles.InputContainer>
@@ -58,8 +50,10 @@ const SigninPage = () => {
             type="password"
             placeholder="Enter UserName"
             value={password}
-            onChange={changePassword}
-          ></styles.Input>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setPassword)
+            }
+          />
         </styles.InputContainer>
         {/* 카카오톡 */}
         <styles.OrSignContainer>

@@ -5,7 +5,6 @@ import { changeInputValue } from '../../hooks/chageInputValue';
 const LeftSide = () => {
   return (
     <styles.Left>
-      {/* 이미지 넣는 곳 */}
       <styles.Union />
       <styles.Title />
       <styles.PurpleCloud />
@@ -18,7 +17,7 @@ const LeftSide = () => {
 };
 
 const SignupPage: React.FC = () => {
-  const [number, setNumber] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -35,10 +34,10 @@ const SignupPage: React.FC = () => {
           <styles.Input
             type="tel"
             placeholder="010-1234-5678"
-            value={number}
+            value={phoneNumber}
             pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setNumber)
+              changeInputValue(e, setPhoneNumber)
             }
           />
         </styles.InputContainer>

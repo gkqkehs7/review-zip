@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import styles2 from '../changepwdPage/style';
+import styles2 from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
 
 const LeftSide = () => {
   return (
     <styles2.Left>
-      {/* 이미지 넣는 곳 */}
       <styles2.Union />
       <styles2.Title />
       <styles2.PurpleCloud />
@@ -16,18 +15,16 @@ const LeftSide = () => {
       <styles2.Ellipse />
       <styles2.EtcContainer>
         <styles2.SignUp to="/signupPage">Sign Up</styles2.SignUp>
-        {/* 링크 수정해야함 */}
       </styles2.EtcContainer>
     </styles2.Left>
   );
 };
 
-const changepwdPage = () => {
+const ChangePasswordPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [newpwd, setNewpwd] = useState<string>('');
   return (
     <styles2.Container>
-      {/* 정보 넣는 곳 */}
       <LeftSide />
       <styles2.PerkyMilkyway />
       <styles2.Right>
@@ -42,7 +39,7 @@ const changepwdPage = () => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setPassword)
             }
-          ></styles2.Input>
+          />
         </styles2.InputContainer>
         {/* 비밀 번호 */}
         <styles2.InputContainer>
@@ -55,7 +52,7 @@ const changepwdPage = () => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setNewpwd)
             }
-          ></styles2.Input>
+          />
         </styles2.InputContainer>
         {/* 카카오톡 */}
 
@@ -68,4 +65,4 @@ const changepwdPage = () => {
   );
 };
 
-export default changepwdPage;
+export default ChangePasswordPage;
