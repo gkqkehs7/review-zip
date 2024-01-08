@@ -1,37 +1,19 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import styles2 from './style';
+import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
-
-const LeftSide = () => {
-  return (
-    <styles2.Left>
-      <styles2.Union />
-      <styles2.Title />
-      <styles2.PurpleCloud />
-      <styles2.MilkyWay />
-      <styles2.LargeStar />
-      <styles2.MiniStar />
-      <styles2.Ellipse />
-      <styles2.EtcContainer>
-        <styles2.SignUp to="/signupPage">Sign Up</styles2.SignUp>
-      </styles2.EtcContainer>
-    </styles2.Left>
-  );
-};
 
 const ChangePasswordPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [newpwd, setNewpwd] = useState<string>('');
   return (
-    <styles2.Container>
-      <LeftSide />
-      <styles2.PerkyMilkyway />
-      <styles2.Right>
+    <styles.Container>
+      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+      <styles.Right>
         {/* 이메일 */}
-        <styles2.InputContainer>
-          <styles2.InputTitle>비밀번호 입력</styles2.InputTitle>
-          <styles2.Input
+        <styles.InputContainer>
+          <styles.InputTitle>비밀번호 입력</styles.InputTitle>
+          <styles.Input
             type="password"
             placeholder="Enter Password"
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
@@ -40,11 +22,11 @@ const ChangePasswordPage: React.FC = () => {
               changeInputValue(e, setPassword)
             }
           />
-        </styles2.InputContainer>
+        </styles.InputContainer>
         {/* 비밀 번호 */}
-        <styles2.InputContainer>
-          <styles2.InputTitle>비밀번호 재입력</styles2.InputTitle>
-          <styles2.Input
+        <styles.InputContainer>
+          <styles.InputTitle>비밀번호 재입력</styles.InputTitle>
+          <styles.Input
             type="password"
             placeholder="Enter Password Again"
             value={newpwd}
@@ -53,15 +35,20 @@ const ChangePasswordPage: React.FC = () => {
               changeInputValue(e, setNewpwd)
             }
           />
-        </styles2.InputContainer>
+        </styles.InputContainer>
         {/* 카카오톡 */}
-
+        <styles.WarnText>
+          대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.
+        </styles.WarnText>
         {/* 로그인 버튼 */}
-        <styles2.ChangeBtn to="">&gt; 변경하기</styles2.ChangeBtn>
+        <styles.ChangeBtn to="/CompleteChangePasswordPage">
+          &gt; 변경하기
+        </styles.ChangeBtn>
+
         {/* 개인정책 */}
-        <styles2.PrivacyPolicy>Privacy Policy</styles2.PrivacyPolicy>
-      </styles2.Right>
-    </styles2.Container>
+        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
+      </styles.Right>
+    </styles.Container>
   );
 };
 

@@ -2,20 +2,6 @@ import { useState } from 'react';
 import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
 
-const LeftSide = () => {
-  return (
-    <styles.Left>
-      <styles.Union />
-      <styles.Title />
-      <styles.PurpleCloud />
-      <styles.MilkyWay />
-      <styles.LargeStar />
-      <styles.MiniStar />
-      <styles.Ellipse />
-    </styles.Left>
-  );
-};
-
 const SignupPage: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -25,9 +11,9 @@ const SignupPage: React.FC = () => {
   return (
     <styles.Container>
       {/* 왼쪽 */}
-      <LeftSide />
+
       {/* 오른쪽*/}
-      <styles.PerkyMilkyway />
+
       <styles.Right>
         <styles.InputContainer>
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
@@ -82,7 +68,9 @@ const SignupPage: React.FC = () => {
           </styles.WarnText>
         </styles.InputContainer>
 
-        <styles.SignUpBtn>&gt; SIGN UP</styles.SignUpBtn>
+        <styles.SignUpBtn to="/CompleteSigninPage">
+          &gt; SIGN UP
+        </styles.SignUpBtn>
 
         <styles.SignInContainer>
           <p>계정이 있으신가요?</p>

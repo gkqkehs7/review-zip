@@ -3,32 +3,16 @@ import { useState } from 'react';
 import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
 
-const LeftSide = () => {
-  return (
-    <styles.Left>
-      <styles.Union />
-      <styles.Title />
-      <styles.PurpleCloud />
-      <styles.MilkyWay />
-      <styles.LargeStar />
-      <styles.MiniStar />
-      <styles.Ellipse />
-      <styles.EtcContainer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        <styles.ForgotPwd to="">Forgot the Password?</styles.ForgotPwd>
-      </styles.EtcContainer>
-    </styles.Left>
-  );
-};
-
 const SigninPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   return (
     <styles.Container>
-      <LeftSide />
-      <styles.PerkyMilkyway />
+      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+      <styles.ForgotPwd to="/PasswordRecoveryPage">
+        Forgot the Password?
+      </styles.ForgotPwd>
       <styles.Right>
         {/* 이메일 */}
         <styles.InputContainer>
