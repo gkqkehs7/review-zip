@@ -6,6 +6,8 @@ import FindpwdPage from './pages/PasswordRecoveryPage/PasswordRecoveryPage';
 import ChangepwdPage from './pages/changePasswordPage/changePasswordPage';
 import MainPage from './pages/mainPage/mainPage';
 import FindpwPage from './pages/findpwdPage/findpwdPage';
+
+// react swiper
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

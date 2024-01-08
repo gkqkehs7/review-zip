@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
-  // 화면 전체 사용하게
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #331b50;
-`;
+const styles = {
+  Container: styled.div`
+    // 화면 전체 사용하게
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-export { Container };
+    background-repeat: no-repeat;
+    background-size: cover;
+  `,
+};
+
+export default styles;

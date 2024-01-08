@@ -1,9 +1,11 @@
 import { Container } from './style';
-import mainTopImage from '../../../../public/images/mainPage/mainTopBackground.png';
+import mainTopBackgroundImage from '../../../../public/images/mainPage/mainTopBackground.png';
 
 const MainTop: React.FC = () => {
   return (
-    <Container style={{ backgroundImage: `url(${mainTopImage})` }}></Container>
+    <Container
+      style={{ backgroundImage: `url(${mainTopBackgroundImage})` }}
+    ></Container>
   );
 };
 
