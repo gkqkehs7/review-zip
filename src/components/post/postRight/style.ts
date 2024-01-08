@@ -11,6 +11,8 @@ const styles = {
     background-color: white;
     padding: 1.5vh 2.5vh 2vh 2.5vh;
     margin-left: 7px;
+
+    position: relative;
   `,
 
   UserContainer: styled.div`
@@ -72,6 +74,7 @@ const styles = {
   `,
 
   LikePersonNumber: styled.span`
+    cursor: pointer;
     font-weight: bold;
   `,
 
