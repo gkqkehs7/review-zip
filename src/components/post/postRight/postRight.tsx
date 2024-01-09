@@ -60,7 +60,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post }) => {
         <styles.SpaceShipImage src={SpaceShipImage} />
       </styles.SpaceShipImageContainer>
 
-      {/* 좋아요 목록 */}
+      {/* 좋아요 목록 - 나중에 하기 */}
       <LikeList likeListPop={likeListPop} popUplikelist={popUplikelist} />
     </styles.Container>
   );

@@ -1,28 +1,8 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  // 화면 전체 사용하게
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  background: linear-gradient(to bottom, #251a34 50%, #331b50 50%);
   position: relative;
-
-  z-index: 999;
-`;
-
-const LeftContainer = styled.div`
-  margin: -25vh auto;
-`;
-
-const MiddleContainer = styled.div`
-  margin: -10vh auto;
-`;
-
-const RightContainer = styled.div`
-  margin: -20vh auto;
+  margin: 40vh auto;
 `;
 
 const Frame = styled.div`
@@ -86,9 +66,6 @@ const Text = styled.p`
 
 export {
   Container,
-  LeftContainer,
-  MiddleContainer,
-  RightContainer,
   ImageContainer,
   Image,
   Frame,

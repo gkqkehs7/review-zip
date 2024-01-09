@@ -1,6 +1,6 @@
 import styles from './style';
-import FrameImage from '../../../../public/images/mainPage/Frame.png';
 import SpaceShipImage from '../../../../public/images/Post/spaceShip.png';
+import FrameComponent from '../frame/frame';
 
 interface MainMiddleModalProps {
   modalOpen: boolean;
@@ -25,10 +25,9 @@ const MainMiddelModal: React.FC<MainMiddleModalProps> = ({
     >
       <styles.InnerContainer>
         {/* 액자 */}
-        <styles.FrameContainer onClick={openLoadingModal}>
-          <styles.Frame src={FrameImage} />
-        </styles.FrameContainer>
+        <FrameComponent openLoadingModal={openLoadingModal} />
 
+        {/* 게시글 내용 */}
         <styles.ContentContainer>
           <styles.TextContainer>
             {/* 우주선 이미지 */}

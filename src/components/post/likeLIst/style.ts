@@ -5,16 +5,13 @@ const styles = {
     box-sizing: border-box;
     position: absolute;
     background-color: #331b50;
-
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     width: 100%;
     height: 40%;
     left: 0;
     bottom: 0;
-
     padding: 0 20px;
-
     display: flex;
     flex-direction: column;
   `,
@@ -43,12 +40,9 @@ const styles = {
   `,
 
   UserListContainer: styled.div`
-    box-sizing: border-box;
     overflow: scroll;
     margin: 10px 0;
-
     height: 100%;
-    background-color: aliceblue;
   `,
 
   User: styled.div`
