@@ -25,8 +25,8 @@ const data = [
 ];
 
 const SearchPage: React.FC = () => {
-  const [searchInputValue, setSearchInputValue] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
+  const [searchInputValue, setSearchInputValue] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const filteredData = searchInputValue
     ? data.filter((item) => item.value.includes(searchInputValue))
     : data;
