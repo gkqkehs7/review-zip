@@ -1,6 +1,6 @@
 import Post from '../../post/post';
 import styles from './style';
-import mainBottomBackgroundImage from '../../../../public/images/mainPage/mainBottomBackground.png';
+import mainBottomBackgroundImage from '/images/mainPage/mainBottomBackground.png';
 
 const MainBottom: React.FC = () => {
   return (

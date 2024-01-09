@@ -1,6 +1,6 @@
 import styles from './style';
 import ImageSlider from '../imageSlider/imageSlider';
-import SpaceShipImage from '../../../../public/images/Post/spaceShip.png';
+import SpaceShipImage from '/images/Post/spaceShip.png';
 import { IPost } from '../../../types/posts.types';
 
 interface PostLeftProps {

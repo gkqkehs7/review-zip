@@ -1,5 +1,5 @@
 import styles from './style';
-import mainTopBackgroundImage from '../../../../public/images/mainPage/mainTopBackground.png';
+import mainTopBackgroundImage from '/images/mainPage/mainTopBackground.png';
 
 const MainTop: React.FC = () => {
   return (

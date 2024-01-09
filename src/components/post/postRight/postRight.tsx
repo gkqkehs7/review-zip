@@ -1,7 +1,7 @@
 import styles from './style';
 import StarRating from '../../common/star/starsRating';
-import ScrabButton from '../../../../public/images/Post/ScrabButton.png';
-import SpaceShipImage from '../../../../public/images/Post/spaceShip.png';
+import ScrabButton from '/images/Post/ScrabButton.png';
+import SpaceShipImage from '/images/Post/spaceShip.png';
 import { IPost } from '../../../types/posts.types';
 import LikeList from '../likeLIst/likeLIst';
 import { useState } from 'react';

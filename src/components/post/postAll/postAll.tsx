@@ -1,7 +1,7 @@
 import styles from './style';
 import StarRating from '../../common/star/starsRating';
 import ImageSlider from '../imageSlider/imageSlider';
-import ScrabButton from '../../../../public/images/Post/ScrabButton.png';
+import ScrabButton from '/images/Post/ScrabButton.png';
 import { IPost } from '../../../types/posts.types';
 
 interface PostAllProps {

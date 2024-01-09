@@ -1,5 +1,5 @@
 import styles from './style';
-import SpaceShipImage from '../../../../public/images/Post/spaceShip.png';
+import SpaceShipImage from '/images/Post/spaceShip.png';
 import FrameComponent from '../frame/frame';
 
 interface MainMiddleModalProps {
