@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
+import MenuBar from '../../components/searchPage/MenuBar';
 
 const searchHistory = [
   { type: 'username', value: 'username' },
@@ -24,69 +25,85 @@ const data = [
 ];
 
 const SearchPage: React.FC = () => {
-  const [search, setSearch] = useState('');
+  const [searchInputValue, setSearchInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const filteredData = search
-    ? data.filter((item) => item.value.includes(search))
+  const filteredData = searchInputValue
+    ? data.filter((item) => item.value.includes(searchInputValue))
     : data;
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
   return (
     <styles.Container>
+      {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
       <styles.SearchBarContainer>
         <styles.SearchBar
           type="text"
           size={90}
-          value={search}
+          value={searchInputValue}
           placeholder="search"
-          onChange={(e) => changeInputValue(e, setSearch)}
+          onChange={(e) => changeInputValue(e, setSearchInputValue)}
           onFocus={handleFocus}
           onBlur={handleBlur}
           isFocused={isFocused}
         />
         <styles.Search />
+        {/*포커스가 된 경우 */}
         {isFocused && (
           <styles.SearchBarExtends>
-            {search === '' ? (
+            {' '}
+            {/*검색창 확장 영역*/}
+            {searchInputValue === '' ? (
+              //>>>>  검색창의 입력값이 비어있는 경우
               <>
                 {searchHistory.map((item, index) => (
                   <styles.HistoryContainer key={index}>
-                    {item.type === 'hashtag' ? (
-                      <styles.Hashtag src="images/Hashtag.png" />
+                    {' '}
+                    {/*검색 기록 보여주기 */}
+                    {item.type === 'hashtag' ? ( //검색 기록 데이터가 어떤 종류인지에 따라 구분
+                      <styles.Hashtag src="images/searchPage/Hashtag.png" /> //해시태그
                     ) : (
-                      <styles.UserName src="images/UserName.png" />
+                      <styles.UserName src="images/searchPage/UserName.png" /> //유저이름
                     )}
                     <styles.Content>{item.value}</styles.Content>
                   </styles.HistoryContainer>
                 ))}
-                <styles.DeleteButton>delete search history</styles.DeleteButton>
+                <styles.DeleteButton>delete search history</styles.DeleteButton>{' '}
+                {/*검색 기록 삭제 버튼 */}
               </>
             ) : (
+              //>>>>  검색창의 입력값이 비어있지 않은 경우
               <>
                 <styles.Top>
-                  <styles.SearchType isBorder={!search.includes('#')}>
+                  {' '}
+                  {/*검색어의 종류를 구분해서 보여주는 컨테이너 */}
+                  <styles.SearchType isBorder={!searchInputValue.includes('#')}>
+                    {' '}
+                    {/*props를 전달해서 border 변화*/}
                     리뷰잉
                   </styles.SearchType>
-                  <styles.SearchType isBorder={search.includes('#')}>
+                  <styles.SearchType isBorder={searchInputValue.includes('#')}>
                     태그
                   </styles.SearchType>
                 </styles.Top>
                 <>
+                  {/*밑에도 검색어 종류에 따라 표시되는 이미지 모양과 옆에 붙는 버튼 구분 */}
                   {filteredData.map((item, index) => (
                     <styles.HistoryContainer key={index}>
                       {item.type === 'username' &&
-                      item.value.includes(search) ? (
+                      item.value.includes(searchInputValue) ? (
                         <>
-                          <styles.UserName src="images/UserName.png" />
+                          <styles.UserName src="images/searchPage/UserName.png" />
                           <styles.Content>{item.value}</styles.Content>
-                          <styles.PlusFriend to="" />
+                          <styles.PlusFriend to="" />{' '}
+                          {/*username인 경우 친구 추가 */}
                         </>
                       ) : (
                         <>
-                          <styles.Hashtag src="images/Hashtag.png" />
+                          <styles.Hashtag src="images/searchPage/Hashtag.png" />
                           <styles.Content>{item.value}</styles.Content>
                           <styles.SeeReview to="">리뷰 보기</styles.SeeReview>
+                          {/*리뷰 보기 */}
                         </>
                       )}
                     </styles.HistoryContainer>
@@ -97,14 +114,8 @@ const SearchPage: React.FC = () => {
           </styles.SearchBarExtends>
         )}
       </styles.SearchBarContainer>
-      <styles.ComponentBox>
-        <styles.Union to="" />
-        <styles.Plus to="" />
-        <styles.Home to="" />
-        <styles.Find to="" />
-        <styles.Map to="" />
-        <styles.User to="" />
-      </styles.ComponentBox>
+      {/* 옆에 계속 표시되는 메뉴 */}
+      <MenuBar />
     </styles.Container>
   );
 };
