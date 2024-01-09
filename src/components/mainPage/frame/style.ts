@@ -2,25 +2,8 @@ import styled from 'styled-components';
 
 const styles = {
   Container: styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background: linear-gradient(to bottom, #251a34 50%, #331b50 50%);
     position: relative;
-    z-index: 999;
-  `,
-
-  LeftContainer: styled.div`
-    margin: -25vh auto;
-  `,
-
-  MiddleContainer: styled.div`
-    margin: -10vh auto;
-  `,
-
-  RightContainer: styled.div`
-    margin: -20vh auto;
+    margin: 40vh auto;
   `,
 
   Frame: styled.div`
