@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const styles = {
   Container: styled.div`
     position: absolute;
-    background-color: white;
     width: 100%;
     height: 100%;
     z-index: 1000;
@@ -25,7 +24,9 @@ const styles = {
     align-items: center;
   `,
 
-  FrameContainer: styled.div``,
+  FrameContainer: styled.div`
+    cursor: pointer;
+  `,
 
   Frame: styled.img`
     height: 350px;

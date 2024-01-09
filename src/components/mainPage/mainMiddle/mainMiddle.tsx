@@ -11,12 +11,18 @@ import {
 import FrameImage from '../../../../public/images/mainPage/Frame.png';
 import MainMiddelModal from '../mainMiddleModal/mainMiddelModal';
 import { useState } from 'react';
+import LoadingModal from '../../common/loadingModal.tsx/loadingModal';
 
 const MainMiddle: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
 
   const toggleModal = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const openLoadingModal = () => {
+    setLoadingModalOpen(true);
   };
 
   return (
@@ -47,7 +53,12 @@ const MainMiddle: React.FC = () => {
         <Text>나의 가장 아름다운 세상을 보여줄게</Text>
       </TextContainer>
 
-      <MainMiddelModal modalOpen={modalOpen} toggleModal={toggleModal} />
+      <MainMiddelModal
+        modalOpen={modalOpen}
+        toggleModal={toggleModal}
+        openLoadingModal={openLoadingModal}
+      />
+      <LoadingModal loadingModalOpen={loadingModalOpen} />
     </Container>
   );
 };

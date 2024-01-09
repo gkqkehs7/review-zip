@@ -5,11 +5,13 @@ import SpaceShipImage from '../../../../public/images/Post/spaceShip.png';
 interface MainMiddleModalProps {
   modalOpen: boolean;
   toggleModal: () => void;
+  openLoadingModal: () => void;
 }
 
 const MainMiddelModal: React.FC<MainMiddleModalProps> = ({
   modalOpen,
   toggleModal,
+  openLoadingModal,
 }) => {
   const hashtags = ['제천 덕수산성', '5월 초봄', '달이 잘 보이는 곳'];
 
@@ -23,7 +25,7 @@ const MainMiddelModal: React.FC<MainMiddleModalProps> = ({
     >
       <styles.InnerContainer>
         {/* 액자 */}
-        <styles.FrameContainer>
+        <styles.FrameContainer onClick={openLoadingModal}>
           <styles.Frame src={FrameImage} />
         </styles.FrameContainer>
 
