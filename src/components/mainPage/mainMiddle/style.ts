@@ -8,7 +8,6 @@ const styles = {
     grid-template-columns: 1fr 1fr 1fr;
     background: linear-gradient(to bottom, #251a34 50%, #331b50 50%);
     position: relative;
-    z-index: 999;
   `,
 
   LeftContainer: styled.div`

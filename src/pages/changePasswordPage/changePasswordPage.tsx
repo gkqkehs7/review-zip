@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useState } from 'react';
 import styles2 from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';

@@ -6,10 +6,17 @@ import spaceShipImage from '/images/groupBar/spaceShip.png';
 import userImage from '/images/groupBar/user.png';
 import styles from './style';
 
+import { useState } from 'react';
+
 const GroupBarComponent: React.FC = () => {
+  const [isBVisible, setBVisible] = useState(false);
+
   return (
     <styles.Container>
-      <styles.IconContainer>
+      <styles.IconContainer
+        onMouseEnter={() => setBVisible(true)}
+        onMouseLeave={() => setBVisible(false)}
+      >
         <styles.Icon src={spaceShipImage} />
         <styles.Icon src={plusImage} />
         <styles.Icon src={homeImage} />
@@ -18,24 +25,28 @@ const GroupBarComponent: React.FC = () => {
         <styles.Icon src={userImage} />
       </styles.IconContainer>
 
-      <styles.MenuContainer>
+      <styles.MenuContainer
+        isVisible={isBVisible}
+        onMouseEnter={() => setBVisible(true)}
+        onMouseLeave={() => setBVisible(false)}
+      >
         <styles.Menu>
-          <styles.MenuText>게시글</styles.MenuText>
+          <styles.MenuText isVisible={isBVisible}>→</styles.MenuText>
         </styles.Menu>
         <styles.Menu>
-          <styles.MenuText>게시글</styles.MenuText>
+          <styles.MenuText isVisible={isBVisible}>업로드</styles.MenuText>
         </styles.Menu>
         <styles.Menu>
-          <styles.MenuText>게시글</styles.MenuText>
+          <styles.MenuText isVisible={isBVisible}>홈</styles.MenuText>
         </styles.Menu>
         <styles.Menu>
-          <styles.MenuText>게시글</styles.MenuText>
+          <styles.MenuText isVisible={isBVisible}>검색</styles.MenuText>
         </styles.Menu>
         <styles.Menu>
-          <styles.MenuText>게시글</styles.MenuText>
+          <styles.MenuText isVisible={isBVisible}>지도</styles.MenuText>
         </styles.Menu>
         <styles.Menu>
-          <styles.MenuText>게시글</styles.MenuText>
+          <styles.MenuText isVisible={isBVisible}>프로필</styles.MenuText>
         </styles.Menu>
       </styles.MenuContainer>
     </styles.Container>

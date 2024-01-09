@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 const styles = {
-  Container: styled.div``,
+  Container: styled.div`
+    position: fixed;
+    top: 5vh;
+    right: 2vw;
+    z-index: 1000;
+  `,
 
   IconContainer: styled.div`
     display: flex;
@@ -11,11 +16,7 @@ const styles = {
     width: 330px;
     height: 50px;
     background-color: #7843b6;
-
     cursor: pointer;
-
-    &:hover {
-    }
   `,
 
   Icon: styled.img`
@@ -24,7 +25,7 @@ const styles = {
     padding: 10px;
   `,
 
-  MenuContainer: styled.div`
+  MenuContainer: styled.div<{ isVisible: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +34,8 @@ const styles = {
 
     border-radius: 20px;
     background-color: #d9d9d9;
+    height: ${(props) => (props.isVisible ? '50px' : '0')};
+    transition: height 0.5s ease;
   `,
 
   Menu: styled.div`
@@ -51,7 +54,10 @@ const styles = {
     }
   `,
 
-  MenuText: styled.div``,
+  MenuText: styled.div<{ isVisible: boolean }>`
+    display: ${(props) => (props.isVisible ? 'flex' : 'none')};
+    font-weight: bold;
+  `,
 };
 
 export default styles;

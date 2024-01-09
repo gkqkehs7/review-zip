@@ -40,7 +40,7 @@ const styles = {
   `,
 
   UserListContainer: styled.div`
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 10px 0;
     height: 100%;
   `,
