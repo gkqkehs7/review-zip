@@ -12,9 +12,13 @@ const MainMiddelModal: React.FC<MainMiddleModalProps> = ({
   toggleModal,
 }) => {
   const hashtags = ['제천 덕수산성', '5월 초봄', '달이 잘 보이는 곳'];
+
   return (
     <styles.Container
-      style={{ display: modalOpen ? 'flex' : 'none' }}
+      style={{
+        opacity: modalOpen ? 1 : 0,
+        pointerEvents: modalOpen ? 'all' : 'none',
+      }}
       onClick={toggleModal}
     >
       <styles.InnerContainer>

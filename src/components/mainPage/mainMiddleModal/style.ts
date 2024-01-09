@@ -12,6 +12,9 @@ const styles = {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
   `,
 
   InnerContainer: styled.div`

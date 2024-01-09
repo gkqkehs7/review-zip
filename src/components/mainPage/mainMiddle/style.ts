@@ -9,6 +9,8 @@ const Container = styled.div`
 
   background: linear-gradient(to bottom, #251a34 50%, #331b50 50%);
   position: relative;
+
+  z-index: 999;
 `;
 
 const LeftContainer = styled.div`
