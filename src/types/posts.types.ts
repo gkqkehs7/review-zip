@@ -13,6 +13,7 @@ type IPost = {
     name: string;
     profileImage: string;
   };
+  hashTags: string[];
   postImages: { id: number; url: string }[];
 };
 

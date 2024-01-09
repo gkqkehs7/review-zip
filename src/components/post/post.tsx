@@ -24,6 +24,7 @@ const Post: React.FC = () => {
       name: '김민우',
       profileImage: faker.image.avatar(),
     },
+    hashTags: ['제천 덕수산성', '5월 초봄', '달이 잘 보이는 곳'],
     postImages: [
       {
         id: 1,
