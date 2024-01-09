@@ -23,7 +23,9 @@ const RightContainer = styled.div`
   margin: 20vh auto;
 `;
 
-const FrameContainer = styled.div``;
+const FrameContainer = styled.div`
+  cursor: pointer;
+`;
 
 const Frame = styled.img`
   height: 350px;
