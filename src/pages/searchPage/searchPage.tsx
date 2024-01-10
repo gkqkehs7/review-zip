@@ -24,6 +24,16 @@ const data = [
   { type: 'username', value: 'username' },
 ];
 
+// SearchType 컴포넌트에 대한 타입 정의
+export interface SearchTypeProps {
+  isBorder: boolean;
+}
+
+// SearchBar 컴포넌트에 대한 타입 정의
+export interface SearchBarProps {
+  isFocused: boolean;
+}
+
 const SearchPage: React.FC = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
