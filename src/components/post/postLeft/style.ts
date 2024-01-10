@@ -6,13 +6,13 @@ const styles = {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 75vh;
+    width: 565px;
+    height: 785px;
 
     background-color: white;
-    padding: 1.5vh 2.5vh 2vh 2.5vh;
+    padding: 15px;
 
-    margin-right: 7px;
+    margin-right: 10px;
   `,
 
   TopContainer: styled.div`
@@ -48,7 +48,7 @@ const styles = {
 
   SpaceShipImage: styled.img`
     align-items: right;
-    width: 2vw;
+    width: 45.25px;
     height: auto;
   `,
 };

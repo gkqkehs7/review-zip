@@ -9,8 +9,8 @@ const styles = {
   Frame: styled.div`
     cursor: pointer;
     background-color: white;
-    width: 17vw;
-    height: 40vh;
+    width: 325px
+    height: 399px;
     padding: 12px 12px 20px 10px;
   `,
 
@@ -22,8 +22,8 @@ const styles = {
   `,
 
   ImageContainer: styled.div`
-    width: 100%;
-    height: 35vh;
+    width: 291px;
+    height: 296px;
     display: flex;
     background-color: black;
     justify-content: center;
@@ -43,8 +43,8 @@ const styles = {
   `,
 
   StarImage: styled.img`
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   `,
 
   LikeText: styled.div`

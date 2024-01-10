@@ -6,8 +6,8 @@ const styles = {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 75vh;
+    width: 565px;
+    height: 785px;
     background-color: white;
     padding: 1.5vh 2.5vh 2vh 2.5vh;
     margin-left: 7px;
@@ -18,11 +18,12 @@ const styles = {
   UserContainer: styled.div`
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
   `,
 
   UserImage: styled.img`
-    width: 35px;
-    height: 35px;
+    width: 40.8px;
+    height: 40.8px;
     border-radius: 50%;
   `,
 
@@ -59,12 +60,14 @@ const styles = {
 
   LikeButton: styled(GrLike)`
     cursor: pointer;
-    width: 1.5vw;
+    width: 26px;
+    height: 26px;
     margin-right: 10px;
   `,
 
   ScrabButton: styled.img`
-    width: 1.5vw;
+    width: 26px;
+    height: 26px;
     height: auto;
     cursor: pointer;
   `,
@@ -85,7 +88,7 @@ const styles = {
 
   SpaceShipImage: styled.img`
     align-items: right;
-    width: 2vw;
+    width: 45.25px;
     height: auto;
   `,
 };
