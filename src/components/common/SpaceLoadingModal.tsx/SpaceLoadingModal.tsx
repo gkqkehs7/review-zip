@@ -1,10 +1,12 @@
 import styles from './style';
 
-interface LoadingModalProps {
+interface SpaceLoadingModalProps {
   loadingModalOpen: boolean;
 }
 
-const LoadingModal: React.FC<LoadingModalProps> = ({ loadingModalOpen }) => {
+const SpaceLoadingModal: React.FC<SpaceLoadingModalProps> = ({
+  loadingModalOpen,
+}) => {
   return (
     <styles.Container style={{ display: loadingModalOpen ? 'flex' : 'none' }}>
       <styles.Text>로딩중...</styles.Text>
@@ -12,4 +14,4 @@ const LoadingModal: React.FC<LoadingModalProps> = ({ loadingModalOpen }) => {
   );
 };
 
-export default LoadingModal;
+export default SpaceLoadingModal;
