@@ -2,6 +2,7 @@ import styles from './style';
 import StarRating from '../../common/star/starsRating';
 import ImageSlider from '../imageSlider/imageSlider';
 import ScrabButton from '/images/Post/ScrabButton.png';
+import LikeButton from '/images/Post/LikeButton.png';
 import { IPost } from '../../../types/posts.types';
 
 interface PostAllProps {
@@ -38,7 +39,7 @@ const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
       {/* 좋아요, 스크랩, 별 버튼 */}
       <styles.Buttons>
         <styles.LikeSrabButtons>
-          <styles.LikeButton />
+          <styles.LikeButton src={LikeButton} />
           <styles.ScrabButton src={ScrabButton} />
         </styles.LikeSrabButtons>
 

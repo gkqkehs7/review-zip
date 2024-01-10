@@ -58,20 +58,18 @@ const styles = {
     justify-content: center;
   `,
 
-  LikeButton: styled(GrLike)`
+  LikeButton: styled.img`
     cursor: pointer;
     width: 26px;
-    height: 26px;
+    height: auto;
     margin-right: 10px;
   `,
 
   ScrabButton: styled.img`
-    width: 26px;
-    height: 26px;
-    height: auto;
     cursor: pointer;
+    width: 37px;
+    height: auto;
   `,
-
   LikeText: styled.div`
     font-size: small;
   `,

@@ -1,6 +1,7 @@
 import styles from './style';
 import StarRating from '../../common/star/starsRating';
 import ScrabButton from '/images/Post/ScrabButton.png';
+import LikeButton from '/images/Post/LikeButton.png';
 import SpaceShipImage from '/images/Post/spaceShip.png';
 import { IPost } from '../../../types/posts.types';
 
@@ -41,7 +42,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
       {/* 좋아요, 스크랩, 별 버튼 */}
       <styles.Buttons>
         <styles.LikeSrabButtons>
-          <styles.LikeButton />
+          <styles.LikeButton src={LikeButton} />
           <styles.ScrabButton src={ScrabButton} />
         </styles.LikeSrabButtons>
 
