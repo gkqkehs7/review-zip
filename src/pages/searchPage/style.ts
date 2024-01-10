@@ -1,15 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { SearchBarProps, SearchTypeProps } from './searchPage';
 
-// SearchType 컴포넌트에 대한 타입 정의
-interface SearchTypeProps {
-  isBorder: boolean;
-}
-
-// SearchBar 컴포넌트에 대한 타입 정의
-interface SearchBarProps {
-  isFocused: boolean;
-}
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
@@ -37,7 +29,7 @@ const styles = {
       props.isFocused
         ? '0'
         : '0px 4px 8px rgba(0, 0, 0, 0.3)'}; //포커스가 되면 그림자 제거
-    padding-left: 5vw;
+    padding-left: 96px;
     outline: none;
     ::placeholder {
       //--------placeholder의 색깔이 안바뀌는 문제 ------
@@ -52,7 +44,7 @@ const styles = {
   SearchBarExtends: styled.div`
     height: 70vh;
     font-size: 20px;
-    border: None;
+    border: none;
     background-color: rgba(255, 255, 255, 0.4); // 흰색 배경에 투명도 60%
     background-size: cover;
     position: absolute;
@@ -78,13 +70,13 @@ const styles = {
     background-position: center;
     position: absolute;
     top: 0;
-    margin: 2vw;
+    margin: 38px;
   `,
   //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용
   SearchType: styled.span<SearchTypeProps>`
     color: white;
     border-bottom: ${(props) => (props.isBorder ? 'solid white' : 'none')};
-    padding: 0 15vw 0 15vw;
+    padding: 0 230px 0 230px;
   `,
   //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
   Top: styled.div`
@@ -94,7 +86,7 @@ const styles = {
   `,
   //검색 기록에 뜰 데이터(searchHistory)나 유저의 입력에 따라 필터가 된 데이터( filteredData)들을 감쌀 컨테이너 hr태그를 따로 사용안하고 아래쪽만 border처리
   HistoryContainer: styled.div`
-    margin: 1.5vw 0 1.5vw 0;
+    margin: 28.8px 0 28.8px 0;
     border-bottom: 1px solid white;
   `,
 
@@ -103,7 +95,7 @@ const styles = {
     border-radius: 10px;
     width: 2vw;
     height: 4vh;
-    margin: 0 2vw 0 2vw;
+    margin: 0 38px 0 38px;
     position: relative;
     bottom: 1vh;
   `,
@@ -112,7 +104,7 @@ const styles = {
     border-radius: 50px;
     width: 2vw;
     height: 4vh;
-    margin: 0 2vw 0 2vw;
+    margin: 0 38px 0 38px;
     position: relative;
     bottom: 1vh;
   `,
