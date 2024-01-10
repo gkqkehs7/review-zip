@@ -27,7 +27,9 @@ const Post: React.FC = () => {
     iLike: true,
     date: 1,
     star: 3,
-    like: 150,
+    like: true,
+    likeNum: 150,
+    scrab: false,
     user: {
       id: 1,
       email: 'test@naver.com',

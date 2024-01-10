@@ -1,7 +1,9 @@
 import styles from './style';
 import StarRating from '../../common/star/starsRating';
-import ScrabButton from '/images/Post/ScrabButton.png';
-import LikeButton from '/images/Post/LikeButton.png';
+import ScrabButtonImage from '/images/Post/ScrabButton.png';
+import LikeButtonImage from '/images/Post/LikeButton.png';
+import NotScrabButtonImage from '/images/Post/NotScrabButton.png';
+import NotLikeButtonImage from '/images/Post/NotLikeButton.png';
 import SpaceShipImage from '/images/Post/spaceShip.png';
 import { IPost } from '../../../types/posts.types';
 
@@ -31,7 +33,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
       <styles.LikeText>
         제니님 외{' '}
         <styles.LikePersonNumber onClick={openLikeList}>
-          {post.like}
+          {post.likeNum}
         </styles.LikePersonNumber>
         명이 좋아합니다
       </styles.LikeText>
@@ -42,8 +44,17 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
       {/* 좋아요, 스크랩, 별 버튼 */}
       <styles.Buttons>
         <styles.LikeSrabButtons>
-          <styles.LikeButton src={LikeButton} />
-          <styles.ScrabButton src={ScrabButton} />
+          {post.like ? (
+            <styles.LikeButton src={LikeButtonImage} />
+          ) : (
+            <styles.LikeButton src={NotLikeButtonImage} />
+          )}
+
+          {post.scrab ? (
+            <styles.ScrabButton src={ScrabButtonImage} />
+          ) : (
+            <styles.ScrabButton src={NotScrabButtonImage} />
+          )}
         </styles.LikeSrabButtons>
 
         <StarRating count={post.star} size={20} />

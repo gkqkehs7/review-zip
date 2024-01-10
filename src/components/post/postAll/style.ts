@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { GrLike } from 'react-icons/gr';
 
 const styles = {
   Container: styled.div`
