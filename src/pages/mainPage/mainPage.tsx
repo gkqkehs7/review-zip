@@ -9,37 +9,40 @@ import GroupBarComponent from '../../components/common/GroupBar/groupBar';
 
 const MainPage: React.FC = () => {
   return (
-    // <styles.Container
-    //   modules={[Pagination, Mousewheel]}
-    //   direction={'vertical'}
-    //   pagination={{
-    //     clickable: true,
-    //   }}
-    //   scrollbar={{ draggable: true }}
-    //   mousewheel={true}
-    // >
-    //   {/* mainPage 화면 윗 부분 */}
-    //   <SwiperSlide>
-    //     <MainTop />
-    //   </SwiperSlide>
+    <styles.Container
+      modules={[Pagination, Mousewheel]}
+      direction={'vertical'}
+      pagination={{
+        clickable: true,
+      }}
+      scrollbar={{ draggable: true }}
+      mousewheel={true}
+    >
+      {/* mainPage 화면 윗 부분 */}
+      <SwiperSlide>
+        <GroupBarComponent />
+        <MainTop />
+      </SwiperSlide>
 
-    //   {/* mainPage 화면 중간 부분 */}
-    //   <SwiperSlide>
-    //     <MainMiddle />
-    //   </SwiperSlide>
+      {/* mainPage 화면 중간 부분 */}
+      <SwiperSlide>
+        <GroupBarComponent />
+        <MainMiddle />
+      </SwiperSlide>
 
-    //   {/* mainPage 화면 밑 부분 */}
-    //   <SwiperSlide>
-    //     <MainBottom />
-    //   </SwiperSlide>
-    // </styles.Container>
+      {/* mainPage 화면 밑 부분 */}
+      <SwiperSlide>
+        <GroupBarComponent />
+        <MainBottom />
+      </SwiperSlide>
+    </styles.Container>
 
-    <div style={{ overflow: 'hidden', position: 'relative' }}>
-      <GroupBarComponent />
-      <MainTop />
-      <MainMiddle />
-      <MainBottom />
-    </div>
+    // <div style={{ overflow: 'hidden', position: 'relative' }}>
+    //   <GroupBarComponent />
+    //   <MainTop />
+    //   <MainMiddle />
+    //   <MainBottom />
+    // </div>
   );
 };
 
