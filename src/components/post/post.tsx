@@ -4,9 +4,20 @@ import PostRight from './postRight/postRight';
 import PostAll from './postAll/postAll';
 import { faker } from '@faker-js/faker';
 import { IPost } from '../../types/posts.types';
+import LikeListComponent from '../common/LikeList/LikeList';
 
 const Post: React.FC = () => {
   const [split, setSplit] = useState<boolean>(false);
+
+  const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
+
+  const openLikeList = () => {
+    setLikeListOpen(true);
+  };
+
+  const closeLikeList = () => {
+    setLikeListOpen(false);
+  };
 
   const post: IPost = {
     id: 1,
@@ -53,7 +64,13 @@ const Post: React.FC = () => {
         <PostAll splitPost={splitPost} post={post} />
       )}
 
-      <PostRight split={split} post={post} />
+      <PostRight split={split} post={post} openLikeList={openLikeList} />
+
+      {/* 좋아요 목록 */}
+      <LikeListComponent
+        likeListOpen={likeListOpen}
+        closeLikeList={closeLikeList}
+      />
     </>
   );
 };

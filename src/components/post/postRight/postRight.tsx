@@ -3,21 +3,14 @@ import StarRating from '../../common/star/starsRating';
 import ScrabButton from '/images/Post/ScrabButton.png';
 import SpaceShipImage from '/images/Post/spaceShip.png';
 import { IPost } from '../../../types/posts.types';
-import LikeList from '../likeLIst/likeLIst';
-import { useState } from 'react';
 
 interface PostRightProps {
   split: boolean;
   post: IPost;
+  openLikeList: () => void;
 }
 
-const PostRight: React.FC<PostRightProps> = ({ split, post }) => {
-  const [likeListPop, setLikeListPop] = useState<boolean>(false);
-
-  const popUplikelist = () => {
-    setLikeListPop(!likeListPop);
-  };
-
+const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
   return (
     <styles.Container style={{ display: split ? 'flex' : 'none' }}>
       {/* 유저 정보 */}
@@ -36,7 +29,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post }) => {
       {/* 좋아요 개수 */}
       <styles.LikeText>
         제니님 외{' '}
-        <styles.LikePersonNumber onClick={popUplikelist}>
+        <styles.LikePersonNumber onClick={openLikeList}>
           {post.like}
         </styles.LikePersonNumber>
         명이 좋아합니다
@@ -59,9 +52,6 @@ const PostRight: React.FC<PostRightProps> = ({ split, post }) => {
       <styles.SpaceShipImageContainer>
         <styles.SpaceShipImage src={SpaceShipImage} />
       </styles.SpaceShipImageContainer>
-
-      {/* 좋아요 목록 - 나중에 하기 */}
-      <LikeList likeListPop={likeListPop} popUplikelist={popUplikelist} />
     </styles.Container>
   );
 };
