@@ -7,28 +7,24 @@ import mainBottomBackgroundImage from '/images/mainPage/mainBottomBackground.png
 const MainBottom: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  // 새로운 포스트 (위 스크롤은 막기)
-  const newPost = useCallback(
-    (event: React.WheelEvent<HTMLDivElement>) => {
-      if (loading) {
-        event.preventDefault();
-      } else {
+  // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
+  const newPost = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (event.deltaY > 0) {
+      if (!loading) {
         setLoading(true);
-
         setTimeout(() => {
           setLoading(false);
         }, 3000);
       }
-    },
-    [loading],
-  );
+    } else {
+    }
+  };
 
   return (
     <styles.Container
       style={{
         backgroundImage: `url(${mainBottomBackgroundImage})`,
       }}
-      id="your-div-id"
       onWheel={newPost}
     >
       <Post />

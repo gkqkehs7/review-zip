@@ -14,7 +14,6 @@ interface PostAllProps {
 
 const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
   const splitContent = (content: string): string => {
-    console.log(content.length);
     if (content.length < 15) {
       return content;
     }
