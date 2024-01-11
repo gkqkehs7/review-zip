@@ -1,4 +1,18 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const bounceAnimation = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-20px);
+  }
+
+  60% {
+    transform: translateY(-10px);
+  }
+`;
 
 const styles = {
   Container: styled.div`
@@ -11,6 +25,18 @@ const styles = {
 
     background-repeat: no-repeat;
     background-size: cover;
+  `,
+
+  ArrowImage: styled.img`
+    position: absolute;
+    width: 77px;
+    height: 77px;
+    bottom: 0;
+    left: 48%;
+    transform: translate(-50%, -50%);
+
+    margin-bottom: 3vh;
+    animation: ${bounceAnimation} 1s infinite;
   `,
 };
 

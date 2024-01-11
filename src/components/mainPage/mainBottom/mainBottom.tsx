@@ -3,6 +3,7 @@ import LoadingModalComponent from '../../common/LoadingModal/LoadingModal';
 import Post from '../../post/post';
 import styles from './style';
 import mainBottomBackgroundImage from '/images/mainPage/mainBottomBackground.png';
+import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const MainBottom: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,7 +29,8 @@ const MainBottom: React.FC = () => {
       onWheel={newPost}
     >
       <Post />
-
+      {/* 아래 화살표 */}
+      <styles.ArrowImage src={DownArrowImage} />
       {loading && <LoadingModalComponent />}
     </styles.Container>
   );

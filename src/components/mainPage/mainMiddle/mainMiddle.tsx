@@ -5,6 +5,7 @@ import SpaceLoadingModal from '../../common/SpaceLoadingModal.tsx/SpaceLoadingMo
 import FrameComponent from '../frame/frame';
 import { IPost } from '../../../types/posts.types';
 import { faker } from '@faker-js/faker';
+import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const posts: IPost[] = [
   {
@@ -140,6 +141,9 @@ const MainMiddle: React.FC = () => {
         <FrameComponent post={posts[2]} />
       </styles.RightContainer>
 
+      {/* 아래 화살표 */}
+      <styles.ArrowImage src={DownArrowImage} />
+
       {/* 글씨 */}
       <styles.TextContainer>
         <styles.Text>안녕, 우주에게</styles.Text>
@@ -154,6 +158,7 @@ const MainMiddle: React.FC = () => {
       />
 
       {/* 로딩 modal */}
+
       {/* <SpaceLoadingModal loadingModalOpen={loadingModalOpen} /> */}
     </styles.Container>
   );
