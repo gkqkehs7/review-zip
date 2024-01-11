@@ -25,9 +25,19 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
 
       <styles.Line />
 
+      {/* 게시글 내용 */}
       <styles.PostContentContainer>
         <styles.PostContent>{post.content}</styles.PostContent>
       </styles.PostContentContainer>
+
+      {/* 해시태그들 */}
+      <styles.HashTagContainer>
+        {post.hashTags.map((hashTag, index) => (
+          <styles.HashTag key={index}>
+            <styles.HashTagText># {hashTag}</styles.HashTagText>
+          </styles.HashTag>
+        ))}
+      </styles.HashTagContainer>
 
       {/* 좋아요 개수 */}
       <styles.LikeText>
@@ -43,6 +53,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
 
       {/* 좋아요, 스크랩, 별 버튼 */}
       <styles.Buttons>
+        {/* 좋아요 버튼 */}
         <styles.LikeSrabButtons>
           {post.like ? (
             <styles.LikeButton src={LikeButtonImage} />
@@ -50,6 +61,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
             <styles.LikeButton src={NotLikeButtonImage} />
           )}
 
+          {/* 스크랩 버튼 */}
           {post.scrab ? (
             <styles.ScrabButton src={ScrabButtonImage} />
           ) : (
@@ -57,6 +69,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
           )}
         </styles.LikeSrabButtons>
 
+        {/* 별점 */}
         <StarRating count={post.star} size={20} />
       </styles.Buttons>
 

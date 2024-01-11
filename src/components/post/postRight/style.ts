@@ -43,6 +43,26 @@ const styles = {
     flex: 1;
   `,
 
+  HashTagContainer: styled.div`
+    display: flex;
+    margin-bottom: 10px;
+  `,
+
+  HashTag: styled.div`
+    background-color: #e5d9f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+
+    border-radius: 13px;
+    margin-right: 10px;
+  `,
+
+  HashTagText: styled.div`
+    font-weight: 600;
+  `,
+
   PostContent: styled.div``,
 
   Buttons: styled.div`
