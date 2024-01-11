@@ -6,8 +6,8 @@ const styles = {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 565px;
-    height: 785px;
+    width: 25vw;
+    height: 75vh;
 
     background-color: white;
     padding: 15px;

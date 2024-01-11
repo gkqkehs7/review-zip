@@ -29,8 +29,8 @@ const styles = {
 
   ArrowImage: styled.img`
     position: absolute;
-    width: 77px;
-    height: 77px;
+    width: 50px;
+    height: 50px;
     bottom: 0;
     left: 48%;
     transform: translate(-50%, -50%);

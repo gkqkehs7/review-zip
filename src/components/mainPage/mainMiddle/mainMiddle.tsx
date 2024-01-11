@@ -158,8 +158,7 @@ const MainMiddle: React.FC = () => {
       />
 
       {/* 로딩 modal */}
-
-      {/* <SpaceLoadingModal loadingModalOpen={loadingModalOpen} /> */}
+      <SpaceLoadingModal loadingModalOpen={loadingModalOpen} />
     </styles.Container>
   );
 };
