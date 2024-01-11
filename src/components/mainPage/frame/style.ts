@@ -9,8 +9,8 @@ const styles = {
   Frame: styled.div`
     cursor: pointer;
     background-color: white;
-    width: 325px
-    height: 399px;
+    /* width: 325px
+    height: 399px; */
     padding: 12px 12px 20px 10px;
   `,
 
@@ -19,6 +19,7 @@ const styles = {
     top: -40px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 1;
   `,
 
   ImageContainer: styled.div`
@@ -28,12 +29,20 @@ const styles = {
     background-color: black;
     justify-content: center;
     align-items: center;
+    position: relative;
   `,
 
   Image: styled.img`
     object-fit: cover;
     width: 100%;
     height: auto;
+  `,
+
+  StarContainer: styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
   `,
 
   FrameBottom: styled.div`

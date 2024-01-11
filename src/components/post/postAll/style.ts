@@ -74,14 +74,23 @@ const styles = {
     height: auto;
   `,
 
-  LikeText: styled.div`
-    font-size: small;
+  LikeContainer: styled.div`
+    display: flex;
+    align-items: center;
   `,
 
-  LikePersonNumber: styled.span`
+  LikeText: styled.span`
+    cursor: pointer;
     font-weight: bold;
+    font-size: small;
+    margin-right: 3px;
   `,
 
+  LikeUserImage: styled.img`
+    border-radius: 50px;
+    width: 18px;
+    height: 18px;
+  `,
   PostContentContainer: styled.div`
     display: flex;
     justify-content: space-between;

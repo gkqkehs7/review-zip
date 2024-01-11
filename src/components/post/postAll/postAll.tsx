@@ -53,14 +53,16 @@ const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
           )}
         </styles.LikeSrabButtons>
 
-        <StarRating count={post.star} size={20} />
+        <StarRating count={post.star} width={30} all={true} />
       </styles.Buttons>
 
       {/* 좋아요 개수 */}
-      <styles.LikeText>
-        제니님 외 <styles.LikePersonNumber>{post.like}</styles.LikePersonNumber>
-        명이 좋아합니다
-      </styles.LikeText>
+      <styles.LikeContainer>
+        <styles.LikeText>
+          {post.likeNum}명이 이 게시글을 좋아합니다
+        </styles.LikeText>
+        <styles.LikeUserImage src={post.user.profileImage} />
+      </styles.LikeContainer>
 
       {/* 게시글 내용 ,더보기 버튼 */}
       <styles.PostContentContainer>

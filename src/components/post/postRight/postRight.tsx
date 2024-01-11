@@ -40,13 +40,12 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
       </styles.HashTagContainer>
 
       {/* 좋아요 개수 */}
-      <styles.LikeText>
-        제니님 외{' '}
-        <styles.LikePersonNumber onClick={openLikeList}>
-          {post.likeNum}
-        </styles.LikePersonNumber>
-        명이 좋아합니다
-      </styles.LikeText>
+      <styles.LikeContainer>
+        <styles.LikeText onClick={openLikeList}>
+          {post.likeNum}명이 이 게시글을 좋아합니다
+        </styles.LikeText>
+        <styles.LikeUserImage src={post.user.profileImage} />
+      </styles.LikeContainer>
 
       {/* 아래 선 */}
       <styles.Line />
@@ -70,7 +69,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
         </styles.LikeSrabButtons>
 
         {/* 별점 */}
-        <StarRating count={post.star} size={20} />
+        <StarRating count={post.star} width={30} all={true} />
       </styles.Buttons>
 
       {/* 우주선 아이콘 */}
