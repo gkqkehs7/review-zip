@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 const styles = {
   //SearchPage에 쓰이는 MenuBar
   ComponentBox: styled.div`
@@ -11,14 +12,14 @@ const styles = {
     align-items: flex-start;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 40px;
-    padding: 2vh 0.3vw 2vh 0.3vw;
+    padding: 21px 5px 21px 5px;
   `,
 
   Union: styled(Link)`
     position: relative;
     width: 2vw;
     height: 3.8vh;
-    margin: 0.6vw;
+    margin: 11px;
     color: white;
     z-index: 3;
     cursor: pointer;
@@ -31,7 +32,7 @@ const styles = {
     position: relative;
     width: 2vw;
     height: 3.8vh;
-    margin: 0.6vw;
+    margin: 11px;
     color: white;
     z-index: 3;
     cursor: pointer;
@@ -43,7 +44,7 @@ const styles = {
     position: relative;
     width: 2vw;
     height: 3.8vh;
-    margin: 0.6vw;
+    margin: 11px;
     color: white;
     z-index: 3;
     cursor: pointer;
@@ -55,7 +56,7 @@ const styles = {
     position: relative;
     width: 2vw;
     height: 4vh;
-    margin: 0.6vw;
+    margin: 11px;
     color: white;
     z-index: 3;
     cursor: pointer;
@@ -68,7 +69,7 @@ const styles = {
     position: relative;
     width: 2vw;
     height: 3.8vh;
-    margin: 0.6vw;
+    margin: 11px;
     color: white;
     z-index: 3;
     cursor: pointer;
@@ -81,7 +82,7 @@ const styles = {
     position: relative;
     width: 2vw;
     height: 3.5vh;
-    margin: 0.6vw;
+    margin: 11px;
     color: white;
     z-index: 3;
     cursor: pointer;
