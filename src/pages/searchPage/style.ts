@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { SearchBarProps, SearchTypeProps } from './searchPage';
+//margin과 padding은 5의 배수로
+//일단 vw,vh로 하고 max-width,max-height 설정해주기
 
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
     width: 100vw;
+    max-width: 1920px;
     height: 100vh;
+    max-height: 1096px;
     display: flex;
     align-items: center;
     background-image: url('images/searchPage/SearchBackground.png');
@@ -15,34 +19,36 @@ const styles = {
   `,
   // 검색창 컴포넌트
   SearchBar: styled.input<SearchBarProps>`
+    &::placeholder {
+      color: black;
+    }
+    width: 70vw;
+    max-width: 1340px;
     height: 10vh;
+    max-height: 84px;
     font-size: 20px;
     border: None;
-    border-radius: 25px;
+    border-radius: 30.5px;
     background-color: ${(props) =>
       props.isFocused
         ? 'rgba(255, 255, 255, 0.4)'
         : 'rgba(255, 255, 255, 0.6)'}; // 포커스시에 투명도 변화 흰색 배경에 투명도 60%
     background-size: cover;
-    color: white;
+    color: black;
     box-shadow: ${(props) =>
       props.isFocused
         ? '0'
         : '0px 4px 8px rgba(0, 0, 0, 0.3)'}; //포커스가 되면 그림자 제거
-    padding-left: 96px;
+    padding-left: 75px; //placeholder위치 조정
     outline: none;
-    ::placeholder {
-      //--------placeholder의 색깔이 안바뀌는 문제 ------
-      color: white !important;
-      opacity: 0.7;
-    }
     &:focus {
-      border-radius: 25px 25px 0 0;
+      border-radius: 30.5px 30.5px 0 0;
     }
   `,
   // 검색창이 포커스 된 경우 나타날 검색창 확장 영역 컴포넌트
   SearchBarExtends: styled.div`
     height: 70vh;
+    max-height: 736px;
     font-size: 20px;
     border: none;
     background-color: rgba(255, 255, 255, 0.4); // 흰색 배경에 투명도 60%
@@ -52,7 +58,8 @@ const styles = {
     left: 0;
     right: 0;
     z-index: 100;
-    border-radius: 0 0 25px 25px;
+    border-radius: 0 0 30.5px 30.5px;
+    overflow: hidden; //요소가 많은 경우 안보이게 함
   `,
   //검색창과 검색창 확장 영역을 감쌀 컨테이너
   SearchBarContainer: styled.div`
@@ -63,19 +70,21 @@ const styles = {
   `,
   // 검색창 안에 위치한 돋보기
   Search: styled.div`
-    width: 2vw;
-    height: 3.8vh;
+    width: 26.96px;
+    height: 26.96px;
     background-image: url('images/searchPage/Search.png');
     background-size: cover;
     background-position: center;
     position: absolute;
     top: 0;
-    margin: 38px;
+    margin: 25px;
+    display: flex;
+    align-items: center;
   `,
   //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용
   SearchType: styled.span<SearchTypeProps>`
-    color: white;
-    border-bottom: ${(props) => (props.isBorder ? 'solid white' : 'none')};
+    color: black;
+    border-bottom: ${(props) => (props.isBorder ? 'solid black' : 'none')};
     padding: 0 230px 0 230px;
   `,
   //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
@@ -86,8 +95,8 @@ const styles = {
   `,
   //검색 기록에 뜰 데이터(searchHistory)나 유저의 입력에 따라 필터가 된 데이터( filteredData)들을 감쌀 컨테이너 hr태그를 따로 사용안하고 아래쪽만 border처리
   HistoryContainer: styled.div`
-    margin: 28.8px 0 28.8px 0;
-    border-bottom: 1px solid white;
+    margin: 30px 0 30px 0;
+    border-bottom: 1px solid black;
   `,
 
   //hashtag 데이터 옆에 뜰 이미지- 모서리 깎인 사각형
@@ -95,7 +104,9 @@ const styles = {
     border-radius: 10px;
     width: 2vw;
     height: 4vh;
-    margin: 0 38px 0 38px;
+    max-width: 47px;
+    max-height: 47px;
+    margin: 0 40px 0 40px;
     position: relative;
     bottom: 1vh;
   `,
@@ -104,13 +115,15 @@ const styles = {
     border-radius: 50px;
     width: 2vw;
     height: 4vh;
-    margin: 0 38px 0 38px;
+    max-width: 56px;
+    max-height: 53px;
+    margin: 0 40px 0 40px;
     position: relative;
     bottom: 1vh;
   `,
   //위의 이미지 옆에 표시될 내용 username이나 hashtag
   Content: styled.span`
-    color: white;
+    color: black;
     font-size: 20px;
     position: relative;
     bottom: 2vh;
@@ -122,7 +135,9 @@ const styles = {
     bottom: 2vh;
     width: 1.2vw;
     height: 2vh;
-    z-index: 3;
+    max-width: 23px;
+    max-height: 3px;
+    z-index: 100;
     cursor: pointer;
     background-image: url('images/searchPage/PlusFriend.png');
     background-size: cover;
@@ -133,7 +148,7 @@ const styles = {
     position: relative;
     width: 3vw;
     height: 4vh;
-    padding: 6px;
+    padding: 5px;
     z-index: 3;
     left: 50vw;
     font-size: 15px;
@@ -148,7 +163,7 @@ const styles = {
   //검색어 입력이 있기 전에 검색 기록뜨는 화면_ 삭제 버튼
   DeleteButton: styled.button`
     background: #a087bf;
-    color: white;
+    color: black;
     font-size: 1em;
     padding: 10px 20px;
     border: none;
