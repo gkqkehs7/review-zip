@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import styles2 from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
+import styles from './style';
 
 const LeftSide = () => {
   return (
-    <styles2.Left>
-      <styles2.Union />
-      <styles2.Title />
-      <styles2.PurpleCloud />
-      <styles2.MilkyWay />
-      <styles2.LargeStar />
-      <styles2.MiniStar />
-      <styles2.Ellipse />
-      <styles2.EtcContainer>
-        <styles2.SignUp to="/signupPage">Sign Up</styles2.SignUp>
-      </styles2.EtcContainer>
-    </styles2.Left>
+    <styles.Left>
+      <styles.Union />
+      <styles.Title />
+      <styles.PurpleCloud />
+      <styles.MilkyWay />
+      <styles.LargeStar />
+      <styles.MiniStar />
+      <styles.Ellipse />
+      <styles.EtcContainer>
+        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+      </styles.EtcContainer>
+    </styles.Left>
   );
 };
 
@@ -23,14 +23,16 @@ const ChangePasswordPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [newpwd, setNewpwd] = useState<string>('');
   return (
-    <styles2.Container>
+    <styles.Container>
+
       <LeftSide />
-      <styles2.PerkyMilkyway />
-      <styles2.Right>
-        {/* 이메일 */}
-        <styles2.InputContainer>
-          <styles2.InputTitle>비밀번호 입력</styles2.InputTitle>
-          <styles2.Input
+      <styles.PerkyMilkyway />
+      <styles.Right>
+
+        {/* 비밀번호 입력 */}
+        <styles.InputContainer>
+          <styles.InputTitle>비밀번호 입력</styles.InputTitle>
+          <styles.Input
             type="password"
             placeholder="Enter Password"
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
@@ -39,11 +41,12 @@ const ChangePasswordPage: React.FC = () => {
               changeInputValue(e, setPassword)
             }
           />
-        </styles2.InputContainer>
-        {/* 비밀 번호 */}
-        <styles2.InputContainer>
-          <styles2.InputTitle>비밀번호 재입력</styles2.InputTitle>
-          <styles2.Input
+        </styles.InputContainer>
+
+        {/* 비밀 번호 재입력 */}
+        <styles.InputContainer>
+          <styles.InputTitle>비밀번호 재입력</styles.InputTitle>
+          <styles.Input
             type="password"
             placeholder="Enter Password Again"
             value={newpwd}
@@ -52,15 +55,15 @@ const ChangePasswordPage: React.FC = () => {
               changeInputValue(e, setNewpwd)
             }
           />
-        </styles2.InputContainer>
-        {/* 카카오톡 */}
+        </styles.InputContainer>
 
-        {/* 로그인 버튼 */}
-        <styles2.ChangeBtn to="">&gt; 변경하기</styles2.ChangeBtn>
+        {/* 비밀번호 변경 버튼 */}
+        <styles.ChangeBtn to="">&gt; 변경하기</styles.ChangeBtn>
+
         {/* 개인정책 */}
-        <styles2.PrivacyPolicy>Privacy Policy</styles2.PrivacyPolicy>
-      </styles2.Right>
-    </styles2.Container>
+        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
+      </styles.Right>
+    </styles.Container>
   );
 };
 

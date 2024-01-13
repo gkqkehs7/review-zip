@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
+import styles from './style';
 
 const LeftSide = () => {
   return (
@@ -24,12 +24,15 @@ const SignupPage: React.FC = () => {
 
   return (
     <styles.Container>
-      {/* 왼쪽 */}
       <LeftSide />
-      {/* 오른쪽*/}
+    
+      {/* 곧 삭제될 LeftSide */}
       <styles.PerkyMilkyway />
       <styles.Right>
+
+        {/*휴대폰 번호 입력*/}
         <styles.InputContainer>
+          {/* 휴대폰 번호입력 */}
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
           <styles.Input
             type="tel"
@@ -42,7 +45,9 @@ const SignupPage: React.FC = () => {
           />
         </styles.InputContainer>
 
+        {/*사용자 성명 입력*/}
         <styles.InputContainer>
+          {/* 사용자 성명입력 */}
           <styles.InputTitle>성명</styles.InputTitle>
           <styles.Input
             type="text"
@@ -54,7 +59,9 @@ const SignupPage: React.FC = () => {
           />
         </styles.InputContainer>
 
+        {/*사용자 닉네임 입력*/}
         <styles.InputContainer>
+          {/* 사용자 닉네임 입력 */}
           <styles.InputTitle>사용자 닉네임</styles.InputTitle>
           <styles.Input
             type="text"
@@ -66,7 +73,9 @@ const SignupPage: React.FC = () => {
           />
         </styles.InputContainer>
 
+        {/*비밀번호 입력*/}
         <styles.InputContainer>
+          {/* 비밀번호 입력 */}
           <styles.InputTitle>비밀번호</styles.InputTitle>
           <styles.Input
             type="password"
@@ -77,17 +86,29 @@ const SignupPage: React.FC = () => {
               changeInputValue(e, setPassword)
             }
           />
+
+          {/* 비밀번호 입력방법 */}
+
+          {/*비밀번호 주의문*/}
+
           <styles.WarnText>
             대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.{' '}
           </styles.WarnText>
         </styles.InputContainer>
-
+        {/* 회원가입 버튼 */}
         <styles.SignUpBtn>&gt; SIGN UP</styles.SignUpBtn>
+        {/* 로그인 버튼 */}
+
+        {/*SIGN UP 버튼*/}
+        <styles.SignUpBtn>&gt; SIGN UP</styles.SignUpBtn>
+
+        {/*로그인 페이지 이동버튼*/}
 
         <styles.SignInContainer>
           <p>계정이 있으신가요?</p>
           <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
         </styles.SignInContainer>
+        
       </styles.Right>
     </styles.Container>
   );
