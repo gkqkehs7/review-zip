@@ -1,7 +1,6 @@
-import styled from 'styled-components';
 import React, { useState } from 'react';
-import styles from './style';
 import { changeInputValue } from '../../hooks/chageInputValue';
+import styles from './style';
 
 const LeftSide = () => {
   return (
@@ -60,8 +59,8 @@ const PasswordRecoveryPage: React.FC = () => {
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
-        {/* 로그인 버튼 */}
 
+        {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
     </styles.Container>
