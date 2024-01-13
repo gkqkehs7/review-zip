@@ -1,8 +1,10 @@
-import { IPost } from '../../../types/posts.types';
-import StarRating from '../../common/star/starsRating';
+import StarRating from '@/components/common/starRatingComponent/starsRatingComponent';
+
+import { IPost } from '@/types/posts.types';
+
 import styles from './style';
-import MainMiddleStarImage from '/images/mainPage/mainMiddleStar.png';
-import MainMiddeleStickerImage from '/images/mainPage/mainMiddleSticker.png';
+import MainMiddleStarImage from '/images/mainPage/MainMiddleStar.png';
+import MainMiddeleStickerImage from '/images/mainPage/MainMiddleSticker.png';
 
 interface FrameComponentProps {
   openLoadingModal?: () => void;

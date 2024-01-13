@@ -1,14 +1,19 @@
-import styles from './style';
-import ImageSlider from '../imageSlider/imageSlider';
-import SpaceShipImage from '/images/Post/spaceShip.png';
-import { IPost } from '../../../types/posts.types';
+import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
-interface PostLeftProps {
+import { IPost } from '@/types/posts.types';
+
+import styles from './style';
+import SpaceShipImage from '/images/Post/SpaceShip.png';
+
+interface PostLeftComponentProps {
   splitPost: () => void;
   post: IPost;
 }
 
-const PostLeft: React.FC<PostLeftProps> = ({ splitPost, post }) => {
+const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
+  splitPost,
+  post,
+}) => {
   return (
     <styles.Container>
       <styles.TopContainer>
@@ -19,7 +24,7 @@ const PostLeft: React.FC<PostLeftProps> = ({ splitPost, post }) => {
       <styles.Line />
 
       {/* image slider */}
-      <ImageSlider sliderImages={post.postImages} />
+      <ImageSliderComponent sliderImages={post.postImages} />
 
       <styles.SpaceShipImageContainer>
         <styles.SpaceShipImage src={SpaceShipImage} />
@@ -28,4 +33,4 @@ const PostLeft: React.FC<PostLeftProps> = ({ splitPost, post }) => {
   );
 };
 
-export default PostLeft;
+export default PostLeftComponent;

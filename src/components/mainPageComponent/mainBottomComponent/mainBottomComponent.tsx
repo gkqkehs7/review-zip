@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import LoadingModalComponent from '../../common/LoadingModal/LoadingModal';
-import Post from '../../post/post';
+import { useState } from 'react';
+
+import PostComponent from '@/components/postComponent/postComponent';
+import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
+
 import styles from './style';
-import mainBottomBackgroundImage from '/images/mainPage/mainBottomBackground.png';
+import mainBottomBackgroundImage from '/images/mainPage/MainBottomBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
-const MainBottom: React.FC = () => {
+const MainBottomComponent: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
@@ -28,7 +30,7 @@ const MainBottom: React.FC = () => {
       }}
       onWheel={newPost}
     >
-      <Post />
+      <PostComponent />
       {/* 아래 화살표 */}
       <styles.ArrowImage src={DownArrowImage} />
       {loading && <LoadingModalComponent />}
@@ -36,4 +38,4 @@ const MainBottom: React.FC = () => {
   );
 };
 
-export default MainBottom;
+export default MainBottomComponent;

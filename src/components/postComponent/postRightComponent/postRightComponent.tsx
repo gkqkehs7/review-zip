@@ -1,19 +1,25 @@
+import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
+
+import { IPost } from '@/types/posts.types';
+
 import styles from './style';
-import StarRating from '../../common/star/starsRating';
 import ScrabButtonImage from '/images/Post/ScrabButton.png';
 import LikeButtonImage from '/images/Post/LikeButton.png';
 import NotScrabButtonImage from '/images/Post/NotScrabButton.png';
 import NotLikeButtonImage from '/images/Post/NotLikeButton.png';
-import SpaceShipImage from '/images/Post/spaceShip.png';
-import { IPost } from '../../../types/posts.types';
+import SpaceShipImage from '/images/Post/SpaceShip.png';
 
-interface PostRightProps {
+interface PostRightComponentProps {
   split: boolean;
   post: IPost;
   openLikeList: () => void;
 }
 
-const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
+const PostRightComponent: React.FC<PostRightComponentProps> = ({
+  split,
+  post,
+  openLikeList,
+}) => {
   return (
     <styles.Container style={{ display: split ? 'flex' : 'none' }}>
       {/* 유저 정보 */}
@@ -69,7 +75,7 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
         </styles.LikeSrabButtons>
 
         {/* 별점 */}
-        <StarRating count={post.star} width={30} all={true} />
+        <StarRatingComponent count={post.star} width={30} all={true} />
       </styles.Buttons>
 
       {/* 우주선 아이콘 */}
@@ -80,4 +86,4 @@ const PostRight: React.FC<PostRightProps> = ({ split, post, openLikeList }) => {
   );
 };
 
-export default PostRight;
+export default PostRightComponent;

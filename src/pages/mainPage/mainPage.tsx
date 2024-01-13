@@ -1,11 +1,12 @@
 import { SwiperSlide } from 'swiper/react';
 import { Pagination, Mousewheel } from 'swiper/modules';
-import styles from './style';
 
-import MainTop from '@/components/mainPage/mainTop/mainTop';
-import MainMiddle from '@/components/mainPage/mainMiddle/mainMiddle';
-import MainBottom from '../../components/mainPage/mainBottom/mainBottom';
-import GroupBarComponent from '../../components/common/GroupBar/groupBar';
+import MainTopComponent from '@/components/mainPageComponent/mainTopComponent/mainTopComponent';
+import MainMiddleComponent from '@/components/mainPageComponent/mainMiddleComponent/mainMiddleComponent';
+import MainBottom from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
+import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
+
+import styles from './style';
 
 const MainPage: React.FC = () => {
   return (
@@ -21,13 +22,13 @@ const MainPage: React.FC = () => {
       {/* mainPage 화면 윗 부분 */}
       <SwiperSlide>
         <GroupBarComponent />
-        <MainTop />
+        <MainTopComponent />
       </SwiperSlide>
 
       {/* mainPage 화면 중간 부분 */}
       <SwiperSlide>
         <GroupBarComponent />
-        <MainMiddle />
+        <MainMiddleComponent />
       </SwiperSlide>
 
       {/* mainPage 화면 밑 부분 */}

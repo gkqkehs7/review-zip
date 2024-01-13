@@ -1,15 +1,21 @@
 import { useState } from 'react';
-import PostLeft from './postLeft/postLeft';
-import PostRight from './postRight/postRight';
-import PostAll from './postAll/postAll';
 import { faker } from '@faker-js/faker';
-import { IPost } from '../../types/posts.types';
-import LikeListComponent from '../common/LikeList/LikeList';
 
-const Post: React.FC = () => {
+import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
+import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
+import PostAll from '@/components/postComponent/postAllComponent/postAllComponent';
+import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
+
+import { IPost } from '@/types/posts.types';
+
+const PostComponent: React.FC = () => {
   const [split, setSplit] = useState<boolean>(false);
 
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
+
+  const splitPost = () => {
+    setSplit(!split);
+  };
 
   const openLikeList = () => {
     setLikeListOpen(true);
@@ -54,10 +60,6 @@ const Post: React.FC = () => {
     ],
   };
 
-  const splitPost = () => {
-    setSplit(!split);
-  };
-
   return (
     <>
       {split ? (
@@ -77,4 +79,4 @@ const Post: React.FC = () => {
   );
 };
 
-export default Post;
+export default PostComponent;
