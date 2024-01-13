@@ -1,5 +1,5 @@
-import LoadingImage from '/images/Loading/Loading.png';
 import styles from './style';
+import LoadingImage from '/images/loading/Loading.png';
 
 const LoadingModalComponent: React.FC = () => {
   return (

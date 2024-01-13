@@ -1,9 +1,9 @@
-import homeImage from '/images/groupBar/home.png';
-import mapImage from '/images/groupBar/map.png';
-import plusImage from '/images/groupBar/plus.png';
-import searchImage from '/images/groupBar/search.png';
-import spaceShipImage from '/images/groupBar/spaceShip.png';
-import userImage from '/images/groupBar/user.png';
+import homeImage from '/images/groupBar/Home.png';
+import mapImage from '/images/groupBar/Map.png';
+import plusImage from '/images/groupBar/Plus.png';
+import searchImage from '/images/groupBar/Search.png';
+import spaceShipImage from '/images/groupBar/SpaceShip.png';
+import userImage from '/images/groupBar/User.png';
 import styles from './style';
 
 import { useState } from 'react';

@@ -1,11 +1,11 @@
 import styles from './style';
-import LoadingSpaceImage from '/images/Loading/LoadingSpace.png';
+import LoadingSpaceImage from '/images/loading/LoadingSpace.png';
 
-interface SpaceLoadingModalProps {
+interface SpaceLoadingModalComponentProps {
   loadingModalOpen: boolean;
 }
 
-const SpaceLoadingModal: React.FC<SpaceLoadingModalProps> = ({
+const SpaceLoadingModalComponent: React.FC<SpaceLoadingModalComponentProps> = ({
   loadingModalOpen,
 }) => {
   return (
@@ -16,4 +16,4 @@ const SpaceLoadingModal: React.FC<SpaceLoadingModalProps> = ({
   );
 };
 
-export default SpaceLoadingModal;
+export default SpaceLoadingModalComponent;

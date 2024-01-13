@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import styles from './style';
-import MainMiddelModal from '../mainMiddleModal/mainMiddelModal';
-import SpaceLoadingModal from '../../common/SpaceLoadingModal.tsx/SpaceLoadingModal';
-import FrameComponent from '../frame/frame';
-import { IPost } from '../../../types/posts.types';
 import { faker } from '@faker-js/faker';
+
+import MainMiddelModalComponent from '@/components/mainPageComponent/mainMiddelModalComponent/mainMiddelModalComponent';
+import SpaceLoadingModalComponent from '@/components/common/spaceLoadingModalComponent/spaceLoadingModalComponent';
+import FrameComponent from '@/components/common/frameComponent/frameComponent';
+
+import { IPost } from '@/types/posts.types';
+
+import styles from './style';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const posts: IPost[] = [
@@ -112,7 +115,7 @@ const posts: IPost[] = [
   },
 ];
 
-const MainMiddle: React.FC = () => {
+const MainMiddleComponent: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
 
@@ -151,16 +154,16 @@ const MainMiddle: React.FC = () => {
       </styles.TextContainer>
 
       {/* 액자 눌렀을 때 modal */}
-      <MainMiddelModal
+      <MainMiddelModalComponent
         modalOpen={modalOpen}
         toggleModal={toggleModal}
         openLoadingModal={openLoadingModal}
       />
 
       {/* 로딩 modal */}
-      <SpaceLoadingModal loadingModalOpen={loadingModalOpen} />
+      <SpaceLoadingModalComponent loadingModalOpen={loadingModalOpen} />
     </styles.Container>
   );
 };
 
-export default MainMiddle;
+export default MainMiddleComponent;

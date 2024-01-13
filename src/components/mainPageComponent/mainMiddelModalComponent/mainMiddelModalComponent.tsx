@@ -1,14 +1,16 @@
-import styles from './style';
-import SpaceShipImage from '/images/Post/spaceShip.png';
-import FrameComponent from '../frame/frame';
+import FrameComponent from '@/components/common/frameComponent/frameComponent';
 
-interface MainMiddleModalProps {
+import styles from './style';
+
+import SpaceShipImage from '/images/Post/SpaceShip.png';
+
+interface MainMiddelModalComponentProps {
   modalOpen: boolean;
   toggleModal: () => void;
   openLoadingModal: () => void;
 }
 
-const MainMiddelModal: React.FC<MainMiddleModalProps> = ({
+const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
   modalOpen,
   toggleModal,
   openLoadingModal,
@@ -54,4 +56,4 @@ const MainMiddelModal: React.FC<MainMiddleModalProps> = ({
   );
 };
 
-export default MainMiddelModal;
+export default MainMiddelModalComponent;

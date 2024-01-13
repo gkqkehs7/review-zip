@@ -1,8 +1,8 @@
 import styles from './style';
-import mainTopBackgroundImage from '/images/mainPage/mainTopBackground.png';
+import mainTopBackgroundImage from '/images/mainPage/MainTopBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
-const MainTop: React.FC = () => {
+const MainTopComponent: React.FC = () => {
   return (
     <styles.Container
       style={{ backgroundImage: `url(${mainTopBackgroundImage})` }}
@@ -13,4 +13,4 @@ const MainTop: React.FC = () => {
   );
 };
 
-export default MainTop;
+export default MainTopComponent;

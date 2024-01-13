@@ -2,11 +2,13 @@ import { Swiper } from 'swiper/react';
 import { SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-type ImageSliderProps = {
+type ImageSliderComponentProps = {
   sliderImages: { id: number; url: string }[];
 };
 
-const ImageSlider: React.FC<ImageSliderProps> = ({ sliderImages }) => {
+const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
+  sliderImages,
+}) => {
   return (
     <Swiper
       style={{ flex: 1, width: '100%', margin: '10px 0' }}
@@ -41,4 +43,4 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliderImages }) => {
   );
 };
 
-export default ImageSlider;
+export default ImageSliderComponent;
