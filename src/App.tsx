@@ -5,7 +5,6 @@ import SignupPage from './pages/signupPage/signupPage';
 import FindpwdPage from './pages/PasswordRecoveryPage/PasswordRecoveryPage';
 import ChangepwdPage from './pages/changePasswordPage/changePasswordPage';
 import MainPage from './pages/mainPage/mainPage';
-import FindpwPage from './pages/findpwdPage/findpwdPage';
 import SearchPage from './pages/searchPage/searchPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,7 +20,6 @@ function App() {
           <Route path="/findpwdPage" element={<FindpwdPage />}></Route>
           <Route path="/findpwdPage2" element={<ChangepwdPage />}></Route>
           <Route path="/mainPage" element={<MainPage />}></Route>
-          <Route path="/smsPage" element={<FindpwPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
         </Routes>
       </BrowserRouter>

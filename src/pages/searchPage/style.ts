@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SearchBarProps, SearchTypeProps } from './searchPage';
 //margin과 padding은 5의 배수로
 //일단 vw,vh로 하고 max-width,max-height 설정해주기
-
+// 작업 별로 없을 때 commit할 때는 WIP로
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
@@ -103,64 +103,64 @@ const styles = {
   `,
 
   //hashtag 데이터 옆에 뜰 이미지- 모서리 깎인 사각형
-  Hashtag: styled.img`
-    border-radius: 10px;
+  HashtagImage: styled.img`
+    position: relative;
+    bottom: 1vh;
     width: 2vw;
-    height: 4vh;
     max-width: 47px;
+    height: 4vh;
     max-height: 47px;
     margin: 0 40px 0 40px;
-    position: relative;
-    bottom: 1vh;
+    border-radius: 10px;
   `,
   //username 옆에 뜰 이미지 - 원
-  UserName: styled.img`
+  UserNameImage: styled.img`
     position: relative;
     bottom: 1vh;
-    border-radius: 50px;
     width: 2vw;
-    height: 4vh;
     max-width: 56px;
+    height: 4vh;
     max-height: 53px;
     margin: 0 40px 0 40px;
+    border-radius: 50px;
   `,
   //위의 이미지 옆에 표시될 내용 username이나 hashtag
   Content: styled.span`
-    color: black;
-    font-size: 20px;
     position: relative;
     bottom: 2vh;
+    color: black;
+    font-size: 20px;
   `,
   //유저가 찾는 데이터가 username인 경우 옆에 표시될 친구 추가 아이콘
   PlusFriend: styled(Link)`
     position: relative;
     right: 50px;
     bottom: 2vh;
-    width: 1.2vw;
-    height: 2vh;
-    max-width: 23px;
-    max-height: 3px;
-    z-index: 100;
-    cursor: pointer;
     background-image: url('images/searchPage/PlusFriendImage.png');
     background-size: cover;
     background-position: center;
+    width: 1.2vw;
+    max-width: 23px;
+    height: 2vh;
+    max-height: 3px;
+    z-index: 100;
+    cursor: pointer;
   `,
   //유저가 찾는 데이터가 hashtag인 경우 표시될 리뷰 보기 버튼
   SeeReview: styled(Link)`
     position: relative;
+    left: 50vw;
+    bottom: 2vh;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
     width: 3vw;
     height: 4vh;
     padding: 5px;
     z-index: 3;
-    left: 50vw;
     font-size: 15px;
     color: black;
-    bottom: 2vh;
     cursor: pointer;
-    background-color: white;
-    background-size: cover;
-    background-position: center;
     border-radius: 20px;
   `,
   //검색어 입력이 있기 전에 검색 기록뜨는 화면_ 삭제 버튼
