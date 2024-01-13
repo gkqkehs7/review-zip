@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/signinPage" element={<SigninPage />}></Route>
           <Route path="/signupPage" element={<SignupPage />}></Route>
+<<<<<<< HEAD
           <Route
             path="/passwordRecoveryPage"
             element={<PasswordRecoveryPage />}
@@ -28,6 +29,10 @@ function App() {
             path="/changePasswordPage"
             element={<ChangePasswordPage />}
           ></Route>
+=======
+          <Route path="/passwordRecoveryPage" element={<PasswordRecoveryPage />}></Route>
+          <Route path="/changePasswordPage" element={<ChangePasswordPage />}></Route>
+>>>>>>> b7aaf0d (Refactor: signinPage)
           <Route path="/mainPage" element={<MainPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
           <Route

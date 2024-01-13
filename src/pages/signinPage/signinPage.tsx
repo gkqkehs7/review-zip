@@ -2,6 +2,11 @@ import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b7aaf0d (Refactor: signinPage)
 const SigninPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
