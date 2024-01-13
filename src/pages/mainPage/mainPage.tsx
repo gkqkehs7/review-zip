@@ -2,8 +2,8 @@ import { SwiperSlide } from 'swiper/react';
 import { Pagination, Mousewheel } from 'swiper/modules';
 import styles from './style';
 
-import MainTop from '../../components/mainPage/mainTop/mainTop';
-import MainMiddle from '../../components/mainPage/mainMiddle/mainMiddle';
+import MainTop from '@/components/mainPage/mainTop/mainTop';
+import MainMiddle from '@/components/mainPage/mainMiddle/mainMiddle';
 import MainBottom from '../../components/mainPage/mainBottom/mainBottom';
 import GroupBarComponent from '../../components/common/GroupBar/groupBar';
 
