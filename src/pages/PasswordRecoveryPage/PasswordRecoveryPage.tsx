@@ -2,22 +2,6 @@ import React, { useState } from 'react';
 import { changeInputValue } from '../../hooks/chageInputValue';
 import styles from './style';
 
-const LeftSide = () => {
-  return (
-    <styles.Left>
-      <styles.Union />
-      <styles.Title />
-      <styles.PurpleCloud />
-      <styles.MilkyWay />
-      <styles.LargeStar />
-      <styles.MiniStar />
-      <styles.Ellipse />
-      <styles.EtcContainer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-      </styles.EtcContainer>
-    </styles.Left>
-  );
-};
 
 const PasswordRecoveryPage: React.FC = () => {
   const [name, setName] = useState<string>('');
@@ -26,7 +10,6 @@ const PasswordRecoveryPage: React.FC = () => {
   return (
     <styles.Container>
     {/* 곧 삭제될 LeftSide */}
-      <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
         {/* 성명입력 */}

@@ -2,31 +2,13 @@ import { useState } from 'react';
 import { changeInputValue } from '../../hooks/chageInputValue';
 import styles from './style';
 
-const LeftSide = () => {
-  return (
-    <styles.Left>
-      <styles.Union />
-      <styles.Title />
-      <styles.PurpleCloud />
-      <styles.MilkyWay />
-      <styles.LargeStar />
-      <styles.MiniStar />
-      <styles.Ellipse />
-      <styles.EtcContainer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-      </styles.EtcContainer>
-    </styles.Left>
-  );
-};
+
 
 const ChangePasswordPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [newpwd, setNewpwd] = useState<string>('');
   return (
     <styles.Container>
-
-      <LeftSide />
-      <styles.PerkyMilkyway />
       <styles.Right>
 
         {/* 비밀번호 입력 */}

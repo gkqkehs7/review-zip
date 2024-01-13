@@ -1,24 +1,8 @@
 import { useState } from 'react';
-import { changeInputValue } from '../../hooks/chageInputValue';
+import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
-const LeftSide = () => {
-  return (
-    <styles.Left>
-      <styles.Union />
-      <styles.Title />
-      <styles.PurpleCloud />
-      <styles.MilkyWay />
-      <styles.LargeStar />
-      <styles.MiniStar />
-      <styles.Ellipse />
-      <styles.EtcContainer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        <styles.ForgotPwd to="">Forgot the Password?</styles.ForgotPwd>
-      </styles.EtcContainer>
-    </styles.Left>
-  );
-};
+
 
 const SigninPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
@@ -26,9 +10,6 @@ const SigninPage: React.FC = () => {
 
   return (
     <styles.Container>
-      {/* 곧 삭제될 LeftSide */}
-      <LeftSide />
-      <styles.PerkyMilkyway />
       <styles.Right>
         
         {/* 이메일 */}
