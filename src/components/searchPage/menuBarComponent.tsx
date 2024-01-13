@@ -1,6 +1,6 @@
-import styles from './style';
+import styles from '@components/searchPage/style';
 
-const MenuBar = () => {
+const MenuBarComponent = () => {
   return (
     <styles.ComponentBox>
       <styles.Union to="" />
@@ -13,4 +13,4 @@ const MenuBar = () => {
   );
 };
 
-export default MenuBar;
+export default MenuBarComponent;

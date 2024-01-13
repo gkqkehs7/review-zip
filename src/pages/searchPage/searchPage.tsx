@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import styles from './style';
-import { changeInputValue } from '../../hooks/chageInputValue';
-import MenuBar from '../../components/searchPage/MenuBar';
 
+import { changeInputValue } from '@hooks/chageInputValue';
+import MenuBarComponent from '@components/searchPage/menuBarComponent';
+
+import styles from '@pages/searchPage/style';
 const searchHistory = [
   { type: 'username', value: 'username' },
   { type: 'hashtag', value: '#hashtag' },
@@ -70,9 +71,9 @@ const SearchPage: React.FC = () => {
                     {searchHistory.map((item, index) => (
                       <styles.HistoryContainer key={index}>
                         {item.type === 'hashtag' ? (
-                          <styles.Hashtag src="images/searchPage/Hashtag.png" />
+                          <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                         ) : (
-                          <styles.UserName src="images/searchPage/UserName.png" />
+                          <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
                         )}
                         <styles.Content>{item.value}</styles.Content>
                       </styles.HistoryContainer>
@@ -104,13 +105,13 @@ const SearchPage: React.FC = () => {
                           {item.type === 'username' &&
                           item.value.includes(searchInputValue) ? (
                             <>
-                              <styles.UserName src="images/searchPage/UserName.png" />
+                              <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
                               <styles.Content>{item.value}</styles.Content>
                               <styles.PlusFriend to="" />
                             </>
                           ) : (
                             <>
-                              <styles.Hashtag src="images/searchPage/Hashtag.png" />
+                              <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                               <styles.Content>{item.value}</styles.Content>
                               <styles.SeeReview to="">
                                 리뷰 보기
@@ -128,7 +129,7 @@ const SearchPage: React.FC = () => {
         )}
       </styles.SearchBarContainer>
       {/* 옆에 계속 표시되는 메뉴 */}
-      <MenuBar />
+      <MenuBarComponent />
     </styles.Container>
   );
 };
