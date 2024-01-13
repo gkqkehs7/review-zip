@@ -88,6 +88,8 @@ const SearchPage: React.FC = () => {
                 // 검색창의 입력값이 비어있지 않고 진행중인 경우
                 return (
                   <>
+                    {' '}
+                    {/*입력이 있을 경우 리뷰잉인지 태그인지 보여주는 부분 */}
                     <styles.Top>
                       <styles.SearchType
                         isBorder={!searchInputValue.includes('#')}
@@ -103,7 +105,7 @@ const SearchPage: React.FC = () => {
                     <>
                       {filteredData.map((item, index) => (
                         <styles.HistoryContainer key={index}>
-                          {item.type === 'username' &&
+                          {item.type === 'username' && //유저 이름인 경우
                           item.value.includes(searchInputValue) ? (
                             <>
                               <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
@@ -111,6 +113,7 @@ const SearchPage: React.FC = () => {
                               <styles.PlusFriend to="" />
                             </>
                           ) : (
+                            //해시태그인 경우
                             <>
                               <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                               <styles.Content>{item.value}</styles.Content>
