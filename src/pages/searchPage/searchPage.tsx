@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import styles from './style';
-import { changeInputValue } from '../../hooks/chageInputValue';
-import MenuBar from '../../components/searchPage/MenuBar';
 
+import { changeInputValue } from '@hooks/chageInputValue';
+<<<<<<< HEAD
+import MenuBarComponent from '@/components/searchPage/menuBar/menuBarComponent';
+=======
+import MenuBarComponent from '@components/searchPage/menuBarComponent';
+>>>>>>> d5e3a6d708e6f091a61fa22216f74010df63f8ad
+
+import styles from '@pages/searchPage/style';
 const searchHistory = [
   { type: 'username', value: 'username' },
   { type: 'hashtag', value: '#hashtag' },
@@ -64,15 +69,22 @@ const SearchPage: React.FC = () => {
           <styles.SearchBarExtends>
             {(() => {
               if (searchInputValue === '') {
-                // 검색창의 입력값이 비어있는 경우
+                // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
                 return (
                   <>
                     {searchHistory.map((item, index) => (
                       <styles.HistoryContainer key={index}>
-                        {item.type === 'hashtag' ? (
-                          <styles.Hashtag src="images/searchPage/Hashtag.png" />
+<<<<<<< HEAD
+                        {item.type === 'hashtag' ? ( //해시태그인 경우
+                          <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                         ) : (
-                          <styles.UserName src="images/searchPage/UserName.png" />
+                          //유저 이름인 경우
+=======
+                        {item.type === 'hashtag' ? (
+                          <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
+                        ) : (
+>>>>>>> d5e3a6d708e6f091a61fa22216f74010df63f8ad
+                          <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
                         )}
                         <styles.Content>{item.value}</styles.Content>
                       </styles.HistoryContainer>
@@ -83,9 +95,11 @@ const SearchPage: React.FC = () => {
                   </>
                 );
               } else {
-                // 검색창의 입력값이 비어있지 않은 경우
+                // 검색창의 입력값이 비어있지 않고 진행중인 경우
                 return (
                   <>
+                    {' '}
+                    {/*입력이 있을 경우 리뷰잉인지 태그인지 보여주는 부분 */}
                     <styles.Top>
                       <styles.SearchType
                         isBorder={!searchInputValue.includes('#')}
@@ -101,16 +115,17 @@ const SearchPage: React.FC = () => {
                     <>
                       {filteredData.map((item, index) => (
                         <styles.HistoryContainer key={index}>
-                          {item.type === 'username' &&
+                          {item.type === 'username' && //유저 이름인 경우
                           item.value.includes(searchInputValue) ? (
                             <>
-                              <styles.UserName src="images/searchPage/UserName.png" />
+                              <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
                               <styles.Content>{item.value}</styles.Content>
                               <styles.PlusFriend to="" />
                             </>
                           ) : (
+                            //해시태그인 경우
                             <>
-                              <styles.Hashtag src="images/searchPage/Hashtag.png" />
+                              <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                               <styles.Content>{item.value}</styles.Content>
                               <styles.SeeReview to="">
                                 리뷰 보기
@@ -128,7 +143,7 @@ const SearchPage: React.FC = () => {
         )}
       </styles.SearchBarContainer>
       {/* 옆에 계속 표시되는 메뉴 */}
-      <MenuBar />
+      <MenuBarComponent />
     </styles.Container>
   );
 };
