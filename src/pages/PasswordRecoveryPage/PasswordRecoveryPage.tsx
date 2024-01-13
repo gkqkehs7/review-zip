@@ -63,8 +63,7 @@ const PasswordRecoveryPage: React.FC = () => {
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
         
-        {/* 로그인 버튼 */}
-
+        {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
     </styles.Container>

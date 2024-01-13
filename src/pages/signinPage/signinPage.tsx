@@ -67,7 +67,7 @@ const SigninPage: React.FC = () => {
         {/* 로그인 버튼 */}
         <styles.SignInBtn to="">&gt; SIGN IN</styles.SignInBtn>
 
-        {/* 개인정책 */}
+        {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
     </styles.Container>
