@@ -1,4 +1,5 @@
 import { IPost } from '../../../types/posts.types';
+import StarRating from '../../common/star/starsRating';
 import styles from './style';
 import MainMiddleStarImage from '/images/mainPage/mainMiddleStar.png';
 import MainMiddeleStickerImage from '/images/mainPage/mainMiddleSticker.png';
@@ -18,6 +19,9 @@ const FrameComponent: React.FC<FrameComponentProps> = ({
       <styles.Frame>
         <styles.ImageContainer>
           <styles.Image src="https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
+          <styles.StarContainer>
+            <StarRating count={5} width={20} all={false} />
+          </styles.StarContainer>
         </styles.ImageContainer>
 
         <styles.FrameBottom>

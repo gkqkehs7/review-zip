@@ -1,6 +1,6 @@
 import { Swiper } from 'swiper/react';
 import { SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 type ImageSliderProps = {
   sliderImages: { id: number; url: string }[];
@@ -10,12 +10,13 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliderImages }) => {
   return (
     <Swiper
       style={{ flex: 1, width: '100%', margin: '10px 0' }}
-      modules={[Pagination, Navigation]}
+      modules={[Pagination, Navigation, Autoplay]}
       navigation={{ nextEl: '.swiper-button-next' }}
       pagination={{
         clickable: true,
       }}
       scrollbar={{ draggable: true }}
+      autoplay={{ delay: 2000 }}
     >
       {sliderImages.map((slideImage) => (
         <SwiperSlide

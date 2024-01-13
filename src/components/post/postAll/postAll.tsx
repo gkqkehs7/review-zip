@@ -1,7 +1,10 @@
 import styles from './style';
 import StarRating from '../../common/star/starsRating';
 import ImageSlider from '../imageSlider/imageSlider';
-import ScrabButton from '/images/Post/ScrabButton.png';
+import ScrabButtonImage from '/images/Post/ScrabButton.png';
+import LikeButtonImage from '/images/Post/LikeButton.png';
+import NotScrabButtonImage from '/images/Post/NotScrabButton.png';
+import NotLikeButtonImage from '/images/Post/NotLikeButton.png';
 import { IPost } from '../../../types/posts.types';
 
 interface PostAllProps {
@@ -11,7 +14,6 @@ interface PostAllProps {
 
 const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
   const splitContent = (content: string): string => {
-    console.log(content.length);
     if (content.length < 15) {
       return content;
     }
@@ -38,18 +40,29 @@ const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
       {/* 좋아요, 스크랩, 별 버튼 */}
       <styles.Buttons>
         <styles.LikeSrabButtons>
-          <styles.LikeButton />
-          <styles.ScrabButton src={ScrabButton} />
+          {post.like ? (
+            <styles.LikeButton src={LikeButtonImage} />
+          ) : (
+            <styles.LikeButton src={NotLikeButtonImage} />
+          )}
+
+          {post.scrab ? (
+            <styles.ScrabButton src={ScrabButtonImage} />
+          ) : (
+            <styles.ScrabButton src={NotScrabButtonImage} />
+          )}
         </styles.LikeSrabButtons>
 
-        <StarRating count={post.star} size={20} />
+        <StarRating count={post.star} width={30} all={true} />
       </styles.Buttons>
 
       {/* 좋아요 개수 */}
-      <styles.LikeText>
-        제니님 외 <styles.LikePersonNumber>{post.like}</styles.LikePersonNumber>
-        명이 좋아합니다
-      </styles.LikeText>
+      <styles.LikeContainer>
+        <styles.LikeText>
+          {post.likeNum}명이 이 게시글을 좋아합니다
+        </styles.LikeText>
+        <styles.LikeUserImage src={post.user.profileImage} />
+      </styles.LikeContainer>
 
       {/* 게시글 내용 ,더보기 버튼 */}
       <styles.PostContentContainer>

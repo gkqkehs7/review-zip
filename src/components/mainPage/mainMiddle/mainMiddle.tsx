@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import styles from './style';
 import MainMiddelModal from '../mainMiddleModal/mainMiddelModal';
-import LoadingModal from '../../common/loadingModal.tsx/loadingModal';
+import SpaceLoadingModal from '../../common/SpaceLoadingModal.tsx/SpaceLoadingModal';
 import FrameComponent from '../frame/frame';
 import { IPost } from '../../../types/posts.types';
 import { faker } from '@faker-js/faker';
+import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const posts: IPost[] = [
   {
@@ -15,7 +16,9 @@ const posts: IPost[] = [
     iLike: true,
     date: 1,
     star: 3,
-    like: 150,
+    like: true,
+    scrab: false,
+    likeNum: 150,
     user: {
       id: 1,
       email: 'test@naver.com',
@@ -47,7 +50,9 @@ const posts: IPost[] = [
     iLike: true,
     date: 1,
     star: 3,
-    like: 150,
+    like: true,
+    scrab: false,
+    likeNum: 150,
     user: {
       id: 1,
       email: 'test@naver.com',
@@ -79,7 +84,9 @@ const posts: IPost[] = [
     iLike: true,
     date: 1,
     star: 3,
-    like: 150,
+    like: true,
+    scrab: false,
+    likeNum: 150,
     user: {
       id: 1,
       email: 'test@naver.com',
@@ -134,6 +141,9 @@ const MainMiddle: React.FC = () => {
         <FrameComponent post={posts[2]} />
       </styles.RightContainer>
 
+      {/* 아래 화살표 */}
+      <styles.ArrowImage src={DownArrowImage} />
+
       {/* 글씨 */}
       <styles.TextContainer>
         <styles.Text>안녕, 우주에게</styles.Text>
@@ -148,7 +158,7 @@ const MainMiddle: React.FC = () => {
       />
 
       {/* 로딩 modal */}
-      <LoadingModal loadingModalOpen={loadingModalOpen} />
+      <SpaceLoadingModal loadingModalOpen={loadingModalOpen} />
     </styles.Container>
   );
 };

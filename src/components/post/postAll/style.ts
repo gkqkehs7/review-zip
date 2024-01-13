@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { GrLike } from 'react-icons/gr';
 
 const styles = {
   Container: styled.div`
@@ -62,26 +61,36 @@ const styles = {
     justify-content: center;
   `,
 
-  LikeButton: styled(GrLike)`
+  LikeButton: styled.img`
     cursor: pointer;
-    width: 1.5vw;
+    width: 26px;
+    height: auto;
     margin-right: 10px;
   `,
 
   ScrabButton: styled.img`
-    width: 1.5vw;
-    height: auto;
     cursor: pointer;
+    width: 37px;
+    height: auto;
   `,
 
-  LikeText: styled.div`
-    font-size: small;
+  LikeContainer: styled.div`
+    display: flex;
+    align-items: center;
   `,
 
-  LikePersonNumber: styled.span`
+  LikeText: styled.span`
+    cursor: pointer;
     font-weight: bold;
+    font-size: small;
+    margin-right: 3px;
   `,
 
+  LikeUserImage: styled.img`
+    border-radius: 50px;
+    width: 18px;
+    height: 18px;
+  `,
   PostContentContainer: styled.div`
     display: flex;
     justify-content: space-between;

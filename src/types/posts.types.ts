@@ -5,7 +5,9 @@ type IPost = {
   iLike: boolean;
   date: number;
   star: number;
-  like: number;
+  like: boolean;
+  likeNum: number;
+  scrab: boolean;
   user: {
     id: number;
     email: string;

@@ -9,8 +9,8 @@ const styles = {
   Frame: styled.div`
     cursor: pointer;
     background-color: white;
-    width: 17vw;
-    height: 40vh;
+    /* width: 325px
+    height: 399px; */
     padding: 12px 12px 20px 10px;
   `,
 
@@ -19,21 +19,30 @@ const styles = {
     top: -40px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 1;
   `,
 
   ImageContainer: styled.div`
-    width: 100%;
-    height: 35vh;
+    width: 291px;
+    height: 296px;
     display: flex;
     background-color: black;
     justify-content: center;
     align-items: center;
+    position: relative;
   `,
 
   Image: styled.img`
     object-fit: cover;
     width: 100%;
     height: auto;
+  `,
+
+  StarContainer: styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
   `,
 
   FrameBottom: styled.div`
@@ -43,8 +52,8 @@ const styles = {
   `,
 
   StarImage: styled.img`
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   `,
 
   LikeText: styled.div`
