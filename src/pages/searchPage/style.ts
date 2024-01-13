@@ -38,8 +38,8 @@ const styles = {
     box-shadow: ${(props) =>
       props.isFocused
         ? '0'
-        : '0px 4px 8px rgba(0, 0, 0, 0.3)'}; //포커스가 되면 그림자 제거
-    padding-left: 75px; //placeholder위치 조정
+        : '0px 4px 8px rgba(0, 0, 0, 0.3)'}; //포커스가 되면 그림자
+    padding-left: 96px;
     outline: none;
     &:focus {
       border-radius: 30.5px 30.5px 0 0;
@@ -95,8 +95,8 @@ const styles = {
   `,
   //검색 기록에 뜰 데이터(searchHistory)나 유저의 입력에 따라 필터가 된 데이터( filteredData)들을 감쌀 컨테이너 hr태그를 따로 사용안하고 아래쪽만 border처리
   HistoryContainer: styled.div`
-    margin: 30px 0 30px 0;
-    border-bottom: 1px solid black;
+    margin: 28.8px 0 28.8px 0;
+    border-bottom: 1px solid white;
   `,
 
   //hashtag 데이터 옆에 뜰 이미지- 모서리 깎인 사각형
