@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import { changeInputValue } from '../../hooks/chageInputValue';
 
 const LeftSide = () => {
   return (

@@ -1,7 +1,6 @@
-import styled from 'styled-components';
 import React, { useState } from 'react';
+import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import { changeInputValue } from '../../hooks/chageInputValue';
 
 const LeftSide = () => {
   return (
@@ -26,10 +25,11 @@ const PasswordRecoveryPage: React.FC = () => {
 
   return (
     <styles.Container>
-      {/* 정보 넣는 곳 */}
+      {/* 곧 삭제될 LeftSide */}
       <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
+
         {/* 이메일 */}
         <styles.InputContainer>
           <styles.InputTitle>성명</styles.InputTitle>
@@ -43,6 +43,7 @@ const PasswordRecoveryPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 비밀 번호 */}
         <styles.InputContainer>
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
@@ -55,11 +56,13 @@ const PasswordRecoveryPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 카카오톡 */}
         <styles.OrSignContainer>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
+        
         {/* 로그인 버튼 */}
 
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>

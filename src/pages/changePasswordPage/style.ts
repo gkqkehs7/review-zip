@@ -110,7 +110,6 @@ const SignUp = styled(Link)`
   color: white;
   z-index: 3;
   margin: 44vh 0vw 0vh 20vw;
-
   cursor: pointer;
 `;
 
