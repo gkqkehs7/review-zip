@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { changeInputValue } from '../../hooks/chageInputValue';
 import styles from './style';
@@ -27,9 +26,11 @@ const SigninPage: React.FC = () => {
 
   return (
     <styles.Container>
+      {/* 곧 삭제될 LeftSide */}
       <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
+        
         {/* 이메일 */}
         <styles.InputContainer>
           <styles.InputTitle>EMAIL</styles.InputTitle>
@@ -43,6 +44,7 @@ const SigninPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 비밀 번호 */}
         <styles.InputContainer>
           <styles.InputTitle>PASSWORD</styles.InputTitle>
@@ -55,11 +57,13 @@ const SigninPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 카카오톡 */}
         <styles.OrSignContainer>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
+
         {/* 로그인 버튼 */}
         <styles.SignInBtn to="">&gt; SIGN IN</styles.SignInBtn>
 

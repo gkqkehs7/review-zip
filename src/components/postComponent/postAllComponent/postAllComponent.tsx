@@ -1,18 +1,23 @@
+import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
+import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
+
+import { IPost } from '@/types/posts.types';
+
 import styles from './style';
-import StarRating from '../../common/star/starsRating';
-import ImageSlider from '../imageSlider/imageSlider';
 import ScrabButtonImage from '/images/Post/ScrabButton.png';
 import LikeButtonImage from '/images/Post/LikeButton.png';
 import NotScrabButtonImage from '/images/Post/NotScrabButton.png';
 import NotLikeButtonImage from '/images/Post/NotLikeButton.png';
-import { IPost } from '../../../types/posts.types';
 
-interface PostAllProps {
+interface PostAllComponentProps {
   splitPost: () => void;
   post: IPost;
 }
 
-const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
+const PostAllComponent: React.FC<PostAllComponentProps> = ({
+  splitPost,
+  post,
+}) => {
   const splitContent = (content: string): string => {
     if (content.length < 15) {
       return content;
@@ -35,7 +40,7 @@ const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
       </styles.UserContainer>
 
       {/* image slider */}
-      <ImageSlider sliderImages={post.postImages} />
+      <ImageSliderComponent sliderImages={post.postImages} />
 
       {/* 좋아요, 스크랩, 별 버튼 */}
       <styles.Buttons>
@@ -53,7 +58,7 @@ const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
           )}
         </styles.LikeSrabButtons>
 
-        <StarRating count={post.star} width={30} all={true} />
+        <StarRatingComponent count={post.star} width={30} all={true} />
       </styles.Buttons>
 
       {/* 좋아요 개수 */}
@@ -75,4 +80,4 @@ const PostAll: React.FC<PostAllProps> = ({ splitPost, post }) => {
   );
 };
 
-export default PostAll;
+export default PostAllComponent;

@@ -25,7 +25,7 @@ const PasswordRecoveryPage: React.FC = () => {
 
   return (
     <styles.Container>
-    
+    {/* 곧 삭제될 LeftSide */}
       <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
@@ -42,6 +42,7 @@ const PasswordRecoveryPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 휴대폰 번호 입력 */}
         <styles.InputContainer>
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
@@ -54,11 +55,14 @@ const PasswordRecoveryPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
-        {/* 카카오톡인증 */}
+
+        {/* 카카오톡 */}
+
         <styles.OrSignContainer>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
+
 
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>

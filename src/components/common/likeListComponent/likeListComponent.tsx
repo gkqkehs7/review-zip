@@ -1,5 +1,6 @@
-import styles from './style';
 import { faker } from '@faker-js/faker';
+
+import styles from './style';
 
 interface LikeListComponentProps {
   closeLikeList: () => void;

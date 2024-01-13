@@ -24,9 +24,11 @@ const ChangePasswordPage: React.FC = () => {
   const [newpwd, setNewpwd] = useState<string>('');
   return (
     <styles.Container>
+
       <LeftSide />
       <styles.PerkyMilkyway />
       <styles.Right>
+
         {/* 비밀번호 입력 */}
         <styles.InputContainer>
           <styles.InputTitle>비밀번호 입력</styles.InputTitle>
@@ -40,6 +42,7 @@ const ChangePasswordPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 비밀 번호 재입력 */}
         <styles.InputContainer>
           <styles.InputTitle>비밀번호 재입력</styles.InputTitle>
@@ -56,6 +59,7 @@ const ChangePasswordPage: React.FC = () => {
 
         {/* 비밀번호 변경 버튼 */}
         <styles.ChangeBtn to="">&gt; 변경하기</styles.ChangeBtn>
+
         {/* 개인정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
