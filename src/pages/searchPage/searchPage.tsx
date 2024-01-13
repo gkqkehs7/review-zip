@@ -1,12 +1,8 @@
 import { useState } from 'react';
 
 import { changeInputValue } from '@hooks/chageInputValue';
-<<<<<<< HEAD
-import MenuBarComponent from '@/components/searchPage/menuBar/menuBarComponent';
-=======
-import MenuBarComponent from '@components/searchPage/menuBarComponent';
->>>>>>> d5e3a6d708e6f091a61fa22216f74010df63f8ad
 
+import MenuBarComponent from '@/components/searchPage/menuBar/menuBarComponent';
 import styles from '@pages/searchPage/style';
 const searchHistory = [
   { type: 'username', value: 'username' },
@@ -74,16 +70,11 @@ const SearchPage: React.FC = () => {
                   <>
                     {searchHistory.map((item, index) => (
                       <styles.HistoryContainer key={index}>
-<<<<<<< HEAD
                         {item.type === 'hashtag' ? ( //해시태그인 경우
                           <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                         ) : (
                           //유저 이름인 경우
-=======
-                        {item.type === 'hashtag' ? (
-                          <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
-                        ) : (
->>>>>>> d5e3a6d708e6f091a61fa22216f74010df63f8ad
+
                           <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
                         )}
                         <styles.Content>{item.value}</styles.Content>
