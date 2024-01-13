@@ -7,33 +7,39 @@ import { SearchBarProps, SearchTypeProps } from './searchPage';
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
+    background-image: url('images/searchPage/SearchBackgroundImage.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
     width: 100vw;
     max-width: 1920px;
     height: 100vh;
     max-height: 1096px;
-    display: flex;
-    align-items: center;
-    background-image: url('images/searchPage/SearchBackground.png');
-    background-repeat: no-repeat;
-    background-size: cover;
   `,
   // 검색창 컴포넌트
   SearchBar: styled.input<SearchBarProps>`
-    &::placeholder {
-      color: black;
-    }
-    width: 70vw;
-    max-width: 1340px;
-    height: 10vh;
-    max-height: 84px;
-    font-size: 20px;
-    border: None;
-    border-radius: 30.5px;
     background-color: ${(props) =>
       props.isFocused
         ? 'rgba(255, 255, 255, 0.4)'
         : 'rgba(255, 255, 255, 0.6)'}; // 포커스시에 투명도 변화 흰색 배경에 투명도 60%
     background-size: cover;
+    width: 70vw;
+    max-width: 1340px;
+    height: 10vh;
+    max-height: 84px;
+
+    &::placeholder {
+      color: black;
+    }
+
+    &:focus {
+      border-radius: 30.5px 30.5px 0 0;
+    }
+
+    font-size: 20px;
+    border: None;
+    border-radius: 30.5px;
     color: black;
     box-shadow: ${(props) =>
       props.isFocused
@@ -41,25 +47,22 @@ const styles = {
         : '0px 4px 8px rgba(0, 0, 0, 0.3)'}; //포커스가 되면 그림자
     padding-left: 96px;
     outline: none;
-    &:focus {
-      border-radius: 30.5px 30.5px 0 0;
-    }
   `,
   // 검색창이 포커스 된 경우 나타날 검색창 확장 영역 컴포넌트
   SearchBarExtends: styled.div`
-    height: 70vh;
-    max-height: 736px;
-    font-size: 20px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.4); // 흰색 배경에 투명도 60%
-    background-size: cover;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
+    background-color: rgba(255, 255, 255, 0.4); // 흰색 배경에 투명도 60%
+    background-size: cover;
+    height: 70vh;
+    max-height: 736px;
+    font-size: 20px;
+    border: none;
     z-index: 100;
     border-radius: 0 0 30.5px 30.5px;
-    overflow: hidden; //요소가 많은 경우 안보이게 함
+    overflow: hidden; //요소가 많은 경우 안보이게
   `,
   //검색창과 검색창 확장 영역을 감쌀 컨테이너
   SearchBarContainer: styled.div`
@@ -70,22 +73,22 @@ const styles = {
   `,
   // 검색창 안에 위치한 돋보기
   Search: styled.div`
-    width: 26.96px;
-    height: 26.96px;
-    background-image: url('images/searchPage/Search.png');
-    background-size: cover;
-    background-position: center;
     position: absolute;
     top: 0;
-    margin: 25px;
+    background-image: url('images/searchPage/SearchImage.png');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
+    width: 26.96px;
+    height: 26.96px;
+    margin: 25px;
   `,
   //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용
   SearchType: styled.span<SearchTypeProps>`
+    padding: 0 230px 0 230px;
     color: black;
     border-bottom: ${(props) => (props.isBorder ? 'solid black' : 'none')};
-    padding: 0 230px 0 230px;
   `,
   //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
   Top: styled.div`
@@ -112,14 +115,14 @@ const styles = {
   `,
   //username 옆에 뜰 이미지 - 원
   UserName: styled.img`
+    position: relative;
+    bottom: 1vh;
     border-radius: 50px;
     width: 2vw;
     height: 4vh;
     max-width: 56px;
     max-height: 53px;
     margin: 0 40px 0 40px;
-    position: relative;
-    bottom: 1vh;
   `,
   //위의 이미지 옆에 표시될 내용 username이나 hashtag
   Content: styled.span`
@@ -139,7 +142,7 @@ const styles = {
     max-height: 3px;
     z-index: 100;
     cursor: pointer;
-    background-image: url('images/searchPage/PlusFriend.png');
+    background-image: url('images/searchPage/PlusFriendImage.png');
     background-size: cover;
     background-position: center;
   `,
