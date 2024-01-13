@@ -3,7 +3,7 @@ import ImageSliderComponent from '@/components/common/imageSliderComponent/image
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
-import SpaceShipImage from '/images/Post/SpaceShip.png';
+import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostLeftComponentProps {
   splitPost: () => void;

@@ -2,7 +2,7 @@ import FrameComponent from '@/components/common/frameComponent/frameComponent';
 
 import styles from './style';
 
-import SpaceShipImage from '/images/Post/SpaceShip.png';
+import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface MainMiddelModalComponentProps {
   modalOpen: boolean;
