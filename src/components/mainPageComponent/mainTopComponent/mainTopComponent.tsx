@@ -7,7 +7,6 @@ const MainTopComponent: React.FC = () => {
     <styles.Container
       style={{ backgroundImage: `url(${mainTopBackgroundImage})` }}
     >
-      <div>sss</div>
       {/* 아래 화살표 */}
       <styles.ArrowImage src={DownArrowImage} />
     </styles.Container>
