@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { changeInputValue } from '@hooks/chageInputValue';
-import MenuBarComponent from '@components/searchPage/menuBarComponent';
+import MenuBarComponent from '@/components/searchPage/menuBar/menuBarComponent';
 
 import styles from '@pages/searchPage/style';
 const searchHistory = [
@@ -65,14 +65,15 @@ const SearchPage: React.FC = () => {
           <styles.SearchBarExtends>
             {(() => {
               if (searchInputValue === '') {
-                // 검색창의 입력값이 비어있는 경우
+                // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
                 return (
                   <>
                     {searchHistory.map((item, index) => (
                       <styles.HistoryContainer key={index}>
-                        {item.type === 'hashtag' ? (
+                        {item.type === 'hashtag' ? ( //해시태그인 경우
                           <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
                         ) : (
+                          //유저 이름인 경우
                           <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
                         )}
                         <styles.Content>{item.value}</styles.Content>
@@ -84,7 +85,7 @@ const SearchPage: React.FC = () => {
                   </>
                 );
               } else {
-                // 검색창의 입력값이 비어있지 않은 경우
+                // 검색창의 입력값이 비어있지 않고 진행중인 경우
                 return (
                   <>
                     <styles.Top>
