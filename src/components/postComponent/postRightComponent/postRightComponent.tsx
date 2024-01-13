@@ -3,11 +3,11 @@ import StarRatingComponent from '@/components/common/starRatingComponent/starsRa
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
-import ScrabButtonImage from '/images/Post/ScrabButton.png';
-import LikeButtonImage from '/images/Post/LikeButton.png';
-import NotScrabButtonImage from '/images/Post/NotScrabButton.png';
-import NotLikeButtonImage from '/images/Post/NotLikeButton.png';
-import SpaceShipImage from '/images/Post/SpaceShip.png';
+import ScrabButtonImage from '/images/post/ScrabButton.png';
+import LikeButtonImage from '/images/post/LikeButton.png';
+import NotScrabButtonImage from '/images/post/NotScrabButton.png';
+import NotLikeButtonImage from '/images/post/NotLikeButton.png';
+import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
   split: boolean;
