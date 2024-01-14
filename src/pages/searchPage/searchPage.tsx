@@ -2,9 +2,7 @@ import { useState } from 'react';
 
 import MenuBarComponent from '@/components/searchPageComponent/menuBar/menuBarComponent';
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
-import HashtagComponent from '@/components/searchPageComponent/hashtagComponent/hashtagComponent';
-import UserNameComponent from '@/components/searchPageComponent/userNameComponent/userNameComponent';
-
+import SearchWordComponent from '@/components/searchPageComponent/searchWordComponent/searchWordComponent';
 import styles from '@pages/searchPage/style';
 const searchHistory = [
   { type: 'username', value: 'username' },
@@ -23,7 +21,7 @@ const data = [
   { type: 'hashtag', value: '#hashtag' },
   { type: 'username', value: 'username' },
   { type: 'username', value: 'username' },
-  { type: 'hashtag', value: 'hashtag' },
+  { type: 'hashtag', value: '#hashtag' },
   { type: 'username', value: 'username' },
 ];
 
@@ -63,13 +61,11 @@ const SearchPage: React.FC = () => {
                 return (
                   <>
                     {searchHistory.map((item, index) => (
-                      <styles.HistoryContainer key={index}>
-                        {item.type === 'hashtag' ? (
-                          <HashtagComponent hashtagProps={item.value} />
-                        ) : (
-                          <UserNameComponent usernameProps={item.value} />
-                        )}
-                      </styles.HistoryContainer>
+                      <SearchWordComponent
+                        index={index}
+                        searchInputValue={searchInputValue}
+                        item={{ type: item.type, value: item.value }}
+                      />
                     ))}
                     <styles.DeleteButton>
                       delete search history
@@ -80,7 +76,6 @@ const SearchPage: React.FC = () => {
                 // 검색창의 입력값이 비어있지 않고 진행중인 경우
                 return (
                   <>
-                    {' '}
                     {/*입력이 있을 경우 리뷰잉인지 태그인지 보여주는 부분 */}
                     <styles.Top>
                       <styles.SearchType
@@ -96,14 +91,11 @@ const SearchPage: React.FC = () => {
                     </styles.Top>
                     <>
                       {filteredData.map((item, index) => (
-                        <styles.HistoryContainer key={index}>
-                          {item.type === 'username' && //유저 이름인 경우
-                          item.value.includes(searchInputValue) ? (
-                            <UserNameComponent usernameProps={item.value} />
-                          ) : (
-                            <HashtagComponent hashtagProps={item.value} />
-                          )}
-                        </styles.HistoryContainer>
+                        <SearchWordComponent
+                          index={index}
+                          searchInputValue={searchInputValue}
+                          item={{ type: item.type, value: item.value }}
+                        />
                       ))}
                     </>
                   </>
