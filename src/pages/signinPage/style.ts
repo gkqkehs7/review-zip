@@ -7,93 +7,9 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url('images/MainBackground.png');
+  background-image: url('images/signinPage/Signin.png');
   background-repeat: no-repeat;
   background-size: cover;
-`;
-
-// *******Left******* //뷰포트 내에서 상단에 위치한 순으로 배치했음
-const Left = styled.div`
-  // 왼쪽 절반 차지
-  flex: 1;
-  height: 100vh;
-  font-weight: bold;
-  font-size: 120%;
-`;
-
-const Union = styled.div`
-  width: 9vw;
-  height: 9vh;
-  background-image: url('images/Union.png');
-  margin: 20vh 15vh;
-  background-repeat: no-repeat;
-`;
-
-const MiniStar = styled.div`
-  position: absolute;
-  bottom: 56vh;
-  left: 32vw;
-  width: 5vw;
-  height: 10vh;
-  background-image: url('images/Ministar.png');
-  background-repeat: no-repeat;
-  z-index: 2;
-`;
-
-const Ellipse = styled.div`
-  position: absolute;
-  width: 40vw;
-  height: 42vh;
-  left: 0vw;
-  bottom: 22vh;
-  background-image: url('images/Ellipse.png');
-  background-repeat: no-repeat;
-  z-index: 1;
-`;
-
-const Title = styled.div`
-  position: absolute;
-  width: 27vw;
-  height: 8vh;
-  left: 9vw;
-  bottom: 46vh;
-  background-image: url('images/Title.png');
-  background-repeat: no-repeat;
-  z-index: 3;
-`;
-
-const LargeStar = styled.div`
-  position: absolute;
-  left: 5vw;
-  bottom: 16vh;
-  width: 12.4vw;
-  height: 25vh;
-  background-image: url('images/Largestar.png');
-  background-repeat: no-repeat;
-  z-index: 2;
-`;
-
-const PurpleCloud = styled.div`
-  width: 45vw;
-  height: 66vh;
-  position: absolute;
-  bottom: -0vh;
-  margin: -2vh 0vw;
-  background-image: url('images/PurpleCloud.png');
-  background-repeat: no-repeat;
-  z-index: 1;
-`;
-
-const MilkyWay = styled.div`
-  position: absolute;
-  width: 50vw;
-  height: 43vh;
-  left: -7vw;
-  bottom: 0vh;
-  margin: -2vh 0vw;
-  background-image: url('images/MilkyWay.png');
-  background-repeat: no-repeat;
-  z-index: 2;
 `;
 
 const EtcContainer = styled.div`
@@ -125,21 +41,9 @@ const ForgotPwd = styled(Link)`
   cursor: pointer;
 `;
 
-// *******Right******* //뷰포트 내에서 상단에 위치한 순으로 배치했음
-
 const Right = styled.div`
   flex: 1;
   padding: 1vh 0vw 0vh 7.5vw;
-`;
-
-const PerkyMilkyway = styled.div`
-  position: absolute;
-  top: 2vh;
-  right: 0vw;
-  width: 35vw;
-  height: 50vh;
-  background-image: url('images/perkeyMilkyway.png');
-  background-repeat: no-repeat;
 `;
 
 const InputContainer = styled.div`
@@ -173,7 +77,6 @@ const Input = styled.input`
   }
 `;
 
-// ********or Sign in with Css********
 const OrSignContainer = styled.h2`
   width: 27.5vw;
   display: flex;
@@ -189,13 +92,12 @@ const OrSignBtn = styled.div`
 `;
 
 const KaKaoIcon = styled.div`
-  background-image: url('images/ri_kakao-talk-fill.png');
+  background-image: url('images/signinPage/Kakao.png');
   background-repeat: no-repeat;
   width: 2vw;
   height: 4vh;
   margin: 0vh 0vw 0vh 0.5vw;
 `;
-//*************************************
 
 const SignInBtn = styled(Link)`
   font-size: 300%;
@@ -219,7 +121,6 @@ const PrivacyPolicy = styled.h2`
 
 export default {
   Container,
-  Left,
   Right,
   InputContainer,
   InputTitle,
@@ -229,14 +130,6 @@ export default {
   OrSignBtn,
   PrivacyPolicy,
   KaKaoIcon,
-  PurpleCloud,
-  Union,
-  Title,
-  MilkyWay,
-  Ellipse,
-  LargeStar,
-  MiniStar,
-  PerkyMilkyway,
   SignUp,
   ForgotPwd,
   EtcContainer,
