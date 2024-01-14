@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { SearchBarProps, SearchTypeProps } from './searchPage';
+import { SearchTypeProps } from './searchPage';
 //margin과 padding은 5의 배수로
 //일단 vw,vh로 하고 max-width,max-height 설정해주기
 // 작업 별로 없을 때 commit할 때는 WIP로

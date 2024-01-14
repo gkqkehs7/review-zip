@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import { changeInputValue } from '@hooks/chageInputValue';
-
 import MenuBarComponent from '@/components/searchPageComponent/menuBar/menuBarComponent';
-import styles from '@pages/searchPage/style';
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
+import HashtagComponent from '@/components/searchPageComponent/hashtagComponent/hashtagComponent';
+import UserNameComponent from '@/components/searchPageComponent/userNameComponent/userNameComponent';
+
+import styles from '@pages/searchPage/style';
 const searchHistory = [
   { type: 'username', value: 'username' },
   { type: 'hashtag', value: '#hashtag' },
@@ -32,11 +33,9 @@ export interface SearchTypeProps {
 }
 
 // SearchBar 컴포넌트에 대한 타입 정의
-export interface SearchBarProps {
-  searchBarProps: {
-    searchInputValue: string;
-    setSearchInputValue: React.Dispatch<React.SetStateAction<string>>;
-  };
+
+interface HashtagProps {
+  hashtagProps: string;
 }
 
 const SearchPage: React.FC = () => {
@@ -65,14 +64,11 @@ const SearchPage: React.FC = () => {
                   <>
                     {searchHistory.map((item, index) => (
                       <styles.HistoryContainer key={index}>
-                        {item.type === 'hashtag' ? ( //해시태그인 경우
-                          <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
+                        {item.type === 'hashtag' ? (
+                          <HashtagComponent hashtagProps={item.value} />
                         ) : (
-                          //유저 이름인 경우
-
-                          <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
+                          <UserNameComponent usernameProps={item.value} />
                         )}
-                        <styles.Content>{item.value}</styles.Content>
                       </styles.HistoryContainer>
                     ))}
                     <styles.DeleteButton>
@@ -103,20 +99,9 @@ const SearchPage: React.FC = () => {
                         <styles.HistoryContainer key={index}>
                           {item.type === 'username' && //유저 이름인 경우
                           item.value.includes(searchInputValue) ? (
-                            <>
-                              <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
-                              <styles.Content>{item.value}</styles.Content>
-                              <styles.PlusFriend to="" />
-                            </>
+                            <UserNameComponent usernameProps={item.value} />
                           ) : (
-                            //해시태그인 경우
-                            <>
-                              <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
-                              <styles.Content>{item.value}</styles.Content>
-                              <styles.SeeReview to="">
-                                리뷰 보기
-                              </styles.SeeReview>
-                            </>
+                            <HashtagComponent hashtagProps={item.value} />
                           )}
                         </styles.HistoryContainer>
                       ))}
