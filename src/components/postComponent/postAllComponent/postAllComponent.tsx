@@ -9,6 +9,8 @@ import LikeButtonImage from '/images/post/LikeButton.png';
 import NotScrabButtonImage from '/images/post/NotScrabButton.png';
 import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 
+import { useMediaQuery } from 'react-responsive';
+
 interface PostAllComponentProps {
   splitPost: () => void;
   post: IPost;
@@ -25,9 +27,33 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
 
     return content.slice(0, 15) + '...';
   };
+  const calculateSize = (
+    DesktopWidth: number,
+    DesktopHeight: number,
+    LaptopWidth: number,
+    LaptopHeight: number,
+    PadWidth: number,
+    PadHeight: number,
+  ): { width: string; height: string } => {
+    const isDesktop = useMediaQuery({ query: '(min-width:1920px)' });
+    const isLaptop = useMediaQuery({
+      query: '(min-width: 1680px) and (max-width: 1919px)',
+    });
+    const isPad = useMediaQuery({ query: '(max-width: 1679px)' });
+
+    if (isDesktop) {
+      return { width: `${DesktopWidth}px`, height: `${DesktopHeight}px` };
+    }
+
+    if (isLaptop) {
+      return { width: `${LaptopWidth}px`, height: `${LaptopHeight}px` };
+    }
+
+    return { width: `${PadWidth}px`, height: `${PadHeight}px` };
+  };
 
   return (
-    <styles.Container>
+    <styles.Container style={calculateSize(900, 900, 700, 700, 400, 400)}>
       <styles.TopText>나의 우주에게</styles.TopText>
 
       <styles.Line />

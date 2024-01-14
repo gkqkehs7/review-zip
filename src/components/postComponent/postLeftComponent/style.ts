@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BsBackspace } from 'react-icons/bs';
+import { useMediaQuery } from 'react-responsive';
 
 const styles = {
   Container: styled.div`
