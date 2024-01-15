@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import MenuBarComponent from '@/components/searchPageComponent/menuBarComponent/menuBarComponent';
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
@@ -26,6 +26,40 @@ const data = [
   { type: 'username', value: 'username' },
 ];
 
+const users = [
+  {
+    id: 1,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 2,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 3,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 4,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 5,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+];
+
+type userType = {
+  id: number;
+  name: string;
+  profileImage: string;
+};
+
 // SearchType 컴포넌트에 대한 타입 정의
 export interface SearchTypeProps {
   isBorder: boolean;
@@ -38,6 +72,26 @@ const SearchPage: React.FC = () => {
     ? data.filter((item) => item.value.includes(searchInputValue))
     : data;
 
+  const filterUsers = useCallback(
+    (users: userType[]) => {
+      const filterUserlist = users.filter((user) =>
+        user.name.includes(searchInputValue),
+      );
+
+      return (
+        <>
+          {filterUserlist.map((user) => (
+            <styles.HistoryContainer key={user.id}>
+              <styles.UserNameImage src={user.profileImage} />
+              <styles.Content>{user.name}</styles.Content>
+              <styles.PlusFriend to="" />
+            </styles.HistoryContainer>
+          ))}
+        </>
+      );
+    },
+    [searchInputValue],
+  );
   return (
     <styles.Container>
       {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
@@ -56,13 +110,7 @@ const SearchPage: React.FC = () => {
                 // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
                 return (
                   <>
-                    {searchHistory.map((item, index) => (
-                      <SearchWordComponent
-                        index={index}
-                        searchInputValue={searchInputValue}
-                        item={{ type: item.type, value: item.value }}
-                      />
-                    ))}
+                    {filterUsers(users)}
                     <styles.DeleteButton>
                       delete search history
                     </styles.DeleteButton>
@@ -85,15 +133,7 @@ const SearchPage: React.FC = () => {
                         태그
                       </styles.SearchType>
                     </styles.Top>
-                    <>
-                      {filteredData.map((item, index) => (
-                        <SearchWordComponent
-                          index={index}
-                          searchInputValue={searchInputValue}
-                          item={{ type: item.type, value: item.value }}
-                        />
-                      ))}
-                    </>
+                    <>{filterUsers(users)}</>
                   </>
                 );
               }

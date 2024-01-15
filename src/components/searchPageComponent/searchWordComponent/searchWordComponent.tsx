@@ -4,6 +4,7 @@ import HashtagComponent from '@components/searchPageComponent/hashtagComponent/h
 import UserNameComponent from '@components/searchPageComponent/userNameComponent/userNameComponent';
 
 import styles from './style';
+
 interface searchwordProps {
   index: number;
   searchInputValue: string;
@@ -11,8 +12,15 @@ interface searchwordProps {
     type: string;
     value: string;
   };
+  onScroll: React.UIEventHandler;
+  onWheel: React.WheelEventHandler;
 }
 const SearchWordComponent: React.FC<searchwordProps> = (props) => {
+  /*const filterUsers = useCallback((data)=>{
+    const filterUserList = data.filter((user) => (user.value.includes(searchInputValue)));
+
+    
+  })*/
   return (
     <styles.HistoryContainer key={props.index}>
       {props.item.type === 'username' && //유저 이름인 경우

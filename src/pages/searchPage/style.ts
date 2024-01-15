@@ -66,5 +66,41 @@ const styles = {
     transform: translateX(-50%);
     z-index: 100;
   `,
+  UserNameImage: styled.img`
+    position: relative;
+    bottom: 1vh;
+    width: 2vw;
+    max-width: 56px;
+    height: 4vh;
+    max-height: 53px;
+    margin: 0 40px 0 40px;
+    border-radius: 50px;
+  `,
+  //위의 이미지 옆에 표시될 내용 username이나 hashtag
+  Content: styled.span`
+    position: relative;
+    bottom: 2vh;
+    color: black;
+    font-size: 20px;
+  `,
+  //유저가 찾는 데이터가 username인 경우 옆에 표시될 친구 추가 아이콘
+  PlusFriend: styled(Link)`
+    position: relative;
+    right: 50px;
+    bottom: 2vh;
+    background-image: url('images/searchPage/PlusFriendImage.png');
+    background-size: cover;
+    background-position: center;
+    width: 1.2vw;
+    max-width: 23px;
+    height: 2vh;
+    max-height: 3px;
+    z-index: 100;
+    cursor: pointer;
+  `, //검색 기록에 뜰 데이터(searchHistory)나 유저의 입력에 따라 필터가 된 데이터( filteredData)들을 감쌀 컨테이너 hr태그를 따로 사용안하고 아래쪽만 border처리
+  HistoryContainer: styled.div`
+    margin: 28.8px 0 28.8px 0;
+    border-bottom: 1px solid white;
+  `,
 };
 export default styles;
