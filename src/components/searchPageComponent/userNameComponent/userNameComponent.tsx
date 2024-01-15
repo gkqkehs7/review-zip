@@ -1,12 +1,12 @@
-import styles from '@components/searchPageComponent/userNameComponent/style';
-interface UserNameProps {
-  usernameProps: string;
+import styles from './style';
+interface UserNameComponentProps {
+  username: string;
 }
-const UserNameComponent: React.FC<UserNameProps> = (props) => {
+const UserNameComponent: React.FC<UserNameComponentProps> = (props) => {
   return (
     <>
       <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
-      <styles.Content>{props.usernameProps}</styles.Content>
+      <styles.Content>{props.username}</styles.Content>
       <styles.PlusFriend to="" />
     </>
   );

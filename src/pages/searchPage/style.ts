@@ -39,19 +39,6 @@ const styles = {
     left: 50%; // 왼쪽에서 50% 위치에 배치
     transform: translateX(-50%); // X축으로 -50% 만큼 이동하여 중앙 정렬
   `,
-  // 검색창 안에 위치한 돋보기
-  Search: styled.div`
-    position: absolute;
-    top: 0;
-    background-image: url('images/searchPage/SearchImage.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    width: 26.96px;
-    height: 26.96px;
-    margin: 25px;
-  `,
   //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용
   SearchType: styled.span<SearchTypeProps>`
     padding: 0 230px 0 230px;
@@ -63,73 +50,6 @@ const styles = {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-  `,
-  //검색 기록에 뜰 데이터(searchHistory)나 유저의 입력에 따라 필터가 된 데이터( filteredData)들을 감쌀 컨테이너 hr태그를 따로 사용안하고 아래쪽만 border처리
-  HistoryContainer: styled.div`
-    margin: 28.8px 0 28.8px 0;
-    border-bottom: 1px solid white;
-  `,
-
-  //hashtag 데이터 옆에 뜰 이미지- 모서리 깎인 사각형
-  HashtagImage: styled.img`
-    position: relative;
-    bottom: 1vh;
-    width: 2vw;
-    max-width: 47px;
-    height: 4vh;
-    max-height: 47px;
-    margin: 0 40px 0 40px;
-    border-radius: 10px;
-  `,
-  //username 옆에 뜰 이미지 - 원
-  UserNameImage: styled.img`
-    position: relative;
-    bottom: 1vh;
-    width: 2vw;
-    max-width: 56px;
-    height: 4vh;
-    max-height: 53px;
-    margin: 0 40px 0 40px;
-    border-radius: 50px;
-  `,
-  //위의 이미지 옆에 표시될 내용 username이나 hashtag
-  Content: styled.span`
-    position: relative;
-    bottom: 2vh;
-    color: black;
-    font-size: 20px;
-  `,
-  //유저가 찾는 데이터가 username인 경우 옆에 표시될 친구 추가 아이콘
-  PlusFriend: styled(Link)`
-    position: relative;
-    right: 50px;
-    bottom: 2vh;
-    background-image: url('images/searchPage/PlusFriendImage.png');
-    background-size: cover;
-    background-position: center;
-    width: 1.2vw;
-    max-width: 23px;
-    height: 2vh;
-    max-height: 3px;
-    z-index: 100;
-    cursor: pointer;
-  `,
-  //유저가 찾는 데이터가 hashtag인 경우 표시될 리뷰 보기 버튼
-  SeeReview: styled(Link)`
-    position: relative;
-    left: 50vw;
-    bottom: 2vh;
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-    width: 3vw;
-    height: 4vh;
-    padding: 5px;
-    z-index: 3;
-    font-size: 15px;
-    color: black;
-    cursor: pointer;
-    border-radius: 20px;
   `,
   //검색어 입력이 있기 전에 검색 기록뜨는 화면_ 삭제 버튼
   DeleteButton: styled.button`

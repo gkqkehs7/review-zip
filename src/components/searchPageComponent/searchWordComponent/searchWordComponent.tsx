@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from '@components/searchPageComponent/searchWordComponent/style';
+
 import HashtagComponent from '@components/searchPageComponent/hashtagComponent/hashtagComponent';
 import UserNameComponent from '@components/searchPageComponent/userNameComponent/userNameComponent';
+
+import styles from './style';
 interface searchwordProps {
   index: number;
   searchInputValue: string;
@@ -15,9 +17,9 @@ const SearchWordComponent: React.FC<searchwordProps> = (props) => {
     <styles.HistoryContainer key={props.index}>
       {props.item.type === 'username' && //유저 이름인 경우
       props.item.value.includes(props.searchInputValue) ? (
-        <UserNameComponent usernameProps={props.item.value} />
+        <UserNameComponent username={props.item.value} />
       ) : (
-        <HashtagComponent hashtagProps={props.item.value} />
+        <HashtagComponent hashtag={props.item.value} />
       )}
     </styles.HistoryContainer>
   );

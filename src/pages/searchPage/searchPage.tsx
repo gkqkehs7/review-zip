@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-import MenuBarComponent from '@/components/searchPageComponent/menuBar/menuBarComponent';
+import MenuBarComponent from '@/components/searchPageComponent/menuBarComponent/menuBarComponent';
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
 import SearchWordComponent from '@/components/searchPageComponent/searchWordComponent/searchWordComponent';
-import styles from '@pages/searchPage/style';
+
+import styles from './style';
 const searchHistory = [
   { type: 'username', value: 'username' },
   { type: 'hashtag', value: '#hashtag' },
@@ -30,30 +31,25 @@ export interface SearchTypeProps {
   isBorder: boolean;
 }
 
-// SearchBar 컴포넌트에 대한 타입 정의
-
-interface HashtagProps {
-  hashtagProps: string;
-}
-
 const SearchPage: React.FC = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
   const filteredData = searchInputValue
     ? data.filter((item) => item.value.includes(searchInputValue))
     : data;
-  const searchBarProps = {
-    searchInputValue,
-    setSearchInputValue,
-  };
 
   return (
     <styles.Container>
       {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
-      <styles.SearchBarContainer onClick={() => setIsFocused(!isFocused)}>
-        <SearchBarComponent searchBarProps={searchBarProps} />
+      <styles.SearchBarContainer onClick={() => setIsClicked(!isClicked)}>
+        <SearchBarComponent
+          searchInputValue={searchInputValue}
+          setSearchInputValue={setSearchInputValue}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
+        />
         {/*클릭이 된 경우 */}
-        {isFocused && (
+        {isClicked && (
           <styles.SearchBarExtends>
             {(() => {
               if (searchInputValue === '') {
