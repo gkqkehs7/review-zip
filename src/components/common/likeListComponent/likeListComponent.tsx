@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-
+import React, { useEffect, useRef } from 'react';
 import styles from './style';
 
 interface LikeListComponentProps {
@@ -60,11 +60,22 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
   closeLikeList,
   likeListOpen,
 }) => {
+  const userList = useRef<HTMLDivElement>(null);
+
+  // 유저 리스트에 focus되도록 하는 함수
+  useEffect(() => {
+    if (userList.current) {
+      userList.current.focus();
+    }
+  }, []);
+
   return (
     <styles.Container
+      onScroll={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
       style={{
         opacity: likeListOpen ? 1 : 0,
-        pointerEvents: likeListOpen ? 'all' : 'none',
+        pointerEvents: likeListOpen ? 'auto' : 'none',
       }}
     >
       <styles.InnerContainer>
@@ -82,7 +93,11 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
           <styles.SearchInput placeholder="검색" />
         </styles.SearchContainer>
 
-        <styles.UserListContainer>
+        <styles.UserListContainer
+          ref={userList}
+          onScroll={(e) => e.preventDefault()}
+          onWheel={(e) => e.preventDefault()}
+        >
           {users.map((user, index) => (
             <styles.UserList key={index}>
               <styles.UserData>
