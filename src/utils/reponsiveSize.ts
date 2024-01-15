@@ -1,3 +1,12 @@
+import {
+  isLargeDesktop,
+  isSmallDesktop,
+  isLargeLaptop,
+  isSmallLaptop,
+  isPad,
+  isPhone,
+} from './deviceSize';
+
 // 기기 사이즈별 width, height 조절 함수
 const responsiveWidthHeight = (
   device: string,
