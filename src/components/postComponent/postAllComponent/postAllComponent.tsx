@@ -1,6 +1,9 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+import { checkDevice } from '@/utils/\bcheckDeviceSize';
+
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
@@ -18,6 +21,8 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
   splitPost,
   post,
 }) => {
+  const device = checkDevice();
+
   const splitContent = (content: string): string => {
     if (content.length < 15) {
       return content;
@@ -27,7 +32,17 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
   };
 
   return (
-    <styles.Container>
+    <styles.Container
+      style={responsiveWidthHeight(
+        device,
+        { width: 1500, height: 1500 },
+        { width: 1200, height: 1200 },
+        { width: 1000, height: 1000 },
+        { width: 800, height: 800 },
+        { width: 500, height: 500 },
+        { width: 200, height: 200 },
+      )}
+    >
       <styles.TopText>나의 우주에게</styles.TopText>
 
       <styles.Line />
