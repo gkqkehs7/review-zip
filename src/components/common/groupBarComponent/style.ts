@@ -3,8 +3,6 @@ import styled from 'styled-components';
 const styles = {
   Container: styled.div`
     position: fixed;
-    top: 5vh;
-    right: 2vw;
     z-index: 1000;
   `,
 
