@@ -1,4 +1,4 @@
-import styles from '@/components/searchPage/menuBar/style';
+import styles from '@/components/searchPageComponent/menuBarComponent/style';
 
 const MenuBarComponent = () => {
   return (

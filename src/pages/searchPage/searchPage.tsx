@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { changeInputValue } from '@hooks/chageInputValue';
+import MenuBarComponent from '@/components/searchPageComponent/menuBarComponent/menuBarComponent';
+import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
+import SearchWordComponent from '@/components/searchPageComponent/searchWordComponent/searchWordComponent';
 
-import MenuBarComponent from '@/components/searchPage/menuBar/menuBarComponent';
-import styles from '@pages/searchPage/style';
+import styles from './style';
 const searchHistory = [
   { type: 'username', value: 'username' },
   { type: 'hashtag', value: '#hashtag' },
@@ -21,65 +22,95 @@ const data = [
   { type: 'hashtag', value: '#hashtag' },
   { type: 'username', value: 'username' },
   { type: 'username', value: 'username' },
-  { type: 'hashtag', value: 'hashtag' },
+  { type: 'hashtag', value: '#hashtag' },
   { type: 'username', value: 'username' },
 ];
+
+const users = [
+  {
+    id: 1,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 2,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 3,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 4,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 5,
+    name: 'username',
+    profileImage: 'images/searchPage/UserNameImage.png',
+  },
+];
+
+type userType = {
+  id: number;
+  name: string;
+  profileImage: string;
+};
 
 // SearchType 컴포넌트에 대한 타입 정의
 export interface SearchTypeProps {
   isBorder: boolean;
 }
 
-// SearchBar 컴포넌트에 대한 타입 정의
-export interface SearchBarProps {
-  isFocused: boolean;
-}
-
 const SearchPage: React.FC = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
   const filteredData = searchInputValue
     ? data.filter((item) => item.value.includes(searchInputValue))
     : data;
-  const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
 
+  const filterUsers = useCallback(
+    (users: userType[]) => {
+      const filterUserlist = users.filter((user) =>
+        user.name.includes(searchInputValue),
+      );
+
+      return (
+        <>
+          {filterUserlist.map((user) => (
+            <styles.HistoryContainer key={user.id}>
+              <styles.UserNameImage src={user.profileImage} />
+              <styles.Content>{user.name}</styles.Content>
+              <styles.PlusFriend to="" />
+            </styles.HistoryContainer>
+          ))}
+        </>
+      );
+    },
+    [searchInputValue],
+  );
   return (
     <styles.Container>
       {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
-      <styles.SearchBarContainer>
-        <styles.SearchBar
-          type="text"
-          size={90}
-          value={searchInputValue}
-          placeholder="search"
-          onChange={(e) => changeInputValue(e, setSearchInputValue)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          isFocused={isFocused}
+      <styles.SearchBarContainer onClick={() => setIsClicked(!isClicked)}>
+        <SearchBarComponent
+          searchInputValue={searchInputValue}
+          setSearchInputValue={setSearchInputValue}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
         />
-        {/*컴포넌트로 빼기*/}
-        <styles.Search />
-        {/*포커스가 된 경우 */}
-        {isFocused && (
+        {/*클릭이 된 경우 */}
+        {isClicked && (
           <styles.SearchBarExtends>
             {(() => {
               if (searchInputValue === '') {
                 // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
                 return (
                   <>
-                    {searchHistory.map((item, index) => (
-                      <styles.HistoryContainer key={index}>
-                        {item.type === 'hashtag' ? ( //해시태그인 경우
-                          <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
-                        ) : (
-                          //유저 이름인 경우
-
-                          <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
-                        )}
-                        <styles.Content>{item.value}</styles.Content>
-                      </styles.HistoryContainer>
-                    ))}
+                    {filterUsers(users)}
                     <styles.DeleteButton>
                       delete search history
                     </styles.DeleteButton>
@@ -89,7 +120,6 @@ const SearchPage: React.FC = () => {
                 // 검색창의 입력값이 비어있지 않고 진행중인 경우
                 return (
                   <>
-                    {' '}
                     {/*입력이 있을 경우 리뷰잉인지 태그인지 보여주는 부분 */}
                     <styles.Top>
                       <styles.SearchType
@@ -103,29 +133,7 @@ const SearchPage: React.FC = () => {
                         태그
                       </styles.SearchType>
                     </styles.Top>
-                    <>
-                      {filteredData.map((item, index) => (
-                        <styles.HistoryContainer key={index}>
-                          {item.type === 'username' && //유저 이름인 경우
-                          item.value.includes(searchInputValue) ? (
-                            <>
-                              <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
-                              <styles.Content>{item.value}</styles.Content>
-                              <styles.PlusFriend to="" />
-                            </>
-                          ) : (
-                            //해시태그인 경우
-                            <>
-                              <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
-                              <styles.Content>{item.value}</styles.Content>
-                              <styles.SeeReview to="">
-                                리뷰 보기
-                              </styles.SeeReview>
-                            </>
-                          )}
-                        </styles.HistoryContainer>
-                      ))}
-                    </>
+                    <>{filterUsers(users)}</>
                   </>
                 );
               }
