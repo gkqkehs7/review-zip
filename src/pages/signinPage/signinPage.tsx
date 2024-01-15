@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
-
-
 const SigninPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -11,7 +9,6 @@ const SigninPage: React.FC = () => {
   return (
     <styles.Container>
       <styles.Right>
-        
         {/* 이메일 */}
         <styles.InputContainer>
           <styles.InputTitle>EMAIL</styles.InputTitle>
