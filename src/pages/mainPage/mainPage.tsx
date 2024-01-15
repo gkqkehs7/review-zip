@@ -39,12 +39,12 @@ const MainPage: React.FC = () => {
     //   </SwiperSlide>
     // </styles.Container>
 
-    <div style={{ overflow: 'hidden', position: 'relative' }}>
+    <styles.Container>
       <GroupBarComponent />
       <MainTopComponent />
       <MainMiddleComponent />
       <MainBottomComponent />
-    </div>
+    </styles.Container>
   );
 };
 

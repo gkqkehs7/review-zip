@@ -8,6 +8,7 @@ import FrameComponent from '@/components/common/frameComponent/frameComponent';
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
+import mainMiddleBackgroundImage from '/images/mainPage/MainMiddleBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const posts: IPost[] = [
@@ -128,7 +129,9 @@ const MainMiddleComponent: React.FC = () => {
   };
 
   return (
-    <styles.Container>
+    <styles.Container
+      style={{ backgroundImage: `url(${mainMiddleBackgroundImage})` }}
+    >
       {/* 왼쪽 액자 */}
       <styles.LeftContainer onClick={toggleModal}>
         <FrameComponent post={posts[0]} />
@@ -148,10 +151,10 @@ const MainMiddleComponent: React.FC = () => {
       <styles.ArrowImage src={DownArrowImage} />
 
       {/* 글씨 */}
-      <styles.TextContainer>
+      {/* <styles.TextContainer>
         <styles.Text>안녕, 우주에게</styles.Text>
         <styles.Text>나의 가장 아름다운 세상을 보여줄게</styles.Text>
-      </styles.TextContainer>
+      </styles.TextContainer> */}
 
       {/* 액자 눌렀을 때 modal */}
       <MainMiddelModalComponent

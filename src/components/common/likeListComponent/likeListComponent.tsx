@@ -76,6 +76,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
 
   const userList = useRef<HTMLDivElement>(null);
 
+  // 검색시에 유저 filter되게 해주는 함수
   const filterUsers = useCallback(
     (users: IUser[]) => {
       const filterUserlist = users.filter((user: IUser) =>
@@ -119,8 +120,9 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
       }}
     >
       <styles.InnerContainer>
+        {/* 좋아요 목록 글씨, 나가기 버튼 */}
         <styles.TopContainer>
-          <styles.Title>타이틀</styles.Title>
+          <styles.Title>좋아요 목록</styles.Title>
           <styles.ExitButton onClick={closeLikeList}>
             나가기 버튼
           </styles.ExitButton>
@@ -128,6 +130,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
 
         <styles.Line />
 
+        {/* 검색창 */}
         <styles.SearchContainer>
           <styles.SearchIcon>돋보기 그림</styles.SearchIcon>
           <styles.SearchInput
@@ -136,6 +139,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
           />
         </styles.SearchContainer>
 
+        {/* 유저 검색 리스트 */}
         <styles.UserListContainer
           ref={userList}
           onScroll={(e) => e.preventDefault()}

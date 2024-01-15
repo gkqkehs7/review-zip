@@ -24,7 +24,9 @@ const styles = {
     align-items: center;
 
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
+    text-align: center;
   `,
 
   ArrowImage: styled.img`
