@@ -18,8 +18,14 @@ function App() {
         <Routes>
           <Route path="/signinPage" element={<SigninPage />}></Route>
           <Route path="/signupPage" element={<SignupPage />}></Route>
-          <Route path="/passwordRecoveryPage" element={<PasswordRecoveryPage />}></Route>
-          <Route path="/changePasswordPage" element={<ChangePasswordPage />}></Route>
+          <Route
+            path="/passwordRecoveryPage"
+            element={<PasswordRecoveryPage />}
+          ></Route>
+          <Route
+            path="/changePasswordPage"
+            element={<ChangePasswordPage />}
+          ></Route>
           <Route path="/mainPage" element={<MainPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
         </Routes>

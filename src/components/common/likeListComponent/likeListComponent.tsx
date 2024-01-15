@@ -1,4 +1,9 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { faker } from '@faker-js/faker';
+
+import { changeInputValue } from '@/hooks/chageInputValue';
+
+import { IUser } from '@/types/users.types';
 
 import styles from './style';
 
@@ -7,50 +12,57 @@ interface LikeListComponentProps {
   likeListOpen: boolean;
 }
 
-const users = [
+const users: IUser[] = [
   {
     id: 1,
     name: '제니',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
 
   {
-    id: 1,
-    name: '제니',
+    id: 2,
+    name: '예니',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
 
   {
-    id: 1,
-    name: '제니',
+    id: 3,
+    name: '민우',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
 
   {
-    id: 1,
-    name: '제니',
+    id: 4,
+    name: '나이',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
 
   {
-    id: 1,
-    name: '제니',
+    id: 5,
+    name: '거미',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
   {
-    id: 1,
-    name: '제니',
+    id: 6,
+    name: '코끼리',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
   {
-    id: 1,
-    name: '제니',
+    id: 7,
+    name: '미누',
+    nickname: '닉넴1',
     profileImage: faker.image.avatar(),
     follow: false,
   },
@@ -60,31 +72,21 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
   closeLikeList,
   likeListOpen,
 }) => {
-  return (
-    <styles.Container
-      style={{
-        opacity: likeListOpen ? 1 : 0,
-        pointerEvents: likeListOpen ? 'all' : 'none',
-      }}
-    >
-      <styles.InnerContainer>
-        <styles.TopContainer>
-          <styles.Title>타이틀</styles.Title>
-          <styles.ExitButton onClick={closeLikeList}>
-            나가기 버튼
-          </styles.ExitButton>
-        </styles.TopContainer>
+  const [searchInput, setSearchInput] = useState<string>('');
 
-        <styles.Line />
+  const userList = useRef<HTMLDivElement>(null);
 
-        <styles.SearchContainer>
-          <styles.SearchIcon>돋보기 그림</styles.SearchIcon>
-          <styles.SearchInput placeholder="검색" />
-        </styles.SearchContainer>
+  // 검색시에 유저 filter되게 해주는 함수
+  const filterUsers = useCallback(
+    (users: IUser[]) => {
+      const filterUserlist = users.filter((user: IUser) =>
+        user.name.includes(searchInput),
+      );
 
-        <styles.UserListContainer>
-          {users.map((user, index) => (
-            <styles.UserList key={index}>
+      return (
+        <>
+          {filterUserlist.map((user: IUser) => (
+            <styles.UserList key={user.id}>
               <styles.UserData>
                 <styles.UserImage src={user.profileImage} />
                 <styles.UserName>{user.name}</styles.UserName>
@@ -95,6 +97,55 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
               </styles.FollowButton>
             </styles.UserList>
           ))}
+        </>
+      );
+    },
+    [searchInput],
+  );
+
+  // 유저 리스트에 focus되도록 하는 함수
+  useEffect(() => {
+    if (userList.current) {
+      userList.current.focus();
+    }
+  }, []);
+
+  return (
+    <styles.Container
+      onScroll={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+      style={{
+        opacity: likeListOpen ? 1 : 0,
+        pointerEvents: likeListOpen ? 'auto' : 'none',
+      }}
+    >
+      <styles.InnerContainer>
+        {/* 좋아요 목록 글씨, 나가기 버튼 */}
+        <styles.TopContainer>
+          <styles.Title>좋아요 목록</styles.Title>
+          <styles.ExitButton onClick={closeLikeList}>
+            나가기 버튼
+          </styles.ExitButton>
+        </styles.TopContainer>
+
+        <styles.Line />
+
+        {/* 검색창 */}
+        <styles.SearchContainer>
+          <styles.SearchIcon>돋보기 그림</styles.SearchIcon>
+          <styles.SearchInput
+            placeholder="검색"
+            onChange={(e) => changeInputValue(e, setSearchInput)}
+          />
+        </styles.SearchContainer>
+
+        {/* 유저 검색 리스트 */}
+        <styles.UserListContainer
+          ref={userList}
+          onScroll={(e) => e.preventDefault()}
+          onWheel={(e) => e.preventDefault()}
+        >
+          {filterUsers(users)}
         </styles.UserListContainer>
       </styles.InnerContainer>
     </styles.Container>

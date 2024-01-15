@@ -20,7 +20,11 @@ const styles = {
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background: linear-gradient(to bottom, #251a34 50%, #331b50 50%);
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    text-align: center;
     position: relative;
   `,
 

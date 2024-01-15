@@ -90,7 +90,7 @@ const styles = {
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
   `,
 
   UserList: styled.div`

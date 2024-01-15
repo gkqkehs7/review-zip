@@ -17,7 +17,7 @@ const MainBottomComponent: React.FC = () => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-        }, 3000);
+        }, 1000);
       }
     } else {
     }
