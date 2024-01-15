@@ -32,7 +32,6 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
   };
 
   return (
-
     <styles.Container
       style={responsiveWidthHeight(
         device,
@@ -44,9 +43,6 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
         { width: 500, height: 500 },
       )}
     >
-
-    <styles.Container>
-
       <styles.TopText>나의 우주에게</styles.TopText>
 
       <styles.Line />
