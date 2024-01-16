@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { SearchTypeProps } from './searchPage';
 //margin과 padding은 5의 배수로
 //일단 vw,vh로 하고 max-width,max-height 설정해주기
@@ -11,7 +10,8 @@ const styles = {
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
-    align-items: center;
+    justify-contents: center;
+    align-item: flex-start;
     width: 100vw;
     max-width: 1920px;
     height: 100vh;
@@ -20,7 +20,7 @@ const styles = {
   // 검색창이 포커스 된 경우 나타날 검색창 확장 영역 컴포넌트
   SearchBarExtends: styled.div`
     position: relative;
-    top: 15vh;
+    top: 0;
     background-color: rgba(255, 255, 255, 0.4);
     background-size: cover;
     width: 70vw;
@@ -43,13 +43,17 @@ const styles = {
   SearchType: styled.span<SearchTypeProps>`
     padding: 0 230px 0 230px;
     color: black;
-    border-bottom: ${(props) => (props.isBorder ? 'solid black' : 'none')};
+    border-bottom: ${(isBorder) => (isBorder ? 'solid black' : 'none')};
   `,
   //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
   Top: styled.div`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+  `,
+  ButtonContainer: styled.div`
+    display: flex;
+    justify-content: center;
   `,
   //검색어 입력이 있기 전에 검색 기록뜨는 화면_ 삭제 버튼
   DeleteButton: styled.button`
@@ -60,47 +64,7 @@ const styles = {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    position: absolute;
-    bottom: 4vh;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 100;
-  `,
-  UserNameImage: styled.img`
-    position: relative;
-    bottom: 1vh;
-    width: 2vw;
-    max-width: 56px;
-    height: 4vh;
-    max-height: 53px;
-    margin: 0 40px 0 40px;
-    border-radius: 50px;
-  `,
-  //위의 이미지 옆에 표시될 내용 username이나 hashtag
-  Content: styled.span`
-    position: relative;
-    bottom: 2vh;
-    color: black;
-    font-size: 20px;
-  `,
-  //유저가 찾는 데이터가 username인 경우 옆에 표시될 친구 추가 아이콘
-  PlusFriend: styled(Link)`
-    position: relative;
-    right: 50px;
-    bottom: 2vh;
-    background-image: url('images/searchPage/PlusFriendImage.png');
-    background-size: cover;
-    background-position: center;
-    width: 1.2vw;
-    max-width: 23px;
-    height: 2vh;
-    max-height: 3px;
-    z-index: 100;
-    cursor: pointer;
-  `, //검색 기록에 뜰 데이터(searchHistory)나 유저의 입력에 따라 필터가 된 데이터( filteredData)들을 감쌀 컨테이너 hr태그를 따로 사용안하고 아래쪽만 border처리
-  HistoryContainer: styled.div`
-    margin: 28.8px 0 28.8px 0;
-    border-bottom: 1px solid white;
   `,
 };
 export default styles;

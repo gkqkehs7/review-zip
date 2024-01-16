@@ -1,63 +1,120 @@
 import { useCallback, useState } from 'react';
 
-import MenuBarComponent from '@/components/searchPageComponent/menuBarComponent/menuBarComponent';
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
 import SearchWordComponent from '@/components/searchPageComponent/searchWordComponent/searchWordComponent';
-
+import UserNameComponent from '@/components/searchPageComponent/userNameComponent/userNameComponent';
+import HashtagComponent from '@/components/searchPageComponent/hashtagComponent/hashtagComponent';
 import styles from './style';
 const searchHistory = [
-  { type: 'username', value: 'username' },
-  { type: 'hashtag', value: '#hashtag' },
-  { type: 'username', value: 'username' },
-  { type: 'hashtag', value: '#hashtag' },
-  { type: 'username', value: 'username' },
-  { type: 'username', value: 'username' },
-  { type: 'hashtag', value: '#hashtag' },
-];
-
-const data = [
-  { type: 'username', value: 'username' },
-  { type: 'hashtag', value: '#hashtag' },
-  { type: 'username', value: 'username' },
-  { type: 'hashtag', value: '#hashtag' },
-  { type: 'username', value: 'username' },
-  { type: 'username', value: 'username' },
-  { type: 'hashtag', value: '#hashtag' },
-  { type: 'username', value: 'username' },
+  {
+    id: 1,
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 2,
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 3,
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
+  },
+  {
+    id: 3,
+    type: 'hashtag',
+    value: '#exampleTag3',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+  {
+    id: 4,
+    type: 'hashtag',
+    value: '#exampleTag4',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+  {
+    id: 5,
+    type: 'hashtag',
+    value: '#exampleTag5',
+    image: 'images/searchPage/HashtagImage.png',
+  },
 ];
 
 const users = [
   {
     id: 1,
-    name: 'username',
-    profileImage: 'images/searchPage/UserNameImage.png',
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
   },
   {
     id: 2,
-    name: 'username',
-    profileImage: 'images/searchPage/UserNameImage.png',
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
   },
   {
     id: 3,
-    name: 'username',
-    profileImage: 'images/searchPage/UserNameImage.png',
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
   },
   {
     id: 4,
-    name: 'username',
-    profileImage: 'images/searchPage/UserNameImage.png',
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
   },
   {
     id: 5,
-    name: 'username',
-    profileImage: 'images/searchPage/UserNameImage.png',
+    type: 'username',
+    value: 'username',
+    image: 'images/searchPage/UserNameImage.png',
   },
 ];
 
-type userType = {
+const hashtags = [
+  {
+    id: 1,
+    type: 'hashtag',
+    value: '#exampleTag1',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+  {
+    id: 2,
+    type: 'hashtag',
+    value: '#exampleTag2',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+  {
+    id: 3,
+    type: 'hashtag',
+    value: '#exampleTag3',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+  {
+    id: 4,
+    type: 'hashtag',
+    value: '#exampleTag4',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+  {
+    id: 5,
+    type: 'hashtag',
+    value: '#exampleTag5',
+    image: 'images/searchPage/HashtagImage.png',
+  },
+];
+//유저 네임이나 해시태그 같은 데이터의 타입
+type dataType = {
   id: number;
-  name: string;
-  profileImage: string;
+  type: string;
+  value: string;
+  image: string;
 };
 
 // SearchType 컴포넌트에 대한 타입 정의
@@ -68,30 +125,42 @@ export interface SearchTypeProps {
 const SearchPage: React.FC = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const filteredData = searchInputValue
-    ? data.filter((item) => item.value.includes(searchInputValue))
-    : data;
 
+  //데이터 배열을 받아서 함수가 다시 필요할 때마다 함수를 새로 생성하는 것이 아닌 필요할 때마다 메모리에서 가져와서 재사용하는 것이다.
   const filterUsers = useCallback(
-    (users: userType[]) => {
+    (users: dataType[]) => {
       const filterUserlist = users.filter((user) =>
-        user.name.includes(searchInputValue),
+        user.value.includes(searchInputValue),
       );
 
       return (
-        <>
+        <div>
           {filterUserlist.map((user) => (
-            <styles.HistoryContainer key={user.id}>
-              <styles.UserNameImage src={user.profileImage} />
-              <styles.Content>{user.name}</styles.Content>
-              <styles.PlusFriend to="" />
-            </styles.HistoryContainer>
+            <UserNameComponent value={user.value} image={user.image} />
           ))}
-        </>
+        </div>
       );
     },
     [searchInputValue],
   );
+
+  const filterHashs = useCallback(
+    (hashtags: dataType[]) => {
+      const filterTaglist = hashtags.filter((hashtag) =>
+        hashtag.value.includes(searchInputValue),
+      );
+
+      return (
+        <div>
+          {filterTaglist.map((hashtag) => (
+            <HashtagComponent value={hashtag.value} image={hashtag.image} />
+          ))}
+        </div>
+      );
+    },
+    [searchInputValue],
+  );
+
   return (
     <styles.Container>
       {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
@@ -105,44 +174,49 @@ const SearchPage: React.FC = () => {
         {/*클릭이 된 경우 */}
         {isClicked && (
           <styles.SearchBarExtends>
-            {(() => {
-              if (searchInputValue === '') {
-                // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
-                return (
-                  <>
-                    {filterUsers(users)}
-                    <styles.DeleteButton>
-                      delete search history
-                    </styles.DeleteButton>
-                  </>
-                );
-              } else {
-                // 검색창의 입력값이 비어있지 않고 진행중인 경우
-                return (
-                  <>
-                    {/*입력이 있을 경우 리뷰잉인지 태그인지 보여주는 부분 */}
-                    <styles.Top>
-                      <styles.SearchType
-                        isBorder={!searchInputValue.includes('#')}
-                      >
-                        리뷰잉
-                      </styles.SearchType>
-                      <styles.SearchType
-                        isBorder={searchInputValue.includes('#')}
-                      >
-                        태그
-                      </styles.SearchType>
-                    </styles.Top>
-                    <>{filterUsers(users)}</>
-                  </>
-                );
-              }
-            })()}
+            {!searchInputValue && (
+              // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
+              <div>
+                {searchHistory.map((item, index) => (
+                  <SearchWordComponent
+                    index={index}
+                    searchInputValue={searchInputValue}
+                    item={{
+                      type: item.type,
+                      value: item.value,
+                      image: item.image,
+                    }}
+                  />
+                ))}
+                <styles.ButtonContainer>
+                  <styles.DeleteButton>
+                    delete search history
+                  </styles.DeleteButton>
+                </styles.ButtonContainer>
+              </div>
+            )}
+            {searchInputValue && (
+              // 검색창의 입력값이 비어있지 않고 진행중인 경우
+              <div>
+                {/*입력이 있을 경우 리뷰잉인지 태그인지 보여주는 부분 */}
+                <styles.Top>
+                  <styles.SearchType isBorder={!searchInputValue.includes('#')}>
+                    리뷰잉
+                  </styles.SearchType>
+                  <styles.SearchType isBorder={searchInputValue.includes('#')}>
+                    태그
+                  </styles.SearchType>
+                </styles.Top>
+                {searchInputValue.includes('#') ? (
+                  <>{filterHashs(hashtags)}</>
+                ) : (
+                  <>{filterUsers(users)}</>
+                )}
+              </div>
+            )}
           </styles.SearchBarExtends>
         )}
       </styles.SearchBarContainer>
-      {/* 옆에 계속 표시되는 메뉴 */}
-      <MenuBarComponent />
     </styles.Container>
   );
 };

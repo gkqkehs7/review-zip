@@ -1,14 +1,22 @@
 import styles from './style';
 interface UserNameComponentProps {
-  username: string;
+  value: string;
+  image: string;
 }
-const UserNameComponent: React.FC<UserNameComponentProps> = (props) => {
+const UserNameComponent: React.FC<UserNameComponentProps> = ({
+  value,
+  image,
+}) => {
   return (
-    <>
-      <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
-      <styles.Content>{props.username}</styles.Content>
-      <styles.PlusFriend to="" />
-    </>
+    <styles.HistoryContainer>
+      <div>
+        <styles.UserNameImage src={image} />
+        <styles.Content>{value}</styles.Content>
+      </div>
+      <styles.PluseFriendLink to="">
+        <styles.PlusFriend src="images/searchPage/PlusFriendImage.png" />
+      </styles.PluseFriendLink>
+    </styles.HistoryContainer>
   );
 };
 

@@ -2,7 +2,7 @@ import StarRatingComponent from '@/components/common/starRatingComponent/starsRa
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
-import { checkDevice } from '@/utils/\bcheckDeviceSize';
+import { checkDevice } from '@/utils/checkDeviceSize';
 
 import { IPost } from '@/types/posts.types';
 
