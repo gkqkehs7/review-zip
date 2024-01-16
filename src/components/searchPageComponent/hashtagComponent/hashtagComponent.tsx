@@ -1,15 +1,23 @@
 import styles from './style';
 interface HashtagComponentProps {
-  hashtag: string;
+  value: string;
+  searchWordImage: string;
 }
-const HashtagComponent: React.FC<HashtagComponentProps> = (props) => {
+const HashtagComponent: React.FC<HashtagComponentProps> = ({
+  value,
+  searchWordImage,
+}) => {
   return (
     //해시태그인 경우
-    <>
-      <styles.HashtagImage src="images/searchPage/HashtagImage.png" />
-      <styles.Content>{props.hashtag}</styles.Content>
-      <styles.SeeReview to="">리뷰 보기</styles.SeeReview>
-    </>
+    <styles.HistoryContainer>
+      <div>
+        <styles.HashtagImage src={searchWordImage} />
+        <styles.Content>{value}</styles.Content>
+      </div>
+      <styles.SeeReviewContainer>
+        <styles.SeeReview to="">리뷰 보기</styles.SeeReview>
+      </styles.SeeReviewContainer>
+    </styles.HistoryContainer>
   );
 };
 

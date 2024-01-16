@@ -1,14 +1,25 @@
+import { Link } from 'react-router-dom';
 import styles from './style';
+import PlusFriend from 'images/searchPage/PlusFriendImage.png';
+
 interface UserNameComponentProps {
-  username: string;
+  value: string;
+  searchWordImage: string;
 }
-const UserNameComponent: React.FC<UserNameComponentProps> = (props) => {
+const UserNameComponent: React.FC<UserNameComponentProps> = ({
+  value,
+  searchWordImage,
+}) => {
   return (
-    <>
-      <styles.UserNameImage src="images/searchPage/UserNameImage.png" />
-      <styles.Content>{props.username}</styles.Content>
-      <styles.PlusFriend to="" />
-    </>
+    <styles.HistoryContainer>
+      <div>
+        <styles.UserNameImage src={searchWordImage} />
+        <styles.Content>{value}</styles.Content>
+      </div>
+      <Link to="">
+        <styles.PlusFriend src="images/searchPage/PlusFriendImage.png" />
+      </Link>
+    </styles.HistoryContainer>
   );
 };
 
