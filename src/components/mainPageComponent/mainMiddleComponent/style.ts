@@ -57,6 +57,8 @@ const styles = {
   `,
 
   ArrowImage: styled.img`
+    cursor: pointer;
+
     position: absolute;
     width: 50px;
     height: 50px;

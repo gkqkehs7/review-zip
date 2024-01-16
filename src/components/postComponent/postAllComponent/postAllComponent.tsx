@@ -37,8 +37,8 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
         device,
         { width: 1500, height: 1500 },
         { width: 1200, height: 1200 },
+        { width: 1000, height: 1000 },
         { width: 800, height: 800 },
-        { width: 600, height: 600 },
         { width: 500, height: 500 },
         { width: 200, height: 200 },
       )}

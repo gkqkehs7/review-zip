@@ -8,7 +8,7 @@ import MainMiddeleStickerImage from '/images/mainPage/MainMiddleSticker.png';
 
 interface FrameComponentProps {
   openLoadingModal?: () => void;
-  post: IPost;
+  post?: IPost;
 }
 
 const FrameComponent: React.FC<FrameComponentProps> = ({

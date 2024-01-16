@@ -24,7 +24,7 @@ const styles = {
     align-items: center;
 
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     text-align: center;
   `,

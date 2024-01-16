@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 
 import MainMiddelModalComponent from '@/components/mainPageComponent/mainMiddelModalComponent/mainMiddelModalComponent';
@@ -116,39 +116,87 @@ const posts: IPost[] = [
   },
 ];
 
-const MainMiddleComponent: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+interface MainMiddleComponentProps {
+  modalOpen: () => void;
+  modalClose: () => void;
+}
+
+const MainMiddleComponent: React.FC<MainMiddleComponentProps> = ({
+  modalOpen,
+  modalClose,
+}) => {
+  const [mainMiddleModalOpen, setMainMiddletModalOpen] =
+    useState<boolean>(false);
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
+  const [scrollPosition, setScrollPosition] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    console.log(window.scrollY);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrollPosition]);
+
+  const handleScrollDown = () => {
+    document.body.style.cssText = '';
+
+    window.scrollTo({
+      top: scrollPosition + window.innerHeight + window.innerHeight,
+      behavior: 'smooth',
+    });
   };
 
+  // MainMiddleModal 열기
+  const openMainMiddleModal = () => {
+    setMainMiddletModalOpen(true);
+    modalOpen();
+  };
+
+  // MainMiddleModal 닫기
+  const closeMainMiddleModal = () => {
+    setMainMiddletModalOpen(false);
+    modalClose();
+  };
+
+  // LoadingModal 열기
   const openLoadingModal = () => {
     setLoadingModalOpen(true);
+    modalOpen();
+    modalClose();
+  };
+
+  // LoadingModal 닫기
+  const closeLoadingModal = () => {
+    setLoadingModalOpen(false);
   };
 
   return (
-    <styles.Container
-      style={{ backgroundImage: `url(${mainMiddleBackgroundImage})` }}
-    >
+    <styles.Container>
       {/* 왼쪽 액자 */}
-      <styles.LeftContainer onClick={toggleModal}>
+      <styles.LeftContainer onClick={openMainMiddleModal}>
         <FrameComponent post={posts[0]} />
       </styles.LeftContainer>
 
       {/* 가운데 액자 */}
-      <styles.MiddleContainer onClick={toggleModal}>
+      <styles.MiddleContainer onClick={openMainMiddleModal}>
         <FrameComponent post={posts[1]} />
       </styles.MiddleContainer>
 
       {/* 오른쪽 액자 */}
-      <styles.RightContainer onClick={toggleModal}>
+      <styles.RightContainer onClick={openMainMiddleModal}>
         <FrameComponent post={posts[2]} />
       </styles.RightContainer>
 
       {/* 아래 화살표 */}
-      <styles.ArrowImage src={DownArrowImage} />
+      <styles.ArrowImage src={DownArrowImage} onClick={handleScrollDown} />
 
       {/* 글씨 */}
       {/* <styles.TextContainer>
@@ -158,8 +206,9 @@ const MainMiddleComponent: React.FC = () => {
 
       {/* 액자 눌렀을 때 modal */}
       <MainMiddelModalComponent
-        modalOpen={modalOpen}
-        toggleModal={toggleModal}
+        mainMiddleModalOpen={mainMiddleModalOpen}
+        closeLoadingModal={closeLoadingModal}
+        closeMainMiddleModal={closeMainMiddleModal}
         openLoadingModal={openLoadingModal}
       />
 

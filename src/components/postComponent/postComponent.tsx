@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
@@ -8,7 +8,15 @@ import LikeListComponent from '@/components/common/likeListComponent/likeListCom
 
 import { IPost } from '@/types/posts.types';
 
-const PostComponent: React.FC = () => {
+interface PostComponentProps {
+  modalOpen: () => void;
+  modalClose: () => void;
+}
+
+const PostComponent: React.FC<PostComponentProps> = ({
+  modalOpen,
+  modalClose,
+}) => {
   const [split, setSplit] = useState<boolean>(false);
 
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
@@ -17,12 +25,14 @@ const PostComponent: React.FC = () => {
     setSplit(!split);
   };
 
-  const openLikeList = () => {
+  const openLikeListModal = () => {
     setLikeListOpen(true);
+    modalOpen();
   };
 
-  const closeLikeList = () => {
+  const closeLikeListModal = () => {
     setLikeListOpen(false);
+    modalClose();
   };
 
   const post: IPost = {
@@ -68,12 +78,16 @@ const PostComponent: React.FC = () => {
         <PostAll splitPost={splitPost} post={post} />
       )}
 
-      <PostRight split={split} post={post} openLikeList={openLikeList} />
+      <PostRight
+        split={split}
+        post={post}
+        openLikeListModal={openLikeListModal}
+      />
 
       {/* 좋아요 목록 */}
       <LikeListComponent
         likeListOpen={likeListOpen}
-        closeLikeList={closeLikeList}
+        closeLikeListModal={closeLikeListModal}
       />
     </>
   );

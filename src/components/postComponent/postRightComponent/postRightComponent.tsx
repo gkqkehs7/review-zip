@@ -12,7 +12,7 @@ import SpaceShipImage from '/images/post/SpaceShip.png';
 interface PostRightComponentProps {
   split: boolean;
   post: IPost;
-  openLikeList: () => void;
+  openLikeListModal: () => void;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({

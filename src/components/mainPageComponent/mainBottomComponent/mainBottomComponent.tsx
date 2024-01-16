@@ -7,7 +7,15 @@ import styles from './style';
 import mainBottomBackgroundImage from '/images/mainPage/MainBottomBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
-const MainBottomComponent: React.FC = () => {
+interface MainBottomComponentProps {
+  modalOpen: () => void;
+  modalClose: () => void;
+}
+
+const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
+  modalOpen,
+  modalClose,
+}) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
@@ -24,13 +32,8 @@ const MainBottomComponent: React.FC = () => {
   };
 
   return (
-    <styles.Container
-      style={{
-        backgroundImage: `url(${mainBottomBackgroundImage})`,
-      }}
-      onWheel={newPost}
-    >
-      <PostComponent />
+    <styles.Container style={{}} onWheel={newPost}>
+      <PostComponent modalOpen={modalOpen} modalClose={modalClose} />
       {/* 아래 화살표 */}
       <styles.ArrowImage src={DownArrowImage} />
       {loading && <LoadingModalComponent />}

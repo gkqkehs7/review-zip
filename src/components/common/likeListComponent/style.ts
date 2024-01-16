@@ -7,13 +7,13 @@ const styles = {
 
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    background-color: rgba(0, 0, 0, 0.7);
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
   `,

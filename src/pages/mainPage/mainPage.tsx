@@ -1,15 +1,25 @@
 import { SwiperSlide } from 'swiper/react';
 import { Pagination, Mousewheel } from 'swiper/modules';
+import { useCallback, useEffect, useState } from 'react';
 
 import MainTopComponent from '@/components/mainPageComponent/mainTopComponent/mainTopComponent';
 import MainMiddleComponent from '@/components/mainPageComponent/mainMiddleComponent/mainMiddleComponent';
-import MainBottom from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
+import MainBottomComponent from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
 import styles from './style';
-import MainBottomComponent from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
 
 const MainPage: React.FC = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const modalOpen = useCallback(() => {
+    setOpenModal(true);
+  }, [openModal]);
+
+  const modalClose = useCallback(() => {
+    setOpenModal(false);
+  }, [openModal]);
+
   return (
     // <styles.Container
     //   modules={[Pagination, Mousewheel]}
@@ -41,9 +51,9 @@ const MainPage: React.FC = () => {
 
     <styles.Container>
       <GroupBarComponent />
-      <MainTopComponent />
-      <MainMiddleComponent />
-      <MainBottomComponent />
+      <MainTopComponent openModal={openModal} />
+      <MainMiddleComponent modalOpen={modalOpen} modalClose={modalClose} />
+      <MainBottomComponent modalOpen={modalOpen} modalClose={modalClose} />
     </styles.Container>
   );
 };
