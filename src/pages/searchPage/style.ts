@@ -43,7 +43,7 @@ const styles = {
   SearchType: styled.span<SearchTypeProps>`
     padding: 0 230px 0 230px;
     color: black;
-    border-bottom: ${(isBorder) => (isBorder ? 'solid black' : 'none')};
+    border-bottom: ${(props) => (props.isBorder ? 'solid black' : 'none')};
   `,
   //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
   Top: styled.div`
