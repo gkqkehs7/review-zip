@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 const styles = {
   HistoryContainer: styled.div`
     display: flex;
@@ -25,8 +25,6 @@ const styles = {
     color: black;
     font-size: 20px;
   `,
-  //유저가 찾는 데이터가 username인 경우 옆에 표시될 친구 추가 링크
-  PluseFriendLink: styled(Link)``,
   //친구 추가 이미지
   PlusFriend: styled.img`
     margin: 0 28.8px 0 28.8px;

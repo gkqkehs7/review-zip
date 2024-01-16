@@ -1,5 +1,6 @@
 import { changeInputValue } from '@hooks/chageInputValue';
 import styles from './style';
+import SearchImage from 'images/searchPage/SearchImage.png';
 
 //한줄 치고 ctrl+s
 //media-query쓸거니까 max-width랑 max-height 다 지우기
@@ -24,7 +25,8 @@ const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
         setIsClicked(!isClicked);
       }}
     >
-      <styles.Search /> {/*돋보기 div */}
+      <styles.Search src="images/searchPage/SearchImage.png" />
+      {/*돋보기 div */}
       <styles.SearchBar
         type="text"
         size={90}
