@@ -1,7 +1,6 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import { changeInputValue } from '../../hooks/chageInputValue';
 
 const SigninPage: React.FC = () => {
   const [email, setEamil] = useState<string>('');
@@ -9,10 +8,6 @@ const SigninPage: React.FC = () => {
 
   return (
     <styles.Container>
-      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-      <styles.ForgotPwd to="/PasswordRecoveryPage">
-        Forgot the Password?
-      </styles.ForgotPwd>
       <styles.Right>
         {/* 이메일 */}
         <styles.InputContainer>
@@ -27,6 +22,7 @@ const SigninPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
+
         {/* 비밀 번호 */}
         <styles.InputContainer>
           <styles.InputTitle>PASSWORD</styles.InputTitle>
@@ -39,16 +35,25 @@ const SigninPage: React.FC = () => {
             }
           />
         </styles.InputContainer>
-        {/* 카카오톡 */}
+
+        {/* 카카오톡 인증*/}
         <styles.OrSignContainer>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
+
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="">&gt; SIGN IN</styles.SignInBtn>
-        {/* 개인정책 */}
-        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
+        <styles.SignInBtn to="/mainPage">&gt; SIGN IN</styles.SignInBtn>
+
+        {/* 보안정책 */}
       </styles.Right>
+      <styles.Left>
+        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+        <styles.ForgotPwd to="/passwordRecoveryPage">
+          Forgot the Password ?
+        </styles.ForgotPwd>
+        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
+      </styles.Left>
     </styles.Container>
   );
 };

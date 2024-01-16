@@ -1,12 +1,13 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SigninPage from './pages/signinPage/signinPage';
-import SignupPage from './pages/signupPage/signupPage';
-import PasswordRecoveryPage from './pages/PasswordRecoveryPage/PasswordRecoveryPage';
-import ChangePasswordPage from './pages/changePasswordPage/changePasswordPage';
-import MainPage from './pages/mainPage/mainPage';
-import CompleteChangePassword from './pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
-import CompleteSigninPage from './pages/CompleteSigninPage/CompleteSigninPage';
+import SigninPage from '@/pages/signinPage/signinPage';
+import SignupPage from '@/pages/signupPage/signupPage';
+import PasswordRecoveryPage from '@/pages/PasswordRecoveryPage/PasswordRecoveryPage';
+import ChangePasswordPage from '@/pages/changePasswordPage/changePasswordPage';
+import MainPage from '@/pages/mainPage/mainPage';
+import SearchPage from '@/pages/searchPage/searchPage';
+import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
+import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -19,21 +20,22 @@ function App() {
           <Route path="/signinPage" element={<SigninPage />}></Route>
           <Route path="/signupPage" element={<SignupPage />}></Route>
           <Route
-            path="/PasswordRecoveryPage"
+            path="/passwordRecoveryPage"
             element={<PasswordRecoveryPage />}
           ></Route>
           <Route
-            path="/ChangePasswordPage"
+            path="/changePasswordPage"
             element={<ChangePasswordPage />}
           ></Route>
           <Route path="/mainPage" element={<MainPage />}></Route>
+          <Route path="/searchPage" element={<SearchPage />}></Route>
           <Route
-            path="/CompleteChangePasswordPage"
-            element={<CompleteChangePassword />}
+            path="/completeSigninpage"
+            element={<CompleteSigninPage />}
           ></Route>
           <Route
-            path="/CompleteSigninPage"
-            element={<CompleteSigninPage />}
+            path="/completeChangePasswordPage"
+            element={<CompleteChangePassword />}
           ></Route>
         </Routes>
       </BrowserRouter>

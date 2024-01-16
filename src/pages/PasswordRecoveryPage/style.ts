@@ -7,12 +7,17 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url('images/SigninBackground.png');
+  background-image: url('images/signinPage/Signin.png');
   background-repeat: no-repeat;
   background-size: cover;
 `;
 
-// *******Left******* //뷰포트 내에서 상단에 위치한 순으로 배치했음
+const EtcContainer = styled.div`
+  height: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 const SignUp = styled(Link)`
   position: relative;
@@ -108,4 +113,6 @@ export default {
   OrSignBtn,
   PrivacyPolicy,
   KaKaoIcon,
+  SignUp,
+  EtcContainer,
 };
