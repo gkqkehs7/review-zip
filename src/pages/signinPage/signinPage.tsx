@@ -36,18 +36,24 @@ const SigninPage: React.FC = () => {
           />
         </styles.InputContainer>
 
-        {/* 카카오톡 */}
+        {/* 카카오톡 인증*/}
         <styles.OrSignContainer>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="">&gt; SIGN IN</styles.SignInBtn>
+        <styles.SignInBtn to="/mainPage">&gt; SIGN IN</styles.SignInBtn>
 
         {/* 보안정책 */}
-        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
+      <styles.Left>
+        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+        <styles.ForgotPwd to="/passwordRecoveryPage">
+          Forgot the Password ?
+        </styles.ForgotPwd>
+        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
+      </styles.Left>
     </styles.Container>
   );
 };

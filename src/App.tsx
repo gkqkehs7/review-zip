@@ -6,7 +6,8 @@ import PasswordRecoveryPage from '@/pages/PasswordRecoveryPage/PasswordRecoveryP
 import ChangePasswordPage from '@/pages/changePasswordPage/changePasswordPage';
 import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
-
+import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
+import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -28,6 +29,14 @@ function App() {
           ></Route>
           <Route path="/mainPage" element={<MainPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
+          <Route
+            path="/completeSigninpage"
+            element={<CompleteSigninPage />}
+          ></Route>
+          <Route
+            path="/completeChangePasswordPage"
+            element={<CompleteChangePassword />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

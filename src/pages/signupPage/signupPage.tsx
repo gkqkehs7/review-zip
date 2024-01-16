@@ -10,11 +10,7 @@ const SignupPage: React.FC = () => {
 
   return (
     <styles.Container>
-    
-      {/* 곧 삭제될 LeftSide */}
       <styles.Right>
-
-        {/*휴대폰 번호 입력*/}
         <styles.InputContainer>
           {/* 휴대폰 번호입력 */}
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
@@ -29,7 +25,6 @@ const SignupPage: React.FC = () => {
           />
         </styles.InputContainer>
 
-        {/*사용자 성명 입력*/}
         <styles.InputContainer>
           {/* 사용자 성명입력 */}
           <styles.InputTitle>성명</styles.InputTitle>
@@ -43,7 +38,6 @@ const SignupPage: React.FC = () => {
           />
         </styles.InputContainer>
 
-        {/*사용자 닉네임 입력*/}
         <styles.InputContainer>
           {/* 사용자 닉네임 입력 */}
           <styles.InputTitle>사용자 닉네임</styles.InputTitle>
@@ -71,25 +65,21 @@ const SignupPage: React.FC = () => {
             }
           />
 
-          {/* 비밀번호 입력방법 */}
-
-          {/*비밀번호 주의문*/}
-
+          {/* 비밀번호 입력시 주의사항 */}
           <styles.WarnText>
             대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.{' '}
           </styles.WarnText>
         </styles.InputContainer>
-        {/* 회원가입 버튼 */}
-        <styles.SignUpBtn>&gt; SIGN UP</styles.SignUpBtn>
-        {/* 로그인 버튼 */}
+        {/* 회원가입 완료Link */}
+        <styles.SignUpBtn to="/CompleteSigninPage">
+          &gt; SIGN UP
+        </styles.SignUpBtn>
 
-        {/*로그인 페이지 이동버튼*/}
-
+        {/* 로그인 페이지로 가는 Link */}
         <styles.SignInContainer>
           <p>계정이 있으신가요?</p>
           <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
         </styles.SignInContainer>
-        
       </styles.Right>
     </styles.Container>
   );
