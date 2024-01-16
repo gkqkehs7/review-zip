@@ -4,7 +4,7 @@ import styles from './style';
 
 const ChangePasswordPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
-  const [newpwd, setNewpwd] = useState<string>('');
+  const [newpassword, setNewPassword] = useState<string>('');
   return (
     <styles.Container>
       <styles.Right>
@@ -28,10 +28,10 @@ const ChangePasswordPage: React.FC = () => {
           <styles.Input
             type="password"
             placeholder="Enter Password Again"
-            value={newpwd}
+            value={newpassword}
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setNewpwd)
+              changeInputValue(e, setNewPassword)
             }
           />
         </styles.InputContainer>

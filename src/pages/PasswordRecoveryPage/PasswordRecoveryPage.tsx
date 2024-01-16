@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { changeInputValue } from '../../hooks/chageInputValue';
+import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
 const PasswordRecoveryPage: React.FC = () => {
