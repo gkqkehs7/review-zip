@@ -9,9 +9,12 @@ export interface SearchBarComponentProps {
   isClicked: boolean;
   setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const SearchBarComponent: React.FC<SearchBarComponentProps> = (props) => {
-  const { searchInputValue, setSearchInputValue, isClicked, setIsClicked } =
-    props;
+const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
+  searchInputValue,
+  setSearchInputValue,
+  isClicked,
+  setIsClicked,
+}) => {
   //돋보기랑 인풋 형제 요소로 주기 border나 이런 스타일은 div에
   return (
     // 돋보기와 input을 감싼 div 컴포넌트
