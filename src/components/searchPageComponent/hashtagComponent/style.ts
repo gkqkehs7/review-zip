@@ -15,9 +15,7 @@ const styles = {
     position: relative;
     bottom: 1vh;
     width: 2vw;
-    max-width: 47px;
     height: 4vh;
-    max-height: 47px;
     margin: 0 40px 0 40px;
     border-radius: 10px;
   `,
