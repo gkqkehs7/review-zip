@@ -10,10 +10,10 @@ const HashtagComponent: React.FC<HashtagComponentProps> = ({
   return (
     //해시태그인 경우
     <styles.HistoryContainer>
-      <div>
+      <styles.HashtagContainer>
         <styles.HashtagImage src={searchWordImage} />
         <styles.Content>{value}</styles.Content>
-      </div>
+      </styles.HashtagContainer>
       <styles.SeeReviewContainer>
         <styles.SeeReview to="">리뷰 보기</styles.SeeReview>
       </styles.SeeReviewContainer>
