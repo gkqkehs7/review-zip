@@ -9,7 +9,6 @@ const PasswordRecoveryPage: React.FC = () => {
   return (
     // 인증방식이 정해지면 추후 완성
     <styles.Container>
-      <styles.PerkyMilkyway />
       <styles.Right>
         {/* 성명 */}
         <styles.InputContainer>

@@ -6,9 +6,9 @@ import PasswordRecoveryPage from '@/pages/PasswordRecoveryPage/PasswordRecoveryP
 import ChangePasswordPage from '@/pages/changePasswordPage/changePasswordPage';
 import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
-import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
-import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
+import CompleteSigninPage from '@/pages/CompleteSigninPage/CompleteSigninPage';
+import CompleteChangePassword from '@/pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/signinPage" element={<SigninPage />}></Route>
           <Route path="/signupPage" element={<SignupPage />}></Route>
-<<<<<<< HEAD
+
           <Route
             path="/passwordRecoveryPage"
             element={<PasswordRecoveryPage />}
@@ -29,10 +29,6 @@ function App() {
             path="/changePasswordPage"
             element={<ChangePasswordPage />}
           ></Route>
-=======
-          <Route path="/passwordRecoveryPage" element={<PasswordRecoveryPage />}></Route>
-          <Route path="/changePasswordPage" element={<ChangePasswordPage />}></Route>
->>>>>>> b7aaf0d (Refactor: signinPage)
           <Route path="/mainPage" element={<MainPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
           <Route
