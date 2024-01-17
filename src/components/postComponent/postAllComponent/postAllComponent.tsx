@@ -35,12 +35,12 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
     <styles.Container
       style={responsiveWidthHeight(
         device,
-        { width: 1500, height: 1500 },
-        { width: 1200, height: 1200 },
+        { width: 1000, height: 1000 },
+        { width: 1000, height: 1000 },
         { width: 1000, height: 1000 },
         { width: 800, height: 800 },
         { width: 500, height: 500 },
-        { width: 200, height: 200 },
+        { width: 500, height: 500 },
       )}
     >
       <styles.TopText>나의 우주에게</styles.TopText>
@@ -61,7 +61,18 @@ const PostAllComponent: React.FC<PostAllComponentProps> = ({
       <styles.Buttons>
         <styles.LikeSrabButtons>
           {post.like ? (
-            <styles.LikeButton src={LikeButtonImage} />
+            <styles.LikeButton
+              src={LikeButtonImage}
+              style={responsiveWidthHeight(
+                device,
+                { width: 50, height: 50 },
+                { width: 40, height: 40 },
+                { width: 30, height: 30 },
+                { width: 20, height: 20 },
+                { width: 20, height: 20 },
+                { width: 10, height: 10 },
+              )}
+            />
           ) : (
             <styles.LikeButton src={NotLikeButtonImage} />
           )}
