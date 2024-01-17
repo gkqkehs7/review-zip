@@ -18,7 +18,7 @@ interface PostRightComponentProps {
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
   split,
   post,
-  openLikeList,
+  openLikeListModal,
 }) => {
   return (
     <styles.Container style={{ display: split ? 'flex' : 'none' }}>
@@ -47,7 +47,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
 
       {/* 좋아요 개수 */}
       <styles.LikeContainer>
-        <styles.LikeText onClick={openLikeList}>
+        <styles.LikeText onClick={openLikeListModal}>
           {post.likeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
         <styles.LikeUserImage src={post.user.profileImage} />

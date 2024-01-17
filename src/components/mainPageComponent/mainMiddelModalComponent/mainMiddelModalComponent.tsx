@@ -48,7 +48,7 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
 
           <styles.HashTagContainer>
             {hashtags.map((hashtag, index) => (
-              <styles.HashTag>#{hashtag}</styles.HashTag>
+              <styles.HashTag key={index}>#{hashtag}</styles.HashTag>
             ))}
           </styles.HashTagContainer>
           <styles.LikeText>공감 수 5000개</styles.LikeText>

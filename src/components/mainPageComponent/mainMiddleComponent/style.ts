@@ -16,7 +16,7 @@ const bounceAnimation = keyframes`
 
 const styles = {
   Container: styled.div`
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -62,11 +62,10 @@ const styles = {
     position: absolute;
     width: 50px;
     height: 50px;
-    bottom: 0;
     left: 48%;
+    bottom: 10px;
     transform: translate(-50%, -50%);
 
-    margin-bottom: 3vh;
     animation: ${bounceAnimation} 1s infinite;
   `,
 };

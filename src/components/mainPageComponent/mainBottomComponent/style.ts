@@ -27,6 +27,20 @@ const styles = {
     background-size: cover;
     background-position: center;
     text-align: center;
+    position: relative;
+  `,
+
+  TopScrollButton: styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    background-color: white;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+
+    cursor: pointer;
   `,
 
   ArrowImage: styled.img`
@@ -36,8 +50,6 @@ const styles = {
     bottom: 0;
     left: 48%;
     transform: translate(-50%, -50%);
-
-    margin-bottom: 3vh;
     animation: ${bounceAnimation} 1s infinite;
   `,
 };

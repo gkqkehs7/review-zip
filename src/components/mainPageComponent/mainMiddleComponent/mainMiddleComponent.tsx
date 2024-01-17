@@ -8,7 +8,6 @@ import FrameComponent from '@/components/common/frameComponent/frameComponent';
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
-import mainMiddleBackgroundImage from '/images/mainPage/MainMiddleBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const posts: IPost[] = [
@@ -119,40 +118,17 @@ const posts: IPost[] = [
 interface MainMiddleComponentProps {
   modalOpen: () => void;
   modalClose: () => void;
+  handleScrollDown: () => void;
 }
 
 const MainMiddleComponent: React.FC<MainMiddleComponentProps> = ({
   modalOpen,
   modalClose,
+  handleScrollDown,
 }) => {
   const [mainMiddleModalOpen, setMainMiddletModalOpen] =
     useState<boolean>(false);
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
-
-  const [scrollPosition, setScrollPosition] = useState(window.innerHeight);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    console.log(window.scrollY);
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrollPosition]);
-
-  const handleScrollDown = () => {
-    document.body.style.cssText = '';
-
-    window.scrollTo({
-      top: scrollPosition + window.innerHeight + window.innerHeight,
-      behavior: 'smooth',
-    });
-  };
 
   // MainMiddleModal 열기
   const openMainMiddleModal = () => {
