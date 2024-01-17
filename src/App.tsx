@@ -40,10 +40,7 @@ function App() {
             element={<CompleteChangePassword />}
           ></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
-<<<<<<< HEAD
           <Route path="/testPage" element={<TestPage />}></Route>
-=======
->>>>>>> e770604 (Feature: myProfilePage)
         </Routes>
       </BrowserRouter>
     </>
