@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { changeInputValue } from '../../hooks/chageInputValue';
+import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-
 
 const PasswordRecoveryPage: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   return (
+    // 인증방식이 정해지면 추후 완성
     <styles.Container>
-    {/* 곧 삭제될 LeftSide */}
-      <styles.PerkyMilkyway />
       <styles.Right>
-        {/* 성명입력 */}
+        {/* 성명 */}
         <styles.InputContainer>
           <styles.InputTitle>성명</styles.InputTitle>
           <styles.Input
@@ -26,7 +24,7 @@ const PasswordRecoveryPage: React.FC = () => {
           />
         </styles.InputContainer>
 
-        {/* 휴대폰 번호 입력 */}
+        {/* 휴대폰 번호  */}
         <styles.InputContainer>
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
           <styles.Input
@@ -45,7 +43,6 @@ const PasswordRecoveryPage: React.FC = () => {
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
-
 
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>

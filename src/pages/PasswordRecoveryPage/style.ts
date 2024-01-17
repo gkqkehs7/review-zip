@@ -30,33 +30,12 @@ const SignUp = styled(Link)`
   cursor: pointer;
 `;
 
-const ForgotPwd = styled(Link)`
-  position: relative;
-  width: 10vw;
-  height: 2.5vh;
-  color: white;
-  margin: -2.6vh 0vw 0vh 30vw;
-
-  z-index: 3;
-  cursor: pointer;
-`;
-
 // *******Right******* //뷰포트 내에서 상단에 위치한 순으로 배치했음
 
 const Right = styled.div`
   flex: 1;
   padding: 2vh 0vw 0vh 7.5vw;
   border: 1px solid white;
-`;
-
-const PerkyMilkyway = styled.div`
-  position: absolute;
-  top: 2vh;
-  right: 0vw;
-  width: 35vw;
-  height: 50vh;
-  background-image: url('images/perkeyMilkyway.png');
-  background-repeat: no-repeat;
 `;
 
 const InputContainer = styled.div`
@@ -134,8 +113,6 @@ export default {
   OrSignBtn,
   PrivacyPolicy,
   KaKaoIcon,
-  PerkyMilkyway,
   SignUp,
-  ForgotPwd,
   EtcContainer,
 };

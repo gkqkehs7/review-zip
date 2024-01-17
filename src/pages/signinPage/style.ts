@@ -2,120 +2,126 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  // 화면 전체 사용하게
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
   background-image: url('images/signinPage/Signin.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
-const EtcContainer = styled.div`
-  height: 2vh;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  font-size: 115%;
+  font-weight: bold;
 `;
 
-const SignUp = styled(Link)`
-  position: relative;
-  width: 4vw;
-  height: 2.5vh;
-  color: white;
-  z-index: 3;
-  margin: 44vh 0vw 0vh 20vw;
-
-  cursor: pointer;
+const Left = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+  margin: 60px 0px 0px 0px;
 `;
 
 const ForgotPwd = styled(Link)`
-  position: relative;
-  width: 10vw;
-  height: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 16px;
+  margin: 0px 0px 0px 160px;
   color: white;
-  margin: -2.6vh 0vw 0vh 30vw;
+  white-space: nowrap;
+  cursor: pointer;
+`;
 
-  z-index: 3;
+const SignUp = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 69px;
+  height: 16px;
+  margin: 0px 0px 0px 587px;
+  color: white;
+  white-space: nowrap;
+  cursor: pointer;
+`;
+
+const PrivacyPolicy = styled.p`
+  width: 116px;
+  margin: 0px 0px 0px 578px;
+  color: #323a54;
+  font-size: 125%;
+  font-weight: bold;
+  white-space: nowrap;
   cursor: pointer;
 `;
 
 const Right = styled.div`
-  flex: 1;
-  padding: 1vh 0vw 0vh 7.5vw;
+  width: 494.6px;
+  height: 593px;
+  margin: 285px 0px 0px 1594.6px;
 `;
 
 const InputContainer = styled.div`
-  width: 25vw;
-  position: relative; // input이 화면 전체 사용하기 위함
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin: 1vh 2.5vw;
+  width: 494.6px;
+  margin: 20px 0px 0px 0px;
 `;
 
-const InputTitle = styled.div`
+const InputTitle = styled.p`
+  width: 494.6px;
+  height: 16px;
+  margin: 20px 0px 76px 0px;
   font-weight: bold;
-  margin: 45px 0px;
   color: white;
 `;
 
 const Input = styled.input`
-  width: 25vw; // input이 화면 전체 사용하기 위함
-  box-sizing: border-box; // input이 화면 전체 사용하기 위함
-  margin: 5px 0;
-  padding: 10px;
-  color: white;
-  font-weight: bold;
-  background-color: gray;
-  opacity: 0.5;
-  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 1);
+  width: 494.6px;
+  height: 40px;
+  margin: 0px 0px 0px 0px;
+  box-sizing: border-box;
   border: 1px solid white;
+  border-radius: 100px;
+  color: white;
+  opacity: 0.1;
+  font-weight: bold;
+
   &::placeholder {
     color: white;
   }
 `;
 
 const OrSignContainer = styled.h2`
-  width: 27.5vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  margin: 6vh 0vw;
+  width: 494.6px;
+  height: 40px;
+  margin: 54px 0px 81px 0px;
 `;
 
-const OrSignBtn = styled.div`
+const OrSignBtn = styled.p`
   color: white;
+  font-size: 80%;
   cursor: pointer;
 `;
 
 const KaKaoIcon = styled.div`
-  background-image: url('images/signinPage/Kakao.png');
+  background-image: url('images/signinPage/KakaoIcon.png');
   background-repeat: no-repeat;
-  width: 2vw;
-  height: 4vh;
-  margin: 0vh 0vw 0vh 0.5vw;
+  width: 40px;
+  height: 40px;
+  margin: 0px 0px 0px 10px;
 `;
 
 const SignInBtn = styled(Link)`
-  font-size: 300%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 7vh 2.5vw;
+  width: 200px;
+  height: 29px;
+  margin: 10px 0px 0px 0px;
   color: white;
-  width: fit-content; // 버튼이 자신의 크기만큼만 차지하게 하기 위함
-  cursor: pointer;
-`;
-
-const PrivacyPolicy = styled.h2`
-  display: flex;
-  align-items: center;
-  color: #323a54;
-  width: fit-content;
-  margin: 5vh 2.5vw;
+  font-size: 250%;
   cursor: pointer;
 `;
 
@@ -132,5 +138,5 @@ export default {
   KaKaoIcon,
   SignUp,
   ForgotPwd,
-  EtcContainer,
+  Left,
 };
