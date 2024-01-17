@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './style';
-import PlusFriend from 'images/searchPage/PlusFriendImage.png';
+import PlusFriend from '/images/searchPage/PlusFriendImage.png';
 
 interface UserNameComponentProps {
   value: string;
@@ -17,7 +17,7 @@ const UserNameComponent: React.FC<UserNameComponentProps> = ({
         <styles.Content>{value}</styles.Content>
       </styles.USerContainer>
       <Link to="">
-        <styles.PlusFriend src="images/searchPage/PlusFriendImage.png" />
+        <styles.PlusFriend src={PlusFriend} />
       </Link>
     </styles.HistoryContainer>
   );
