@@ -28,6 +28,8 @@ const styles = {
     position: relative;
   `,
 
+  InnerConainer: styled.div``,
+
   LeftContainer: styled.div`
     cursor: pointer;
     margin: -25vh auto;

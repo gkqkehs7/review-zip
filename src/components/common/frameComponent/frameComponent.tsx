@@ -7,8 +7,8 @@ import MainMiddleStarImage from '/images/mainPage/MainMiddleStar.png';
 import MainMiddeleStickerImage from '/images/mainPage/MainMiddleSticker.png';
 
 interface FrameComponentProps {
-  openLoadingModal?: () => void;
-  post?: IPost;
+  openLoadingModal: () => void;
+  post: IPost;
 }
 
 const FrameComponent: React.FC<FrameComponentProps> = ({

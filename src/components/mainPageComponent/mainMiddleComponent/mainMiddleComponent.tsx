@@ -129,24 +129,27 @@ const MainMiddleComponent: React.FC<MainMiddleComponentProps> = ({
   const [mainMiddleModalOpen, setMainMiddletModalOpen] =
     useState<boolean>(false);
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
+  const [blur, setBlur] = useState<boolean>(false);
 
   // MainMiddleModal 열기
   const openMainMiddleModal = () => {
     setMainMiddletModalOpen(true);
     modalOpen();
+    setBlur(true);
   };
 
   // MainMiddleModal 닫기
   const closeMainMiddleModal = () => {
     setMainMiddletModalOpen(false);
     modalClose();
+    setBlur(false);
   };
 
   // LoadingModal 열기
   const openLoadingModal = () => {
     setLoadingModalOpen(true);
-    modalOpen();
-    modalClose();
+    // modalOpen();
+    // modalClose();
   };
 
   // LoadingModal 닫기
@@ -155,7 +158,11 @@ const MainMiddleComponent: React.FC<MainMiddleComponentProps> = ({
   };
 
   return (
-    <styles.Container>
+    <styles.Container
+      style={{
+        filter: blur ? 'blur(10px)' : 'blur(0px)',
+      }}
+    >
       {/* 왼쪽 액자 */}
       <styles.LeftContainer onClick={openMainMiddleModal}>
         <FrameComponent post={posts[0]} />

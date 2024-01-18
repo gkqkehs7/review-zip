@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const bounceAnimation = keyframes`
+const ArrowButtonBounceAnimation = keyframes`
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
@@ -14,6 +14,20 @@ const bounceAnimation = keyframes`
   }
 `;
 
+const ScrollToTopButtonBounceAnimation = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(20px);
+  }
+
+  60% {
+    transform: translateY(10px);
+  }
+`;
+
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
@@ -22,11 +36,15 @@ const styles = {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+  `,
 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
+  InnerContainer: styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
   `,
 
@@ -41,6 +59,11 @@ const styles = {
     height: 100px;
 
     cursor: pointer;
+
+    transform: translate(-50%, -50%);
+    animation: ${ScrollToTopButtonBounceAnimation} 1s infinite;
+
+    margin: 20px;
   `,
 
   ArrowImage: styled.img`
@@ -50,7 +73,7 @@ const styles = {
     bottom: 0;
     left: 48%;
     transform: translate(-50%, -50%);
-    animation: ${bounceAnimation} 1s infinite;
+    animation: ${ArrowButtonBounceAnimation} 1s infinite;
   `,
 };
 

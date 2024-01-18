@@ -71,25 +71,22 @@ const PostComponent: React.FC<PostComponentProps> = ({
   };
 
   return (
-    <>
+    <div>
       {split ? (
-        <PostLeft splitPost={splitPost} post={post} />
+        <div style={{ display: 'flex' }}>
+          <PostLeft splitPost={splitPost} post={post} />
+          <PostRight openLikeListModal={openLikeListModal} post={post} />
+        </div>
       ) : (
         <PostAll splitPost={splitPost} post={post} />
       )}
-
-      <PostRight
-        split={split}
-        post={post}
-        openLikeListModal={openLikeListModal}
-      />
 
       {/* 좋아요 목록 */}
       <LikeListComponent
         likeListOpen={likeListOpen}
         closeLikeListModal={closeLikeListModal}
       />
-    </>
+    </div>
   );
 };
 

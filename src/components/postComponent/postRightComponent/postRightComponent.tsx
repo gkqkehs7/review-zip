@@ -10,18 +10,16 @@ import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
-  split: boolean;
   post: IPost;
   openLikeListModal: () => void;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
-  split,
   post,
   openLikeListModal,
 }) => {
   return (
-    <styles.Container style={{ display: split ? 'flex' : 'none' }}>
+    <styles.Container>
       {/* 유저 정보 */}
       <styles.UserContainer>
         <styles.UserImage src={post.user.profileImage} />
