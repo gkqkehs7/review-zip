@@ -8,6 +8,7 @@ import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
 import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
 import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
+import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -37,6 +38,7 @@ function App() {
             path="/completeChangePasswordPage"
             element={<CompleteChangePassword />}
           ></Route>
+          <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

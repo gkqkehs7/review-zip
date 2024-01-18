@@ -12,6 +12,7 @@ interface SearchWordProps {
     searchWordImage: string;
   };
 }
+
 const SearchWordComponent: React.FC<SearchWordProps> = ({
   index,
   searchInputValue,
