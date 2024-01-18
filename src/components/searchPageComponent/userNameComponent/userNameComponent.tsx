@@ -12,10 +12,10 @@ const UserNameComponent: React.FC<UserNameComponentProps> = ({
 }) => {
   return (
     <styles.HistoryContainer>
-      <div>
+      <styles.USerContainer>
         <styles.UserNameImage src={searchWordImage} />
         <styles.Content>{value}</styles.Content>
-      </div>
+      </styles.USerContainer>
       <Link to="">
         <styles.PlusFriend src="images/searchPage/PlusFriendImage.png" />
       </Link>

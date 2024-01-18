@@ -7,6 +7,9 @@ const styles = {
     margin: 28.8px 40px 28.8px 40px;
     border-bottom: 1px solid white;
   `,
+  USerContainer: styled.div`
+    min-width: 200px;
+  `,
   //username 옆에 뜰 이미지 - 원
   UserNameImage: styled.img`
     position: relative;
