@@ -9,6 +9,8 @@ import SearchPage from '@/pages/searchPage/searchPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import CompleteSigninPage from '@/pages/CompleteSigninPage/CompleteSigninPage';
 import CompleteChangePassword from '@/pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
+import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
