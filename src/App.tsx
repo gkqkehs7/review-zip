@@ -10,7 +10,6 @@ import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import CompleteSigninPage from '@/pages/CompleteSigninPage/CompleteSigninPage';
 import CompleteChangePassword from '@/pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
 import TestPage from '@pages/testPage/testPage';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -41,7 +40,10 @@ function App() {
             element={<CompleteChangePassword />}
           ></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
+<<<<<<< HEAD
           <Route path="/testPage" element={<TestPage />}></Route>
+=======
+>>>>>>> e770604 (Feature: myProfilePage)
         </Routes>
       </BrowserRouter>
     </>
