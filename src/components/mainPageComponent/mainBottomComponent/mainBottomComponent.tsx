@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import PostComponent from '@/components/postComponent/postComponent';
 import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
@@ -21,22 +21,25 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   const [blur, setBlur] = useState<boolean>(false);
 
   // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
-  const newPost = (event: React.WheelEvent<HTMLDivElement>) => {
-    if (event.deltaY > 0) {
-      if (!loading) {
-        setLoading(true);
-        setBlur(true);
-        setTimeout(() => {
-          setLoading(false);
-          setBlur(false);
-        }, 1000);
+  const newPost = useCallback(
+    (event: React.WheelEvent<HTMLDivElement>) => {
+      // 스크롤이 아래로 내려갔을 때의 조건 (loading중엔 재스크롤 막기)
+      if (event.deltaY > 0 && event.deltaY > 0) {
+        if (!loading) {
+          setLoading(true);
+          setBlur(true);
+          setTimeout(() => {
+            setLoading(false);
+            setBlur(false);
+          }, 2000);
+        }
       }
-    } else {
-    }
-  };
+    },
+    [loading],
+  );
 
   return (
-    <styles.Container onWheel={newPost}>
+    <styles.Container onWheel={(e) => newPost(e)}>
       <styles.InnerContainer
         style={{
           filter: blur ? 'blur(10px)' : 'blur(0px)',
