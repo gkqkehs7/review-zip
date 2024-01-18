@@ -22,6 +22,7 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
   return (
     <styles.Container
       style={{
+        filter: 'none',
         opacity: mainMiddleModalOpen ? 1 : 0,
         pointerEvents: mainMiddleModalOpen ? 'all' : 'none',
       }}

@@ -158,24 +158,20 @@ const MainMiddleComponent: React.FC<MainMiddleComponentProps> = ({
   };
 
   return (
-    <styles.Container
-      style={{
-        filter: blur ? 'blur(10px)' : 'blur(0px)',
-      }}
-    >
+    <styles.Container>
       {/* 왼쪽 액자 */}
       <styles.LeftContainer onClick={openMainMiddleModal}>
-        <FrameComponent post={posts[0]} />
+        <FrameComponent post={posts[0]} blur={blur} />
       </styles.LeftContainer>
 
       {/* 가운데 액자 */}
       <styles.MiddleContainer onClick={openMainMiddleModal}>
-        <FrameComponent post={posts[1]} />
+        <FrameComponent post={posts[1]} blur={blur} />
       </styles.MiddleContainer>
 
       {/* 오른쪽 액자 */}
       <styles.RightContainer onClick={openMainMiddleModal}>
-        <FrameComponent post={posts[2]} />
+        <FrameComponent post={posts[2]} blur={blur} />
       </styles.RightContainer>
 
       {/* 아래 화살표 */}

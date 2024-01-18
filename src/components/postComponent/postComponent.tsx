@@ -71,7 +71,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   };
 
   return (
-    <div>
+    <>
       {split ? (
         <div style={{ display: 'flex' }}>
           <PostLeft splitPost={splitPost} post={post} />
@@ -86,7 +86,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
         likeListOpen={likeListOpen}
         closeLikeListModal={closeLikeListModal}
       />
-    </div>
+    </>
   );
 };
 
