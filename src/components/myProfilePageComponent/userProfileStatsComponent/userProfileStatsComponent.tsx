@@ -1,15 +1,48 @@
-import styles from './style';
+import { Link } from 'react-router-dom';
 
-const UserProfileStatsComponent = () => {
+import styles from './style';
+import PlusFriend from '/images/myProfilePage/PlusFriend.png';
+
+export interface ModalProps {
+  storageIsClicked: boolean;
+  setIsClicked: React.Dispatch<React.SetStateAction<boolean[]>>;
+}
+const UserProfileStatsComponent: React.FC<ModalProps> = ({
+  storageIsClicked,
+  setIsClicked,
+}) => {
   return (
     <div>
       <styles.UserProfileStatsContainer>
-        <styles.UserProfileStats>게시물 09</styles.UserProfileStats>
-        <styles.UserProfileStats>리뷰어 30</styles.UserProfileStats>
-        <styles.UserProfileStats>리뷰잉 30</styles.UserProfileStats>
+        <styles.UserProfileStats
+          onClick={() => {
+            setIsClicked([true, false, false]);
+          }}
+        >
+          게시물 09
+        </styles.UserProfileStats>
+        <styles.UserProfileStats
+          onClick={() => {
+            setIsClicked([false, true, false]);
+          }}
+        >
+          리뷰어 30
+        </styles.UserProfileStats>
+        <styles.UserProfileStats
+          onClick={() => {
+            setIsClicked([false, false, true]);
+          }}
+        >
+          리뷰잉 30
+        </styles.UserProfileStats>
       </styles.UserProfileStatsContainer>
       <styles.EditProfileButtonContainer>
         <styles.EditProfileButton>프로필 수정</styles.EditProfileButton>
+        {storageIsClicked && (
+          <Link to="">
+            <styles.PlusButton src={PlusFriend} />
+          </Link>
+        )}
       </styles.EditProfileButtonContainer>
     </div>
   );

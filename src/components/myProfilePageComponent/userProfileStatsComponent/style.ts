@@ -30,6 +30,14 @@ const styles = {
     color: black;
     border-radius: 7px;
   `,
+  PlusButton: styled.img`
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+  `,
 };
 
 export default styles;
