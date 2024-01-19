@@ -2,7 +2,7 @@ import styles from './style';
 
 import ProfilePhotoImage from '/images/myProfilePage/ProfilePhotoImage.png';
 
-const ProfileNameImageComponent = () => {
+const ProfileNameImageComponent: React.FC = () => {
   return (
     <styles.NameImageContainer>
       <styles.UserProfileImage src={ProfilePhotoImage} />
