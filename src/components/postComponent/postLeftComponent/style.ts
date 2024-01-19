@@ -1,29 +1,36 @@
 import styled, { keyframes, css } from 'styled-components';
 import { BsBackspace } from 'react-icons/bs';
 
-const moveLeft = (widthValue) => keyframes`
+const moveLeft = () => keyframes`
   to {
-    left: 25%;
-    /* transform: translate(calc(-50% - ${widthValue} - 10px), -50%); */
+    left: 34%;
   }
 `;
 
 const revert = () => keyframes`
   from {
-    left: 25%;
+    left: 34%;
   }
   to {
     left: 50%;
   }
 `;
 
+interface ContainerProps {
+  splitPost: boolean;
+}
+
 const postLeftStyles = {
-  Container: styled.div`
+  Container: styled.div<ContainerProps>`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 15px;
+
+    width: 30%;
+    height: 80%;
+    min-width: 350px;
 
     position: absolute;
     top: 50%;
@@ -33,7 +40,7 @@ const postLeftStyles = {
     ${(props) =>
       props.splitPost
         ? css`
-            animation: ${moveLeft(props.splitPost)} 2s forwards;
+            animation: ${moveLeft()} 2s forwards;
           `
         : css`
             animation: ${revert()} 2s forwards;
@@ -79,12 +86,17 @@ const postLeftStyles = {
 };
 
 const styles = {
-  Container: styled.div`
+  Container: styled.div<ContainerProps>`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 15px;
+
+    width: 30%;
+    height: 80%;
+
+    min-width: 350px;
 
     position: absolute;
     top: 50%;
@@ -94,7 +106,7 @@ const styles = {
     ${(props) =>
       props.splitPost
         ? css`
-            animation: ${moveLeft(props.splitPost)} 2s forwards;
+            animation: ${moveLeft()} 2s forwards;
           `
         : css`
             animation: ${revert()} 2s forwards;

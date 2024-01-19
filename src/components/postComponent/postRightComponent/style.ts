@@ -1,27 +1,35 @@
 import styled, { keyframes, css } from 'styled-components';
 
-const moveRight = (widthValue) => keyframes`
+const moveRight = () => keyframes`
   to {
-    left: 75%;
+    left: 66%;
   }
 `;
 
 const revert = () => keyframes`
   from {
-    left: 75%;
+    left: 66%;
   }
   to {
     left: 50%;
   }
 `;
 
+interface ContainerProps {
+  splitPost: boolean;
+}
+
 const styles = {
-  Container: styled.div`
+  Container: styled.div<ContainerProps>`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: white;
     padding: 1.5vh 2.5vh 2vh 2.5vh;
+
+    width: 30%;
+    height: 80%;
+    min-width: 350px;
 
     position: absolute;
     top: 50%;
@@ -31,7 +39,7 @@ const styles = {
     ${(props) =>
       props.splitPost
         ? css`
-            animation: ${moveRight(props.splitPost)} 2s forwards;
+            animation: ${moveRight()} 2s forwards;
           `
         : css`
             animation: ${revert()} 2s forwards;
