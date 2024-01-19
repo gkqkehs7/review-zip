@@ -1,5 +1,8 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+import { checkDevice } from '@/utils/checkDeviceSize';
+
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
@@ -11,15 +14,31 @@ import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
   post: IPost;
+  split: boolean;
   openLikeListModal: () => void;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
   post,
+  split,
   openLikeListModal,
 }) => {
+  const device = checkDevice();
+
   return (
-    <styles.Container>
+    <styles.Container
+      style={responsiveWidthHeight(
+        device,
+        { width: 1000, height: 1000 },
+        { width: 1000, height: 1000 },
+        { width: 1000, height: 1000 },
+        { width: 800, height: 800 },
+        { width: 500, height: 500 },
+        { width: 500, height: 500 },
+      )}
+      move={'100px'}
+      splitPost={split}
+    >
       {/* 유저 정보 */}
       <styles.UserContainer>
         <styles.UserImage src={post.user.profileImage} />

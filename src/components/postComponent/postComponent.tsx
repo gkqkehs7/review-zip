@@ -8,6 +8,8 @@ import LikeListComponent from '@/components/common/likeListComponent/likeListCom
 
 import { IPost } from '@/types/posts.types';
 
+import styles from './style';
+
 interface PostComponentProps {
   modalOpen: () => void;
   modalClose: () => void;
@@ -71,22 +73,19 @@ const PostComponent: React.FC<PostComponentProps> = ({
   };
 
   return (
-    <>
-      {split ? (
-        <div style={{ display: 'flex' }}>
-          <PostLeft splitPost={splitPost} post={post} />
-          <PostRight openLikeListModal={openLikeListModal} post={post} />
-        </div>
-      ) : (
-        <PostAll splitPost={splitPost} post={post} />
-      )}
+    <styles.Container>
+      <PostRight
+        split={split}
+        openLikeListModal={openLikeListModal}
+        post={post}
+      />
+      <PostLeft split={split} post={post} splitPost={splitPost} />
 
-      {/* 좋아요 목록 */}
       <LikeListComponent
         likeListOpen={likeListOpen}
         closeLikeListModal={closeLikeListModal}
       />
-    </>
+    </styles.Container>
   );
 };
 

@@ -9,6 +9,7 @@ import SearchPage from '@/pages/searchPage/searchPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import CompleteSigninPage from '@/pages/CompleteSigninPage/CompleteSigninPage';
 import CompleteChangePassword from '@/pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
+import TestPage from '@pages/testPage/testPage';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,7 +22,6 @@ function App() {
         <Routes>
           <Route path="/signinPage" element={<SigninPage />}></Route>
           <Route path="/signupPage" element={<SignupPage />}></Route>
-
           <Route
             path="/passwordRecoveryPage"
             element={<PasswordRecoveryPage />}
@@ -41,6 +41,7 @@ function App() {
             element={<CompleteChangePassword />}
           ></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
+          <Route path="/testPage" element={<TestPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
