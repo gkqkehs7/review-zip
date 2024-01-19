@@ -1,18 +1,49 @@
-import styled from 'styled-components';
-import { GrLike } from 'react-icons/gr';
+import styled, { keyframes, css } from 'styled-components';
+
+const moveRight = () => keyframes`
+  to {
+    left: 66%;
+  }
+`;
+
+const revert = () => keyframes`
+  from {
+    left: 66%;
+  }
+  to {
+    left: 50%;
+  }
+`;
+
+interface ContainerProps {
+  splitPost: boolean;
+}
 
 const styles = {
-  Container: styled.div`
+  Container: styled.div<ContainerProps>`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 75vh;
     background-color: white;
     padding: 1.5vh 2.5vh 2vh 2.5vh;
-    margin-left: 7px;
 
-    position: relative;
+    width: 30%;
+    height: 80%;
+    min-width: 350px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    ${(props) =>
+      props.splitPost
+        ? css`
+            animation: ${moveRight()} 2s forwards;
+          `
+        : css`
+            animation: ${revert()} 2s forwards;
+          `}
   `,
 
   UserContainer: styled.div`

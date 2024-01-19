@@ -7,16 +7,23 @@ import MainMiddleStarImage from '/images/mainPage/MainMiddleStar.png';
 import MainMiddeleStickerImage from '/images/mainPage/MainMiddleSticker.png';
 
 interface FrameComponentProps {
+  blur?: boolean;
   openLoadingModal?: () => void;
-  post: IPost;
+  post?: IPost;
 }
 
 const FrameComponent: React.FC<FrameComponentProps> = ({
+  blur,
   openLoadingModal,
   post,
 }) => {
   return (
-    <styles.Container onClick={openLoadingModal}>
+    <styles.Container
+      onClick={openLoadingModal}
+      style={{
+        filter: blur ? 'blur(10px)' : 'blur(0px)',
+      }}
+    >
       <styles.FrameSticker src={MainMiddeleStickerImage} />
       <styles.Frame>
         <styles.ImageContainer>

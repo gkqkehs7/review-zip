@@ -5,8 +5,6 @@ const styles = {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 75vh;
 
     background-color: white;
     padding: 1.5vh 2.5vh 2vh 2.5vh;
@@ -70,8 +68,6 @@ const styles = {
 
   ScrabButton: styled.img`
     cursor: pointer;
-    width: 37px;
-    height: auto;
   `,
 
   LikeContainer: styled.div`

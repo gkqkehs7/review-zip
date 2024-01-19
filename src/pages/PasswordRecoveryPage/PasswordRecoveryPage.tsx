@@ -43,7 +43,6 @@ const PasswordRecoveryPage: React.FC = () => {
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
-
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>

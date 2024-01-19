@@ -2,13 +2,13 @@ import styled, { keyframes, css } from 'styled-components';
 
 const moveLeft = (widthValue) => keyframes`
   to {
-    transform: translate(calc(-50% - ${widthValue} - 10px), -50%);
+    transform: translate(calc(-50%  - 10px), -50%);
   }
 `;
 
 const moveRight = (widthValue) => keyframes`
   to {
-    transform: translate(calc(50% - ${widthValue} + 10px), -50%);
+    transform: translate(calc(50%  + 10px), -50%);
   }
 `;
 
@@ -20,13 +20,15 @@ const revert = () => keyframes`
 
 const styles = {
   Container: styled.div`
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
   `,
 
   Card1: styled.div`
     width: ${(props) => props.width};
+    height: 400px;
+    background-color: white;
 
     position: absolute;
     top: 50%;
@@ -38,10 +40,14 @@ const styles = {
       css`
         animation: ${moveLeft(props.move)} 2s forwards;
       `}
+
+    background-color: red;
   `,
 
   Card2: styled.div`
     width: ${(props) => props.width};
+    height: 400px;
+    background-color: white;
 
     position: absolute;
     top: 50%;
@@ -53,6 +59,8 @@ const styles = {
       css`
         animation: ${moveRight(props.move)} 2s forwards;
       `}
+
+    background-color: lightblue;
   `,
 };
 

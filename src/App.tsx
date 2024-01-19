@@ -6,9 +6,10 @@ import PasswordRecoveryPage from '@/pages/PasswordRecoveryPage/PasswordRecoveryP
 import ChangePasswordPage from '@/pages/changePasswordPage/changePasswordPage';
 import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
-import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
-import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
+import CompleteSigninPage from '@/pages/CompleteSigninPage/CompleteSigninPage';
+import CompleteChangePassword from '@/pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
+import TestPage from '@pages/testPage/testPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -39,6 +40,7 @@ function App() {
             element={<CompleteChangePassword />}
           ></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
+          <Route path="/testPage" element={<TestPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

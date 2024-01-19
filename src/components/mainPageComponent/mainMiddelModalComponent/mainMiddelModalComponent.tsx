@@ -5,14 +5,16 @@ import styles from './style';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface MainMiddelModalComponentProps {
-  modalOpen: boolean;
-  toggleModal: () => void;
+  mainMiddleModalOpen: boolean;
+  closeMainMiddleModal: () => void;
+  closeLoadingModal: () => void;
   openLoadingModal: () => void;
 }
 
 const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
-  modalOpen,
-  toggleModal,
+  mainMiddleModalOpen,
+  closeMainMiddleModal,
+  closeLoadingModal,
   openLoadingModal,
 }) => {
   const hashtags = ['제천 덕수산성', '5월 초봄', '달이 잘 보이는 곳'];
@@ -20,10 +22,11 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
   return (
     <styles.Container
       style={{
-        opacity: modalOpen ? 1 : 0,
-        pointerEvents: modalOpen ? 'all' : 'none',
+        filter: 'none',
+        opacity: mainMiddleModalOpen ? 1 : 0,
+        pointerEvents: mainMiddleModalOpen ? 'all' : 'none',
       }}
-      onClick={toggleModal}
+      onClick={closeMainMiddleModal}
     >
       <styles.InnerContainer>
         {/* 액자 */}
@@ -46,7 +49,7 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
 
           <styles.HashTagContainer>
             {hashtags.map((hashtag, index) => (
-              <styles.HashTag>#{hashtag}</styles.HashTag>
+              <styles.HashTag key={index}>#{hashtag}</styles.HashTag>
             ))}
           </styles.HashTagContainer>
           <styles.LikeText>공감 수 5000개</styles.LikeText>

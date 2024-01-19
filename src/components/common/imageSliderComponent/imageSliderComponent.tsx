@@ -1,6 +1,6 @@
-import { Swiper } from 'swiper/react';
-import { SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+import styles from './style';
 
 type ImageSliderComponentProps = {
   sliderImages: { id: number; url: string }[];
@@ -10,10 +10,15 @@ const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
   sliderImages,
 }) => {
   return (
-    <Swiper
-      style={{ flex: 1, width: '100%', margin: '10px 0' }}
+    <styles.Container
+      style={{
+        //@ts-ignore
+        '--swiper-pagination-color': 'white',
+        '--swiper-pagination-bullet-inactive-color': '#999999',
+        '--swiper-pagination-bullet-inactive-opacity': '1',
+      }}
       modules={[Pagination, Navigation, Autoplay]}
-      navigation={{ nextEl: '.swiper-button-next' }}
+      rewind={true}
       pagination={{
         clickable: true,
       }}
@@ -21,7 +26,7 @@ const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
       autoplay={{ delay: 2000 }}
     >
       {sliderImages.map((slideImage) => (
-        <SwiperSlide
+        <styles.ImageContainer
           key={slideImage.id}
           style={{
             display: 'flex',
@@ -30,16 +35,16 @@ const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
             backgroundColor: 'black',
           }}
         >
-          <img
+          <styles.Image
             src={slideImage.url}
             style={{
               objectFit: 'cover',
               width: '100%',
             }}
           />
-        </SwiperSlide>
+        </styles.ImageContainer>
       ))}
-    </Swiper>
+    </styles.Container>
   );
 };
 

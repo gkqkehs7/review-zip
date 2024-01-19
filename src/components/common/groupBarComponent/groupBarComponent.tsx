@@ -9,7 +9,7 @@ import userImage from '/images/groupBar/User.png';
 import styles from './style';
 
 const GroupBarComponent: React.FC = () => {
-  const [isBVisible, setBVisible] = useState<boolean>(false);
+  const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [position, setPosition] = useState<{ x: number; y: number }>({
     x: 50,
@@ -59,8 +59,8 @@ const GroupBarComponent: React.FC = () => {
     >
       <styles.IconContainer
         onMouseDown={handleMouseDown}
-        onMouseEnter={() => setBVisible(true)}
-        onMouseLeave={() => setBVisible(false)}
+        onMouseEnter={() => setMenuVisible(true)}
+        onMouseLeave={() => setMenuVisible(false)}
       >
         <styles.Icon
           src={spaceShipImage}
@@ -77,27 +77,27 @@ const GroupBarComponent: React.FC = () => {
       </styles.IconContainer>
 
       <styles.MenuContainer
-        isVisible={isBVisible}
-        onMouseEnter={() => setBVisible(true)}
-        onMouseLeave={() => setBVisible(false)}
+        isVisible={menuVisible}
+        onMouseEnter={() => setMenuVisible(true)}
+        onMouseLeave={() => setMenuVisible(false)}
       >
-        <styles.Menu>
-          <styles.MenuText isVisible={isBVisible}>→</styles.MenuText>
+        <styles.Menu to="">
+          <styles.MenuText isVisible={menuVisible}>→</styles.MenuText>
         </styles.Menu>
-        <styles.Menu>
-          <styles.MenuText isVisible={isBVisible}>업로드</styles.MenuText>
+        <styles.Menu to="/uploadPage">
+          <styles.MenuText isVisible={menuVisible}>업로드</styles.MenuText>
         </styles.Menu>
-        <styles.Menu>
-          <styles.MenuText isVisible={isBVisible}>홈</styles.MenuText>
+        <styles.Menu to="/mainPage">
+          <styles.MenuText isVisible={menuVisible}>홈</styles.MenuText>
         </styles.Menu>
-        <styles.Menu>
-          <styles.MenuText isVisible={isBVisible}>검색</styles.MenuText>
+        <styles.Menu to="/searchPage">
+          <styles.MenuText isVisible={menuVisible}>검색</styles.MenuText>
         </styles.Menu>
-        <styles.Menu>
-          <styles.MenuText isVisible={isBVisible}>지도</styles.MenuText>
+        <styles.Menu to="/mapPage">
+          <styles.MenuText isVisible={menuVisible}>지도</styles.MenuText>
         </styles.Menu>
-        <styles.Menu>
-          <styles.MenuText isVisible={isBVisible}>프로필</styles.MenuText>
+        <styles.Menu to="/myPage">
+          <styles.MenuText isVisible={menuVisible}>프로필</styles.MenuText>
         </styles.Menu>
       </styles.MenuContainer>
     </styles.Container>
