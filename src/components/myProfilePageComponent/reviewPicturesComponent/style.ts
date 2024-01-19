@@ -30,6 +30,7 @@ const PictureContainer = styled.div`
   margin: 10px;
   width: 160px;
   height: 160px;
+  cursor: pointer;
 
   &:hover ${IconContainer} {
     visibility: visible;
