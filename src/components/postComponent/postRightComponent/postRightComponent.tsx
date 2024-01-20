@@ -1,5 +1,7 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 
+import { checkDevice } from '@/utils/checkDeviceSize';
+
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
@@ -10,18 +12,20 @@ import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
-  split: boolean;
   post: IPost;
-  openLikeList: () => void;
+  split: boolean;
+  openLikeListModal: () => void;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
-  split,
   post,
-  openLikeList,
+  split,
+  openLikeListModal,
 }) => {
+  const device = checkDevice();
+
   return (
-    <styles.Container style={{ display: split ? 'flex' : 'none' }}>
+    <styles.Container splitPost={split}>
       {/* 유저 정보 */}
       <styles.UserContainer>
         <styles.UserImage src={post.user.profileImage} />
@@ -47,7 +51,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
 
       {/* 좋아요 개수 */}
       <styles.LikeContainer>
-        <styles.LikeText onClick={openLikeList}>
+        <styles.LikeText onClick={openLikeListModal}>
           {post.likeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
         <styles.LikeUserImage src={post.user.profileImage} />

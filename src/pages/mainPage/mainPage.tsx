@@ -1,50 +1,63 @@
-import { SwiperSlide } from 'swiper/react';
-import { Pagination, Mousewheel } from 'swiper/modules';
+import { useCallback, useEffect, useState } from 'react';
+import { RemoveScroll } from 'react-remove-scroll';
 
 import MainTopComponent from '@/components/mainPageComponent/mainTopComponent/mainTopComponent';
 import MainMiddleComponent from '@/components/mainPageComponent/mainMiddleComponent/mainMiddleComponent';
-import MainBottom from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
+import MainBottomComponent from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
 import styles from './style';
-import MainBottomComponent from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
 
 const MainPage: React.FC = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  const modalOpen = useCallback(() => {
+    setOpenModal(true);
+  }, [openModal]);
+
+  const modalClose = useCallback(() => {
+    setOpenModal(false);
+  }, [openModal]);
+
+  // 밑 component로 내려가는 버튼
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: scrollPosition + window.innerHeight,
+      behavior: 'smooth',
+    });
+
+    setScrollPosition(window.innerHeight);
+  };
+
+  // 맨 위로 올라오는 버튼
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+
+    setScrollPosition(0);
+  };
+
   return (
-    // <styles.Container
-    //   modules={[Pagination, Mousewheel]}
-    //   direction={'vertical'}
-    //   pagination={{
-    //     clickable: true,
-    //   }}
-    //   scrollbar={{ draggable: true }}
-    //   mousewheel={true}
-    // >
-    //   {/* mainPage 화면 윗 부분 */}
-    //   <SwiperSlide>
-    //     <GroupBarComponent />
-    //     <MainTopComponent />
-    //   </SwiperSlide>
-
-    //   {/* mainPage 화면 중간 부분 */}
-    //   <SwiperSlide>
-    //     <GroupBarComponent />
-    //     <MainMiddleComponent />
-    //   </SwiperSlide>
-
-    //   {/* mainPage 화면 밑 부분 */}
-    //   <SwiperSlide>
-    //     <GroupBarComponent />
-    //     <MainBottom />
-    //   </SwiperSlide>
-    // </styles.Container>
-
-    <styles.Container>
+    <RemoveScroll>
       <GroupBarComponent />
-      <MainTopComponent />
-      <MainMiddleComponent />
-      <MainBottomComponent />
-    </styles.Container>
+      <MainTopComponent
+        openModal={openModal}
+        handleScrollDown={handleScrollDown}
+      />
+      <MainMiddleComponent
+        modalOpen={modalOpen}
+        modalClose={modalClose}
+        handleScrollDown={handleScrollDown}
+      />
+      <MainBottomComponent
+        modalOpen={modalOpen}
+        modalClose={modalClose}
+        scrollToTop={scrollToTop}
+      />
+    </RemoveScroll>
   );
 };
 

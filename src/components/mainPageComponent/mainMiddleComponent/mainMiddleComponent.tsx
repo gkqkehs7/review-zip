@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faker } from '@faker-js/faker';
 
 import MainMiddelModalComponent from '@/components/mainPageComponent/mainMiddelModalComponent/mainMiddelModalComponent';
@@ -8,7 +8,6 @@ import FrameComponent from '@/components/common/frameComponent/frameComponent';
 import { IPost } from '@/types/posts.types';
 
 import styles from './style';
-import mainMiddleBackgroundImage from '/images/mainPage/MainMiddleBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 
 const posts: IPost[] = [
@@ -116,39 +115,67 @@ const posts: IPost[] = [
   },
 ];
 
-const MainMiddleComponent: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
+interface MainMiddleComponentProps {
+  modalOpen: () => void;
+  modalClose: () => void;
+  handleScrollDown: () => void;
+}
 
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
+const MainMiddleComponent: React.FC<MainMiddleComponentProps> = ({
+  modalOpen,
+  modalClose,
+  handleScrollDown,
+}) => {
+  const [mainMiddleModalOpen, setMainMiddletModalOpen] =
+    useState<boolean>(false);
+  const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false);
+  const [blur, setBlur] = useState<boolean>(false);
+
+  // MainMiddleModal 열기
+  const openMainMiddleModal = () => {
+    setMainMiddletModalOpen(true);
+    modalOpen();
+    setBlur(true);
   };
 
+  // MainMiddleModal 닫기
+  const closeMainMiddleModal = () => {
+    setMainMiddletModalOpen(false);
+    modalClose();
+    setBlur(false);
+  };
+
+  // LoadingModal 열기
   const openLoadingModal = () => {
     setLoadingModalOpen(true);
+    // modalOpen();
+    // modalClose();
+  };
+
+  // LoadingModal 닫기
+  const closeLoadingModal = () => {
+    setLoadingModalOpen(false);
   };
 
   return (
-    <styles.Container
-      style={{ backgroundImage: `url(${mainMiddleBackgroundImage})` }}
-    >
+    <styles.Container>
       {/* 왼쪽 액자 */}
-      <styles.LeftContainer onClick={toggleModal}>
-        <FrameComponent post={posts[0]} />
+      <styles.LeftContainer onClick={openMainMiddleModal}>
+        <FrameComponent post={posts[0]} blur={blur} />
       </styles.LeftContainer>
 
       {/* 가운데 액자 */}
-      <styles.MiddleContainer onClick={toggleModal}>
-        <FrameComponent post={posts[1]} />
+      <styles.MiddleContainer onClick={openMainMiddleModal}>
+        <FrameComponent post={posts[1]} blur={blur} />
       </styles.MiddleContainer>
 
       {/* 오른쪽 액자 */}
-      <styles.RightContainer onClick={toggleModal}>
-        <FrameComponent post={posts[2]} />
+      <styles.RightContainer onClick={openMainMiddleModal}>
+        <FrameComponent post={posts[2]} blur={blur} />
       </styles.RightContainer>
 
       {/* 아래 화살표 */}
-      <styles.ArrowImage src={DownArrowImage} />
+      <styles.ArrowImage src={DownArrowImage} onClick={handleScrollDown} />
 
       {/* 글씨 */}
       {/* <styles.TextContainer>
@@ -158,8 +185,9 @@ const MainMiddleComponent: React.FC = () => {
 
       {/* 액자 눌렀을 때 modal */}
       <MainMiddelModalComponent
-        modalOpen={modalOpen}
-        toggleModal={toggleModal}
+        mainMiddleModalOpen={mainMiddleModalOpen}
+        closeLoadingModal={closeLoadingModal}
+        closeMainMiddleModal={closeMainMiddleModal}
         openLoadingModal={openLoadingModal}
       />
 

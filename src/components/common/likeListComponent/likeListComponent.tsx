@@ -7,11 +7,6 @@ import { IUser } from '@/types/users.types';
 
 import styles from './style';
 
-interface LikeListComponentProps {
-  closeLikeList: () => void;
-  likeListOpen: boolean;
-}
-
 const users: IUser[] = [
   {
     id: 1,
@@ -68,8 +63,13 @@ const users: IUser[] = [
   },
 ];
 
+interface LikeListComponentProps {
+  closeLikeListModal: () => void;
+  likeListOpen: boolean;
+}
+
 const LikeListComponent: React.FC<LikeListComponentProps> = ({
-  closeLikeList,
+  closeLikeListModal,
   likeListOpen,
 }) => {
   const [searchInput, setSearchInput] = useState<string>('');
@@ -123,7 +123,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         {/* 좋아요 목록 글씨, 나가기 버튼 */}
         <styles.TopContainer>
           <styles.Title>좋아요 목록</styles.Title>
-          <styles.ExitButton onClick={closeLikeList}>
+          <styles.ExitButton onClick={closeLikeListModal}>
             나가기 버튼
           </styles.ExitButton>
         </styles.TopContainer>

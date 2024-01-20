@@ -7,14 +7,15 @@ const styles = {
     margin: 28.8px 40px 28.8px 40px;
     border-bottom: 1px solid white;
   `,
+  USerContainer: styled.div`
+    min-width: 200px;
+  `,
   //username 옆에 뜰 이미지 - 원
   UserNameImage: styled.img`
     position: relative;
     bottom: 1vh;
     width: 2vw;
-    max-width: 56px;
     height: 4vh;
-    max-height: 53px;
     margin: 0 40px 0 40px;
     border-radius: 50px;
   `,

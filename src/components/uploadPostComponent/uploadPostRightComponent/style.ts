@@ -1,40 +1,60 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const moveRight = () => keyframes`
+  to {
+    left: 66%;
+  }
+`;
+
+const revert = () => keyframes`
+  from {
+    left: 66%;
+  }
+  to {
+    left: 50%;
+  }
+`;
+
+interface ContainerProps {
+  splitPost: boolean;
+}
 
 const styles = {
-  Container: styled.div`
+  Container: styled.div<ContainerProps>`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 75vh;
-
     background-color: white;
     padding: 1.5vh 2.5vh 2vh 2.5vh;
-    box-shadow: 20px 20px 20px rgba(0, 0, 0, 1);
-  `,
 
-  TopText: styled.div`
-    display: flex;
-    justify-content: flex-end;
-    color: #9766d1;
-    font-size: small;
-    font-weight: bold;
-  `,
+    width: 30%;
+    height: 80%;
+    min-width: 350px;
 
-  Line: styled.div`
-    border-top: 1px solid black;
-    width: 100%;
-    margin: 5px 0 5px 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    ${(props) =>
+      props.splitPost
+        ? css`
+            animation: ${moveRight()} 2s forwards;
+          `
+        : css`
+            animation: ${revert()} 2s forwards;
+          `}
   `,
 
   UserContainer: styled.div`
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
   `,
 
   UserImage: styled.img`
-    width: 35px;
-    height: 35px;
+    width: 40.8px;
+    height: 40.8px;
     border-radius: 50%;
   `,
 
@@ -44,9 +64,37 @@ const styles = {
 
   PostDate: styled.div``,
 
-  ImageSliderContainer: styled.div`
-    padding: 10px 0;
+  Line: styled.div`
+    border-top: 1px solid black;
+    width: 100%;
+    margin: 5px 0 10px 0;
   `,
+
+  PostContentContainer: styled.div`
+    flex: 1;
+  `,
+
+  HashTagContainer: styled.div`
+    display: flex;
+    margin-bottom: 10px;
+  `,
+
+  HashTag: styled.div`
+    background-color: #e5d9f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+
+    border-radius: 13px;
+    margin-right: 10px;
+  `,
+
+  HashTagText: styled.div`
+    font-weight: 600;
+  `,
+
+  PostContent: styled.div``,
 
   Buttons: styled.div`
     display: flex;
@@ -91,20 +139,6 @@ const styles = {
     width: 18px;
     height: 18px;
   `,
-  PostContentContainer: styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-  `,
-
-  PostContent: styled.div``,
-
-  MoreContentButton: styled.div`
-    cursor: pointer;
-    font-size: small;
-    text-decoration: underline;
-  `,
 
   SpaceShipImageContainer: styled.div`
     display: flex;
@@ -113,7 +147,7 @@ const styles = {
 
   SpaceShipImage: styled.img`
     align-items: right;
-    width: 2vw;
+    width: 45.25px;
     height: auto;
   `,
 };

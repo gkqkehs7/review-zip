@@ -1,5 +1,8 @@
 import { useCallback, useState } from 'react';
 
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+import { checkDevice } from '@/utils/checkDeviceSize';
+
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
 import SearchWordComponent from '@/components/searchPageComponent/searchWordComponent/searchWordComponent';
 import UserNameComponent from '@/components/searchPageComponent/userNameComponent/userNameComponent';
@@ -206,6 +209,8 @@ const SearchPage: React.FC = () => {
     );
   }, [searchInputValue]);
 
+  const device = checkDevice();
+
   return (
     <styles.Container>
       {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
@@ -218,7 +223,17 @@ const SearchPage: React.FC = () => {
         />
         {/*클릭이 된 경우 */}
         {isClicked && (
-          <styles.SearchBarExtends>
+          <styles.SearchBarExtends
+            style={responsiveWidthHeight(
+              device,
+              { width: 2000, height: 1800 },
+              { width: 1700, height: 1500 },
+              { width: 1400, height: 1200 },
+              { width: 1080, height: 500 },
+              { width: 500, height: 300 },
+              { width: 200, height: 100 },
+            )}
+          >
             {!searchInputValue && ( // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
               <div>{renderSearchHistory(searchHistory)}</div>
             )}

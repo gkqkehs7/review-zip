@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const styles = {
   Container: styled.div`
@@ -36,7 +37,7 @@ const styles = {
     transition: height 0.5s ease;
   `,
 
-  Menu: styled.div`
+  Menu: styled(Link)`
     width: 50px;
     height: 100%;
     text-align: center;
@@ -53,6 +54,7 @@ const styles = {
   `,
 
   MenuText: styled.div<{ isVisible: boolean }>`
+    color: black;
     display: ${(props) => (props.isVisible ? 'flex' : 'none')};
     font-weight: bold;
   `,

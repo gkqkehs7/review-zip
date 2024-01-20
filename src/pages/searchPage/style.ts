@@ -13,9 +13,7 @@ const styles = {
     justify-contents: center;
     align-item: flex-start;
     width: 100vw;
-    max-width: 1920px;
     height: 100vh;
-    max-height: 1096px;
   `,
   // 검색창이 포커스 된 경우 나타날 검색창 확장 영역 컴포넌트
   SearchBarExtends: styled.div`

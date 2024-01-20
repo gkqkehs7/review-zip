@@ -24,18 +24,21 @@ const styles = {
     align-items: center;
 
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     text-align: center;
   `,
 
   ArrowImage: styled.img`
+    cursor: pointer;
+
     position: absolute;
     width: 50px;
     height: 50px;
     bottom: 0;
     left: 48%;
     transform: translate(-50%, -50%);
+    z-index: 999;
 
     margin-bottom: 3vh;
     animation: ${bounceAnimation} 1s infinite;
