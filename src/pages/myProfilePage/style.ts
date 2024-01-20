@@ -10,10 +10,32 @@ const styles = {
     height: 100vh;
     overflow: hidden;
   `,
+  MainLogoImage: styled.img`
+    width: 200px;
+    height: 50px;
+    position: relative;
+    left: 0;
+    transition: left 0.5s linear;
+
+    @media (max-width: 900px) {
+      left: -100%; // 화면 너비가 600px 이하일 때 왼쪽으로 밀어내기
+    }
+  `,
+  MainLogoContainer: styled.div`
+    width: 100%;
+    overflow: hidden;
+  `,
+  ProfilePictureContainer: styled.div`
+    positipn: relative;
+    top: 0;
+    width: 900px;
+    min-width: 400px;
+    margin: 0 auto;
+  `,
   ProfileContainer: styled.div`
     display: flex;
     justify-content: center;
-    margin: 0 23vw 0 23vw;
+    margin: 0 auto;
     border-bottom: solid 2px #d5b2ff;
   `,
   NameImageContainer: styled.div`

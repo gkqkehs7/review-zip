@@ -3,10 +3,9 @@ import styled from 'styled-components';
 const styles = {
   UserProfileStatsContainer: styled.div`
     display: flex;
-    margin-top: 15vh;
+    margin-top: 5vh;
   `,
   UserProfileStats: styled.p`
-    min-width: 100px;
     color: white;
     font-weight: bolder;
     margin: 20px;
@@ -29,6 +28,14 @@ const styles = {
     font-weight: bolder;
     color: black;
     border-radius: 7px;
+  `,
+  PlusButton: styled.img`
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
   `,
 };
 
