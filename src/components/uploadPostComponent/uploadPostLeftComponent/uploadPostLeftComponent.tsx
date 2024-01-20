@@ -1,22 +1,28 @@
+import { useState, useEffect } from 'react';
+
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 import UploadImageComponent from '@/components/uploadPostComponent/uploadImageComponent/uploadImageComponent';
-
-import { IPost } from '@/types/posts.types';
 
 import styles from './style';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface UploadPostLeftComponentProps {
   split: boolean;
-  post: IPost;
   splitPost: () => void;
 }
 
 const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   split,
-  post,
   splitPost,
 }) => {
+  const [postImages, setPostImages] = useState<{ id: number; url: string }[]>(
+    [],
+  );
+
+  useEffect(() => {
+    console.log(postImages);
+  }, [postImages]);
+
   return (
     <styles.Container splitPost={split}>
       {/* 윗부분 뒤로가기, 텍스트 */}
@@ -28,8 +34,14 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
       <styles.Line />
 
       {/* image slider */}
-      <UploadImageComponent />
-      {/* <ImageSliderComponent sliderImages={post.postImages} /> */}
+      {postImages.length > 0 ? (
+        <ImageSliderComponent sliderImages={postImages} />
+      ) : (
+        <UploadImageComponent
+          postImages={postImages}
+          setPostImages={setPostImages}
+        />
+      )}
 
       {/* 우주선 이미지 */}
       <styles.SpaceShipImageContainer>

@@ -1,11 +1,18 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useState, useRef, Dispatch, SetStateAction } from 'react';
+import { faker } from '@faker-js/faker';
 
 import styles from './style';
 import UploadImagePictureImage from '/images/uploadPost/UploadImagePicture.png';
 
-type UploadImageComponentProps = {};
+type UploadImageComponentProps = {
+  postImages: { id: number; url: string }[];
+  setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
+};
 
-const UploadImageComponent: React.FC<UploadImageComponentProps> = () => {
+const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
+  postImages,
+  setPostImages,
+}) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -54,6 +61,12 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = () => {
         const file = files[i];
         console.log('Uploading file:', file);
       }
+
+      // 잠시 s3전에 쓰는 가상 코드
+      setPostImages([
+        ...postImages,
+        { id: postImages.length + 1, url: faker.image.image() },
+      ]);
     }
   };
 
