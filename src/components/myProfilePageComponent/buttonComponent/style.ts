@@ -19,9 +19,9 @@ const styles = {
   LeftPurpleRectangle: styled.div`
     position: relative;
     top: 0;
-    left: 2vw;
+    left: 3vw;
     background-color: #d5b2ff;
-    width: 50px;
+    width: 60px;
     height: 10px;
     border-radius: 2px;
   `,
@@ -31,7 +31,7 @@ const styles = {
     top: 0;
     left: 8vw;
     background-color: #d5b2ff;
-    width: 50px;
+    width: 60px;
     height: 10px;
     border-radius: 2px;
   `,

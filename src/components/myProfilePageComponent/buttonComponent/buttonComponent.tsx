@@ -17,7 +17,9 @@ const ButtonComponent: React.FC<ButtonClickedProps> = ({
 }) => {
   return (
     <styles.TopButtonContainer>
+      {/* 게시물 버튼 클릭시에 위에 표시될 보라색 도형 */}
       {postItemIsClicked && <styles.LeftPurpleRectangle />}
+      {/* 저장소 버튼 클릭시에 위에 표시될 보라색 도형 */}
       {storageIsClicked && <styles.RightPurpleRectangle />}
       <styles.LinkContainer
         to=""
@@ -26,7 +28,6 @@ const ButtonComponent: React.FC<ButtonClickedProps> = ({
           setStorageClicked(false);
         }}
       >
-        {/*onClick 이벤트 발생시에 그 보라색 버튼 뜨게끔 하기  */}
         <styles.Buttonimg src={PostItem} />
         <styles.ButtonName>게시물</styles.ButtonName>
       </styles.LinkContainer>

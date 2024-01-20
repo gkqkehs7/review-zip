@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import styles from './style';
 import PlusFriend from '/images/myProfilePage/PlusFriend.png';
 
-export interface ModalProps {
+export interface UserProfileStatsProps {
   storageIsClicked: boolean;
   setIsClicked: React.Dispatch<React.SetStateAction<boolean[]>>;
+  setIsEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditProfile: boolean;
 }
-const UserProfileStatsComponent: React.FC<ModalProps> = ({
+const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   storageIsClicked,
   setIsClicked,
+  setIsEditProfile,
+  isEditProfile,
 }) => {
   return (
     <div>
@@ -37,7 +41,13 @@ const UserProfileStatsComponent: React.FC<ModalProps> = ({
         </styles.UserProfileStats>
       </styles.UserProfileStatsContainer>
       <styles.EditProfileButtonContainer>
-        <styles.EditProfileButton>프로필 수정</styles.EditProfileButton>
+        <styles.EditProfileButton
+          onClick={() => {
+            setIsEditProfile(!isEditProfile);
+          }}
+        >
+          프로필 수정
+        </styles.EditProfileButton>
         {storageIsClicked && (
           <Link to="">
             <styles.PlusButton src={PlusFriend} />

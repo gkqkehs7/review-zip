@@ -3,10 +3,9 @@ import styled from 'styled-components';
 const styles = {
   UserProfileStatsContainer: styled.div`
     display: flex;
-    margin-top: 15vh;
+    margin-top: 5vh;
   `,
   UserProfileStats: styled.p`
-    min-width: 100px;
     color: white;
     font-weight: bolder;
     margin: 20px;

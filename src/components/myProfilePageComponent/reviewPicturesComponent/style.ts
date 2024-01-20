@@ -1,35 +1,52 @@
 import styled from 'styled-components';
 
 const RveiwPicturesContainer = styled.div`
+  width: 600px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 24vw 0 24vw;
-  padding: 0 5vw 0 5vw;
+  margin: 0 auto;
 `;
 
 const IconContainer = styled.div`
   position: relative;
-  top: -15vh;
+  top: -120px;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: hidden;
 `;
 
-const Picture = styled.img`
+const PictureBorder = styled.div`
   width: 150px;
   height: 150px;
+  display: flex;
   border: solid 3px #d5b2ff;
-  border-radius: 17px;
-  object-fit: cover;
+  border-radius: 20px;
+`;
+
+const IconUnion = styled.img`
+  position: relative;
+  top: -5vh;
+  left: 120px;
+  width: 20px;
+  height: 20px;
+  z-index: 100;
+`;
+
+const Picture = styled.img`
+  display: flex;
+  justify-content: center;
+  align-items: cneter;
+  flex: 1;
+  border-radius: 20px;
 `;
 const PictureContainer = styled.div`
   overflow: hidden;
   position: relative;
   margin: 10px;
-  width: 160px;
-  height: 160px;
+  width: 150px;
+  height: 150px;
   cursor: pointer;
 
   &:hover ${IconContainer} {
@@ -42,6 +59,11 @@ const PictureContainer = styled.div`
     opacity: 0.3;
     transition: opacity 0.4s ease-in-out;
   }
+
+  &:hover ${PictureBorder} {
+    border: solid 3px #d5b2ff;
+    border-radius: 20px;
+  }
 `;
 
 const IconBox = styled.div`
@@ -49,7 +71,6 @@ const IconBox = styled.div`
 `;
 
 const Icon = styled.img`
-  //display: none;
   width: 20px;
   height: 20px;
 `;
@@ -65,6 +86,8 @@ const Count = styled.p`
 
 export default {
   RveiwPicturesContainer,
+  PictureBorder,
+  IconUnion,
   Picture,
   PictureContainer,
   IconContainer,
