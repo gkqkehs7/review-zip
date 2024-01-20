@@ -13,7 +13,7 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   isEditProfile,
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [userName, setUserName] = useState('엔젤');
+  const [userName, setUserName] = useState<string>('엔젤');
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
