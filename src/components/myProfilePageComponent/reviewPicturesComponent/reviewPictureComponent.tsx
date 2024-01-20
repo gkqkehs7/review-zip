@@ -1,5 +1,4 @@
 import styles from './style';
-
 import StarImage from '/images/myProfilePage/StarImage.png';
 import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
@@ -81,7 +80,6 @@ const storage = [
     saves: 79,
   },
 ];
-
 interface ChangePageProps {
   storageIsClicked: boolean;
 }
