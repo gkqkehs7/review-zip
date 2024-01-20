@@ -13,6 +13,8 @@ const styles = {
   MainLogoImage: styled.img`
     width: 200px;
     height: 50px;
+    margin-top: 30px;
+    margin-left: 30px;
     position: relative;
     left: 0;
     transition: left 0.5s linear;
