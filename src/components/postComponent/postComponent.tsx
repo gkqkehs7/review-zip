@@ -3,7 +3,6 @@ import { faker } from '@faker-js/faker';
 
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
 import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
-import PostAll from '@/components/postComponent/postAllComponent/postAllComponent';
 import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
 
 import { IPost } from '@/types/posts.types';

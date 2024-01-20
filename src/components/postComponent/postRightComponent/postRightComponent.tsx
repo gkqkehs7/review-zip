@@ -1,6 +1,5 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 
-import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 
 import { IPost } from '@/types/posts.types';
