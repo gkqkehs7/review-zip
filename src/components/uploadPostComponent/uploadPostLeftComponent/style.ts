@@ -74,14 +74,15 @@ const styles = {
     padding: 10px 0;
   `,
 
-  SpaceShipImageContainer: styled.div`
+  ImageUploadedContainer: styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: flex-end;
   `,
 
-  SpaceShipImage: styled.img`
+  ImageUploaded: styled.img`
     align-items: right;
-    width: 45.25px;
+    width: 45px;
     height: auto;
   `,
 };

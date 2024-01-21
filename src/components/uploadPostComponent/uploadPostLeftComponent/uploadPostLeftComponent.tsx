@@ -4,7 +4,9 @@ import ImageSliderComponent from '@/components/common/imageSliderComponent/image
 import UploadImageComponent from '@/components/uploadPostComponent/uploadImageComponent/uploadImageComponent';
 
 import styles from './style';
-import SpaceShipImage from '/images/post/SpaceShip.png';
+import ImageUploadedImage from '/images/uploadPost/ImageUploaded.png';
+import ImageNotUploadedImage from '/images/uploadPost/ImageNotUploaded.png';
+import ImageListComponent from '../imageListComponent/imageListComponent';
 
 interface UploadPostLeftComponentProps {
   split: boolean;
@@ -18,10 +20,6 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   const [postImages, setPostImages] = useState<{ id: number; url: string }[]>(
     [],
   );
-
-  useEffect(() => {
-    console.log(postImages);
-  }, [postImages]);
 
   return (
     <styles.Container splitPost={split}>
@@ -43,10 +41,21 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         />
       )}
 
-      {/* 우주선 이미지 */}
-      <styles.SpaceShipImageContainer>
-        <styles.SpaceShipImage src={SpaceShipImage} />
-      </styles.SpaceShipImageContainer>
+      <ImageListComponent
+        postImages={postImages}
+        setPostImages={setPostImages}
+      />
+
+      {/* 이미지 업로드 여부 이미지 */}
+      {postImages.length > 0 ? (
+        <styles.ImageUploadedContainer>
+          <styles.ImageUploaded src={ImageUploadedImage} />
+        </styles.ImageUploadedContainer>
+      ) : (
+        <styles.ImageUploadedContainer>
+          <styles.ImageUploaded src={ImageNotUploadedImage} />
+        </styles.ImageUploadedContainer>
+      )}
     </styles.Container>
   );
 };
