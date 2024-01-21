@@ -1,60 +1,38 @@
-import { useState } from 'react';
-import { changeInputValue } from '@/hooks/chageInputValue';
-import styles from './style';
+import React from 'react';
+import { useMediaQuery } from 'react-responsive';
+import DesktopComponent from '@/components/signinPageComponent/signinComponent/desktopComponent/desktopComponent';
+import LargeDesktopComponent from '@/components/signinPageComponent/signinComponent/largeDesktopComponent/largeDesktopComponent';
+import LaptopComponent from '@/components/signinPageComponent/signinComponent/laptopComponent/laptopComponent';
+import MobileComponent from '@/components/signinPageComponent/signinComponent/mobileComponent/mobileComponent';
 
 const SigninPage: React.FC = () => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const isLargeDesktop: boolean = useMediaQuery({
+    query: '(min-width : 1921px)',
+  });
+  const isDesktop: boolean = useMediaQuery({
+    //ipad와 pc사이
+    query: '(min-width : 1441px) and (max-width : 1920px)', //1921의 다자인 적용
+  });
+
+  const isLaptop: boolean = useMediaQuery({
+    //ipad와 pc사이
+    query: '(min-width : 1025px) and (max-width : 1440px)', //1921의 다자인 적용
+  });
+
+  const isMobile: boolean = useMediaQuery({
+    query: '(max-width : 1025px)',
+  });
 
   return (
-    <styles.Container>
-      <styles.Right>
-        {/* 이메일 */}
-        <styles.InputContainer>
-          <styles.InputTitle>EMAIL</styles.InputTitle>
-          <styles.Input
-            type="email"
-            pattern=".+@example\.com"
-            placeholder="Enter ID or Email Adress"
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
-            }
-          />
-        </styles.InputContainer>
+    <>
+      <div>
+        {isLargeDesktop && <LargeDesktopComponent />}
+        {isDesktop && <DesktopComponent />}
 
-        {/* 비밀 번호 */}
-        <styles.InputContainer>
-          <styles.InputTitle>PASSWORD</styles.InputTitle>
-          <styles.Input
-            type="password"
-            placeholder="Enter UserName"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setPassword)
-            }
-          />
-        </styles.InputContainer>
-
-        {/* 카카오톡 인증*/}
-        <styles.OrSignContainer>
-          <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
-          <styles.KaKaoIcon />
-        </styles.OrSignContainer>
-
-        {/* 로그인 버튼 */}
-        <styles.SignInBtn to="/mainPage">&gt; SIGN IN</styles.SignInBtn>
-
-        {/* 보안정책 */}
-      </styles.Right>
-      <styles.Left>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        <styles.ForgotPwd to="/passwordRecoveryPage">
-          Forgot the Password ?
-        </styles.ForgotPwd>
-        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
-      </styles.Left>
-    </styles.Container>
+        {isLaptop && <LaptopComponent />}
+        {isMobile && <MobileComponent />}
+      </div>
+    </>
   );
 };
 
