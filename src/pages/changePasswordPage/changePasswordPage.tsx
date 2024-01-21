@@ -1,55 +1,53 @@
-import { useState } from 'react';
-import { changeInputValue } from '@/hooks/chageInputValue';
-import styles from './style';
+import { useMediaQuery } from 'react-responsive';
+import LargeDesktopComponent from '@/components/signinPageComponent/changePasswordComponent/largeDesktopComponent/largeDesktopComponent';
+import DesktopComponent from '@/components/signinPageComponent/changePasswordComponent/desktopComponent/desktopComponent';
+import LaptopComponent from '@/components/signinPageComponent/changePasswordComponent/laptopComponent/laptopComponent';
+import MobileComponent from '@/components/signinPageComponent/changePasswordComponent/mobileComponent/mobileveComponent';
 
 const ChangePasswordPage: React.FC = () => {
-  const [password, setPassword] = useState<string>('');
-  const [newpassword, setNewPassword] = useState<string>('');
-  return (
-    <styles.Container>
-      <styles.Right>
-        {/* 비밀번호 입력 */}
-        <styles.InputContainer>
-          <styles.InputTitle>비밀번호 입력</styles.InputTitle>
-          <styles.Input
-            type="password"
-            placeholder="Enter Password"
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setPassword)
-            }
-          />
-        </styles.InputContainer>
+  const isLargeDesktop: boolean = useMediaQuery({
+    query: '(min-width : 1921px)',
+  });
+  const isDesktop: boolean = useMediaQuery({
+    //ipad와 pc사이
+    query: '(min-width : 1441px) and (max-width : 1920px)', //1921의 다자인 적용
+  });
 
-        {/* 비밀 번호 재입력 */}
-        <styles.InputContainer>
-          <styles.InputTitle>비밀번호 재입력</styles.InputTitle>
-          <styles.Input
-            type="password"
-            placeholder="Enter Password Again"
-            value={newpassword}
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setNewPassword)
-            }
-          />
-        </styles.InputContainer>
-        {/* 비밀번호 입력시 주의사항 */}
-        <styles.WarnText>
-          대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.{' '}
-        </styles.WarnText>
-        {/* 비밀번호 변경 버튼 */}
-        <styles.ChangeBtn to="/completeChangePasswordPage">
-          &gt; 변경하기
-        </styles.ChangeBtn>
-      </styles.Right>
-      {/* 회원가입 및 개인정책  */}
-      <styles.Left>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
-      </styles.Left>
-    </styles.Container>
+  const isLaptop: boolean = useMediaQuery({
+    //ipad와 pc사이
+    query: '(min-width : 1025px) and (max-width : 1440px)', //1921의 다자인 적용
+  });
+
+  const isMobile: boolean = useMediaQuery({
+    query: '(max-width : 1025px)',
+  });
+
+  return (
+    <>
+      <div>
+        {isLargeDesktop && (
+          <>
+            <LargeDesktopComponent />
+          </>
+        )}
+        {isDesktop && (
+          <>
+            <DesktopComponent />
+          </>
+        )}
+
+        {isLaptop && (
+          <>
+            <LaptopComponent />
+          </>
+        )}
+        {isMobile && (
+          <>
+            <MobileComponent />
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
