@@ -1,11 +1,4 @@
-import {
-  useCallback,
-  Dispatch,
-  SetStateAction,
-  useRef,
-  useEffect,
-} from 'react';
-import { faker } from '@faker-js/faker';
+import { useCallback, Dispatch, SetStateAction, useRef } from 'react';
 
 import styles from './style';
 import ImagePlusButtomImage from '/images/uploadPost/ImagePlusButton.png';
@@ -15,15 +8,18 @@ interface ImageListComponentProps {
   postImages: { id: number; url: string }[];
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
   imageListOpen: boolean;
+  setClickedImage: Dispatch<SetStateAction<string>>;
 }
 
 const ImageListComponent: React.FC<ImageListComponentProps> = ({
   postImages,
   setPostImages,
   imageListOpen,
+  setClickedImage,
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  // 파일 업로드
   const handleFileUpload = (files: FileList | null): void => {
     if (files) {
       for (let i = 0; i < files.length; i++) {
@@ -45,6 +41,8 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
             ...prevPostImages,
             { id: prevPostImages.length + 1, url: imageUrl },
           ]);
+
+          setClickedImage(imageUrl);
         };
 
         reader.readAsArrayBuffer(file);
@@ -93,7 +91,14 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
 
       {postImages.map((postImage) => {
         return (
-          <styles.ImageContainer key={postImage.id}>
+          <styles.ImageContainer
+            key={postImage.id}
+            onClick={() => {
+              console.log('click');
+
+              setClickedImage(postImage.url);
+            }}
+          >
             <styles.Image src={postImage.url}></styles.Image>
             <styles.ImageDeleteButton onClick={() => deleteImage(postImage.id)}>
               x

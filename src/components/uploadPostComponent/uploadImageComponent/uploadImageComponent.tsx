@@ -1,12 +1,4 @@
-import {
-  useCallback,
-  useState,
-  useRef,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-} from 'react';
-import { faker } from '@faker-js/faker';
+import { useCallback, useState, useRef, Dispatch, SetStateAction } from 'react';
 
 import styles from './style';
 import UploadImagePictureImage from '/images/uploadPost/UploadImagePicture.png';
@@ -14,11 +6,13 @@ import UploadImagePictureImage from '/images/uploadPost/UploadImagePicture.png';
 type UploadImageComponentProps = {
   postImages: { id: number; url: string }[];
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
+  setClickedImage: Dispatch<SetStateAction<string>>;
 };
 
 const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   postImages,
   setPostImages,
+  setClickedImage,
 }) => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -83,6 +77,8 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
             ...prevPostImages,
             { id: prevPostImages.length + 1, url: imageUrl },
           ]);
+
+          setClickedImage(imageUrl);
         };
 
         reader.readAsArrayBuffer(file);

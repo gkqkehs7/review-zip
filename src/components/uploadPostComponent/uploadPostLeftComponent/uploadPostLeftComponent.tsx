@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 import UploadImageComponent from '@/components/uploadPostComponent/uploadImageComponent/uploadImageComponent';
 
 import styles from './style';
@@ -20,8 +19,11 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   const [postImages, setPostImages] = useState<{ id: number; url: string }[]>(
     [],
   );
+  const [clickedImage, setClickedImage] = useState<string>('');
 
   const [imageListOpen, setImageListOpen] = useState<boolean>(false);
+
+  useEffect(() => {}, [clickedImage]);
 
   const togglemageList = () => {
     setImageListOpen(!imageListOpen);
@@ -40,12 +42,13 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
       {/* image slider */}
       {postImages.length > 0 ? (
         <styles.ImageContainer>
-          <styles.Image src={postImages[postImages.length - 1].url} />
+          <styles.Image src={clickedImage} />
         </styles.ImageContainer>
       ) : (
         <UploadImageComponent
           postImages={postImages}
           setPostImages={setPostImages}
+          setClickedImage={setClickedImage}
         />
       )}
 
@@ -54,6 +57,7 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         postImages={postImages}
         setPostImages={setPostImages}
         imageListOpen={imageListOpen}
+        setClickedImage={setClickedImage}
       />
 
       {/* 이미지 업로드 여부 이미지 */}

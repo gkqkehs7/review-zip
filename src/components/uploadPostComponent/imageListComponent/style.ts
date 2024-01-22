@@ -17,6 +17,7 @@ const styles = {
   `,
 
   ImageContainer: styled.div`
+    cursor: pointer;
     padding: 10px 5px;
     position: relative;
   `,
