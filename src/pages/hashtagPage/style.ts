@@ -36,42 +36,6 @@ const styles = {
     display: flex;
     justify-content: space-between;
   `,
-  HashtagTopContainer: styled.div`
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 0 100px;
-    border-bottom: solid 2px #d5b2ff;
-  `,
-  ExitSearchContainer: styled.div`
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px 20px 0 0;
-  `,
-  ExitButton: styled(IoCloseSharp)`
-    color: white;
-    width: 40px;
-    height: 25px;
-    cursor: pointer;
-  `,
-  SearchIcon: styled(IoSearch)`
-    color: white;
-    width: 28px;
-    height: 25px;
-    cursor: pointer;
-  `,
-  TagName: styled.p`
-    margin-left: 30px;
-    color: white;
-    font-size: 40px;
-    font-weight: bolder;
-  `,
-  TagCount: styled.p`
-    color: white;
-    font-size: 20px;
-    font-weight: bolder;
-  `,
   DropdownContainer: styled.div`
     display: flex;
     justify-content: flex-end;
