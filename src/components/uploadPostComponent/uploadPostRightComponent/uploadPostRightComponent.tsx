@@ -1,4 +1,7 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
+import autosize from 'autosize';
 import { faker } from '@faker-js/faker';
+import { Mention, SuggestionDataItem } from 'react-mentions';
 
 import { IPost } from '@/types/posts.types';
 
@@ -7,6 +10,7 @@ import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
   split: boolean;
+  openLoadingModal: () => void;
 }
 
 const post: IPost = {
@@ -44,9 +48,66 @@ const post: IPost = {
   ],
 };
 
+const hashTagsData = [
+  {
+    id: 1,
+    hashTag: '여름',
+  },
+  {
+    id: 2,
+    hashTag: '여름이였다',
+  },
+  {
+    id: 2,
+    hashTag: '여름인건가',
+  },
+];
+
 const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   split,
+  openLoadingModal,
 }) => {
+  const [hashTags, setHashTags] = useState<string[]>([]);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      autosize(textareaRef.current);
+    }
+  }, []);
+
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const inputChange = (e: any) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleAddMention = (id: string | number, display: string) => {
+    setHashTags((prevHashTags) => [...prevHashTags, display]);
+  };
+
+  const renderUserSuggestion: (
+    suggestion: SuggestionDataItem,
+    search: string,
+    highlightedDisplay: React.ReactNode,
+    index: number,
+    focused: boolean,
+  ) => React.ReactNode = useCallback(
+    (member, search, highlightedDisplay, index, focus) => {
+      if (!hashTagsData) {
+        return null;
+      }
+
+      return (
+        <styles.EachMention focus={focus}>
+          <span>#{highlightedDisplay}</span>
+        </styles.EachMention>
+      );
+    },
+    [hashTagsData],
+  );
+
   return (
     <styles.Container splitPost={split}>
       {/* 유저 정보 */}
@@ -56,19 +117,33 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
           <styles.UserName>{post.user.nickname}</styles.UserName>
         </styles.UserContainer>
 
-        <styles.SendButton>보내기</styles.SendButton>
+        <styles.SendButton onClick={openLoadingModal}>보내기</styles.SendButton>
       </styles.TopContainer>
 
       <styles.Line />
 
       {/* 게시글 내용 */}
-      <styles.PostInputContainer>
-        <styles.PostInput placeholder="리뷰의 내용을 작성해주세요" />
-      </styles.PostInputContainer>
+      <styles.MentionsTextarea
+        id="editor-chat"
+        value={inputValue}
+        onChange={inputChange}
+        inputRef={textareaRef}
+        forceSuggestionsAboveCursor
+      >
+        <Mention
+          appendSpaceOnAdd
+          trigger="#"
+          data={
+            hashTagsData?.map((v) => ({ id: v.id, display: v.hashTag })) || []
+          }
+          renderSuggestion={renderUserSuggestion}
+          onAdd={handleAddMention}
+        />
+      </styles.MentionsTextarea>
 
       {/* 해시태그들 */}
       <styles.HashTagContainer>
-        {post.hashTags.map((hashTag, index) => (
+        {hashTags.map((hashTag, index) => (
           <styles.HashTag key={index}>
             <styles.HashTagText># {hashTag}</styles.HashTagText>
           </styles.HashTag>
