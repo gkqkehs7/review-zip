@@ -1,9 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
+import ExitSearchComponent from '@/components/hashtagPageComponent/exitSearchComponent/exitSearchComponent';
+import HashtagTopComponent from '@/components/hashtagPageComponent/hashtagTopComponent/hashtagTopComponent';
+import DropdownComponent from '@/components/hashtagPageComponent/dropdownComponent/dropdownComponent';
+
 import styles from './style';
 
 import MainLogo from '/images/myProfilePage/MainLogoImage.png';
-import Down from '/images/hashtagPage/DownImage.png';
-import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
 
 const hashtagPictures = [
   {
@@ -63,35 +65,19 @@ const hashtagPictures = [
 ];
 
 const HashtagPage = () => {
-  const navigate = useNavigate();
   return (
     <styles.Container>
+      {/*상단의 메인로고와 돋보기, 취소 버튼을 포함한 컴포넌트가 들어 있는 컨테이너*/}
       <styles.MainLogoContainer>
         <styles.MainLogoImage src={MainLogo} />
-        <styles.ExitSearchContainer>
-          <Link to="/searchPage">
-            <styles.SearchIcon />
-          </Link>
-          <styles.ExitButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
-        </styles.ExitSearchContainer>
+        <ExitSearchComponent />
       </styles.MainLogoContainer>
       <styles.HashtagContainer>
-        <styles.HashtagTopContainer>
-          <div>
-            <styles.TagName>#강남역</styles.TagName>
-          </div>
-          <div>
-            <styles.TagCount>태그 56</styles.TagCount>
-          </div>
-        </styles.HashtagTopContainer>
-        <styles.DropdownContainer>
-          <styles.SortDropdown>최신순</styles.SortDropdown>
-          <styles.DownImage src={Down} />
-        </styles.DropdownContainer>
+        {/*유저가 검색한 해시태그와 해당 태그 수를 표시하는 컴포넌트 */}
+        <HashtagTopComponent />
+        {/*최신순 정렬을 기본으로 하는 드롭다운 컴포넌트 */}
+        <DropdownComponent />
+        {/*해시태그 이미지 컴포넌트  */}
         <ReviewPictureComponent
           storageIsClicked={false}
           picture={hashtagPictures}
