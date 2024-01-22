@@ -1,4 +1,11 @@
-import { useCallback, useState, useRef, Dispatch, SetStateAction } from 'react';
+import {
+  useCallback,
+  useState,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from 'react';
 import { faker } from '@faker-js/faker';
 
 import styles from './style';
@@ -13,7 +20,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   postImages,
   setPostImages,
 }) => {
-  const [isDragging, setIsDragging] = useState(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // 드래드 & 드롭으로 파일 선택
@@ -55,18 +62,31 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   );
 
   // 선택된 파일 정보
-  const handleFileUpload = (files: FileList | null) => {
+  const handleFileUpload = (files: FileList | null): void => {
     if (files) {
       for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        console.log('Uploading file:', file);
-      }
+        const file: File = files[i];
 
-      // 잠시 s3전에 쓰는 가상 코드
-      setPostImages([
-        ...postImages,
-        { id: postImages.length + 1, url: faker.image.image() },
-      ]);
+        const reader: FileReader = new FileReader();
+
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+          const arrayBuffer: ArrayBuffer | null = e.target
+            ?.result as ArrayBuffer;
+
+          const blob: Blob = new Blob([arrayBuffer as ArrayBuffer], {
+            type: file.type,
+          });
+
+          const imageUrl: string = URL.createObjectURL(blob);
+
+          setPostImages((prevPostImages) => [
+            ...prevPostImages,
+            { id: prevPostImages.length + 1, url: imageUrl },
+          ]);
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
     }
   };
 

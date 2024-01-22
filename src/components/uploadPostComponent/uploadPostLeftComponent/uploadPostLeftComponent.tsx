@@ -21,6 +21,12 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
     [],
   );
 
+  const [imageListOpen, setImageListOpen] = useState<boolean>(false);
+
+  const togglemageList = () => {
+    setImageListOpen(!imageListOpen);
+  };
+
   return (
     <styles.Container splitPost={split}>
       {/* 윗부분 뒤로가기, 텍스트 */}
@@ -33,7 +39,9 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
 
       {/* image slider */}
       {postImages.length > 0 ? (
-        <ImageSliderComponent sliderImages={postImages} />
+        <styles.ImageContainer>
+          <styles.Image src={postImages[postImages.length - 1].url} />
+        </styles.ImageContainer>
       ) : (
         <UploadImageComponent
           postImages={postImages}
@@ -41,18 +49,20 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         />
       )}
 
+      {/* 업로드한 이미지들 작게 보이는 component */}
       <ImageListComponent
         postImages={postImages}
         setPostImages={setPostImages}
+        imageListOpen={imageListOpen}
       />
 
       {/* 이미지 업로드 여부 이미지 */}
       {postImages.length > 0 ? (
-        <styles.ImageUploadedContainer>
+        <styles.ImageUploadedContainer onClick={togglemageList}>
           <styles.ImageUploaded src={ImageUploadedImage} />
         </styles.ImageUploadedContainer>
       ) : (
-        <styles.ImageUploadedContainer>
+        <styles.ImageUploadedContainer onClick={togglemageList}>
           <styles.ImageUploaded src={ImageNotUploadedImage} />
         </styles.ImageUploadedContainer>
       )}

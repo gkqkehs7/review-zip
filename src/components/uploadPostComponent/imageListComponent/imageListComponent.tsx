@@ -1,4 +1,10 @@
-import { useCallback, Dispatch, SetStateAction, useRef } from 'react';
+import {
+  useCallback,
+  Dispatch,
+  SetStateAction,
+  useRef,
+  useEffect,
+} from 'react';
 import { faker } from '@faker-js/faker';
 
 import styles from './style';
@@ -8,26 +14,41 @@ import ImagePlusButtonBackgroundImage from '/images/uploadPost/ImagePlusButtonBa
 interface ImageListComponentProps {
   postImages: { id: number; url: string }[];
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
+  imageListOpen: boolean;
 }
 
 const ImageListComponent: React.FC<ImageListComponentProps> = ({
   postImages,
   setPostImages,
+  imageListOpen,
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleFileUpload = (files: FileList | null) => {
+  const handleFileUpload = (files: FileList | null): void => {
     if (files) {
       for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        console.log('Uploading file:', file);
-      }
+        const file: File = files[i];
 
-      // 잠시 s3전에 쓰는 가상 코드
-      setPostImages([
-        ...postImages,
-        { id: postImages.length + 1, url: faker.image.image() },
-      ]);
+        const reader: FileReader = new FileReader();
+
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+          const arrayBuffer: ArrayBuffer | null = e.target
+            ?.result as ArrayBuffer;
+
+          const blob: Blob = new Blob([arrayBuffer as ArrayBuffer], {
+            type: file.type,
+          });
+
+          const imageUrl: string = URL.createObjectURL(blob);
+
+          setPostImages((prevPostImages) => [
+            ...prevPostImages,
+            { id: prevPostImages.length + 1, url: imageUrl },
+          ]);
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
     }
   };
 
@@ -39,8 +60,16 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
     [],
   );
 
+  const deleteImage = (postImageId: number) => {
+    // 이미지를 삭제하고 새로운 배열을 만듭니다
+    const updatedImages = postImages.filter(
+      (image) => image.id !== postImageId,
+    );
+    setPostImages(updatedImages);
+  };
+
   return (
-    <styles.Container>
+    <styles.Container style={{ display: imageListOpen ? 'flex' : 'none' }}>
       <styles.ImagePlusButtonContainer
         onClick={() => {
           fileInputRef.current?.click();
@@ -65,7 +94,10 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
       {postImages.map((postImage) => {
         return (
           <styles.ImageContainer key={postImage.id}>
-            <styles.Image src={postImage.url} />
+            <styles.Image src={postImage.url}></styles.Image>
+            <styles.ImageDeleteButton onClick={() => deleteImage(postImage.id)}>
+              x
+            </styles.ImageDeleteButton>
           </styles.ImageContainer>
         );
       })}

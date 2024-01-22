@@ -70,6 +70,21 @@ const styles = {
     margin: 5px 0 5px 0;
   `,
 
+  ImageContainer: styled.div`
+    flex: 1;
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+  `,
+
+  Image: styled.img`
+    width: 100%;
+    object-fit: cover;
+  `,
+
   ImageSliderContainer: styled.div`
     padding: 10px 0;
   `,

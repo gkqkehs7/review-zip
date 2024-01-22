@@ -12,18 +12,29 @@ const styles = {
     padding: 0 5px;
   `,
 
-  ImageContainer: styled.div`
-    padding: 10px 5px;
-  `,
-
   InputButton: styled.input`
     display: none;
+  `,
+
+  ImageContainer: styled.div`
+    padding: 10px 5px;
+    position: relative;
   `,
 
   Image: styled.img`
     width: 90px;
     height: 90px;
     vertical-align: bottom; // 이미지 이상한 공백 삭제
+  `,
+
+  ImageDeleteButton: styled.div`
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    top: 4px;
+    font-size: large;
+    right: 6px;
+    font-weight: bold;
   `,
 
   ImagePlusButtonContainer: styled.div`
