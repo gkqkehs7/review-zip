@@ -62,12 +62,18 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
 
       {/* 이미지 업로드 여부 이미지 */}
       {postImages.length > 0 ? (
-        <styles.ImageUploadedContainer onClick={togglemageList}>
-          <styles.ImageUploaded src={ImageUploadedImage} />
+        <styles.ImageUploadedContainer>
+          <styles.ImageUploaded
+            src={ImageUploadedImage}
+            onClick={togglemageList}
+          />
         </styles.ImageUploadedContainer>
       ) : (
-        <styles.ImageUploadedContainer onClick={togglemageList}>
-          <styles.ImageUploaded src={ImageNotUploadedImage} />
+        <styles.ImageUploadedContainer>
+          <styles.ImageUploaded
+            src={ImageNotUploadedImage}
+            onClick={togglemageList}
+          />
         </styles.ImageUploadedContainer>
       )}
     </styles.Container>

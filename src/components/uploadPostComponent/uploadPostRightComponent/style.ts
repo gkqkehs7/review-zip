@@ -46,10 +46,16 @@ const styles = {
           `}
   `,
 
+  TopContainer: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  `,
+
   UserContainer: styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
   `,
 
   UserImage: styled.img`
@@ -60,9 +66,18 @@ const styles = {
 
   UserName: styled.div`
     margin: 0 15px 0 8px;
+    font-weight: bold;
   `,
 
-  PostDate: styled.div``,
+  SendButton: styled.div`
+    cursor: pointer;
+    color: #9766d1;
+    font-weight: bold;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  `,
 
   Line: styled.div`
     border-top: 1px solid black;
@@ -70,8 +85,16 @@ const styles = {
     margin: 5px 0 10px 0;
   `,
 
-  PostContentContainer: styled.div`
+  PostInputContainer: styled.div`
     flex: 1;
+  `,
+
+  PostInput: styled.textarea`
+    width: 100%;
+    height: 90%;
+    border: none;
+    outline: none;
+    font-size: 16px;
   `,
 
   HashTagContainer: styled.div`
@@ -93,8 +116,6 @@ const styles = {
   HashTagText: styled.div`
     font-weight: 600;
   `,
-
-  PostContent: styled.div``,
 
   Buttons: styled.div`
     display: flex;

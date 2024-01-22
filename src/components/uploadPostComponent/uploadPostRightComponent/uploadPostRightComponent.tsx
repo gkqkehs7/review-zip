@@ -50,18 +50,21 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   return (
     <styles.Container splitPost={split}>
       {/* 유저 정보 */}
-      <styles.UserContainer>
-        <styles.UserImage src={post.user.profileImage} />
-        <styles.UserName>{post.user.nickname}</styles.UserName>
-        <styles.PostDate>{post.date}</styles.PostDate>
-      </styles.UserContainer>
+      <styles.TopContainer>
+        <styles.UserContainer>
+          <styles.UserImage src={post.user.profileImage} />
+          <styles.UserName>{post.user.nickname}</styles.UserName>
+        </styles.UserContainer>
+
+        <styles.SendButton>보내기</styles.SendButton>
+      </styles.TopContainer>
 
       <styles.Line />
 
       {/* 게시글 내용 */}
-      <styles.PostContentContainer>
-        <styles.PostContent>{post.content}</styles.PostContent>
-      </styles.PostContentContainer>
+      <styles.PostInputContainer>
+        <styles.PostInput placeholder="리뷰의 내용을 작성해주세요" />
+      </styles.PostInputContainer>
 
       {/* 해시태그들 */}
       <styles.HashTagContainer>

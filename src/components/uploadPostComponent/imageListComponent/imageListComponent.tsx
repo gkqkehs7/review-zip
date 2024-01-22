@@ -42,6 +42,7 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
             { id: prevPostImages.length + 1, url: imageUrl },
           ]);
 
+          // 클릭된 이미지 보이게 하기
           setClickedImage(imageUrl);
         };
 
@@ -58,8 +59,8 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
     [],
   );
 
+  // 이미지 삭제
   const deleteImage = (postImageId: number) => {
-    // 이미지를 삭제하고 새로운 배열을 만듭니다
     const updatedImages = postImages.filter(
       (image) => image.id !== postImageId,
     );
@@ -93,11 +94,7 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
         return (
           <styles.ImageContainer
             key={postImage.id}
-            onClick={() => {
-              console.log('click');
-
-              setClickedImage(postImage.url);
-            }}
+            onClick={() => setClickedImage(postImage.url)}
           >
             <styles.Image src={postImage.url}></styles.Image>
             <styles.ImageDeleteButton onClick={() => deleteImage(postImage.id)}>

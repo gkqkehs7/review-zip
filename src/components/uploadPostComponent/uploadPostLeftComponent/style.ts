@@ -58,6 +58,10 @@ const styles = {
     color: black;
     font-size: medium;
     font-weight: bold;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   BackButton: styled(BsBackspace)`
@@ -90,15 +94,19 @@ const styles = {
   `,
 
   ImageUploadedContainer: styled.div`
-    cursor: pointer;
     display: flex;
     justify-content: flex-end;
   `,
 
   ImageUploaded: styled.img`
+    cursor: pointer;
     align-items: right;
     width: 45px;
     height: auto;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 };
 
