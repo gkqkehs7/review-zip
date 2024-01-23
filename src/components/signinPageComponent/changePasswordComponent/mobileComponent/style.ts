@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   Container: styled.div`
-    // background-image: url('images/signinPage/Signin.png');
+    background-image: url('images/signinPage/Background.png');
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;

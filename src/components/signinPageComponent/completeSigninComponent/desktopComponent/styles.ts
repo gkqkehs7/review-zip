@@ -102,112 +102,33 @@ const styles = {
     z-index: 3;
   `,
   Right: styled.div`
-    postion: relative;
+    display: flex;
+    flex-flow: row wrap;
     width: 500px;
-    height: 750px;
-    margin: 350px 0px 0px 60vw;
+    height: 650px;
+    margin: 500px 0px 0px 60vw;
     z-index: 5;
   `,
 
-  InputContainer: styled.div`
-    display: flex;
-    flex-direction: column;
+  SuccessIcon: styled.div`
+    background-image: url('images/signinPage/SuccessIcon.png');
+    background-size: 100% 100%;
+    margin: 0px 0px 0px 0px;
+    width: 20%;
+    height: 20%;
+  `,
+
+  SuccessText: styled(Link)`
+    background-image: url('images/signinPage/SuccessSignin.png');
+    background-size: 100% 100%;
+    margin: 0px 0px 0px 0px;
     width: 100%;
-    margin: 15px 0px 0px 0px;
-  `,
-
-  InputTitle: styled.p`
-    width: 100%;
-    height: 16px;
-    margin: 20px 0px 76px 0px;
-    font-weight: bold;
-    color: white;
-  `,
-
-  Input: styled.input`
-    background-color: rgba(255, 255, 255, 0.3);
-    width: 100%;
-    height: 40px;
-    padding-left: 10px;
-    box-sizing: border-box;
-    border-radius: 100px;
-    color: white;
-
-    font-size: 90%;
-    &::placeholder {
-      color: white;
-    }
-  `,
-
-  OrSignContainer: styled.h2`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    width: 494.6px;
-    height: 40px;
-    margin: 54px 0px 81px 0px;
-  `,
-
-  OrSignBtn: styled.p`
-    color: white;
-    font-size: 80%;
-    cursor: pointer;
-  `,
-
-  KaKaoIcon: styled.div`
-    background-image: url('images/signinPage/KakaoIcon.png');
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    margin: 0px 0px 0px 10px;
-  `,
-
-  SignInBtn: styled(Link)`
-    width: 100%;
-    height: fit-content;
-    margin: 10px 0px 0px 0px;
-    color: white;
-    font-size: 250%;
-    cursor: pointer;
-  `,
-
-  Footer: styled.div`
-    postion: relative;
-    width: 62%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 40px;
-    margin: -40px 0px 0px 0px;
-    z-index: 5;
-  `,
-  SignUp: styled(Link)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 69px;
-    height: 16px;
-    margin: 0px 0vw 0px 22vw;
-    color: white;
-    white-space: nowrap;
-    cursor: pointer;
-  `,
-  ForgotPwd: styled(Link)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-    height: 16px;
-    margin: 0px 0px 0px 5vw;
-    color: white;
-    white-space: nowrap;
-    cursor: pointer;
+    height: 7%;
   `,
 
   PrivacyPolicy: styled.p`
     width: fit-content;
-    margin: 120px 0px 0px 0px;
+    margin: 200px 0px 0px 0px;
     color: #323a54;
     font-size: 125%;
     font-weight: bold;
