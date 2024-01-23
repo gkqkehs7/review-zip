@@ -7,6 +7,14 @@ const DesktopComponent: React.FC = () => {
   const [newpassword, setNewPassword] = useState<string>('');
   return (
     <styles.Container>
+      <styles.PerkyMilkyWay />
+      <styles.PurpleCloud />
+      <styles.Ellipse />
+      <styles.MilkyWay />
+      <styles.Title />
+      <styles.LargeStart />
+      <styles.Union />
+      <styles.MiniStart />
       <styles.Right>
         {/* 비밀번호 입력 */}
         <styles.InputContainer>

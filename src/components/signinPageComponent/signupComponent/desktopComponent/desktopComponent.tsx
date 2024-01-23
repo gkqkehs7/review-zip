@@ -10,6 +10,13 @@ const DesktopComponent: React.FC = () => {
 
   return (
     <styles.Container>
+      <styles.PerkyMilkyWay />
+      <styles.PurpleCloud />
+      <styles.Ellipse />
+      <styles.Title />
+      <styles.LargeStart />
+      <styles.Union />
+      <styles.MiniStart />
       <styles.Right>
         <styles.InputContainer>
           {/* 휴대폰 번호입력 */}
