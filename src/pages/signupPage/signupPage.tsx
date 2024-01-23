@@ -11,7 +11,7 @@ const SignupPage: React.FC = () => {
   });
   const isDesktop: boolean = useMediaQuery({
     //ipad와 pc사이
-    query: '(min-width : 1441px) and (max-width : 1920px)', //1921의 다자인 적용
+    query: '(min-width : 1441px) and (max-width : 1920px) ', //1921의 다자인 적용
   });
 
   const isLaptop: boolean = useMediaQuery({

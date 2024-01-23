@@ -3,35 +3,122 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   Container: styled.div`
-    // background-image: url('images/signinPage/Signin.png');
-    // background-size: 100% 100%;
-    // background-position: center;
-    // background-repeat: no-repeat;
+    background-image: url('images/signinPage/Background.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
     font-size: 115%;
     font-weight: bold;
+    z-index: 0;
+  `,
+  PerkyMilkyWay: styled.div`
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-image: url('images/signinPage/PerkyMilkyWay.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50px 30px;
+    width: 1000px;
+    height: 850px;
+    z-index: 0;
+  `,
+  PurpleCloud: styled.div`
+    position: absolute;
+    bottom: 0vh;
+    background-image: url('images/signinPage/PurpleCloud.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 1300px;
+    height: 85vh;
+    z-index: 0;
+  `,
+  Ellipse: styled.div`
+    position: absolute;
+    top: 32.5%;
+    background-image: url('images/signinPage/Ellipse.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 800px;
+    height: 40vh;
+    z-index: 2;
   `,
 
-  Right: styled.div`
+  MilkyWay: styled.div`
+    position: absolute;
+    bottom: 0;
+    background-image: url('images/signinPage/MilkyWay.png');
+    background-size: 100% 100%;
+    width: 850px;
+    height: 50vh;
+    z-index: 3;
+  `,
+
+  Title: styled.div`
+    position: absolute;
+    top: 43.5%;
+    left: 240px;
+    background-image: url('images/signinPage/Title.png');
+    background-size: 100% 100%;
+    width: 600px;
+    height: 12vh;
+    z-index: 3;
+  `,
+
+  LargeStart: styled.div`
+    position: absolute;
     display: flex;
-    flex-direction: column;
-    width: 494.6px;
-    height: fit-content;
-    margin: 285px 0px 0px 60vw;
+    top: 62.5%;
+    left: 150px;
+    background-image: url('images/signinPage/LargeStar.png');
+    background-size: 100% 100%;
+    width: 200px;
+    height: 17.5vh;
+    z-index: 4;
+  `,
+
+  Union: styled.div`
+    position: absolute;
+    top: 20vh;
+    left: 325px;
+    background-image: url('images/signinPage/Union.png');
+    background-size: 100% 100%;
+    width: 100px;
+    height: 8vh;
+  `,
+
+  MiniStart: styled.div`
+    position: absolute;
+    top: 30vh;
+    left: 730px;
+    background-image: url('images/signinPage/MiniStar.png');
+    background-size: 100% 100%;
+    width: 100px;
+    height: 8vh;
+    z-index: 3;
+  `,
+  Right: styled.div`
+    postion: relative;
+    width: 500px;
+    height: 750px;
+    margin: 350px 0px 0px 60vw;
+    z-index: 5;
   `,
 
   InputContainer: styled.p`
     width: 100%;
-    margin: 20px 0px 0px 0px;
+    margin: 15px 0px 0px 0px;
+    font-weight: bold;
   `,
 
   InputTitle: styled.div`
     width: 100%;
     height: fit-content;
-    margin: 20px 0px 75px 0px;
+    margin: 20px 0px 76px 0px;
     font-weight: bold;
     color: white;
   `,
@@ -71,7 +158,7 @@ const styles = {
   `,
   PrivacyPolicy: styled.p`
     width: fit-content;
-    margin: 70px 0px 0px 0px;
+    margin: 120px 0px 0px 0px;
     color: #323a54;
     font-size: 125%;
     font-weight: bold;
@@ -87,12 +174,14 @@ const styles = {
     margin: -40px 0px 0px 0px;
   `,
   SignUp: styled(Link)`
+    position: relative;
     width: fit-content;
     height: fit-content;
     margin: 0px 0vw 0px 22.5vw;
     color: white;
     white-space: nowrap;
     cursor: pointer;
+    z-index: 5;
   `,
 };
 export default styles;

@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   Container: styled.div`
-    // background-image: url('images/signinPage/Signin.png');
-    // background-size: contain;
-    // background-position: center;
-    // background-repeat: no-repeat;
+    background-image: url('images/signinPage/Background.png');
+    background-size: 100% 100%;
     display: flex;
     align-items: center;
     width: 100vw;
