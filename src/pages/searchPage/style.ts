@@ -43,7 +43,7 @@ const styles = {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    min-width: 80px;wing , tag)
+    min-width: 80px;
     color: black;
     border-bottom: ${({ isBorder }) => (isBorder ? 'solid black' : 'none')};
   `,
