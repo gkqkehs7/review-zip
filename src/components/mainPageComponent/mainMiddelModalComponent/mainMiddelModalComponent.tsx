@@ -2,8 +2,6 @@ import FrameComponent from '@/components/common/frameComponent/frameComponent';
 
 import styles from './style';
 
-import SpaceShipImage from '/images/post/SpaceShip.png';
-
 interface MainMiddelModalComponentProps {
   mainMiddleModalOpen: boolean;
   closeMainMiddleModal: () => void;
@@ -17,7 +15,7 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
   closeLoadingModal,
   openLoadingModal,
 }) => {
-  const hashtags = ['제천 덕수산성', '5월 초봄', '달이 잘 보이는 곳'];
+  const hashtags = ['hastag1', 'hashtag2', 'hashtag3'];
 
   return (
     <styles.Container
@@ -35,24 +33,20 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
         {/* 게시글 내용 */}
         <styles.ContentContainer>
           <styles.TextContainer>
-            {/* 우주선 이미지 */}
-            <styles.SpaceShipImageContainer>
-              <styles.SpaceShipImage src={SpaceShipImage} />
-            </styles.SpaceShipImageContainer>
-
-            {/* 글씨 */}
-            <styles.Text>
-              외계인 왈: "우주에 도달한 것을 축하해 지구의 달은 마치 내 머리형과
-              비슷하구나"
-            </styles.Text>
+            <styles.Text>게시글 내용</styles.Text>
           </styles.TextContainer>
 
+          {/* 해시태그들 */}
           <styles.HashTagContainer>
             {hashtags.map((hashtag, index) => (
-              <styles.HashTag key={index}>#{hashtag}</styles.HashTag>
+              <styles.HashTagText key={index}>#{hashtag}</styles.HashTagText>
             ))}
           </styles.HashTagContainer>
-          <styles.LikeText>공감 수 5000개</styles.LikeText>
+
+          {/* 공감 개수 */}
+          <styles.LikeTextContainer>
+            <styles.LikeText>공감 수 5000개</styles.LikeText>
+          </styles.LikeTextContainer>
         </styles.ContentContainer>
       </styles.InnerContainer>
     </styles.Container>

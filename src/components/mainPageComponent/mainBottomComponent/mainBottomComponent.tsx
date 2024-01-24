@@ -5,6 +5,7 @@ import LoadingModalComponent from '@/components/common/loadingModalComponent/loa
 
 import styles from './style';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
+import TopButtonImage from '/images/mainPage/TopButton.png';
 
 interface MainBottomComponentProps {
   modalOpen: () => void;
@@ -54,7 +55,7 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
         <styles.ArrowImage src={DownArrowImage} />
 
         {/* 위로 가는 화살표 */}
-        <styles.TopScrollButton onClick={scrollToTop}></styles.TopScrollButton>
+        <styles.TopButton src={TopButtonImage} onClick={scrollToTop} />
       </styles.InnerContainer>
 
       {loading && <LoadingModalComponent />}

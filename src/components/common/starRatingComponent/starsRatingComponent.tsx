@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+
 import BlackStarImage from '/images/star/BlackStar.png';
 import YellowStarImage from '/images/star/YellowStar.png';
 
 interface StarRatingComponentProps {
   count: number;
-  width: number;
   all: boolean;
   click?: boolean;
   setStarCount?: React.Dispatch<React.SetStateAction<number>>;
@@ -13,11 +15,12 @@ interface StarRatingComponentProps {
 
 const StarRatingComponent: React.FC<StarRatingComponentProps> = ({
   count,
-  width,
   all,
   click,
   setStarCount,
 }) => {
+  const deviceSize = checkDevice();
+
   const [changeStarCount, setChangeStarCount] = useState<number>(count);
 
   // count만큼의 노란색 별을 가진 배열 생성
@@ -25,7 +28,15 @@ const StarRatingComponent: React.FC<StarRatingComponentProps> = ({
     <img
       key={index}
       src={YellowStarImage}
-      style={{ width: `${width}px`, cursor: 'pointer' }}
+      style={responsiveWidthHeight(
+        deviceSize,
+        { width: 28, height: 28 },
+        { width: 28, height: 28 },
+        { width: 28, height: 28 },
+        { width: 28, height: 28 },
+        { width: 20, height: 20 },
+        { width: 20, height: 20 },
+      )}
       onClick={(e) => {
         click && setChangeStarCount(index + 1);
         click && setStarCount!(yellowStars.length + 1);
@@ -40,7 +51,15 @@ const StarRatingComponent: React.FC<StarRatingComponentProps> = ({
       <img
         key={index}
         src={BlackStarImage}
-        style={{ width: `${width}px`, cursor: 'pointer' }}
+        style={responsiveWidthHeight(
+          deviceSize,
+          { width: 28, height: 28 },
+          { width: 28, height: 28 },
+          { width: 28, height: 28 },
+          { width: 28, height: 28 },
+          { width: 20, height: 20 },
+          { width: 20, height: 20 },
+        )}
         onClick={(e) => {
           click && setChangeStarCount(changeStarCount + index + 1);
           click && setStarCount!(yellowStars.length + 1);
