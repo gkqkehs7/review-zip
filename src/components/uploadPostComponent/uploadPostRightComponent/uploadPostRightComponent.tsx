@@ -53,14 +53,17 @@ const hashTagsData = [
   {
     id: 1,
     hashTag: '여름',
+    postnum: '10k+',
   },
   {
     id: 2,
     hashTag: '여름이였다',
+    postnum: '100k+',
   },
   {
     id: 2,
     hashTag: '여름인건가',
+    postnum: '1000k+',
   },
 ];
 
@@ -122,6 +125,7 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
         <styles.SendButton onClick={openLoadingModal}>보내기</styles.SendButton>
       </styles.TopContainer>
 
+      {/* 윗부분 선 */}
       <styles.Line />
 
       {/* 게시글 내용 */}
@@ -156,7 +160,7 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.Line />
 
       <styles.StarRatingContainer>
-        <StarRatingComponent count={starCount} width={20} all={true} />
+        <StarRatingComponent count={0} width={20} all={true} click={true} />
       </styles.StarRatingContainer>
 
       {/* 우주선 아이콘 */}

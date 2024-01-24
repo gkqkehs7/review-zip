@@ -7,8 +7,7 @@ import ChangePasswordPage from '@/pages/changePasswordPage/changePasswordPage';
 import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
-import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
-import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
+import UploadPage from '@/pages/uploadPage/uploadPage';
 import TestPage from '@pages/testPage/testPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import 'swiper/css';
@@ -33,14 +32,7 @@ function App() {
           ></Route>
           <Route path="/mainPage" element={<MainPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
-          <Route
-            path="/completeSigninpage"
-            element={<CompleteSigninPage />}
-          ></Route>
-          <Route
-            path="/completeChangePasswordPage"
-            element={<CompleteChangePassword />}
-          ></Route>
+          <Route path="/uploadPage" element={<UploadPage />}></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/testPage" element={<TestPage />}></Route>
           <Route path="/hashtagPage" element={<HashtagPage />}></Route>

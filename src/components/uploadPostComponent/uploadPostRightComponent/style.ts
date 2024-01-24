@@ -91,19 +91,20 @@ const styles = {
     font-family: Slack-Lato, appleLogo, sans-serif;
     font-size: 15px;
     padding: 8px 9px;
+    overflow: auto;
 
     & strong {
       background-color: #e5d9f4;
     }
 
     & textarea {
-      height: 44px;
       padding: 9px 10px !important;
       outline: none !important;
       border-radius: 4px !important;
       resize: none !important;
       line-height: 22px;
       border: none;
+      overflow-y: auto;
     }
 
     & ul {
@@ -201,6 +202,7 @@ const styles = {
   StarRatingContainer: styled.div`
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 10px;
   `,
 
   SpaceShipImageContainer: styled.div`
