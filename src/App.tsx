@@ -13,6 +13,7 @@ import TestPage from '@pages/testPage/testPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import MapPage from './pages/mapPage/mapPage';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           ></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/testPage" element={<TestPage />}></Route>
+          <Route path="/mapPage" element={<MapPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

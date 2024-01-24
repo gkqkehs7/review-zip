@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
-import styles from './style';
+import styles from './styles';
 
 const DesktopComponent: React.FC = () => {
   const [password, setPassword] = useState<string>('');
