@@ -8,8 +8,6 @@ import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import UploadPage from '@/pages/uploadPage/uploadPage';
-import CompleteSigninPage from '@/pages/completeSigninPage/CompleteSigninPage';
-import CompleteChangePassword from '@/pages/completeChangePasswordPage/CompleteChangePasswordPage';
 import TestPage from '@pages/testPage/testPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import 'swiper/css';
