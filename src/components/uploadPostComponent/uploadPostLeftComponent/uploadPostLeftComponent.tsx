@@ -1,27 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 import UploadImageComponent from '@/components/uploadPostComponent/uploadImageComponent/uploadImageComponent';
 
 import styles from './style';
-import SpaceShipImage from '/images/post/SpaceShip.png';
+import ImageUploadedImage from '/images/uploadPost/ImageUploaded.png';
+import ImageNotUploadedImage from '/images/uploadPost/ImageNotUploaded.png';
+import ImageListComponent from '../imageListComponent/imageListComponent';
 
 interface UploadPostLeftComponentProps {
   split: boolean;
   splitPost: () => void;
+  postImages: { id: number; url: string }[];
+  setPostImages: React.Dispatch<
+    React.SetStateAction<{ id: number; url: string }[]>
+  >;
 }
 
 const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   split,
   splitPost,
+  postImages,
+  setPostImages,
 }) => {
-  const [postImages, setPostImages] = useState<{ id: number; url: string }[]>(
-    [],
-  );
+  const [clickedImage, setClickedImage] = useState<string>('');
 
-  useEffect(() => {
-    console.log(postImages);
-  }, [postImages]);
+  const [imageListOpen, setImageListOpen] = useState<boolean>(false);
+
+  useEffect(() => {}, [clickedImage]);
+
+  const toggleImageList = () => {
+    setImageListOpen(!imageListOpen);
+  };
 
   return (
     <styles.Container splitPost={split}>
@@ -35,18 +44,41 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
 
       {/* image slider */}
       {postImages.length > 0 ? (
-        <ImageSliderComponent sliderImages={postImages} />
+        <styles.ImageContainer>
+          <styles.Image src={clickedImage} />
+        </styles.ImageContainer>
       ) : (
         <UploadImageComponent
           postImages={postImages}
           setPostImages={setPostImages}
+          setClickedImage={setClickedImage}
         />
       )}
 
-      {/* 우주선 이미지 */}
-      <styles.SpaceShipImageContainer>
-        <styles.SpaceShipImage src={SpaceShipImage} />
-      </styles.SpaceShipImageContainer>
+      {/* 업로드한 이미지들 작게 보이는 component */}
+      <ImageListComponent
+        postImages={postImages}
+        setPostImages={setPostImages}
+        imageListOpen={imageListOpen}
+        setClickedImage={setClickedImage}
+      />
+
+      {/* 이미지 업로드 여부 이미지 */}
+      {postImages.length > 0 ? (
+        <styles.ImageUploadedContainer>
+          <styles.ImageUploaded
+            src={ImageUploadedImage}
+            onClick={toggleImageList}
+          />
+        </styles.ImageUploadedContainer>
+      ) : (
+        <styles.ImageUploadedContainer>
+          <styles.ImageUploaded
+            src={ImageNotUploadedImage}
+            onClick={toggleImageList}
+          />
+        </styles.ImageUploadedContainer>
+      )}
     </styles.Container>
   );
 };

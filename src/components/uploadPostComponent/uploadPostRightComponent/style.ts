@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+import { MentionsInput, Mention } from 'react-mentions';
 
 const moveRight = () => keyframes`
   to {
@@ -46,10 +47,16 @@ const styles = {
           `}
   `,
 
+  TopContainer: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  `,
+
   UserContainer: styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
   `,
 
   UserImage: styled.img`
@@ -60,9 +67,18 @@ const styles = {
 
   UserName: styled.div`
     margin: 0 15px 0 8px;
+    font-weight: bold;
   `,
 
-  PostDate: styled.div``,
+  SendButton: styled.div`
+    cursor: pointer;
+    color: #9766d1;
+    font-weight: bold;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  `,
 
   Line: styled.div`
     border-top: 1px solid black;
@@ -70,8 +86,53 @@ const styles = {
     margin: 5px 0 10px 0;
   `,
 
-  PostContentContainer: styled.div`
+  MentionsTextarea: styled(MentionsInput)`
     flex: 1;
+    font-family: Slack-Lato, appleLogo, sans-serif;
+    font-size: 15px;
+    padding: 8px 9px;
+    overflow: auto;
+
+    & strong {
+      background-color: #e5d9f4;
+    }
+
+    & textarea {
+      padding: 9px 10px !important;
+      outline: none !important;
+      border-radius: 4px !important;
+      resize: none !important;
+      line-height: 22px;
+      border: none;
+      overflow-y: auto;
+    }
+
+    & ul {
+      border: 1px solid lightgray;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 9px 10px;
+      background: white;
+      border-radius: 4px;
+      width: 150px;
+    }
+  `,
+
+  EachMention: styled.button<{ focus: boolean }>`
+    padding: 4px 20px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: black;
+    width: 100%;
+
+    ${({ focus }) =>
+      focus &&
+      `
+    background: #9766D1;
+    color: white;
+    `};
   `,
 
   HashTagContainer: styled.div`
@@ -93,8 +154,6 @@ const styles = {
   HashTagText: styled.div`
     font-weight: 600;
   `,
-
-  PostContent: styled.div``,
 
   Buttons: styled.div`
     display: flex;
@@ -138,6 +197,12 @@ const styles = {
     border-radius: 50px;
     width: 18px;
     height: 18px;
+  `,
+
+  StarRatingContainer: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
   `,
 
   SpaceShipImageContainer: styled.div`

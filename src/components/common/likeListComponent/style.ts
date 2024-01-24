@@ -19,7 +19,6 @@ const styles = {
   `,
 
   InnerContainer: styled.div`
-    box-sizing: border-box;
     width: 498px;
     height: 498px;
     background-color: white;

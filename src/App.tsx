@@ -7,10 +7,9 @@ import ChangePasswordPage from '@/pages/changePasswordPage/changePasswordPage';
 import MainPage from '@/pages/mainPage/mainPage';
 import SearchPage from '@/pages/searchPage/searchPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
-import CompleteSigninPage from '@/pages/CompleteSigninPage/CompleteSigninPage';
-import CompleteChangePassword from '@/pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
-import UploagePage from './pages/uploadPage/uploadPage';
+import UploadPage from '@/pages/uploadPage/uploadPage';
 import TestPage from '@pages/testPage/testPage';
+import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -33,17 +32,10 @@ function App() {
           ></Route>
           <Route path="/mainPage" element={<MainPage />}></Route>
           <Route path="/searchPage" element={<SearchPage />}></Route>
-          <Route
-            path="/completeSigninpage"
-            element={<CompleteSigninPage />}
-          ></Route>
-          <Route
-            path="/completeChangePasswordPage"
-            element={<CompleteChangePassword />}
-          ></Route>
+          <Route path="/uploadPage" element={<UploadPage />}></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
-          <Route path="/uploadPage" element={<UploagePage />}></Route>
-          <Route path="/testPage" element={<TestPage />}></Route>{' '}
+          <Route path="/testPage" element={<TestPage />}></Route>
+          <Route path="/hashtagPage" element={<HashtagPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

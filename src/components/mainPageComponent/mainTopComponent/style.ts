@@ -36,8 +36,8 @@ const styles = {
     width: 50px;
     height: 50px;
     bottom: 0;
-    left: 48%;
-    transform: translate(-50%, -50%);
+    left: 49%;
+    transform: translateX(-50%);
     z-index: 999;
 
     margin-bottom: 3vh;

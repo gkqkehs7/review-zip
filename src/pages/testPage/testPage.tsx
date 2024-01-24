@@ -1,31 +1,69 @@
 // TestPage.js
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
+import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
+
 import styles from './styles';
 
 const TestPage = () => {
-  const [splitCards, setSplitCards] = useState(false);
-  const [combineCards, setCombineCards] = useState(true);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const splitCard = () => {
-    setSplitCards(!splitCards);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const inputChange = (e) => {
+    setInputValue(e.target.value);
   };
 
-  const combineCard = () => {
-    setCombineCards(false);
-  };
+  const data = [
+    {
+      id: 1,
+      hashtag: '안녕',
+    },
+    {
+      id: 2,
+      name: '안녕하세요',
+    },
+    {
+      id: 3,
+      name: '안녕나야',
+    },
+  ];
+
+  const renderUserSuggestion: (
+    suggestion: SuggestionDataItem,
+    search: string,
+    highlightedDisplay: React.ReactNode,
+    index: number,
+    focused: boolean,
+  ) => React.ReactNode = useCallback(
+    (member, search, highlightedDisplay, index, focus) => {
+      if (!data) {
+        return null;
+      }
+      return (
+        <styles.EachMention focus={focus}>
+          <span>{highlightedDisplay}</span>
+        </styles.EachMention>
+      );
+    },
+    [data],
+  );
 
   return (
     <styles.Container>
-      <styles.Card1 width={'200px'} move={'100px'} splitCards={splitCards}>
-        a
-      </styles.Card1>
-
-      <styles.Card2 width={'200px'} move={'100px'} splitCards={splitCards}>
-        b
-      </styles.Card2>
-
-      <button onClick={splitCard}>open Animation</button>
-      <button onClick={combineCard}>close Animation</button>
+      <styles.MentionsTextarea
+        id="editor-chat"
+        value={inputValue}
+        onChange={inputChange}
+        inputRef={textareaRef}
+        forceSuggestionsAboveCursor
+      >
+        <Mention
+          appendSpaceOnAdd
+          trigger="@"
+          data={data?.map((v) => ({ id: v.id, display: v.name })) || []}
+          renderSuggestion={renderUserSuggestion}
+        />
+      </styles.MentionsTextarea>
     </styles.Container>
   );
 };
