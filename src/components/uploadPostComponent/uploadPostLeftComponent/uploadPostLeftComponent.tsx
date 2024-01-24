@@ -10,22 +10,25 @@ import ImageListComponent from '../imageListComponent/imageListComponent';
 interface UploadPostLeftComponentProps {
   split: boolean;
   splitPost: () => void;
+  postImages: { id: number; url: string }[];
+  setPostImages: React.Dispatch<
+    React.SetStateAction<{ id: number; url: string }[]>
+  >;
 }
 
 const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   split,
   splitPost,
+  postImages,
+  setPostImages,
 }) => {
-  const [postImages, setPostImages] = useState<{ id: number; url: string }[]>(
-    [],
-  );
   const [clickedImage, setClickedImage] = useState<string>('');
 
   const [imageListOpen, setImageListOpen] = useState<boolean>(false);
 
   useEffect(() => {}, [clickedImage]);
 
-  const togglemageList = () => {
+  const toggleImageList = () => {
     setImageListOpen(!imageListOpen);
   };
 
@@ -65,14 +68,14 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         <styles.ImageUploadedContainer>
           <styles.ImageUploaded
             src={ImageUploadedImage}
-            onClick={togglemageList}
+            onClick={toggleImageList}
           />
         </styles.ImageUploadedContainer>
       ) : (
         <styles.ImageUploadedContainer>
           <styles.ImageUploaded
             src={ImageNotUploadedImage}
-            onClick={togglemageList}
+            onClick={toggleImageList}
           />
         </styles.ImageUploadedContainer>
       )}
