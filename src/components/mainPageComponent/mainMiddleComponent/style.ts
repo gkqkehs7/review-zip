@@ -32,17 +32,17 @@ const styles = {
 
   LeftContainer: styled.div`
     cursor: pointer;
-    margin: -25vh auto;
+    margin: 25vh auto;
   `,
 
   MiddleContainer: styled.div`
     cursor: pointer;
-    margin: -10vh auto;
+    margin: 10vh auto;
   `,
 
   RightContainer: styled.div`
     cursor: pointer;
-    margin: -20vh auto;
+    margin: 20vh auto;
   `,
 
   TextContainer: styled.div`

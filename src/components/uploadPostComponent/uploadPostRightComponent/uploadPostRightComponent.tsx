@@ -71,7 +71,6 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.StarRatingContainer>
         <StarRatingComponent
           count={0}
-          width={20}
           all={true}
           click={true}
           setStarCount={setStarCount}
