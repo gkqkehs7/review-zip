@@ -10,6 +10,7 @@ import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import CompleteSigninPage from '@/pages/completeSigninPage/completeSigninPage';
 import CompleteChangePassword from '@/pages/completeChangePasswordPage/completeChangePasswordPage';
 import TestPage from '@pages/testPage/testPage';
+import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -42,6 +43,7 @@ function App() {
           ></Route>
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/testPage" element={<TestPage />}></Route>
+          <Route path="/hashtagPage" element={<HashtagPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
