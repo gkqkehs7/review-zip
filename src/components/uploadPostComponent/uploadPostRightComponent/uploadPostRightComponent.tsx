@@ -4,6 +4,7 @@ import styles from './style';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import InputBoxComponent from '../inputBoxComponent/inputBoxComponent';
+import { useCallback } from 'react';
 
 interface PostRightComponentProps {
   split: boolean;
@@ -26,9 +27,12 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   setStarCount,
 }) => {
   // textInput 수정 함수
-  const textInputChange = (e: any) => {
-    setTextInput(e.target.value);
-  };
+  const textInputChange = useCallback(
+    (e: any) => {
+      setTextInput(e.target.value);
+    },
+    [textInput],
+  );
 
   return (
     <styles.Container splitPost={split}>
