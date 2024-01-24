@@ -64,10 +64,12 @@ const styles = {
     position: absolute;
     width: 50px;
     height: 50px;
-    left: 48%;
-    bottom: 10px;
-    transform: translate(-50%, -50%);
+    bottom: 0;
+    left: 49%;
+    transform: translateX(-50%);
+    z-index: 999;
 
+    margin-bottom: 3vh;
     animation: ${bounceAnimation} 1s infinite;
   `,
 };
