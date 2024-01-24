@@ -30,6 +30,10 @@ const styles = {
     background-color: #7843b6;
     border-radius: 29px;
     padding: 15px 25px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   UploadButtonText: styled.div`

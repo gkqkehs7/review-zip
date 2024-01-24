@@ -1,33 +1,26 @@
-import styled, { keyframes, css } from 'styled-components';
-import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
+import styled from 'styled-components';
+import { MentionsInput } from 'react-mentions';
 
 const styles = {
-  Container: styled.div`
-    width: 100%;
-    height: 100%;
-    position: relative;
-
-    display: flex;
-    align-items: center;
-  `,
-
   MentionsTextarea: styled(MentionsInput)`
+    flex: 1;
     font-family: Slack-Lato, appleLogo, sans-serif;
     font-size: 15px;
     padding: 8px 9px;
+    overflow: auto;
 
     & strong {
-      background: skyblue;
+      background-color: #e5d9f4;
     }
 
     & textarea {
-      height: 44px;
       padding: 9px 10px !important;
       outline: none !important;
       border-radius: 4px !important;
       resize: none !important;
       line-height: 22px;
       border: none;
+      overflow-y: auto;
     }
 
     & ul {
@@ -47,19 +40,15 @@ const styles = {
     border: none;
     display: flex;
     align-items: center;
-    color: rgb(28, 29, 28);
+    color: black;
     width: 100%;
-
-    & img {
-      margin-right: 5px;
-    }
 
     ${({ focus }) =>
       focus &&
       `
-    background: #1264a3;
-    color: white;
-  `};
+      background: #9766D1;
+      color: white;
+      `};
   `,
 };
 
