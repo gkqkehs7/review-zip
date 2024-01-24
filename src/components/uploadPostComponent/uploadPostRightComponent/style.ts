@@ -198,6 +198,11 @@ const styles = {
     height: 18px;
   `,
 
+  StarRatingContainer: styled.div`
+    display: flex;
+    justify-content: flex-end;
+  `,
+
   SpaceShipImageContainer: styled.div`
     display: flex;
     justify-content: flex-end;

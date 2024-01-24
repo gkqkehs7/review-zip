@@ -7,6 +7,7 @@ import { IPost } from '@/types/posts.types';
 
 import styles from './style';
 import SpaceShipImage from '/images/post/SpaceShip.png';
+import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 
 interface PostRightComponentProps {
   split: boolean;
@@ -68,6 +69,7 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   openLoadingModal,
 }) => {
   const [hashTags, setHashTags] = useState<string[]>([]);
+  const [starCount, setStarCount] = useState<number>(0);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -152,6 +154,10 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
 
       {/* 아래 선 */}
       <styles.Line />
+
+      <styles.StarRatingContainer>
+        <StarRatingComponent count={starCount} width={20} all={true} />
+      </styles.StarRatingContainer>
 
       {/* 우주선 아이콘 */}
       <styles.SpaceShipImageContainer>
