@@ -9,6 +9,7 @@ const styles = {
     color: white;
     font-weight: bolder;
     margin: 20px;
+    cursor: pointer;
   `,
   EditProfileButtonContainer: styled.div`
     display: flex;
@@ -28,6 +29,7 @@ const styles = {
     font-weight: bolder;
     color: black;
     border-radius: 7px;
+    cursor: pointer;
   `,
   PlusButton: styled.img`
     width: 30px;

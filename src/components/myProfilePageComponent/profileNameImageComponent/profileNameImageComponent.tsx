@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 
 import styles from './style';
 import ProfilePhotoImage from '/images/myProfilePage/ProfilePhotoImage.png';
 import PencilImage from '/images/myProfilePage/Pencil.png';
 import CameraImage from '/images/myProfilePage/Camera.png';
+
 export interface ProfileNameImagePrps {
   isEditProfile: boolean;
+  friendProfileImage?: string;
+  isFriend?: boolean;
+  friend?: string;
 }
 
 const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   isEditProfile,
+  friendProfileImage,
+  isFriend = false,
+  friend = '제니',
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [userName, setUserName] = useState<string>('엔젤');
@@ -22,12 +29,20 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
     }
   };
 
+  useEffect(() => {
+    isFriend && setUserName(friend);
+  }, [isFriend]);
+
   return (
     <styles.NameImageContainer>
       {/* 유저가 고른 이미지가 있을 경우 해당 이미지 url 아닌 경우 기본 이미지 주소 */}
       <styles.UserProfileImage
         src={
-          selectedImage ? URL.createObjectURL(selectedImage) : ProfilePhotoImage
+          selectedImage
+            ? URL.createObjectURL(selectedImage)
+            : isFriend
+              ? friendProfileImage
+              : ProfilePhotoImage
         }
         alt="ProfileImage"
       />
