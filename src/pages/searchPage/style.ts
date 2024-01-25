@@ -38,12 +38,12 @@ const styles = {
     transform: translateX(-50%); // X축으로 -50% 만큼 이동하여 중앙 정렬
   `,
   //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용
-  SearchType: styled.span<SearchTypeProps>`
+  SearchType: styled.div<SearchTypeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 100px;
     flex-grow: 1;
-    min-width: 80px;
     color: black;
     border-bottom: ${({ isBorder }) => (isBorder ? 'solid black' : 'none')};
   `,

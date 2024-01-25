@@ -2,7 +2,7 @@ import styles from './style';
 import StarImage from '/images/myProfilePage/StarImage.png';
 import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
-
+import { PictureType } from '@/pages/myProfilePage/myProfilePage';
 const posts = [
   {
     reviewImage: 'images/myProfilePage/Component10.png',
@@ -80,27 +80,29 @@ const storage = [
     saves: 79,
   },
 ];
-type PictureType = {
-  reviewImage: string;
-  postId: string;
-  likes: number;
-  saves: number;
-};
+
 interface ChangePageProps {
   storageIsClicked: boolean;
+  setPostISClicked: React.Dispatch<React.SetStateAction<boolean>>;
   picture?: PictureType[];
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   storageIsClicked,
   picture,
+  setPostISClicked,
 }) => {
   return (
     <styles.RveiwPicturesContainer>
       {/*props를 받아서 저장소 버튼이 클릭이 되어있으면 저장소 데이터 배열을 map에 전달하고 게시물을 클릭하면 해당 데이터를 전달 */}
       {(storageIsClicked ? storage : picture ? picture : posts).map(
         (post, index) => (
-          <styles.PictureContainer key={index}>
+          <styles.PictureContainer
+            key={index}
+            onClick={() => {
+              setPostISClicked(true);
+            }}
+          >
             <styles.PictureBorder>
               <styles.Picture src={post.reviewImage} alt={post.postId} />
             </styles.PictureBorder>
