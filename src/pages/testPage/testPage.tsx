@@ -3,6 +3,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
 
 import styles from './styles';
+import GroupBarComponent2 from '@/components/common/groupBarComponent2/groupBarComponent2';
 
 const TestPage = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -50,20 +51,7 @@ const TestPage = () => {
 
   return (
     <styles.Container>
-      <styles.MentionsTextarea
-        id="editor-chat"
-        value={inputValue}
-        onChange={inputChange}
-        inputRef={textareaRef}
-        forceSuggestionsAboveCursor
-      >
-        <Mention
-          appendSpaceOnAdd
-          trigger="@"
-          data={data?.map((v) => ({ id: v.id, display: v.name })) || []}
-          renderSuggestion={renderUserSuggestion}
-        />
-      </styles.MentionsTextarea>
+      <GroupBarComponent2 />
     </styles.Container>
   );
 };
