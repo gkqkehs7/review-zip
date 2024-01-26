@@ -8,8 +8,18 @@ import spaceShipImage from '/images/groupBar/SpaceShip.png';
 import userImage from '/images/groupBar/User.png';
 import { rowStyles, colStyles } from './style';
 
-const GroupBarComponent: React.FC = () => {
-  const [direction, setDirection] = useState<boolean>(false);
+//  background-color: ;
+
+interface GroupBarComponentProps {
+  direction: 'row' | 'col';
+  color: 'purple' | 'white';
+}
+
+const GroupBarComponent: React.FC<GroupBarComponentProps> = ({
+  direction,
+  color,
+}) => {
+  const [barDirection, setBarDirection] = useState<'row' | 'col'>(direction);
   const [menuVisible, setMenuVisible] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [position, setPosition] = useState<{ x: number; y: number }>({
@@ -20,7 +30,11 @@ const GroupBarComponent: React.FC = () => {
 
   // 그룹바 방향 바꾸는 함수
   const changeDirection = () => {
-    setDirection(!direction);
+    if (barDirection === 'row') {
+      setBarDirection('col');
+    } else {
+      setBarDirection('row');
+    }
   };
 
   // 마우스로 드래깅해서 groupBar 움직이게 하기
@@ -56,7 +70,7 @@ const GroupBarComponent: React.FC = () => {
 
   return (
     <>
-      {direction ? (
+      {barDirection === 'row' ? (
         <rowStyles.Container
           style={{
             top: `${position.y}px`,
@@ -66,6 +80,10 @@ const GroupBarComponent: React.FC = () => {
           onMouseDown={handleMouseDown}
         >
           <rowStyles.IconContainer
+            style={{
+              backgroundColor:
+                color === 'purple' ? '#7843b6' : 'rgba(255, 255, 255, 0.4)',
+            }}
             onMouseDown={handleMouseDown}
             onMouseEnter={() => setMenuVisible(true)}
             onMouseLeave={() => setMenuVisible(false)}
@@ -124,7 +142,7 @@ const GroupBarComponent: React.FC = () => {
                 지도
               </rowStyles.MenuText>
             </rowStyles.Menu>
-            <rowStyles.Menu to="/myPage">
+            <rowStyles.Menu to="/myProfilePage">
               <rowStyles.MenuText isVisible={menuVisible}>
                 프로필
               </rowStyles.MenuText>
@@ -141,6 +159,10 @@ const GroupBarComponent: React.FC = () => {
           onMouseDown={handleMouseDown}
         >
           <colStyles.IconContainer
+            style={{
+              backgroundColor:
+                color === 'purple' ? '#7843b6' : 'rgba(255, 255, 255, 0.4)',
+            }}
             onMouseDown={handleMouseDown}
             onMouseEnter={() => setMenuVisible(true)}
             onMouseLeave={() => setMenuVisible(false)}
@@ -199,7 +221,7 @@ const GroupBarComponent: React.FC = () => {
                 지도
               </colStyles.MenuText>
             </colStyles.Menu>
-            <colStyles.Menu to="/myPage">
+            <colStyles.Menu to="/myProfilePage">
               <colStyles.MenuText isVisible={menuVisible}>
                 프로필
               </colStyles.MenuText>

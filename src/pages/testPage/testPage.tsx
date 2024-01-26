@@ -3,7 +3,6 @@ import React, { useState, useCallback, useRef } from 'react';
 import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
 
 import styles from './styles';
-import GroupBarComponent2 from '@/components/common/groupBarComponent2/groupBarComponent2';
 
 const TestPage = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -49,11 +48,7 @@ const TestPage = () => {
     [data],
   );
 
-  return (
-    <styles.Container>
-      <GroupBarComponent2 />
-    </styles.Container>
-  );
+  return <styles.Container></styles.Container>;
 };
 
 export default TestPage;

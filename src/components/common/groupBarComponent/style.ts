@@ -14,7 +14,6 @@ const rowStyles = {
     border-radius: 20px;
     width: 330px;
     height: 50px;
-    background-color: #7843b6;
     cursor: pointer;
   `,
 
