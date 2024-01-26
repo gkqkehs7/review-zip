@@ -7,7 +7,6 @@ interface ReviewingStopModalProps {
   setReviewingStop: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// 컴포넌트 정의
 const ReviewingStopModalComponent: React.FC<ReviewingStopModalProps> = ({
   reviewingUser,
   reviewingUserName,
