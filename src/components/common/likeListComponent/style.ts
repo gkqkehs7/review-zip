@@ -112,6 +112,7 @@ const styles = {
 
   UserName: styled.div`
     font-weight: bold;
+    color: black;
   `,
 
   FollowButton: styled.div`
@@ -128,6 +129,13 @@ const styles = {
 
   FollowText: styled.div`
     color: white;
+  `,
+
+  Reviewing: styled.p`
+    margin: 0 5px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #7300ff;
   `,
 };
 

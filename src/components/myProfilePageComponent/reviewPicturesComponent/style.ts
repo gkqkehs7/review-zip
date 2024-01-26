@@ -6,6 +6,7 @@ const RveiwPicturesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+  overflow-y: auto;
 `;
 
 const IconContainer = styled.div`

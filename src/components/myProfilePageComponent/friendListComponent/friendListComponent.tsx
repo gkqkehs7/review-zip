@@ -6,6 +6,7 @@ import { changeInputValue } from '@/hooks/chageInputValue';
 import { IUser } from '@/types/users.types';
 
 import styles from './style';
+import ReviewingStopModalComponent from '@/components/myProfilePageComponent/reviewingStopModalComponent/reviewingStopModalComponent';
 
 const users: IUser[] = [
   {
@@ -142,24 +143,11 @@ const FriendListComponent: React.FC<FriendListComponentProps> = ({
       {' '}
       {/*리뷰잉 취소를 누른 경우*/}
       {reviewingStop && (
-        <styles.Container style={{ zIndex: '1000' }}>
-          <styles.ReviewingStopModal>
-            <styles.ReviewingProfileContainer>
-              <styles.ReviewingUserProfile src={reviewingUSer} />
-              <p>@{reviewingUserName}님의 리뷰잉을 취소하시겠습니까?</p>
-            </styles.ReviewingProfileContainer>
-            <styles.BorderTopContainer>
-              <p style={{ color: 'red' }}>리뷰잉 취소</p>
-            </styles.BorderTopContainer>
-            <styles.BorderTopContainer
-              onClick={() => {
-                setReviewingStop(false);
-              }}
-            >
-              <p>취소</p>
-            </styles.BorderTopContainer>
-          </styles.ReviewingStopModal>
-        </styles.Container>
+        <ReviewingStopModalComponent
+          reviewingUser={reviewingUSer}
+          reviewingUserName={reviewingUserName}
+          setReviewingStop={setReviewingStop}
+        />
       )}
       <styles.Container
         onScroll={(e) => e.stopPropagation()}

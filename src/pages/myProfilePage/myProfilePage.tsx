@@ -4,12 +4,12 @@ import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPi
 import ProfileNameImageComponent from '@/components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
 import UserProfileStatsComponent from '@/components/myProfilePageComponent/userProfileStatsComponent/userProfileStatsComponent';
 import ButtonComponent from '@/components/myProfilePageComponent/buttonComponent/buttonComponent';
-import FriendListComponent from '@/components/myProfilePageComponent/friendListComponent/friendListComponent';
+import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
 import PostComponent from '@/components/postComponent/postComponent';
 
 import styles from './style';
 import MainLogo from '/images/myProfilePage/MainLogoImage.png';
-import ClosePostComponent from '@/components/myProfilePageComponent/closePostComponent/closePostComponent';
+import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
 //게시물 정보를 담은 배열의 게시물 타입
 export type PictureType = {
@@ -59,43 +59,43 @@ const MyProfilePage: React.FC<ProfiilePageProps> = ({
     modalClose();
   };
 
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    // 클릭된 요소가 Overlay 자체인 경우에만 postIsClicked 상태를 변경
-    console.log('Clicked target:', event.target);
-    console.log('Current target:', event.currentTarget);
-    if (event.target === event.currentTarget) {
-      setPostIsClicked(false);
-    }
-  };
   return (
     <styles.Container>
       {/*상단 컨테이너*/}
       {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔 */}
       {isClicked[1] && (
-        <FriendListComponent
-          closeFriendListModal={closeFriendListModal}
-          friendListOpen={friendListOpen}
+        <LikeListComponent
+          closeLikeListModal={closeFriendListModal}
+          likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}
+          isReviewing={isClicked[2]}
         />
       )}
       {isClicked[2] && (
-        <FriendListComponent
-          closeFriendListModal={closeFriendListModal}
-          friendListOpen={friendListOpen}
-          isReviewer={!isClicked[2]}
+        <LikeListComponent
+          closeLikeListModal={closeFriendListModal}
+          likeListOpen={friendListOpen}
+          isReviewer={isClicked[1]}
+          isReviewing={isClicked[2]}
         />
       )}
       {/* 게시물이 클릭이 된 경우  */}
       {postIsClicked && (
-        <ClosePostComponent setPostIsClicked={setPostIsClicked}>
-          <PostComponent modalOpen={modalOpen} modalClose={modalClose} />
-        </ClosePostComponent>
+        <styles.Overlay>
+          <PostComponent
+            modalOpen={modalOpen}
+            modalClose={modalClose}
+            setPostIsClicked={setPostIsClicked}
+          />
+        </styles.Overlay>
       )}
       {/*메인 로고 - 뷰포트 크기에 의해 일정 크기 이하에서는 옆으로 넘어감  */}
       <styles.MainLogoContainer>
         <styles.MainLogoImage src={MainLogo} />
       </styles.MainLogoContainer>
       <styles.ProfilePictureContainer>
+        {/*보라색 세로 그룹 바  */}
+        <GroupBarComponent color="purple" direction="col" />
         <styles.ProfileContainer>
           {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
           <ProfileNameImageComponent
