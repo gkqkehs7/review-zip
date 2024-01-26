@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 
 import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
 import ProfileNameImageComponent from '@/components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
@@ -9,6 +9,7 @@ import PostComponent from '@/components/postComponent/postComponent';
 
 import styles from './style';
 import MainLogo from '/images/myProfilePage/MainLogoImage.png';
+import ClosePostComponent from '@/components/myProfilePageComponent/closePostComponent/closePostComponent';
 
 //게시물 정보를 담은 배열의 게시물 타입
 export type PictureType = {
@@ -38,7 +39,7 @@ const MyProfilePage: React.FC<ProfiilePageProps> = ({
   //프로필 수정
   const [isEditProfile, setIsEditProfile] = useState<boolean>(false);
   //게시물이 클릭
-  const [postIsClicked, setPostISClicked] = useState<boolean>(false);
+  const [postIsClicked, setPostIsClicked] = useState<boolean>(false);
   //모달 오픈
   const [openModal, setOpenModal] = useState<boolean>(false);
   //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
@@ -58,6 +59,14 @@ const MyProfilePage: React.FC<ProfiilePageProps> = ({
     modalClose();
   };
 
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // 클릭된 요소가 Overlay 자체인 경우에만 postIsClicked 상태를 변경
+    console.log('Clicked target:', event.target);
+    console.log('Current target:', event.currentTarget);
+    if (event.target === event.currentTarget) {
+      setPostIsClicked(false);
+    }
+  };
   return (
     <styles.Container>
       {/*상단 컨테이너*/}
@@ -78,16 +87,9 @@ const MyProfilePage: React.FC<ProfiilePageProps> = ({
       )}
       {/* 게시물이 클릭이 된 경우  */}
       {postIsClicked && (
-        <styles.Overlay>
-          <styles.ExitButtonContainer
-            onClick={() => {
-              setPostISClicked(false);
-            }}
-          >
-            <styles.ExitButton />
-          </styles.ExitButtonContainer>
+        <ClosePostComponent setPostIsClicked={setPostIsClicked}>
           <PostComponent modalOpen={modalOpen} modalClose={modalClose} />
-        </styles.Overlay>
+        </ClosePostComponent>
       )}
       {/*메인 로고 - 뷰포트 크기에 의해 일정 크기 이하에서는 옆으로 넘어감  */}
       <styles.MainLogoContainer>
@@ -120,7 +122,7 @@ const MyProfilePage: React.FC<ProfiilePageProps> = ({
         {/* 리뷰 게시물 이미지 컴포넌트 */}
         <ReviewPictureComponent
           storageIsClicked={storageIsClicked}
-          setPostISClicked={setPostISClicked}
+          setPostISClicked={setPostIsClicked}
           picture={pictures}
         />
       </styles.ProfilePictureContainer>
