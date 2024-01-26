@@ -48,24 +48,7 @@ const TestPage = () => {
     [data],
   );
 
-  return (
-    <styles.Container>
-      <styles.MentionsTextarea
-        id="editor-chat"
-        value={inputValue}
-        onChange={inputChange}
-        inputRef={textareaRef}
-        forceSuggestionsAboveCursor
-      >
-        <Mention
-          appendSpaceOnAdd
-          trigger="@"
-          data={data?.map((v) => ({ id: v.id, display: v.name })) || []}
-          renderSuggestion={renderUserSuggestion}
-        />
-      </styles.MentionsTextarea>
-    </styles.Container>
-  );
+  return <styles.Container></styles.Container>;
 };
 
 export default TestPage;

@@ -42,7 +42,7 @@ const MainPage: React.FC = () => {
 
   return (
     <RemoveScroll>
-      <GroupBarComponent />
+      <GroupBarComponent color="purple" direction="row" />
       <MainTopComponent
         openModal={openModal}
         handleScrollDown={handleScrollDown}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import UploadPostComponent from '@/components/uploadPostComponent/uploadPostComponent';
+import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import ErrorModalComponent from '@/components/common/errorModalComponent/errorModalComponent';
 
 import styles from './style';
@@ -15,6 +16,8 @@ const UploagePage = () => {
 
   return (
     <styles.Container>
+      <GroupBarComponent color="purple" direction="col" />
+
       <ErrorModalComponent
         errorMessage={errorMessage}
         errorModalOpen={errorModalOpen}
