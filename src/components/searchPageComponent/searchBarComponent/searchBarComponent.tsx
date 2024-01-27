@@ -28,8 +28,8 @@ const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
     <styles.SearchBarContainer
       style={responsiveWidthHeight(
         device,
-        { width: 1400, height: 100 },
-        { width: 1400, height: 100 },
+        { width: 2000, height: 100 },
+        { width: 1700, height: 100 },
         { width: 1400, height: 100 },
         { width: 1080, height: 80 },
         { width: 500, height: 50 },
@@ -40,7 +40,7 @@ const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
         setIsClicked(!isClicked);
       }}
     >
-      {/*돋보기 div */}
+      {/* 돋보기 div */}
       <styles.Search
         src={SearchImage}
         style={responsiveWidthHeight(
@@ -49,10 +49,11 @@ const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
           { width: 56, height: 53 },
           { width: 56, height: 53 },
           { width: 36, height: 33 },
-          { width: 16, height: 10 },
-          { width: 16, height: 10 },
+          { width: 36, height: 33 },
+          { width: 36, height: 33 },
         )}
       />
+
       {/*input */}
       <styles.SearchBar
         type="text"

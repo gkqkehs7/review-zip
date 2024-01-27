@@ -7,8 +7,6 @@ interface SearchBarContainerProps {
 const styles = {
   //검색창과 돋보기 div를 감쌀 컨테이너
   SearchBarContainer: styled.div<SearchBarContainerProps>`
-    width: 70vw;
-    height: 10vh;
     display: flex;
     align-items: center;
     padding: 20px;
@@ -30,8 +28,6 @@ const styles = {
   SearchBar: styled.input`
     background-color: transparent;
     background-size: cover;
-    width: 30vw;
-    height: 5vh;
     margin: 20px;
     border: none;
     font-size: 20px;
