@@ -9,7 +9,7 @@ const styles = {
     background-size: cover;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: scroll;
   `,
   MainLogoImage: styled.img`
     width: 200px;
@@ -41,13 +41,11 @@ const styles = {
     margin: 0 auto;
     border-bottom: solid 2px #d5b2ff;
   `,
-  ExitButtonContainer: styled.div`
+  PostComponentContainer: styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
     padding: 20px 20px 0 0;
-    //background-color: rgba(0, 0, 0, 0); /* 검은색 배경, 투명도 조절 */
-    //z-index: 10;
   `,
   Overlay: styled.div`
     position: fixed;
@@ -57,11 +55,6 @@ const styles = {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* 검은색 배경, 투명도 조절 */
     z-index: 2;
-  `,
-  ExitButton: styled(IoCloseSharp)`
-    color: white;
-    width: 40px;
-    height: 25px;
     cursor: pointer;
   `,
 };

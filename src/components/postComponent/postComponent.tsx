@@ -12,11 +12,13 @@ import styles from './style';
 interface PostComponentProps {
   modalOpen: () => void;
   modalClose: () => void;
+  setPostIsClicked?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
   modalOpen,
   modalClose,
+  setPostIsClicked,
 }) => {
   const [split, setSplit] = useState<boolean>(false);
 
@@ -71,8 +73,17 @@ const PostComponent: React.FC<PostComponentProps> = ({
     ],
   };
 
+  const handleOutsideClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    // 클릭된 요소가 Container 자체인 경우에만 postIsClicked 상태를 변경
+    if (event.target === event.currentTarget) {
+      setPostIsClicked && setPostIsClicked(false);
+    }
+  };
+
   return (
-    <styles.Container>
+    <styles.Container onClick={handleOutsideClick}>
       <PostRight
         split={split}
         openLikeListModal={openLikeListModal}
