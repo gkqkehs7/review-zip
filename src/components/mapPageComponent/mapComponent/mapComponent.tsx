@@ -23,9 +23,9 @@ const MapComponent: React.FC = () => {
         onZoomChanged={(map) => {
           const mapLevel = map.getLevel();
           setPrevious(mapLevel);
-
+          console.log('previouse : ' + previous);
+          console.log('mapLevel : ' + mapLevel);
           if (previous > mapLevel) {
-            console.log('previouse' + previous);
             setDeltaY((deltaY) => deltaY - 31.5);
           } else {
             setDeltaY((deltaY) => deltaY + 27.5);

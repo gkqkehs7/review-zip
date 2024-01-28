@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, RefObject, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
 
@@ -6,11 +6,9 @@ const LocationSearchComponent: React.FC = () => {
   const [keyword, setkeyword] = useState('');
   const ListRef = useRef<HTMLUListElement>(null);
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (e.key === 'Enter') {
-      searchPlace(keyword, ListRef);
-    }
+    searchPlace(keyword, ListRef);
   };
 
   return (
@@ -19,7 +17,7 @@ const LocationSearchComponent: React.FC = () => {
         <styles.TopImage />
 
         <styles.SearchingContainer>
-          <styles.SearchBarForm>
+          <styles.SearchBarForm onSubmit={handleSubmit}>
             <styles.SearchIcon src="images/mapPage/Search.png" />
             <styles.SearchBar
               type="text"
@@ -27,12 +25,11 @@ const LocationSearchComponent: React.FC = () => {
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setkeyword(e.target.value);
               }}
-              onKeyDown={handleKeyDown}
             />
           </styles.SearchBarForm>
 
           <styles.PlaceList ref={ListRef} />
-          <styles.Pagnitation></styles.Pagnitation>
+          {/* <styles.Pagnitation /> */}
         </styles.SearchingContainer>
         <styles.StarsImage />
       </styles.Container>

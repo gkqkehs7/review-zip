@@ -9,33 +9,34 @@ const styles = {
     background-image: url('images/mapPage/Background.png');
     background-size: 110% 110%;
     background-position: -10px -30px;
-    width: 454px;
+    width: 554px;
     height: 100%;
     margin: 0px 0px 0px -10px;
-
     z-index: 0;
   `,
 
   TopImage: styled.div`
     background-image: url('images/mapPage/Top.png');
     background-size: 100% 100%;
-    width: 268px;
+    width: 300px;
     height: 61px;
     margin: 71px 0 0 0;
   `,
 
   SearchingContainer: styled.div`
     display: flex;
-    flex-flow: column wrap;
+    flex-direction: column;
     width: 350px;
     height: 800px;
+    margin: 0px 0px 0px 0px;
   `,
 
   SearchBarForm: styled.form`
     display: flex;
     postion: relative;
-    width: 300px;
-    height: 40px;
+    align-items: center;
+    width: 320px;
+    height: 70px;
     border: 0px;
     margin: 50px auto;
     padding: 0px 0px 0px 0px;
@@ -45,7 +46,7 @@ const styles = {
     position: absolute;
     width: 40px;
     height: 40px;
-    z-index: 1;
+    z-index: 3;
     padding: 0px 0px 0px 10px;
   `,
 
@@ -54,26 +55,31 @@ const styles = {
     width: 100%;
     height: 45px;
     border-radius: 22px;
-    border: none;
+    outline: none;
     color: white;
-    z-index: 2;
+    z-index: 3;
     font-size: 110%;
     margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 55px;
 
     &::placeholder {
       color: white;
-      padding: 0px 0px 0px 55px;
+      text-align: center;
+      margin-left: 35px;
     }
   `,
 
   PlaceList: styled.ul`
-    postion: relative;
-    width: 240px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
     height: fit-content;
-    margin: 30px auto;
-    z-index: 3;
-    color: white;
-    border: 1px solid white;
+    margin: 0px auto 0px auto;
+    z-index: 2;
+    color: black;
+
+    padding: 0px;
   `,
 
   Pagnitation: styled.div``,
