@@ -1,10 +1,13 @@
 import LocationSearchComponent from '@/components/mapPageComponent/locationSearchComponent/loactionSearchComponent';
+import MapComponent from '@/components/mapPageComponent/mapComponent/mapComponent';
+import styles from './styles';
 
 const MapPage: React.FC = () => {
   return (
-    <>
-      <LocationSearchComponent></LocationSearchComponent>
-    </>
+    <styles.Container>
+      <LocationSearchComponent />
+      <MapComponent />
+    </styles.Container>
   );
 };
 
