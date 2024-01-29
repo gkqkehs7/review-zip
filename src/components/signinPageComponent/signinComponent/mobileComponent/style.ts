@@ -48,7 +48,7 @@ const styles = {
     }
   `,
 
-  OrSignContainer: styled.h2`
+  OrSignContainer: styled.a`
     display: flex;
     flex-direction: row;
     align-items: center;

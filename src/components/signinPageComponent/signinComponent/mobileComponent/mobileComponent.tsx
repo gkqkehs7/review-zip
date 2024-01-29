@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
-const MobileComponent: React.FC = () => {
+interface MobileComponentProps {
+  kakaoLoginUrl: string;
+}
+
+const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -38,7 +42,7 @@ const MobileComponent: React.FC = () => {
         </styles.InputContainer>
 
         {/* 카카오톡 인증*/}
-        <styles.OrSignContainer>
+        <styles.OrSignContainer href={kakaoLoginUrl}>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
