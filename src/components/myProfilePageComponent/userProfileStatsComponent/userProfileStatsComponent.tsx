@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
 
 import styles from './style';
-import PlusFriend from '/images/myProfilePage/PlusFriend.png';
+import Map from '/images/friendProfilePage/MapImage.png';
 
 export interface UserProfileStatsProps {
-  storageIsClicked: boolean;
   setIsClicked: React.Dispatch<React.SetStateAction<boolean[]>>;
   setIsEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
   isEditProfile: boolean;
+  isFriend: boolean | undefined;
+  setFriendListOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
-  storageIsClicked,
   setIsClicked,
   setIsEditProfile,
   isEditProfile,
+  isFriend,
+  setFriendListOpen,
 }) => {
   return (
     <div>
@@ -28,6 +30,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
         <styles.UserProfileStats
           onClick={() => {
             setIsClicked([false, true, false]);
+            setFriendListOpen(true);
           }}
         >
           리뷰어 30
@@ -35,6 +38,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
         <styles.UserProfileStats
           onClick={() => {
             setIsClicked([false, false, true]);
+            setFriendListOpen(true);
           }}
         >
           리뷰잉 30
@@ -43,14 +47,16 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
       <styles.EditProfileButtonContainer>
         <styles.EditProfileButton
           onClick={() => {
-            setIsEditProfile(!isEditProfile);
+            isFriend
+              ? setIsEditProfile(false)
+              : setIsEditProfile(!isEditProfile);
           }}
         >
-          프로필 수정
+          {isFriend ? '리뷰잉' : '프로필 수정'}
         </styles.EditProfileButton>
-        {storageIsClicked && (
+        {isFriend && (
           <Link to="">
-            <styles.PlusButton src={PlusFriend} />
+            <styles.PlusButton src={Map} />
           </Link>
         )}
       </styles.EditProfileButtonContainer>

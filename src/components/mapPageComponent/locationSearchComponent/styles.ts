@@ -9,7 +9,7 @@ const styles = {
     background-image: url('images/mapPage/Background.png');
     background-size: 110% 110%;
     background-position: -10px -30px;
-    width: 554px;
+    width: 454px;
     height: 100%;
     margin: 0px 0px 0px -10px;
     z-index: 0;
@@ -78,7 +78,7 @@ const styles = {
     margin: 0px auto 0px auto;
     z-index: 2;
     color: black;
-
+    overflow: auto;
     padding: 0px;
   `,
 

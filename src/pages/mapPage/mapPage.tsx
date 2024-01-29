@@ -5,7 +5,6 @@ import styles from './styles';
 const MapPage: React.FC = () => {
   return (
     <styles.Container>
-      <LocationSearchComponent />
       <MapComponent />
     </styles.Container>
   );

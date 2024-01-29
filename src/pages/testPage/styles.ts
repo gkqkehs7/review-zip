@@ -1,66 +1,65 @@
 import styled, { keyframes, css } from 'styled-components';
-
-const moveLeft = (widthValue) => keyframes`
-  to {
-    transform: translate(calc(-50%  - 10px), -50%);
-  }
-`;
-
-const moveRight = (widthValue) => keyframes`
-  to {
-    transform: translate(calc(50%  + 10px), -50%);
-  }
-`;
-
-const revert = () => keyframes`
-  to {
-    transform: translate(-50%, -50%);
-  }
-`;
+import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
 
 const styles = {
   Container: styled.div`
     width: 100%;
     height: 100%;
     position: relative;
+
+    display: flex;
+    align-items: center;
   `,
 
-  Card1: styled.div`
-    width: ${(props) => props.width};
-    height: 400px;
-    background-color: white;
+  MentionsTextarea: styled(MentionsInput)`
+    font-family: Slack-Lato, appleLogo, sans-serif;
+    font-size: 15px;
+    padding: 8px 9px;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    & strong {
+      background: skyblue;
+    }
 
-    ${(props) =>
-      props.splitCards &&
-      css`
-        animation: ${moveLeft(props.move)} 2s forwards;
-      `}
+    & textarea {
+      height: 44px;
+      padding: 9px 10px !important;
+      outline: none !important;
+      border-radius: 4px !important;
+      resize: none !important;
+      line-height: 22px;
+      border: none;
+    }
 
-    background-color: red;
+    & ul {
+      border: 1px solid lightgray;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 9px 10px;
+      background: white;
+      border-radius: 4px;
+      width: 150px;
+    }
   `,
 
-  Card2: styled.div`
-    width: ${(props) => props.width};
-    height: 400px;
-    background-color: white;
+  EachMention: styled.button<{ focus: boolean }>`
+    padding: 4px 20px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: rgb(28, 29, 28);
+    width: 100%;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    & img {
+      margin-right: 5px;
+    }
 
-    ${(props) =>
-      props.splitCards &&
-      css`
-        animation: ${moveRight(props.move)} 2s forwards;
-      `}
-
-    background-color: lightblue;
+    ${({ focus }) =>
+      focus &&
+      `
+    background: #1264a3;
+    color: white;
+  `};
   `,
 };
 

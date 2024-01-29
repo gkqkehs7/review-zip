@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
 const styles = {
-  MapContiner: styled.div`
+  Container: styled.div`
     postion: relative;
+    width: 100%;
+    height: 100%;
+  `,
+
+  MapContainer: styled.div`
+    display: flex;
     width: 100%;
     height: 100%;
   `,

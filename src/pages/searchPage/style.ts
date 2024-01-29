@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import { SearchTypeProps } from './searchPage';
-//margin과 padding은 5의 배수로
-//일단 vw,vh로 하고 max-width,max-height 설정해주기
-// 작업 별로 없을 때 commit할 때는 WIP로
+
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
@@ -10,8 +7,8 @@ const styles = {
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
-    justify-contents: center;
-    align-item: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
   `,
@@ -20,53 +17,15 @@ const styles = {
     position: relative;
     top: 0;
     background-color: rgba(255, 255, 255, 0.4);
-    background-size: cover;
-    width: 70vw;
-    height: 70vh;
     max-height: 736px;
     font-size: 20px;
     border: none;
     z-index: 100;
     border-radius: 0 0 30.5px 30.5px;
-    overflow: hidden; //요소가 많은 경우 안보이게
+    overflow: auto; //요소가 많은 경우 안보이게
   `,
+
   //검색창과 검색창 확장 영역을 감쌀 컨테이너
-  SearchBarContainer: styled.div`
-    position: absolute;
-    top: 10vh;
-    left: 50%; // 왼쪽에서 50% 위치에 배치
-    transform: translateX(-50%); // X축으로 -50% 만큼 이동하여 중앙 정렬
-  `,
-  //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용
-  SearchType: styled.span<SearchTypeProps>`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    min-width: 80px;
-    color: black;
-    border-bottom: ${({ isBorder }) => (isBorder ? 'solid black' : 'none')};
-  `,
-  //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
-  Top: styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  `,
-  ButtonContainer: styled.div`
-    display: flex;
-    justify-content: center;
-  `,
-  //검색어 입력이 있기 전에 검색 기록뜨는 화면_ 삭제 버튼
-  DeleteButton: styled.button`
-    background: #a087bf;
-    color: black;
-    font-size: 1em;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    z-index: 100;
-  `,
+  SearchBarContainer: styled.div``,
 };
 export default styles;

@@ -58,6 +58,10 @@ const styles = {
     color: black;
     font-size: medium;
     font-weight: bold;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   BackButton: styled(BsBackspace)`
@@ -70,19 +74,39 @@ const styles = {
     margin: 5px 0 5px 0;
   `,
 
+  ImageContainer: styled.div`
+    flex: 1;
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+  `,
+
+  Image: styled.img`
+    width: 100%;
+    object-fit: cover;
+  `,
+
   ImageSliderContainer: styled.div`
     padding: 10px 0;
   `,
 
-  SpaceShipImageContainer: styled.div`
+  ImageUploadedContainer: styled.div`
     display: flex;
     justify-content: flex-end;
   `,
 
-  SpaceShipImage: styled.img`
+  ImageUploaded: styled.img`
+    cursor: pointer;
     align-items: right;
-    width: 45.25px;
+    width: 45px;
     height: auto;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 };
 

@@ -1,31 +1,36 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const styles = {
-  HistoryContainer: styled.div`
+  UserContainer: styled.div`
     display: flex;
     justify-content: space-between;
-    margin: 28.8px 40px 28.8px 40px;
-    border-bottom: 1px solid white;
+    align-items: center;
+    padding: 40px;
+    border-bottom: 2px solid white;
+    height: 50px;
   `,
-  USerContainer: styled.div`
-    min-width: 200px;
+
+  UserData: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
+
   //username 옆에 뜰 이미지 - 원
-  UserNameImage: styled.img`
-    position: relative;
-    bottom: 1vh;
-    width: 2vw;
-    height: 4vh;
-    margin: 0 40px 0 40px;
+  UserImage: styled.img`
     border-radius: 50px;
+    margin-right: 10px;
   `,
+
   //위의 이미지 옆에 표시될 내용 username이나 hashtag
-  Content: styled.span`
-    position: relative;
-    bottom: 2vh;
+  UserName: styled.div`
     color: black;
     font-size: 20px;
   `,
+
+  PlusFriendLink: styled(Link)``,
+
   //친구 추가 이미지
   PlusFriend: styled.img`
     margin: 0 28.8px 0 28.8px;

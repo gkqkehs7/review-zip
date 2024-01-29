@@ -48,15 +48,30 @@ const styles = {
     position: relative;
   `,
 
-  TopScrollButton: styled.div`
+  ArrowImage: styled.img`
+    cursor: pointer;
+
     position: absolute;
+    width: 30px;
+    height: 30px;
     bottom: 0;
-    right: 0;
+    left: 49%;
+    transform: translateX(-50%);
+    z-index: 999;
+
+    margin-bottom: 3vh;
+    animation: ${ArrowButtonBounceAnimation} 1s infinite;
+  `,
+
+  TopButton: styled.img`
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 
     background-color: white;
     border-radius: 50px;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
 
     cursor: pointer;
 
@@ -64,16 +79,6 @@ const styles = {
     animation: ${ScrollToTopButtonBounceAnimation} 1s infinite;
 
     margin: 20px;
-  `,
-
-  ArrowImage: styled.img`
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    bottom: 0;
-    left: 48%;
-    transform: translate(-50%, -50%);
-    animation: ${ArrowButtonBounceAnimation} 1s infinite;
   `,
 };
 

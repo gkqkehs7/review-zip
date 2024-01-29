@@ -1,14 +1,18 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
 
-const LocationSearchComponent: React.FC = () => {
+interface LocationSearchprops {
+  mapRef: React.RefObject<kakao.maps.Map>;
+}
+
+const LocationSearchComponent: React.FC<LocationSearchprops> = ({ mapRef }) => {
   const [keyword, setkeyword] = useState('');
   const ListRef = useRef<HTMLUListElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchPlace(keyword, ListRef);
+    searchPlace(keyword, ListRef, mapRef);
   };
 
   return (

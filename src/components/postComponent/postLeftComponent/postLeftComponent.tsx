@@ -86,7 +86,7 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
               )}
             </styles.LikeSrabButtons>
 
-            <StarRatingComponent count={post.star} width={30} all={true} />
+            <StarRatingComponent count={post.star} all={true} />
           </styles.Buttons>
 
           {/* 좋아요 개수 */}
