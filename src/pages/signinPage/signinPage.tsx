@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 import DesktopComponent from '@/components/signinPageComponent/signinComponent/desktopComponent/desktopComponent';
 import LargeDesktopComponent from '@/components/signinPageComponent/signinComponent/largeDesktopComponent/largeDesktopComponent';
@@ -23,14 +24,20 @@ const SigninPage: React.FC = () => {
     query: '(max-width : 1025px)',
   });
 
+  const kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${
+    import.meta.env.VITE_KAKAO_REST_API_KEY
+  }&redirect_uri=${import.meta.env.VITE_KAKAO_REDIRECT_URI}&response_type=code`;
+
   return (
     <>
       <div>
-        {isLargeDesktop && <LargeDesktopComponent />}
-        {isDesktop && <DesktopComponent />}
+        {isLargeDesktop && (
+          <LargeDesktopComponent kakaoLoginUrl={kakaoLoginUrl} />
+        )}
+        {isDesktop && <DesktopComponent kakaoLoginUrl={kakaoLoginUrl} />}
 
-        {isLaptop && <LaptopComponent />}
-        {isMobile && <MobileComponent />}
+        {isLaptop && <LaptopComponent kakaoLoginUrl={kakaoLoginUrl} />}
+        {isMobile && <MobileComponent kakaoLoginUrl={kakaoLoginUrl} />}
       </div>
     </>
   );

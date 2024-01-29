@@ -11,6 +11,7 @@ import UploadPage from '@/pages/uploadPage/uploadPage';
 import TestPage from '@pages/testPage/testPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import FreindProfilePage from '@/pages/friendProfilePage/freindProfilePage';
+import KakaoLoginPage from './pages/kakaoLoginPage/kakaoLoginPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/signinPage" element={<SigninPage />}></Route>
           <Route path="/signupPage" element={<SignupPage />}></Route>
+          <Route path="/kakaoLogin" element={<KakaoLoginPage />}></Route>
           <Route
             path="/passwordRecoveryPage"
             element={<PasswordRecoveryPage />}

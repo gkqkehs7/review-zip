@@ -2,7 +2,13 @@ import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
-const desktopComponent: React.FC = () => {
+interface DesktopComponentProps {
+  kakaoLoginUrl: string;
+}
+
+const desktopComponent: React.FC<DesktopComponentProps> = ({
+  kakaoLoginUrl,
+}) => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -45,7 +51,7 @@ const desktopComponent: React.FC = () => {
         </styles.InputContainer>
 
         {/* 카카오톡 인증*/}
-        <styles.OrSignContainer>
+        <styles.OrSignContainer href={kakaoLoginUrl}>
           <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
           <styles.KaKaoIcon />
         </styles.OrSignContainer>
