@@ -14,6 +14,7 @@ import FreindProfilePage from '@/pages/friendProfilePage/freindProfilePage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import MapPage from './pages/mapPage/mapPage';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             path="/friendProfilePage"
             element={<FreindProfilePage />}
           ></Route>
+          <Route path="/mapPage" element={<MapPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

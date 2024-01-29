@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 import LargeDesktopComponent from '@/components/signinPageComponent/completeSigninComponent/largeDesktopComponent/largeDesktopComponent';
 import DesktopComponent from '@/components/signinPageComponent/completeSigninComponent/desktopComponent/desktopComponent';

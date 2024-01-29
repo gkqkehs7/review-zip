@@ -4,7 +4,7 @@ import DesktopComponent from '@/components/signinPageComponent/completeChangePas
 import LaptopComponent from '@/components/signinPageComponent/completeChangePasswordComponent/laptopComponent/laptopComponent';
 import MobileComponent from '@/components/signinPageComponent/completeChangePasswordComponent/mobileComponent/mobileComponent';
 
-const CompleteChangePassword: React.FC = () => {
+const CompleteChangePasswordPage: React.FC = () => {
   const isLargeDesktop: boolean = useMediaQuery({
     query: '(min-width : 1921px)',
   });
@@ -32,4 +32,4 @@ const CompleteChangePassword: React.FC = () => {
   );
 };
 
-export default CompleteChangePassword;
+export default CompleteChangePasswordPage;
