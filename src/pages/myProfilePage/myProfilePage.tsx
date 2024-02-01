@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
 import ProfileNameImageComponent from '@/components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
@@ -13,20 +13,20 @@ import GroupBarComponent from '@/components/common/groupBarComponent/groupBarCom
 
 //게시물 정보를 담은 배열의 게시물 타입
 export type PictureType = {
-  reviewImage: string;
-  postId: string;
-  likes: number;
-  saves: number;
+  postId: number;
+  postImageUrl: string;
+  likeNum: number;
+  scrabNum: number;
 };
 
 //프로필 페이지 Props 타입
-interface ProfiilePageProps {
+interface ProfilePageProps {
   isFriend?: boolean;
   friendImage?: string;
   pictures?: PictureType[];
 }
 
-const MyProfilePage: React.FC<ProfiilePageProps> = ({
+const MyProfilePage: React.FC<ProfilePageProps> = ({
   isFriend,
   friendImage,
   pictures,
