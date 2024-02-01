@@ -4,31 +4,8 @@ import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
 import { PictureType } from '@/pages/myProfilePage/myProfilePage';
 
-import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import axiosInstance from '@/api/apiInstance';
-
-const storage = [
-  {
-    postImageUrl: 'images/myProfilePage/Component1.png',
-    postId: 1,
-    likeNum: 103,
-    scrabNum: 47,
-  },
-  {
-    postImageUrl: 'images/myProfilePage/Component2.png',
-    postId: 2,
-    likeNum: 380,
-    scrabNum: 31,
-  },
-  {
-    postImageUrl: 'images/myProfilePage/Component3.png',
-    postId: 3,
-    likeNum: 84,
-    scrabNum: 79,
-  },
-];
 
 interface ChangePageProps {
   storageIsClicked: boolean;
@@ -41,6 +18,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   picture,
   setPostISClicked,
 }) => {
+  const [userId, setUserId] = useState<number>(0);
   // 서버로부터 받아올 유저 데이터
   const [userData, setUserData] = useState({
     isSuccess: true,
@@ -50,7 +28,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
       postList: [
         {
           postId: 0,
-          postImageUrl: 'string',
+          postImageUrl: '',
           likeNum: 0,
           scrabNum: 0,
         },
@@ -66,10 +44,20 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosInstance.get(`/v1/users/${1}/posts`);
+        let url = '/v1/users/';
 
-        console.log('user: ', response.data);
+        if (userId === 0) {
+          url += 'me/posts'; // 현재 로그인한 사용자
+        } else {
+          url += `${userId}/posts`; // 다른 사용자
+        }
 
+        // 저장소 클릭 여부에 따라 URL 수정
+        if (storageIsClicked) {
+          url += '/scrabs';
+        }
+
+        const response = await axiosInstance.get(url);
         setUserData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -80,12 +68,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   return (
     <styles.RveiwPicturesContainer>
       {/*props를 받아서 저장소 버튼이 클릭이 되어있으면 저장소 데이터 배열을 map에 전달하고 게시물을 클릭하면 해당 데이터를 전달 */}
-      {(storageIsClicked
-        ? storage
-        : picture
-          ? picture
-          : userData.result.postList
-      ).map((post, index) => (
+      {userData.result.postList.map((post, index) => (
         <styles.PictureContainer
           key={index}
           onClick={() => {
