@@ -17,4 +17,12 @@ const PostAxiosInstance = async <T>(
   return response;
 };
 
-export { PostAxiosInstance };
+const GetAxiosInstance = async <T>(
+  url: string,
+  config?: AxiosRequestConfig,
+): Promise<AxiosResponse<CommonResponse<T>>> => {
+  const response = await axiosInstance.get(url, config);
+  return response;
+};
+
+export { PostAxiosInstance, GetAxiosInstance };

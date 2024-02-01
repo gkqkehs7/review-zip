@@ -1,27 +1,28 @@
 import StarRating from '@/components/common/starRatingComponent/starsRatingComponent';
 
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 
-import { IPost } from '@/types/posts.types';
+import { Post } from '@/types/common.types';
 
 import styles from './style';
 import MainMiddleStarImage from '/images/mainPage/MainMiddleStar.png';
 import MainMiddeleStickerImage from '/images/mainPage/MainMiddleSticker.png';
-import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 
 interface FrameComponentProps {
+  post: Post;
   blur?: boolean;
   openLoadingModal?: () => void;
-  post?: IPost;
 }
 
 const FrameComponent: React.FC<FrameComponentProps> = ({
+  post,
   blur,
   openLoadingModal,
-  post,
 }) => {
   const deviceSize = checkDevice();
 
+  console.log(post);
   return (
     <styles.Container
       onClick={openLoadingModal}
@@ -42,15 +43,15 @@ const FrameComponent: React.FC<FrameComponentProps> = ({
         )}
       >
         <styles.ImageContainer>
-          <styles.Image src="https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
+          <styles.Image src={post.postImages[0].url} />
           <styles.StarContainer>
-            <StarRating count={5} all={false} />
+            <StarRating count={post.point} all={false} />
           </styles.StarContainer>
         </styles.ImageContainer>
 
         <styles.FrameBottom>
           <styles.StarImage src={MainMiddleStarImage} />
-          <styles.LikeText>999+</styles.LikeText>
+          <styles.LikeText>{post.likeNum}+</styles.LikeText>
         </styles.FrameBottom>
       </styles.Frame>
     </styles.Container>

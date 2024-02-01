@@ -6,7 +6,7 @@ import ReviewingStopModalComponent from '@/components/myProfilePageComponent/rev
 
 import { changeInputValue } from '@/hooks/chageInputValue';
 
-import { IUser } from '@/types/users.types';
+import { IUser } from '@/types/common.types';
 
 import styles from './style';
 
