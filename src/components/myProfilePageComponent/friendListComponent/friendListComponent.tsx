@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { Link } from 'react-router-dom';
 import { changeInputValue } from '@/hooks/chageInputValue';
 
-import { IUser } from '@/types/users.types';
+import { IUser } from '@/types/common.types';
 
 import styles from './style';
 import ReviewingStopModalComponent from '@/components/myProfilePageComponent/reviewingStopModalComponent/reviewingStopModalComponent';

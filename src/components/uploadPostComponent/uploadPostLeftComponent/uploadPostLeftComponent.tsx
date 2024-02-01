@@ -10,17 +10,19 @@ import ImageListComponent from '../imageListComponent/imageListComponent';
 interface UploadPostLeftComponentProps {
   split: boolean;
   splitPost: () => void;
-  postImages: { id: number; url: string }[];
-  setPostImages: React.Dispatch<
+  previewImages: { id: number; url: string }[];
+  setPreviewPostImages: React.Dispatch<
     React.SetStateAction<{ id: number; url: string }[]>
   >;
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
 }
 
 const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   split,
   splitPost,
-  postImages,
-  setPostImages,
+  previewImages,
+  setPreviewPostImages,
+  setFiles,
 }) => {
   const [clickedImage, setClickedImage] = useState<string>('');
 
@@ -43,28 +45,29 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
       <styles.Line />
 
       {/* image slider */}
-      {postImages.length > 0 ? (
+      {previewImages.length > 0 ? (
         <styles.ImageContainer>
           <styles.Image src={clickedImage} />
         </styles.ImageContainer>
       ) : (
         <UploadImageComponent
-          postImages={postImages}
-          setPostImages={setPostImages}
+          postImages={previewImages}
+          setPostImages={setPreviewPostImages}
           setClickedImage={setClickedImage}
+          setFiles={setFiles}
         />
       )}
 
       {/* 업로드한 이미지들 작게 보이는 component */}
       <ImageListComponent
-        postImages={postImages}
-        setPostImages={setPostImages}
+        postImages={previewImages}
+        setPostImages={setPreviewPostImages}
         imageListOpen={imageListOpen}
         setClickedImage={setClickedImage}
       />
 
       {/* 이미지 업로드 여부 이미지 */}
-      {postImages.length > 0 ? (
+      {previewImages.length > 0 ? (
         <styles.ImageUploadedContainer>
           <styles.ImageUploaded
             src={ImageUploadedImage}

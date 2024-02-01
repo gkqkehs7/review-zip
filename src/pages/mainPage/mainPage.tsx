@@ -6,11 +6,33 @@ import MainMiddleComponent from '@/components/mainPageComponent/mainMiddleCompon
 import MainBottomComponent from '@/components/mainPageComponent/mainBottomComponent/mainBottomComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
-import styles from './style';
+import { Post } from '@/types/common.types';
+import { GetRandomPostsResponse } from '@/types/response.types';
+import { GetAxiosInstance } from '@/api/axios.methods';
 
 const MainPage: React.FC = () => {
+  const [randomPosts, SetRandomPosts] = useState<Post[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  // 랜덤으로 3개 게시물 가져오기
+  const getRandomPosts = async () => {
+    try {
+      const response = await GetAxiosInstance<GetRandomPostsResponse>(
+        '/v1/posts/random?userId=1',
+      );
+
+      const randomPosts = response.data.result;
+
+      SetRandomPosts(randomPosts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getRandomPosts();
+  }, []);
 
   const modalOpen = useCallback(() => {
     setOpenModal(true);
@@ -47,11 +69,15 @@ const MainPage: React.FC = () => {
         openModal={openModal}
         handleScrollDown={handleScrollDown}
       />
-      <MainMiddleComponent
-        modalOpen={modalOpen}
-        modalClose={modalClose}
-        handleScrollDown={handleScrollDown}
-      />
+      {randomPosts.length > 0 && (
+        <MainMiddleComponent
+          randomPosts={randomPosts}
+          modalOpen={modalOpen}
+          modalClose={modalClose}
+          handleScrollDown={handleScrollDown}
+        />
+      )}
+
       <MainBottomComponent
         modalOpen={modalOpen}
         modalClose={modalClose}

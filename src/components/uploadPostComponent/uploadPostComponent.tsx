@@ -5,6 +5,12 @@ import styles from './style';
 import UploadPostLeftComponent from './uploadPostLeftComponent/uploadPostLeftComponent';
 import UploadPostRightComponent from './uploadPostRightComponent/uploadPostRightComponent';
 import SpaceLoadingModalComponent from '../common/spaceLoadingModalComponent/spaceLoadingModalComponent';
+import { CreatePostRequest } from '@/types/request.types';
+import { PostAxiosInstance } from '@/api/axios.methods';
+import {
+  CreatePostResponse,
+  CreateImagesResponse,
+} from '@/types/response.types';
 
 const UploadPostComponent: React.FC = () => {
   const navigate = useNavigate();
@@ -13,9 +19,10 @@ const UploadPostComponent: React.FC = () => {
   const [textInput, setTextInput] = useState<string>(''); // 게시글 내용
   const [hashTags, setHashTags] = useState<string[]>([]); // hashtag들
   const [starCount, setStarCount] = useState<number>(0); // 별점
-  const [postImages, setPostImages] = useState<{ id: number; url: string }[]>(
-    [],
-  );
+  const [previewImages, setPreviewPostImages] = useState<
+    { id: number; url: string }[]
+  >([]);
+  const [files, setFiles] = useState<File[]>([]);
 
   const [split, setSplit] = useState<boolean>(false); // post 분리용 변수
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false); // 로딩창 띄우기용 변수
@@ -26,12 +33,42 @@ const UploadPostComponent: React.FC = () => {
   };
 
   // 게시글 보내기 - post이후 success가 오면 mainPage로 이동
-  const sendPost = () => {
+  const sendPost = async () => {
     setLoadingModalOpen(true);
 
-    setTimeout(() => {
+    try {
+      const formData = new FormData();
+
+      // 이미지들 파일에 저장
+      files.forEach((file) => {
+        formData.append('fileList', file);
+      });
+
+      // 이미지 먼저 업로드
+      const response = await PostAxiosInstance<CreateImagesResponse>(
+        '/v1/images/users/1',
+        formData,
+      );
+
+      const { imageIds } = response.data.result;
+
+      const createPostRequest: CreatePostRequest = {
+        userId: 1,
+        comment: textInput,
+        point: starCount,
+        imageIds: imageIds,
+      };
+
+      // 받아온 이미지 id들로 게시글 업로드
+      await PostAxiosInstance<CreatePostResponse>(
+        '/v1/posts',
+        createPostRequest,
+      );
+
       return navigate('/mainPage');
-    }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -52,8 +89,9 @@ const UploadPostComponent: React.FC = () => {
       <UploadPostLeftComponent
         split={split}
         splitPost={splitPost}
-        postImages={postImages}
-        setPostImages={setPostImages}
+        previewImages={previewImages}
+        setPreviewPostImages={setPreviewPostImages}
+        setFiles={setFiles}
       />
 
       {/* 로딩 */}

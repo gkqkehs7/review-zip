@@ -7,12 +7,14 @@ type UploadImageComponentProps = {
   postImages: { id: number; url: string }[];
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
   setClickedImage: Dispatch<SetStateAction<string>>;
+  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
 };
 
 const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   postImages,
   setPostImages,
   setClickedImage,
+  setFiles,
 }) => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -71,8 +73,12 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
             type: file.type,
           });
 
+          // 서버에 보낼 용도로 변수에 저장
+          setFiles((prevFiles) => [...prevFiles, files[0]]);
+
           const imageUrl: string = URL.createObjectURL(blob);
 
+          // 이미지 front에 보여주기 위한 용도로 번수에 저장
           setPostImages((prevPostImages) => [
             ...prevPostImages,
             { id: prevPostImages.length + 1, url: imageUrl },
