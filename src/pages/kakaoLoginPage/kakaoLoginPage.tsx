@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
-import axiosInstance from '@/api/apiInstance';
-import { KakaoLoginType } from '@/types/response.type';
+import { PostAxiosInstance } from '@/api/axios.methods';
+import { KakaoLoginType } from '@/types/response.types';
 
 const KakaoLoginPage: React.FC = () => {
   const [kakaoToken, setKakaoToken] = useState<string>('');
@@ -44,14 +44,14 @@ const KakaoLoginPage: React.FC = () => {
     (async () => {
       if (kakaoToken) {
         try {
-          const response: KakaoLoginType = await axiosInstance.post(
+          const response = await PostAxiosInstance<KakaoLoginType>(
             '/v1/oauth/kakao',
             {
               token: kakaoToken,
             },
           );
 
-          const accessToken = response.data.result.accessToken;
+          const { accessToken } = response.data.result;
 
           localStorage.setItem('accessToken', accessToken);
 
