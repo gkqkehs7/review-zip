@@ -1,5 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
+import { GetAxiosInstance } from '@/api/axios.methods';
+import { CurtPost } from '@/types/common.types';
+import { GetUserPostsResponse } from '@/types/response.types';
 import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
 import ProfileNameImageComponent from '@/components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
 import UserProfileStatsComponent from '@/components/myProfilePageComponent/userProfileStatsComponent/userProfileStatsComponent';
@@ -45,6 +48,30 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
   //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
   const [friendListOpen, setFriendListOpen] = useState<boolean>(false);
 
+  //userId에 본인 프로필 페이지인 경우 me가 들어가고, 다른 유저인 경우는 숫자가 들어감
+  const [userId, setUserId] = useState<number | string>(3);
+  // 스크랩한 게시물인 경우 /scrab이 붙음
+  const [isScrab, setIsScrab] = useState<string>('');
+  const [curtPosts, SetCurtPosts] = useState<CurtPost[]>([]);
+
+  // 포스트들 가져오기
+  const getCurtPosts = async () => {
+    try {
+      const response = await GetAxiosInstance<GetUserPostsResponse>(
+        `/v1/users/${userId}/posts${isScrab}?page=0&size=3`,
+      );
+
+      SetCurtPosts(response.data.result.postList);
+      console.log(response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCurtPosts();
+  }, [userId, isScrab]);
+
   const modalOpen = useCallback(() => {
     setOpenModal(true);
   }, [openModal]);
@@ -61,7 +88,6 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
 
   return (
     <styles.Container>
-      {/*상단 컨테이너*/}
       {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔 */}
       {isClicked[1] && (
         <LikeListComponent
@@ -118,13 +144,17 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
           setPostClicked={setPostClicked}
           storageIsClicked={storageIsClicked}
           setStorageClicked={setStorageClicked}
+          setIsScrab={setIsScrab}
         />
         {/* 리뷰 게시물 이미지 컴포넌트 */}
-        <ReviewPictureComponent
-          storageIsClicked={storageIsClicked}
-          setPostISClicked={setPostIsClicked}
-          picture={pictures}
-        />
+        {curtPosts.length > 0 && (
+          <ReviewPictureComponent
+            storageIsClicked={storageIsClicked}
+            setPostISClicked={setPostIsClicked}
+            picture={pictures}
+            curtPost={curtPosts}
+          />
+        )}
       </styles.ProfilePictureContainer>
     </styles.Container>
   );

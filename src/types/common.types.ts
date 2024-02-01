@@ -30,4 +30,11 @@ interface PostImages {
   url: string;
 }
 
-export type { IUser, User, Post, PostImages };
+interface CurtPost {
+  postId: number;
+  postImageUrl: string;
+  likeNum: number;
+  scrabNum: number;
+}
+
+export type { IUser, User, Post, PostImages, CurtPost };

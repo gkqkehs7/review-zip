@@ -3,7 +3,7 @@ import StarImage from '/images/myProfilePage/StarImage.png';
 import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
 import { PictureType } from '@/pages/myProfilePage/myProfilePage';
-
+import { CurtPost } from '@/types/common.types';
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/api/apiInstance';
 
@@ -11,64 +11,21 @@ interface ChangePageProps {
   storageIsClicked: boolean;
   setPostISClicked: React.Dispatch<React.SetStateAction<boolean>>;
   picture?: PictureType[];
+  curtPost: CurtPost[];
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   storageIsClicked,
   picture,
   setPostISClicked,
+  curtPost,
 }) => {
   const [userId, setUserId] = useState<number>(0);
-  // 서버로부터 받아올 유저 데이터
-  const [userData, setUserData] = useState({
-    isSuccess: true,
-    code: 'string',
-    message: 'string',
-    result: {
-      postList: [
-        {
-          postId: 0,
-          postImageUrl: '',
-          likeNum: 0,
-          scrabNum: 0,
-        },
-      ],
-      listSize: 0,
-      totalPage: 0,
-      totalElements: 0,
-      isFirst: true,
-      isLast: true,
-    },
-  });
-
-  useEffect(() => {
-    (async () => {
-      try {
-        let url = '/v1/users/';
-
-        if (userId === 0) {
-          url += 'me/posts'; // 현재 로그인한 사용자
-        } else {
-          url += `${userId}/posts`; // 다른 사용자
-        }
-
-        // 저장소 클릭 여부에 따라 URL 수정
-        if (storageIsClicked) {
-          url += '/scrabs';
-        }
-
-        const response = await axiosInstance.get(url);
-        setUserData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    })();
-  }, []);
 
   return (
     <styles.RveiwPicturesContainer>
       {/*props를 받아서 저장소 버튼이 클릭이 되어있으면 저장소 데이터 배열을 map에 전달하고 게시물을 클릭하면 해당 데이터를 전달 */}
-      {userData.result.postList.map((post, index) => (
+      {curtPost.map((post, index) => (
         <styles.PictureContainer
           key={index}
           onClick={() => {

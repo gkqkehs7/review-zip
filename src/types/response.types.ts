@@ -1,4 +1,4 @@
-import { User, Post, PostImages } from './common.types';
+import { User, Post, PostImages, CurtPost } from './common.types';
 
 interface KakaoLoginType {
   accessToken: string;
@@ -20,9 +20,20 @@ interface CreateImagesResponse {
 // /v1/posts/random
 interface GetRandomPostsResponse extends Array<Post> {}
 
+// /v1/users/{userId}/posts
+interface GetUserPostsResponse {
+  postList: CurtPost[];
+  listSize: number;
+  totalPage: number;
+  totalElements: number;
+  isFirst: boolean;
+  isLast: boolean;
+}
+
 export type {
   KakaoLoginType,
   CreatePostResponse,
   CreateImagesResponse,
   GetRandomPostsResponse,
+  GetUserPostsResponse,
 };
