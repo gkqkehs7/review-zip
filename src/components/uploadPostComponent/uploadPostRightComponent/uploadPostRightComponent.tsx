@@ -35,7 +35,7 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   );
 
   return (
-    <styles.Container splitPost={split}>
+    <styles.Container splitpost={split}>
       {/* 유저 정보 */}
       <styles.TopContainer>
         <styles.UserContainer>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './style';
@@ -28,9 +28,13 @@ const UploadPostComponent: React.FC = () => {
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false); // 로딩창 띄우기용 변수
 
   // 포스트 왼쪽 오른쪽 분리하기
-  const splitPost = () => {
+  const splitpost = () => {
     setSplit(!split);
   };
+
+  useEffect(() => {
+    console.log(files);
+  }, [files]);
 
   // 게시글 보내기 - post이후 success가 오면 mainPage로 이동
   const sendPost = async () => {
@@ -88,7 +92,7 @@ const UploadPostComponent: React.FC = () => {
       {/* 사진 업로드 부분 */}
       <UploadPostLeftComponent
         split={split}
-        splitPost={splitPost}
+        splitpost={splitpost}
         previewImages={previewImages}
         setPreviewPostImages={setPreviewPostImages}
         setFiles={setFiles}

@@ -30,11 +30,9 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   const getRandomPost = async () => {
     try {
       const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/3');
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/88');
 
       setRandomPost(response.data.result);
-
-      console.log(response.data.result);
     } catch (error) {
       console.log(error);
     }

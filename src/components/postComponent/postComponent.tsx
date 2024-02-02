@@ -104,7 +104,6 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const handleOutsideClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
-    // 클릭된 요소가 Container 자체인 경우에만 postIsClicked 상태를 변경
     if (event.target === event.currentTarget) {
       setPostIsClicked && setPostIsClicked(false);
     }

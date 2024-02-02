@@ -9,6 +9,7 @@ interface ImageListComponentProps {
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
   imageListOpen: boolean;
   setClickedImage: Dispatch<SetStateAction<string>>;
+  setFiles?: React.Dispatch<React.SetStateAction<File[]>>;
 }
 
 const ImageListComponent: React.FC<ImageListComponentProps> = ({
@@ -16,6 +17,7 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
   setPostImages,
   imageListOpen,
   setClickedImage,
+  setFiles,
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -24,6 +26,8 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const file: File = files[i];
+
+        setFiles!((prevFiles) => [...prevFiles, file]);
 
         const reader: FileReader = new FileReader();
 
