@@ -26,12 +26,15 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [blur, setBlur] = useState<boolean>(false);
 
+  // 랜덤으로 게시글 한개 가져오기
   const getRandomPost = async () => {
     try {
       const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/81');
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/3');
 
       setRandomPost(response.data.result);
+
+      console.log(response.data.result);
     } catch (error) {
       console.log(error);
     }

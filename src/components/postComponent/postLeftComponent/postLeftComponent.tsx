@@ -1,8 +1,6 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
-import { checkDevice } from '@/utils/checkDeviceSize';
-
 import { Post } from '@/types/common.types';
 
 import { styles, postLeftStyles } from './style';
@@ -16,12 +14,24 @@ interface PostLeftComponentProps {
   post: Post;
   split: boolean;
   splitPost: () => void;
+  checkLike: boolean;
+  checkScrab: boolean;
+  likePost: () => Promise<void>;
+  unLikePost: () => Promise<void>;
+  scrabPost: () => Promise<void>;
+  unScrabPost: () => Promise<void>;
 }
 
 const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
   split,
   post,
   splitPost,
+  checkLike,
+  checkScrab,
+  likePost,
+  unLikePost,
+  scrabPost,
+  unScrabPost,
 }) => {
   const splitContent = (content: string): string => {
     if (content.length < 15) {
@@ -71,16 +81,26 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           {/* 좋아요, 스크랩, 별 버튼 */}
           <styles.Buttons>
             <styles.LikeSrabButtons>
-              {post.checkLike ? (
-                <styles.LikeButton src={LikeButtonImage} />
+              {checkLike ? (
+                <styles.LikeButton src={LikeButtonImage} onClick={unLikePost} />
               ) : (
-                <styles.LikeButton src={NotLikeButtonImage} />
+                <styles.LikeButton
+                  src={NotLikeButtonImage}
+                  onClick={likePost}
+                />
               )}
 
-              {post.checkScrab ? (
-                <styles.ScrabButton src={ScrabButtonImage} />
+              {/* 스크랩 버튼 */}
+              {checkScrab ? (
+                <styles.ScrabButton
+                  src={ScrabButtonImage}
+                  onClick={unScrabPost}
+                />
               ) : (
-                <styles.ScrabButton src={NotScrabButtonImage} />
+                <styles.ScrabButton
+                  src={NotScrabButtonImage}
+                  onClick={scrabPost}
+                />
               )}
             </styles.LikeSrabButtons>
 

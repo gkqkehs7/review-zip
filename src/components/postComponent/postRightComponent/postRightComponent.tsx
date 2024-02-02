@@ -13,12 +13,24 @@ interface PostRightComponentProps {
   post: Post;
   split: boolean;
   openLikeListModal: () => void;
+  checkLike: boolean;
+  checkScrab: boolean;
+  likePost: () => Promise<void>;
+  unLikePost: () => Promise<void>;
+  scrabPost: () => Promise<void>;
+  unScrabPost: () => Promise<void>;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
   post,
   split,
   openLikeListModal,
+  checkLike,
+  checkScrab,
+  likePost,
+  unLikePost,
+  scrabPost,
+  unScrabPost,
 }) => {
   return (
     <styles.Container splitPost={split}>
@@ -50,7 +62,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
         <styles.LikeText onClick={openLikeListModal}>
           {post.likeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
-        <styles.LikeUserImage src={post.userInfo.nickname} />
+        <styles.LikeUserImage src={post.userInfo.profileUrl} />
       </styles.LikeContainer>
 
       {/* 아래 선 */}
@@ -60,17 +72,17 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.Buttons>
         {/* 좋아요 버튼 */}
         <styles.LikeSrabButtons>
-          {post.checkLike ? (
-            <styles.LikeButton src={LikeButtonImage} />
+          {checkLike ? (
+            <styles.LikeButton src={LikeButtonImage} onClick={unLikePost} />
           ) : (
-            <styles.LikeButton src={NotLikeButtonImage} />
+            <styles.LikeButton src={NotLikeButtonImage} onClick={likePost} />
           )}
 
           {/* 스크랩 버튼 */}
-          {post.checkScrab ? (
-            <styles.ScrabButton src={ScrabButtonImage} />
+          {checkScrab ? (
+            <styles.ScrabButton src={ScrabButtonImage} onClick={unScrabPost} />
           ) : (
-            <styles.ScrabButton src={NotScrabButtonImage} />
+            <styles.ScrabButton src={NotScrabButtonImage} onClick={scrabPost} />
           )}
         </styles.LikeSrabButtons>
 

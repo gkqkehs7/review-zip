@@ -2,6 +2,7 @@ interface User {
   id: number;
   nickname: string;
   profileUrl: string;
+  following?: boolean;
 }
 
 interface Post {

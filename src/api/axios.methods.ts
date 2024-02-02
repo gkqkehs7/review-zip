@@ -25,4 +25,26 @@ const GetAxiosInstance = async <T>(
   return response;
 };
 
-export { PostAxiosInstance, GetAxiosInstance };
+const PatchAxiosInstance = async <T>(
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig,
+): Promise<AxiosResponse<CommonResponse<T>>> => {
+  const response = await axiosInstance.patch(url, data, config);
+  return response;
+};
+
+const DeleteAxiosInstance = async <T>(
+  url: string,
+  config?: AxiosRequestConfig,
+): Promise<AxiosResponse<CommonResponse<T>>> => {
+  const response = await axiosInstance.delete(url, config);
+  return response;
+};
+
+export {
+  PostAxiosInstance,
+  GetAxiosInstance,
+  PatchAxiosInstance,
+  DeleteAxiosInstance,
+};
