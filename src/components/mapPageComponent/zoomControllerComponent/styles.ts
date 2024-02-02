@@ -4,13 +4,13 @@ const styles = {
   ZoomContainer: styled.div`
     display: flex;
     flex-direction: column;
-    position: absolute;
     justify-content: space-around;
-    top: 177px;
+    position: absolute;
+    top: 16vh;
     right: 50px;
     background-color: rgba(255, 255, 255, 0.7);
     width: 62px;
-    height: 524px;
+    height: 520px;
     border-radius: 31px;
     z-index: 1;
   `,
@@ -18,7 +18,7 @@ const styles = {
     background-image: url('images/mapPage/ZoomIn.png');
     background-size: 100% 100%;
     width: 30px;
-    height: 30px;
+    height: 6%;
     margin: 10px auto 0px auto;
   `,
   ZoomVerticalBar: styled.div`
@@ -26,7 +26,7 @@ const styles = {
     flex-direction: column;
     background-color: rgba(180, 180, 180, 0.6);
     width: 15px;
-    height: 391px;
+    height: 75%;
     margin: 0px auto 0px auto;
     border-radius: 7px;
   `,
@@ -35,15 +35,15 @@ const styles = {
     postion: relative;
     background-color: rgba(0, 0, 0, 0.6);
     margin: auto 0px auto -18px;
-    width: 51px;
-    height: 13px;
+    width: 50px;
+    height: 15px;
   `,
 
   ZoomOutImage: styled.div`
     background-image: url('images/mapPage/ZoomOut.png');
     background-size: 100% 100%;
     width: 30px;
-    height: 30px;
+    height: 6%;
     margin: 0px auto 10px auto;
   `,
 };

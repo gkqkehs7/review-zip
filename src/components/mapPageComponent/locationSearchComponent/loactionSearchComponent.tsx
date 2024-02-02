@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+import { checkDevice } from '@/utils/checkDeviceSize';
 
 interface LocationSearchprops {
   mapRef: React.RefObject<kakao.maps.Map>;
@@ -15,9 +17,20 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({ mapRef }) => {
     searchPlace(keyword, ListRef, mapRef);
   };
 
+  const device = checkDevice();
   return (
     <>
-      <styles.Container>
+      <styles.Container
+        style={responsiveWidthHeight(
+          device,
+          { width: 484, height: '100%' },
+          { width: 444, height: '100%' },
+          { width: 404, height: '100%' },
+          { width: 364, height: '100%' },
+          { width: 324, height: '100%' },
+          { width: 284, height: '100%' },
+        )}
+      >
         <styles.TopImage />
 
         <styles.SearchingContainer>
@@ -33,9 +46,18 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({ mapRef }) => {
           </styles.SearchBarForm>
 
           <styles.PlaceList ref={ListRef} />
-          {/* <styles.Pagnitation /> */}
         </styles.SearchingContainer>
-        <styles.StarsImage />
+        <styles.StarsImage
+          style={responsiveWidthHeight(
+            device,
+            { width: 265, height: 460 },
+            { width: 245, height: 440 },
+            { width: 225, height: 420 },
+            { width: 205, height: 400 },
+            { width: 185, height: 380 },
+            { width: 165, height: 360 },
+          )}
+        />
       </styles.Container>
     </>
   );

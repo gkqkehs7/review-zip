@@ -1,12 +1,10 @@
 import { Status } from 'kakao-maps-sdk';
 import React from 'react';
 
-//아직 마커를 표시하는 작업은 완성X push후 다시진행
-// 키워드를 검색하는 함수
+//카카오 공식문서 Sample "장소검색 후 목록으로 나타내기" 코드참고
 
-var marker = []; //marker의 위치를 담을
-
-interface PlaceData {
+// 검색장소에 대한 데이터
+export interface PlaceData {
   place_name: string;
   address_name: string;
   road_address_name: string;
@@ -15,6 +13,12 @@ interface PlaceData {
   y: string;
 }
 
+export var clickData: PlaceData[] = []; //내가 클릭한 장소만 저장해두는 배열
+
+var markers: kakao.maps.Marker[] = [];
+var open = false;
+
+// 키워드를 검색하는 함수
 export const searchPlace = (
   keyword: string,
   placeList: React.RefObject<HTMLUListElement>,
@@ -54,29 +58,34 @@ export const placeSearchCB = (
 
 // 검색한 장소를 화면에 보여주는 함수
 export const displayPlace = (
+  //placeData
   placeData: PlaceData[], //검색한 장소의 데이터
   listEl: React.RefObject<HTMLUListElement>,
-  map: React.RefObject<kakao.maps.Map>,
+  mapRef: React.RefObject<kakao.maps.Map>,
 ): void => {
-  var fragment = document.createDocumentFragment();
-  var bounds = new kakao.maps.LatLngBounds();
+  let fragment = document.createDocumentFragment();
 
   removeAllChildNodes(listEl);
 
   for (let i = 0; i < placeData.length; i++) {
-    var itemEl = getListItem(i, placeData[i]);
+    var itemEl = getListItem(placeData[i]);
 
     //검색지역 클릭시 좌표이동을 해주는 이벤트 리스너
 
     itemEl.addEventListener('click', () => {
-      var placePostion = new kakao.maps.LatLng( //좌표객체
-        parseFloat(placeData[i].y),
-        parseFloat(placeData[i].x),
-      );
+      //내가 클릭한 placeData[]
+      var lat = parseFloat(placeData[i].y);
+      var lng = parseFloat(placeData[i].x);
 
-      if (map.current) {
-        map.current.setCenter(placePostion);
-        map.current.setLevel(1);
+      clickData[i] = placeData[i];
+      console.log(clickData[i]);
+      var placePostion = new kakao.maps.LatLng(lat, lng); //좌표객체
+
+      if (mapRef.current) {
+        const map: kakao.maps.Map = mapRef.current;
+        map.setCenter(placePostion);
+        map.setLevel(1);
+        addMarker(lat, lng, map, i, clickData);
       }
     });
 
@@ -89,11 +98,8 @@ export const displayPlace = (
 };
 
 // PlaceData 객체를 element형태로 변환해주는 함수
-export const getListItem = (
-  index: number,
-  placeData: PlaceData,
-): HTMLElement => {
-  var el = document.createElement('li'),
+export const getListItem = (placeData: PlaceData): HTMLElement => {
+  let el = document.createElement('li'),
     itemStr =
       '<div class = "placeName" >' + '<h2>' + placeData.place_name + '</h2>';
 
@@ -115,9 +121,8 @@ export const getListItem = (
   el.className = 'item';
 
   styleElement(el);
-  console.log('el : ' + el);
 
-  return el; //<li>info </li>를 리턴하는 함수
+  return el;
 };
 
 //이전 검색결과를 화면에서 지워주는 함수
@@ -136,7 +141,114 @@ const styleElement = (el: HTMLElement): void => {
   el.style.margin = '0px 0px 30px 0px';
   el.style.width = '100%';
   el.style.height = 'fit-content';
-  // el.onclick= ()=>
 };
 
-const addMarker = () => {};
+//마커를 지도에 생성해주는 함수
+const addMarker = (
+  lat: number,
+  lng: number,
+  map: kakao.maps.Map,
+  idx: number,
+  clickData: PlaceData[],
+) => {
+  const imageSrc = 'images/mapPage/Marker.png';
+  let imageSize = new kakao.maps.Size(30, 30);
+
+  let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+  var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+  var marker = new kakao.maps.Marker({
+    position: markerPosition,
+    image: markerImage,
+  });
+
+  markers[idx] = marker; //이미지랑 위치만 가지고 있는 객체
+
+  var infoWindow = createInfoWindow(lat, lng, idx, clickData);
+  kakao.maps.event.addListener(markers[idx], 'click', () => {
+    if (!open) {
+      infoWindow.open(map, markers[idx]);
+      open = !open;
+    } else {
+      infoWindow.close();
+      open = !open;
+    }
+  });
+
+  marker.setMap(map);
+};
+
+// 윈도우 인포객체를 생성하는 함수
+const createInfoWindow = (
+  lat: number,
+  lng: number,
+  idx: number,
+  clickData: PlaceData[],
+): kakao.maps.InfoWindow => {
+  var iwContent = windowContents(idx, clickData); //윈도우의 HTML String
+
+  var iwPosition = new kakao.maps.LatLng(lat, lng); //윈도우 인포를 띄울 위치
+
+  var infoWindow = new kakao.maps.InfoWindow({
+    position: iwPosition,
+    content: iwContent,
+  });
+
+  return infoWindow;
+};
+
+//윈도우 인포창에 들어갈 element를 문자열 형태로 전달해주는 함수
+const windowContents = (idx: number, clickData: PlaceData[]): string => {
+  return setHtmlString(idx, clickData);
+};
+
+//htmlString을 작성해주는 함수 jsx-> string으로 바꾸는
+const setHtmlString = (idx: number, clickData: PlaceData[]): string => {
+  var htmlString = `
+  <div style="
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 200px;
+    background-color: rgba(151, 102, 209, 0.8);
+  ">
+    <div style="
+      display: flex;
+      align-items: center;
+      height: 35%;
+      margin-top: 8%;
+      flex-wrap: wrap;
+      color: white;
+      font-weight: bold;
+      font-size: 110%;
+      margin-bottom: -30px;
+      margin-left: 20px;
+    ">
+      <img src="images/mapPage/PlaceIcon.png" style="width: 30px; height: 30px;">
+      <div style="margin-left: 20px; overflow-wrap: break-word;">
+        <div>${clickData[idx].place_name}</div>
+        <div>${clickData[idx].address_name}</div>
+      </div>
+    </div>
+
+    <div style="
+      display: flex;
+      height: 35%;
+      color: white;
+      font-weight: bold;
+      margin-top: 8%;
+      font-size: 110%;
+      align-items: center;
+      margin-left: 20px;
+    ">
+      <img src="images/mapPage/SaveStar.png" style="width: 30px; height: 30px;">
+      <div style="margin-left: 20px;">
+        <div style="cursor: pointer;">위치저장하기</div>
+      </div>
+    </div>
+    <img src="images/mapPage/Delete.png" style="display: none; width: 15px; height: 15px; margin-left: 90%;">
+  </div>
+`;
+
+  return htmlString;
+};

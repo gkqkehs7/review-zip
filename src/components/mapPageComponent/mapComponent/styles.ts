@@ -14,13 +14,13 @@ const styles = {
   `,
 
   PurpleStar: styled.div`
-    position: absolute;
-    width: 192.54px;
-    height: 198.78px;
     background-size: 100% 100%;
     background-image: url('images/mapPage/PurpleStar.png');
+    position: absolute;
     bottom: 50px;
     right: 50px;
+    width: 150px;
+    height: 150px;
     z-index: 3;
   `,
 };

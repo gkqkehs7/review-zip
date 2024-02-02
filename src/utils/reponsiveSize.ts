@@ -12,9 +12,11 @@ const responsiveWidthHeight = (
     return {
       width: `${largeDesktopSize.width}px`,
       height:
-        typeof largeDesktopSize.height === 'string'
-          ? 'auto'
-          : `${largeDesktopSize.height}px`,
+        largeDesktopSize.height === '100%'
+          ? '100%'
+          : typeof largeDesktopSize.height === 'string'
+            ? 'auto'
+            : `${largeDesktopSize.height}px`,
     };
   }
 
@@ -22,9 +24,11 @@ const responsiveWidthHeight = (
     return {
       width: `${smallDesktopSize.width}px`,
       height:
-        typeof smallDesktopSize.height === 'string'
-          ? 'auto'
-          : `${smallDesktopSize.height}px`,
+        smallDesktopSize.height === '100%'
+          ? '100%'
+          : typeof smallDesktopSize.height === 'string'
+            ? 'auto'
+            : `${smallDesktopSize.height}px`,
     };
   }
 
@@ -32,9 +36,11 @@ const responsiveWidthHeight = (
     return {
       width: `${largeLaptopSize.width}px`,
       height:
-        typeof largeLaptopSize.height === 'string'
-          ? 'auto'
-          : `${largeLaptopSize.height}px`,
+        largeLaptopSize.height === '100%'
+          ? '100%'
+          : typeof largeLaptopSize.height === 'string'
+            ? 'auto'
+            : `${largeLaptopSize.height}px`,
     };
   }
 
@@ -42,9 +48,11 @@ const responsiveWidthHeight = (
     return {
       width: `${smallLaptopSize.width}px`,
       height:
-        typeof smallLaptopSize.height === 'string'
-          ? 'auto'
-          : `${smallLaptopSize.height}px`,
+        smallLaptopSize.height === '100%'
+          ? '100%'
+          : typeof smallLaptopSize.height === 'string'
+            ? 'auto'
+            : `${smallLaptopSize.height}px`,
     };
   }
 
@@ -52,15 +60,24 @@ const responsiveWidthHeight = (
     return {
       width: `${padSize.width}px`,
       height:
-        typeof padSize.height === 'string' ? 'auto' : `${padSize.height}px`,
+        padSize.height === '100%'
+          ? '100%'
+          : typeof padSize.height === 'string'
+            ? 'auto'
+            : `${padSize.height}px`,
     };
   }
 
   if (device === 'Phone') {
     return {
       width: `${phoneSize.width}px`,
+
       height:
-        typeof phoneSize.height === 'string' ? 'auto' : `${phoneSize.height}px`,
+        phoneSize.height === '100%'
+          ? '100%'
+          : typeof phoneSize.height === 'string'
+            ? 'auto'
+            : `${phoneSize.height}px`,
     };
   }
 
