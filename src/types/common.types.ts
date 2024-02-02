@@ -1,15 +1,8 @@
-type IUser = {
-  id: number;
-  name: string;
-  nickname: string;
-  profileImage: string;
-  follow: boolean;
-};
-
 interface User {
   id: number;
   nickname: string;
-  profileUrl: string | null;
+  profileUrl: string;
+  following?: boolean;
 }
 
 interface Post {
@@ -30,4 +23,4 @@ interface PostImages {
   url: string;
 }
 
-export type { IUser, User, Post, PostImages };
+export type { User, Post, PostImages };

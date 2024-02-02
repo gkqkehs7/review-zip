@@ -3,6 +3,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import PostComponent from '@/components/postComponent/postComponent';
 import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
 
+import { Post } from '@/types/common.types';
+import { GetRandomPostResponse } from '@/types/response.types';
+import { GetAxiosInstance } from '@/api/axios.methods';
+
 import styles from './style';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 import TopButtonImage from '/images/mainPage/TopButton.png';
@@ -18,8 +22,23 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   modalClose,
   scrollToTop,
 }) => {
+  const [randomPost, setRandomPost] = useState<Post>();
   const [loading, setLoading] = useState<boolean>(false);
   const [blur, setBlur] = useState<boolean>(false);
+
+  // 랜덤으로 게시글 한개 가져오기
+  const getRandomPost = async () => {
+    try {
+      const response =
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/3');
+
+      setRandomPost(response.data.result);
+
+      console.log(response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
   const newPost = useCallback(
@@ -39,6 +58,10 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
     [loading],
   );
 
+  useEffect(() => {
+    getRandomPost();
+  }, []);
+
   return (
     <styles.Container onWheel={(e) => newPost(e)}>
       <styles.InnerContainer
@@ -49,7 +72,13 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
         }}
       >
         {/* 게시글 component */}
-        <PostComponent modalOpen={modalOpen} modalClose={modalClose} />
+        {randomPost && (
+          <PostComponent
+            post={randomPost}
+            modalOpen={modalOpen}
+            modalClose={modalClose}
+          />
+        )}
 
         {/* 아래 화살표 */}
         <styles.ArrowImage src={DownArrowImage} />
