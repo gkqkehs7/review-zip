@@ -20,9 +20,13 @@ interface CreateImagesResponse {
 // /v1/posts/random
 interface GetRandomPostsResponse extends Array<Post> {}
 
+// /v1/posts/{postId}
+interface GetRandomPostResponse extends Post {}
+
 export type {
   KakaoLoginType,
   CreatePostResponse,
   CreateImagesResponse,
   GetRandomPostsResponse,
+  GetRandomPostResponse,
 };

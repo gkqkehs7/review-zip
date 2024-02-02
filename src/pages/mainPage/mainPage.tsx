@@ -69,6 +69,7 @@ const MainPage: React.FC = () => {
         openModal={openModal}
         handleScrollDown={handleScrollDown}
       />
+
       {randomPosts.length > 0 && (
         <MainMiddleComponent
           randomPosts={randomPosts}
