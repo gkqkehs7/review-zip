@@ -30,10 +30,21 @@ interface GetUserPostsResponse {
   isLast: boolean;
 }
 
+///v1/users/{userId}
+interface GetUserInfoResponse {
+  userId: number;
+  name: string;
+  nickname: string;
+  profileUrl: string;
+  followingNum: number;
+  followerNum: number;
+  following: boolean;
+}
 export type {
   KakaoLoginType,
   CreatePostResponse,
   CreateImagesResponse,
   GetRandomPostsResponse,
   GetUserPostsResponse,
+  GetUserInfoResponse,
 };

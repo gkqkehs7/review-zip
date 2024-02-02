@@ -2,7 +2,10 @@ import { useState, useCallback, useEffect } from 'react';
 
 import { GetAxiosInstance } from '@/api/axios.methods';
 import { CurtPost } from '@/types/common.types';
-import { GetUserPostsResponse } from '@/types/response.types';
+import {
+  GetUserPostsResponse,
+  GetUserInfoResponse,
+} from '@/types/response.types';
 import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
 import ProfileNameImageComponent from '@/components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
 import UserProfileStatsComponent from '@/components/myProfilePageComponent/userProfileStatsComponent/userProfileStatsComponent';
@@ -27,12 +30,16 @@ interface ProfilePageProps {
   isFriend?: boolean;
   friendImage?: string;
   pictures?: PictureType[];
+  friendId: number;
+  setFriendId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const MyProfilePage: React.FC<ProfilePageProps> = ({
   isFriend,
   friendImage,
   pictures,
+  friendId,
+  setFriendId,
 }) => {
   //게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
   const [postItemIsClicked, setPostClicked] = useState<boolean>(true);
@@ -48,29 +55,50 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
   //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
   const [friendListOpen, setFriendListOpen] = useState<boolean>(false);
 
-  //userId에 본인 프로필 페이지인 경우 me가 들어가고, 다른 유저인 경우는 숫자가 들어감
-  const [userId, setUserId] = useState<number | string>(3);
   // 스크랩한 게시물인 경우 /scrab이 붙음
   const [isScrab, setIsScrab] = useState<string>('');
-  const [curtPosts, SetCurtPosts] = useState<CurtPost[]>([]);
-
+  //간단한 게시물 정보
+  const [curtPosts, setCurtPosts] = useState<CurtPost[]>([]);
+  //userId 본인 프로필 페이지인 경우 me 다른 유저들은 숫자 일단은 3을 기본으로
+  const [userId, setUserId] = useState<string | number>(3);
+  //프로필 상단에 들어갈 유저 정보
+  const [userInfo, setUserInfo] = useState<GetUserInfoResponse>();
   // 포스트들 가져오기
   const getCurtPosts = async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts${isScrab}?page=0&size=3`,
+        `/v1/users/${userId}/posts${isScrab}?page=0&size=8`,
       );
 
-      SetCurtPosts(response.data.result.postList);
-      console.log(response.data.result);
+      setCurtPosts(response.data.result.postList);
+      console.log('Posts:', response.data.result);
+      console.log(`/v1/users/${userId}/posts${isScrab}?page=0&size=8`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
+  const getUserInfo = async () => {
+    try {
+      const response = await GetAxiosInstance<GetUserInfoResponse>(
+        `/v1/users/${userId}`,
+      );
+
+      setUserInfo(response.data.result);
+      console.log('UserInfo:', response.data.result);
+      console.log(`/v1/users/${userId}/`);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    isFriend && setUserId(friendId);
+    console.log(friendId); //프로필 페이지에서 친구 prop을 받은 경우
     getCurtPosts();
-  }, [userId, isScrab]);
+    getUserInfo();
+  }, [isScrab]);
 
   const modalOpen = useCallback(() => {
     setOpenModal(true);
@@ -95,6 +123,7 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
           likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}
           isReviewing={isClicked[2]}
+          setFriendId={setFriendId}
         />
       )}
       {isClicked[2] && (
@@ -103,6 +132,7 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
           likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}
           isReviewing={isClicked[2]}
+          setFriendId={setFriendId}
         />
       )}
       {/* 게시물이 클릭이 된 경우  */}
@@ -124,19 +154,25 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
         <GroupBarComponent color="purple" direction="col" />
         <styles.ProfileContainer>
           {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
-          <ProfileNameImageComponent
-            isEditProfile={isEditProfile}
-            friendProfileImage={friendImage}
-            isFriend={isFriend}
-          />
+          {userInfo && (
+            <ProfileNameImageComponent
+              isEditProfile={isEditProfile}
+              friendProfileImage={friendImage}
+              isFriend={isFriend}
+              userInfo={userInfo}
+            />
+          )}
           {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼이 들어있는 컴포넌트 */}
-          <UserProfileStatsComponent
-            setIsClicked={setIsClicked}
-            setIsEditProfile={setIsEditProfile}
-            isEditProfile={isEditProfile}
-            isFriend={isFriend}
-            setFriendListOpen={setFriendListOpen}
-          />
+          {userInfo && (
+            <UserProfileStatsComponent
+              setIsClicked={setIsClicked}
+              setIsEditProfile={setIsEditProfile}
+              isEditProfile={isEditProfile}
+              isFriend={isFriend}
+              setFriendListOpen={setFriendListOpen}
+              userInfo={userInfo}
+            />
+          )}
         </styles.ProfileContainer>
         {/*게시물 ,저장소 버튼 컴포넌트  */}
         <ButtonComponent
@@ -160,4 +196,13 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
   );
 };
 
+const defaultUserInfo: GetUserInfoResponse = {
+  userId: 1,
+  name: 'string',
+  nickname: 'string',
+  profileUrl: 'string',
+  followingNum: 0,
+  followerNum: 0,
+  following: true,
+};
 export default MyProfilePage;

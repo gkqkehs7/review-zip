@@ -5,22 +5,25 @@ import styles from './style';
 import ProfilePhotoImage from '/images/myProfilePage/ProfilePhotoImage.png';
 import PencilImage from '/images/myProfilePage/Pencil.png';
 import CameraImage from '/images/myProfilePage/Camera.png';
+import { GetUserInfoResponse } from '@/types/response.types';
 
 export interface ProfileNameImagePrps {
   isEditProfile: boolean;
   friendProfileImage?: string;
   isFriend?: boolean;
   friend?: string;
+  userInfo?: GetUserInfoResponse;
 }
 
 const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   isEditProfile,
   friendProfileImage,
   isFriend = false,
-  friend = '제니',
+  friend = '',
+  userInfo = defaultUserInfo,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [userName, setUserName] = useState<string>('엔젤');
+  const [selectedImage, setSelectedImage] = useState<File | null>();
+  const [userName, setUserName] = useState<string>(userInfo.nickname);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -30,9 +33,9 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   };
 
   useEffect(() => {
-    isFriend && setUserName(friend);
+    isFriend && setUserName(userInfo.nickname);
   }, [isFriend]);
-
+  console.log(userInfo);
   return (
     <styles.NameImageContainer>
       {/* 유저가 고른 이미지가 있을 경우 해당 이미지 url 아닌 경우 기본 이미지 주소 */}
@@ -40,9 +43,7 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
         src={
           selectedImage
             ? URL.createObjectURL(selectedImage)
-            : isFriend
-              ? friendProfileImage
-              : ProfilePhotoImage
+            : userInfo.profileUrl
         }
         alt="ProfileImage"
       />
@@ -71,6 +72,16 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
       {isEditProfile && <styles.IconEditUserName src={PencilImage} />}
     </styles.NameImageContainer>
   );
+};
+
+const defaultUserInfo: GetUserInfoResponse = {
+  userId: 0,
+  name: 'string',
+  nickname: 'string',
+  profileUrl: 'string',
+  followingNum: 0,
+  followerNum: 0,
+  following: true,
 };
 
 export default ProfileNameImageComponent;

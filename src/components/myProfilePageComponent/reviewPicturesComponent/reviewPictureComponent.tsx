@@ -20,8 +20,6 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   setPostISClicked,
   curtPost,
 }) => {
-  const [userId, setUserId] = useState<number>(0);
-
   return (
     <styles.RveiwPicturesContainer>
       {/*props를 받아서 저장소 버튼이 클릭이 되어있으면 저장소 데이터 배열을 map에 전달하고 게시물을 클릭하면 해당 데이터를 전달 */}
