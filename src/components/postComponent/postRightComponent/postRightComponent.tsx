@@ -38,7 +38,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.UserContainer>
         <styles.UserImage src={post.userInfo.profileUrl} />
         <styles.UserName>{post.userInfo.nickname}</styles.UserName>
-        <styles.PostDate>{post.createdAt.toString()}</styles.PostDate>
+        <styles.PostDate>{post.createdAt}</styles.PostDate>
       </styles.UserContainer>
 
       <styles.Line />

@@ -34,6 +34,8 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
 
   const userList = useRef<HTMLDivElement>(null);
 
+  const followUser = () => {};
+
   // 검색시에 유저 filter되게 해주는 함수
   const filterUsers = useCallback(
     (users: User[]) => {
@@ -49,13 +51,20 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
                 <styles.UserData>
                   <styles.UserImage src={user.profileUrl} />
                   <styles.UserName>{user.nickname}</styles.UserName>
-                  {user.following && (
+                  {user.isFollowing && (
                     <styles.Reviewing>•리뷰잉</styles.Reviewing>
                   )}
                 </styles.UserData>
               </Link>
+
+              {!user.isFollowing && (
+                <styles.FollowButton>
+                  <styles.FollowButtonText>리뷰잉</styles.FollowButtonText>
+                </styles.FollowButton>
+              )}
+
               {/*리뷰어 ,리뷰잉 , 공감 리스트에 따라 버튼 다르게 하는 함수 */}
-              {chooseButton(user.profileUrl, user.nickname)}
+              {/* {chooseButton(user.profileUrl, user.nickname)} */}
             </styles.UserList>
           ))}
         </>
@@ -64,31 +73,31 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
     [searchInput],
   );
 
-  const chooseButton = (profileImage: string, name: string) => {
-    if (isReviewer || isReviewing) {
-      //버튼의 틀은 동일하고 버튼의 이름과 용도가 다르게
-      return (
-        <styles.FollowButton
-          onClick={
-            isReviewing
-              ? () => {
-                  setReviewingStop(!reviewingStop);
-                  setReviewingUSer(profileImage);
-                  setReviewingUserName(name);
-                }
-              : () => {}
-          }
-        >
-          <styles.FollowText>
-            {isReviewer ? '삭제' : '리뷰잉'}
-          </styles.FollowText>
-        </styles.FollowButton>
-      );
-    } else {
-      //리뷰어나 리뷰잉이 아니면 버튼이 없음
-      return <></>;
-    }
-  };
+  // const chooseButton = (profileImage: string, name: string) => {
+  //   if (isReviewer || isReviewing) {
+  //     //버튼의 틀은 동일하고 버튼의 이름과 용도가 다르게
+  //     return (
+  //       <styles.FollowButton
+  //         onClick={
+  //           isReviewing
+  //             ? () => {
+  //                 setReviewingStop(!reviewingStop);
+  //                 setReviewingUSer(profileImage);
+  //                 setReviewingUserName(name);
+  //               }
+  //             : () => {}
+  //         }
+  //       >
+  //         <styles.FollowText>
+  //           {isReviewer ? '삭제' : '리뷰잉'}
+  //         </styles.FollowText>
+  //       </styles.FollowButton>
+  //     );
+  //   } else {
+  //     //리뷰어나 리뷰잉이 아니면 버튼이 없음
+  //     return <></>;
+  //   }
+  // };
 
   // 유저 리스트에 focus되도록 하는 함수
   useEffect(() => {

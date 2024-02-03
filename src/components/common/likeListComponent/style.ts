@@ -104,6 +104,27 @@ const styles = {
     align-items: center;
   `,
 
+  FollowButton: styled.div`
+    cursor: pointer;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    width: 91px;
+    height: 39px;
+    border-radius: 10px;
+    background-color: #957db3;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
+
+  FollowButtonText: styled.div`
+    font-weight: 500;
+    color: white;
+  `,
+
   UserImage: styled.img`
     width: 40.8px;
     border-radius: 50px;
@@ -113,18 +134,6 @@ const styles = {
   UserName: styled.div`
     font-weight: bold;
     color: black;
-  `,
-
-  FollowButton: styled.div`
-    width: 91px;
-    height: 39px;
-    border-radius: 10px;
-    background-color: #957db3;
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
   `,
 
   FollowText: styled.div`

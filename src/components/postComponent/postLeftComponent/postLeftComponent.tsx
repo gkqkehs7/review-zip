@@ -72,7 +72,7 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           <styles.UserContainer>
             <styles.UserImage src={post.userInfo.profileUrl} />
             <styles.UserName>{post.userInfo.nickname}</styles.UserName>
-            <styles.PostDate>1 days ago</styles.PostDate>
+            <styles.PostDate>{post.createdAt}</styles.PostDate>
           </styles.UserContainer>
 
           {/* image slider */}
