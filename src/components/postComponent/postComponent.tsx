@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
 import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
@@ -41,6 +41,8 @@ const PostComponent: React.FC<PostComponentProps> = ({
         `/v1/posts/${post.postId}/users`,
       );
 
+      console.log(response.data.result);
+
       setPostLikedUsers(response.data.result);
     } catch (error) {
       console.log(error);
@@ -48,7 +50,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   };
 
   // 좋아요 누르기
-  const likePost = async () => {
+  const likePost = useCallback(async () => {
     try {
       setCheckLiked(true);
 
@@ -57,10 +59,10 @@ const PostComponent: React.FC<PostComponentProps> = ({
       setCheckLiked(false);
       console.log(error);
     }
-  };
+  }, []);
 
   // 좋아요 취소
-  const unLikePost = async () => {
+  const unLikePost = useCallback(async () => {
     try {
       setCheckLiked(false);
 
@@ -69,23 +71,29 @@ const PostComponent: React.FC<PostComponentProps> = ({
       setCheckLiked(true);
       console.log(error);
     }
-  };
+  }, []);
 
-  const scrabPost = async () => {
+  // 스크랩하기
+  const scrabPost = useCallback(async () => {
     try {
       setCheckScrab(true);
+
+      await PostAxiosInstance(`/v1/posts/${post.postId}/scrabs`);
     } catch (error) {
       setCheckScrab(false);
     }
-  };
+  }, []);
 
-  const unScrabPost = async () => {
+  // 스크랩 취소
+  const unScrabPost = useCallback(async () => {
     try {
       setCheckScrab(false);
+
+      await DeleteAxiosInstance(`/v1/posts/${post.postId}/scrabs`);
     } catch (error) {
       setCheckScrab(true);
     }
-  };
+  }, []);
 
   const splitPost = () => {
     setSplit(!split);
@@ -104,7 +112,6 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const handleOutsideClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
-    // 클릭된 요소가 Container 자체인 경우에만 postIsClicked 상태를 변경
     if (event.target === event.currentTarget) {
       setPostIsClicked && setPostIsClicked(false);
     }

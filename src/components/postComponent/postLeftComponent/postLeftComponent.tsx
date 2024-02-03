@@ -72,7 +72,7 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           <styles.UserContainer>
             <styles.UserImage src={post.userInfo.profileUrl} />
             <styles.UserName>{post.userInfo.nickname}</styles.UserName>
-            <styles.PostDate>{post.createdAt.toString()}일 전</styles.PostDate>
+            <styles.PostDate>{post.createdAt}</styles.PostDate>
           </styles.UserContainer>
 
           {/* image slider */}
@@ -112,7 +112,7 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
             <styles.LikeText>
               {post.likeNum}명이 이 게시글을 좋아합니다
             </styles.LikeText>
-            <styles.LikeUserImage src={post.userInfo.nickname} />
+            {/* <styles.LikeUserImage src={post.userInfo.nickname} /> */}
           </styles.LikeContainer>
 
           {/* 게시글 내용 ,더보기 버튼 */}

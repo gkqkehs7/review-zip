@@ -9,7 +9,7 @@ import ImageListComponent from '../imageListComponent/imageListComponent';
 
 interface UploadPostLeftComponentProps {
   split: boolean;
-  splitPost: () => void;
+  splitpost: () => void;
   previewImages: { id: number; url: string }[];
   setPreviewPostImages: React.Dispatch<
     React.SetStateAction<{ id: number; url: string }[]>
@@ -19,7 +19,7 @@ interface UploadPostLeftComponentProps {
 
 const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   split,
-  splitPost,
+  splitpost,
   previewImages,
   setPreviewPostImages,
   setFiles,
@@ -38,7 +38,7 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
     <styles.Container splitPost={split}>
       {/* 윗부분 뒤로가기, 텍스트 */}
       <styles.TopContainer>
-        <styles.ToNextText onClick={splitPost}>다음</styles.ToNextText>
+        <styles.ToNextText onClick={splitpost}>다음</styles.ToNextText>
       </styles.TopContainer>
 
       {/* 윗 부분 선 */}
@@ -64,6 +64,7 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         setPostImages={setPreviewPostImages}
         imageListOpen={imageListOpen}
         setClickedImage={setClickedImage}
+        setFiles={setFiles}
       />
 
       {/* 이미지 업로드 여부 이미지 */}

@@ -16,6 +16,8 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   setClickedImage,
   setFiles,
 }) => {
+  const reader: FileReader = new FileReader();
+
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -52,6 +54,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
   const handleFileInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
+
       handleFileUpload(files);
     },
     [],
@@ -63,7 +66,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
       for (let i = 0; i < files.length; i++) {
         const file: File = files[i];
 
-        const reader: FileReader = new FileReader();
+        setFiles((prevFiles) => [...prevFiles, file]);
 
         reader.onload = (e: ProgressEvent<FileReader>) => {
           const arrayBuffer: ArrayBuffer | null = e.target
@@ -72,9 +75,6 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
           const blob: Blob = new Blob([arrayBuffer as ArrayBuffer], {
             type: file.type,
           });
-
-          // 서버에 보낼 용도로 변수에 저장
-          setFiles((prevFiles) => [...prevFiles, files[0]]);
 
           const imageUrl: string = URL.createObjectURL(blob);
 

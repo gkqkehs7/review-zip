@@ -2,7 +2,7 @@ interface User {
   id: number;
   nickname: string;
   profileUrl: string;
-  following?: boolean;
+  isFollowing?: boolean;
 }
 
 interface Post {
@@ -12,7 +12,7 @@ interface Post {
   likeNum: number;
   checkLike: boolean;
   checkScrab: boolean;
-  createdAt: Date;
+  createdAt: string;
   userInfo: User;
   hashtags: string[];
   postImages: PostImages[];

@@ -30,11 +30,9 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   const getRandomPost = async () => {
     try {
       const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/3');
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/91');
 
       setRandomPost(response.data.result);
-
-      console.log(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -42,17 +40,28 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
 
   // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
   const newPost = useCallback(
-    (event: React.WheelEvent<HTMLDivElement>) => {
-      // 스크롤이 아래로 내려갔을 때의 조건 (loading중엔 재스크롤 막기)
-      if (event.deltaY > 0 && event.deltaY > 0) {
-        if (!loading) {
-          setLoading(true);
-          setBlur(true);
-          setTimeout(() => {
-            setLoading(false);
-            setBlur(false);
-          }, 2000);
+    async (event: React.WheelEvent<HTMLDivElement>) => {
+      try {
+        // 스크롤이 아래로 내려갔을 때의 조건 (loading중엔 재스크롤 막기)
+        if (event.deltaY > 0 && event.deltaY > 0) {
+          if (!loading) {
+            setLoading(true);
+            setBlur(true);
+
+            const response =
+              await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/89');
+
+            setTimeout(() => {
+              if (response) {
+                setRandomPost(response.data.result);
+                setLoading(false);
+                setBlur(false);
+              }
+            }, 2000);
+          }
         }
+      } catch (error) {
+        console.log(error);
       }
     },
     [loading],
