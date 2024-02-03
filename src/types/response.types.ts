@@ -4,6 +4,7 @@ interface KakaoLoginType {
   accessToken: string;
 }
 
+// [Post] /v1/posts
 interface CreatePostResponse {
   postId: number;
   userId: number;
@@ -12,12 +13,12 @@ interface CreatePostResponse {
   imageIds: number[];
 }
 
-// /v1/images/users/{userId}
+// [Post] /v1/images/users/{userId}
 interface CreateImagesResponse {
   imageIds: number[];
 }
 
-// /v1/posts/random
+// [Get] /v1/posts/random
 interface GetRandomPostsResponse extends Array<Post> {}
 
 // /v1/users/{userId}/posts
@@ -40,6 +41,12 @@ interface GetUserInfoResponse {
   followerNum: number;
   following: boolean;
 }
+
+// [Get] /v1/posts/{postId}
+interface GetRandomPostResponse extends Post {}
+
+// [Get] /v1/posts/like/{postId}/users
+interface GetPostLikedUsersResponse extends Array<User> {}
 export type {
   KakaoLoginType,
   CreatePostResponse,
@@ -47,4 +54,6 @@ export type {
   GetRandomPostsResponse,
   GetUserPostsResponse,
   GetUserInfoResponse,
+  GetRandomPostResponse,
+  GetPostLikedUsersResponse,
 };

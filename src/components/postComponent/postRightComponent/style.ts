@@ -53,12 +53,13 @@ const styles = {
   `,
 
   UserImage: styled.img`
-    width: 40.8px;
-    height: 40.8px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
   `,
 
   UserName: styled.div`
+    font-weight: 600;
     margin: 0 15px 0 8px;
   `,
 

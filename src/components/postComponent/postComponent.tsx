@@ -1,28 +1,91 @@
 import { useState, useEffect } from 'react';
-import { faker } from '@faker-js/faker';
 
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
 import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
 import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
 
-import { IPost } from '@/types/posts.types';
-
 import styles from './style';
+import { Post, User } from '@/types/common.types';
+import {
+  DeleteAxiosInstance,
+  GetAxiosInstance,
+  PostAxiosInstance,
+} from '@/api/axios.methods';
+import { GetPostLikedUsersResponse } from '@/types/response.types';
+import { IoTrendingUp } from 'react-icons/io5';
 
 interface PostComponentProps {
+  post: Post;
   modalOpen: () => void;
   modalClose: () => void;
   setPostIsClicked?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
+  post,
   modalOpen,
   modalClose,
   setPostIsClicked,
 }) => {
+  const [postLikedUsers, setPostLikedUsers] = useState<User[]>([]);
   const [split, setSplit] = useState<boolean>(false);
-
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
+
+  const [checkLike, setCheckLiked] = useState<boolean>(post.checkLike);
+  const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab);
+
+  // 좋아요 누른 목록 가져오기 나중에 postId로 변경
+  const getLikeUsers = async () => {
+    try {
+      const response = await GetAxiosInstance<GetPostLikedUsersResponse>(
+        `/v1/posts/${post.postId}/users`,
+      );
+
+      setPostLikedUsers(response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 좋아요 누르기
+  const likePost = async () => {
+    try {
+      setCheckLiked(true);
+
+      await PostAxiosInstance(`/v1/posts/${post.postId}/like`);
+    } catch (error) {
+      setCheckLiked(false);
+      console.log(error);
+    }
+  };
+
+  // 좋아요 취소
+  const unLikePost = async () => {
+    try {
+      setCheckLiked(false);
+
+      await DeleteAxiosInstance(`/v1/posts/${post.postId}/like`);
+    } catch (error) {
+      setCheckLiked(true);
+      console.log(error);
+    }
+  };
+
+  const scrabPost = async () => {
+    try {
+      setCheckScrab(true);
+    } catch (error) {
+      setCheckScrab(false);
+    }
+  };
+
+  const unScrabPost = async () => {
+    try {
+      setCheckScrab(false);
+    } catch (error) {
+      setCheckScrab(true);
+    }
+  };
 
   const splitPost = () => {
     setSplit(!split);
@@ -38,41 +101,6 @@ const PostComponent: React.FC<PostComponentProps> = ({
     modalClose();
   };
 
-  const post: IPost = {
-    id: 1,
-    title: '개쩌는 제목',
-    content:
-      '나 김민우, 새로운 세상을 떠나 세상을 모험하는 멋진 모험가가 될것이니라',
-    iLike: true,
-    date: 1,
-    star: 3,
-    like: true,
-    likeNum: 150,
-    scrab: false,
-    user: {
-      id: 1,
-      email: 'test@naver.com',
-      nickname: '미누',
-      name: '김민우',
-      profileImage: faker.image.avatar(),
-    },
-    hashTags: ['제천 덕수산성', '5월 초봄'],
-    postImages: [
-      {
-        id: 1,
-        url: 'https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-      },
-      {
-        id: 2,
-        url: 'https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80',
-      },
-      {
-        id: 3,
-        url: 'https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80',
-      },
-    ],
-  };
-
   const handleOutsideClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
@@ -82,16 +110,38 @@ const PostComponent: React.FC<PostComponentProps> = ({
     }
   };
 
+  useEffect(() => {
+    getLikeUsers();
+  }, []);
+
   return (
     <styles.Container onClick={handleOutsideClick}>
       <PostRight
         split={split}
         openLikeListModal={openLikeListModal}
         post={post}
+        checkLike={checkLike}
+        checkScrab={checkScrab}
+        likePost={likePost}
+        unLikePost={unLikePost}
+        scrabPost={scrabPost}
+        unScrabPost={unScrabPost}
       />
-      <PostLeft split={split} post={post} splitPost={splitPost} />
+
+      <PostLeft
+        split={split}
+        post={post}
+        splitPost={splitPost}
+        checkLike={checkLike}
+        checkScrab={checkScrab}
+        likePost={likePost}
+        unLikePost={unLikePost}
+        scrabPost={scrabPost}
+        unScrabPost={unScrabPost}
+      />
 
       <LikeListComponent
+        users={postLikedUsers}
         likeListOpen={likeListOpen}
         closeLikeListModal={closeLikeListModal}
       />

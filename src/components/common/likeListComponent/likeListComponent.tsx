@@ -1,73 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { faker } from '@faker-js/faker';
 import { Link } from 'react-router-dom';
 
 import ReviewingStopModalComponent from '@/components/myProfilePageComponent/reviewingStopModalComponent/reviewingStopModalComponent';
 
 import { changeInputValue } from '@/hooks/chageInputValue';
 
-import { IUser } from '@/types/common.types';
+import { User } from '@/types/common.types';
 
 import styles from './style';
 import { GetUserInfoResponse } from '@/types/response.types';
 
-const users: IUser[] = [
-  {
-    id: 1,
-    name: '제니',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-
-  {
-    id: 2,
-    name: '예니',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-
-  {
-    id: 3,
-    name: '민우',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-
-  {
-    id: 4,
-    name: '나이',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-
-  {
-    id: 5,
-    name: '거미',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-  {
-    id: 6,
-    name: '코끼리',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-  {
-    id: 7,
-    name: '미누',
-    nickname: '닉넴1',
-    profileImage: faker.image.avatar(),
-    follow: false,
-  },
-];
-
 interface LikeListComponentProps {
+  users: User[];
   closeLikeListModal: () => void;
   likeListOpen: boolean;
   isReviewer?: boolean;
@@ -78,6 +22,7 @@ interface LikeListComponentProps {
 }
 
 const LikeListComponent: React.FC<LikeListComponentProps> = ({
+  users,
   closeLikeListModal,
   likeListOpen,
   isReviewer,
@@ -98,14 +43,14 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
 
   // 검색시에 유저 filter되게 해주는 함수
   const filterUsers = useCallback(
-    (users: IUser[]) => {
-      const filterUserlist = users.filter((user: IUser) =>
-        user.name.includes(searchInput),
+    (users: User[]) => {
+      const filterUserlist = users.filter((user: User) =>
+        user.nickname.includes(searchInput),
       );
 
       return (
         <>
-          {filterUserlist.map((user: IUser) => (
+          {filterUserlist.map((user: User) => (
             <styles.UserList key={user.id}>
               <Link
                 to="/friendProfilePage"
@@ -114,17 +59,15 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
                 }}
               >
                 <styles.UserData>
-                  <styles.UserImage src={user.profileImage} />
-                  <styles.UserName>{user.name}</styles.UserName>
-                  {user.follow ? (
+                  <styles.UserImage src={user.profileUrl} />
+                  <styles.UserName>{user.nickname}</styles.UserName>
+                  {user.following && (
                     <styles.Reviewing>•리뷰잉</styles.Reviewing>
-                  ) : (
-                    <div></div> //리뷰잉을 해놓지 않았으면 아무것도 안뜸
                   )}
                 </styles.UserData>
               </Link>
               {/*리뷰어 ,리뷰잉 , 공감 리스트에 따라 버튼 다르게 하는 함수 */}
-              {chooseButton(user.profileImage, user.name)}
+              {chooseButton(user.profileUrl, user.nickname)}
             </styles.UserList>
           ))}
         </>

@@ -18,8 +18,6 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
   closeLoadingModal,
   openLoadingModal,
 }) => {
-  console.log(post);
-
   return (
     <styles.Container
       style={{

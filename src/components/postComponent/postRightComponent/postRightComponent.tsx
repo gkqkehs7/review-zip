@@ -1,8 +1,6 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 
-import { checkDevice } from '@/utils/checkDeviceSize';
-
-import { IPost } from '@/types/posts.types';
+import { Post } from '@/types/common.types';
 
 import styles from './style';
 import ScrabButtonImage from '/images/post/ScrabButton.png';
@@ -12,39 +10,49 @@ import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
-  post: IPost;
+  post: Post;
   split: boolean;
   openLikeListModal: () => void;
+  checkLike: boolean;
+  checkScrab: boolean;
+  likePost: () => Promise<void>;
+  unLikePost: () => Promise<void>;
+  scrabPost: () => Promise<void>;
+  unScrabPost: () => Promise<void>;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
   post,
   split,
   openLikeListModal,
+  checkLike,
+  checkScrab,
+  likePost,
+  unLikePost,
+  scrabPost,
+  unScrabPost,
 }) => {
-  const device = checkDevice();
-
   return (
     <styles.Container splitPost={split}>
       {/* 유저 정보 */}
       <styles.UserContainer>
-        <styles.UserImage src={post.user.profileImage} />
-        <styles.UserName>{post.user.nickname}</styles.UserName>
-        <styles.PostDate>{post.date}</styles.PostDate>
+        <styles.UserImage src={post.userInfo.profileUrl} />
+        <styles.UserName>{post.userInfo.nickname}</styles.UserName>
+        <styles.PostDate>{post.createdAt.toString()}</styles.PostDate>
       </styles.UserContainer>
 
       <styles.Line />
 
       {/* 게시글 내용 */}
       <styles.PostContentContainer>
-        <styles.PostContent>{post.content}</styles.PostContent>
+        <styles.PostContent>{post.comment}</styles.PostContent>
       </styles.PostContentContainer>
 
       {/* 해시태그들 */}
       <styles.HashTagContainer>
-        {post.hashTags.map((hashTag, index) => (
+        {post.hashtags.map((hashtag, index) => (
           <styles.HashTag key={index}>
-            <styles.HashTagText># {hashTag}</styles.HashTagText>
+            <styles.HashTagText># {hashtag}</styles.HashTagText>
           </styles.HashTag>
         ))}
       </styles.HashTagContainer>
@@ -54,7 +62,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
         <styles.LikeText onClick={openLikeListModal}>
           {post.likeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
-        <styles.LikeUserImage src={post.user.profileImage} />
+        <styles.LikeUserImage src={post.userInfo.profileUrl} />
       </styles.LikeContainer>
 
       {/* 아래 선 */}
@@ -64,22 +72,22 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.Buttons>
         {/* 좋아요 버튼 */}
         <styles.LikeSrabButtons>
-          {post.like ? (
-            <styles.LikeButton src={LikeButtonImage} />
+          {checkLike ? (
+            <styles.LikeButton src={LikeButtonImage} onClick={unLikePost} />
           ) : (
-            <styles.LikeButton src={NotLikeButtonImage} />
+            <styles.LikeButton src={NotLikeButtonImage} onClick={likePost} />
           )}
 
           {/* 스크랩 버튼 */}
-          {post.scrab ? (
-            <styles.ScrabButton src={ScrabButtonImage} />
+          {checkScrab ? (
+            <styles.ScrabButton src={ScrabButtonImage} onClick={unScrabPost} />
           ) : (
-            <styles.ScrabButton src={NotScrabButtonImage} />
+            <styles.ScrabButton src={NotScrabButtonImage} onClick={scrabPost} />
           )}
         </styles.LikeSrabButtons>
 
         {/* 별점 */}
-        <StarRatingComponent count={post.star} width={30} all={true} />
+        <StarRatingComponent count={post.point} all={true} />
       </styles.Buttons>
 
       {/* 우주선 아이콘 */}

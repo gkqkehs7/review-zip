@@ -22,7 +22,6 @@ const FrameComponent: React.FC<FrameComponentProps> = ({
 }) => {
   const deviceSize = checkDevice();
 
-  console.log(post);
   return (
     <styles.Container
       onClick={openLoadingModal}

@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect, memo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GetAxiosInstance } from '@/api/axios.methods';
-import { CurtPost } from '@/types/common.types';
+import { CurtPost, Post, User } from '@/types/common.types';
 import {
   GetUserPostsResponse,
   GetUserInfoResponse,
+  GetRandomPostResponse,
 } from '@/types/response.types';
 import ReviewPictureComponent from '@/components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
 import ProfileNameImageComponent from '@/components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
@@ -58,7 +59,22 @@ const MyProfilePage: React.FC = memo(({}) => {
   const [userInfoLoading, setUserInfoLoading] = useState<boolean>(false);
 
   const location = useLocation();
+  const [post, setPost] = useState<Post>(defaultPost);
+  const [users, setUsers] = useState<User[]>(defaultUser);
 
+  // 랜덤으로 게시글 한개 가져오기
+  const getPost = async () => {
+    try {
+      const response =
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/3');
+
+      setPost(response.data.result);
+
+      console.log(response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // 포스트들 가져오기
   const getCurtPosts = async () => {
     setCurtPostLoading(true);
@@ -113,6 +129,7 @@ const MyProfilePage: React.FC = memo(({}) => {
     if (userId) {
       getCurtPosts();
       getUserInfo();
+      getPost();
     }
   }, [userId, isScrab]);
 
@@ -135,6 +152,7 @@ const MyProfilePage: React.FC = memo(({}) => {
       {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔 */}
       {isClicked[1] && (
         <LikeListComponent
+          users={users}
           closeLikeListModal={closeFriendListModal}
           likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}
@@ -145,6 +163,7 @@ const MyProfilePage: React.FC = memo(({}) => {
       )}
       {isClicked[2] && (
         <LikeListComponent
+          users={users}
           closeLikeListModal={closeFriendListModal}
           likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}
@@ -157,6 +176,7 @@ const MyProfilePage: React.FC = memo(({}) => {
       {postIsClicked && (
         <styles.Overlay>
           <PostComponent
+            post={post}
             modalOpen={modalOpen}
             modalClose={modalClose}
             setPostIsClicked={setPostIsClicked}
@@ -217,4 +237,26 @@ const MyProfilePage: React.FC = memo(({}) => {
     </styles.Container>
   );
 });
+
+const defaultPost: Post = {
+  postId: 0,
+  comment: '',
+  point: 0,
+  likeNum: 0,
+  checkLike: false,
+  checkScrab: false,
+  createdAt: new Date(),
+  userInfo: { id: 3, nickname: 'ahffk', profileUrl: '', following: true },
+  hashtags: [],
+  postImages: [],
+};
+
+const defaultUser: User[] = [
+  {
+    id: 3,
+    nickname: 'ahffk',
+    profileUrl: '',
+    following: true,
+  },
+];
 export default MyProfilePage;

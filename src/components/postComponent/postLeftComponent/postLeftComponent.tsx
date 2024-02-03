@@ -1,9 +1,7 @@
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
-import { checkDevice } from '@/utils/checkDeviceSize';
-
-import { IPost } from '@/types/posts.types';
+import { Post } from '@/types/common.types';
 
 import { styles, postLeftStyles } from './style';
 import ScrabButtonImage from '/images/post/ScrabButton.png';
@@ -13,18 +11,28 @@ import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostLeftComponentProps {
+  post: Post;
   split: boolean;
-  post: IPost;
   splitPost: () => void;
+  checkLike: boolean;
+  checkScrab: boolean;
+  likePost: () => Promise<void>;
+  unLikePost: () => Promise<void>;
+  scrabPost: () => Promise<void>;
+  unScrabPost: () => Promise<void>;
 }
 
 const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
   split,
   post,
   splitPost,
+  checkLike,
+  checkScrab,
+  likePost,
+  unLikePost,
+  scrabPost,
+  unScrabPost,
 }) => {
-  const device = checkDevice();
-
   const splitContent = (content: string): string => {
     if (content.length < 15) {
       return content;
@@ -62,9 +70,9 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
 
           {/* 맨 위 유저 정보, 게시글 날짜 */}
           <styles.UserContainer>
-            <styles.UserImage src={post.user.profileImage} />
-            <styles.UserName>{post.user.nickname}</styles.UserName>
-            <styles.PostDate>{post.date}일 전</styles.PostDate>
+            <styles.UserImage src={post.userInfo.profileUrl} />
+            <styles.UserName>{post.userInfo.nickname}</styles.UserName>
+            <styles.PostDate>{post.createdAt.toString()}일 전</styles.PostDate>
           </styles.UserContainer>
 
           {/* image slider */}
@@ -73,20 +81,30 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           {/* 좋아요, 스크랩, 별 버튼 */}
           <styles.Buttons>
             <styles.LikeSrabButtons>
-              {post.like ? (
-                <styles.LikeButton src={LikeButtonImage} />
+              {checkLike ? (
+                <styles.LikeButton src={LikeButtonImage} onClick={unLikePost} />
               ) : (
-                <styles.LikeButton src={NotLikeButtonImage} />
+                <styles.LikeButton
+                  src={NotLikeButtonImage}
+                  onClick={likePost}
+                />
               )}
 
-              {post.scrab ? (
-                <styles.ScrabButton src={ScrabButtonImage} />
+              {/* 스크랩 버튼 */}
+              {checkScrab ? (
+                <styles.ScrabButton
+                  src={ScrabButtonImage}
+                  onClick={unScrabPost}
+                />
               ) : (
-                <styles.ScrabButton src={NotScrabButtonImage} />
+                <styles.ScrabButton
+                  src={NotScrabButtonImage}
+                  onClick={scrabPost}
+                />
               )}
             </styles.LikeSrabButtons>
 
-            <StarRatingComponent count={post.star} all={true} />
+            <StarRatingComponent count={post.point} all={true} />
           </styles.Buttons>
 
           {/* 좋아요 개수 */}
@@ -94,13 +112,13 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
             <styles.LikeText>
               {post.likeNum}명이 이 게시글을 좋아합니다
             </styles.LikeText>
-            <styles.LikeUserImage src={post.user.profileImage} />
+            <styles.LikeUserImage src={post.userInfo.nickname} />
           </styles.LikeContainer>
 
           {/* 게시글 내용 ,더보기 버튼 */}
           <styles.PostContentContainer>
             <styles.PostContent>
-              {splitContent(post.content)}
+              {splitContent(post.comment)}
             </styles.PostContent>
             <styles.MoreContentButton onClick={splitPost}>
               더보기
