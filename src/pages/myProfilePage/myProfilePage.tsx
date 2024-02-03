@@ -53,7 +53,7 @@ const MyProfilePage: React.FC = memo(({}) => {
   const [isFriend, setIsFriend] = useState<boolean>(false);
   //userId에 본인 프로필 페이지인 경우 me가 들어가고, 다른 유저인 경우는 숫자가 들어감
   const [friendId, setFriendId] = useState<number>(1);
-  //***문제 == > 데이터를 서버에서 받아와도 그 이전에 받아온 데이터를 props로 내려버려서 화면에 이전에 받아온 데이터가 떠버림 근데 그래도 state가 바뀌면 재랜더링이 되야 되는데 안됨 -> loading이 끝났을 때만 화면에 띄우게끔 state를 만듦
+  //curtPost의 로딩
   const [curtPostLoading, setCurtPostLoading] = useState<boolean>(false);
   //userInfo의 로딩
   const [userInfoLoading, setUserInfoLoading] = useState<boolean>(false);
@@ -62,7 +62,7 @@ const MyProfilePage: React.FC = memo(({}) => {
   const [post, setPost] = useState<Post>(defaultPost);
   const [users, setUsers] = useState<User[]>(defaultUser);
 
-  // 랜덤으로 게시글 한개 가져오기
+  //일단 prop으로 내릴 post하나 가져오기
   const getPost = async () => {
     try {
       const response =
@@ -75,17 +75,16 @@ const MyProfilePage: React.FC = memo(({}) => {
       console.log(error);
     }
   };
+
   // 포스트들 가져오기
   const getCurtPosts = async () => {
-    setCurtPostLoading(true);
+    setCurtPostLoading(true); //***문제 == > 데이터를 서버에서 받아와도 그 이전에 받아온 데이터를 props로 내려버려서 화면에 이전에 받아온 데이터가 떠버림 근데 그래도 state가 바뀌면서 props로 내려가는게 바뀌면 리랜더링이 되야 되는데 안됨 -> 일단 loading이 끝났을 때만 화면에 띄우게끔 state를 만듦
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
         `/v1/users/${userId}/posts${isScrab}?page=0&size=8`,
       );
-      //일단은 배열 길이로 같은 데이터인지 다른 데이터인지 구볋함
-      if (response.data.result.postList.length !== curtPosts.length) {
-        setCurtPosts(response.data.result.postList);
-      }
+      setCurtPosts(response.data.result.postList);
+
       console.log('Posts:', response.data.result);
       console.log(`/v1/users/${userId}/posts${isScrab}?page=0&size=8`);
     } catch (error) {
@@ -96,6 +95,7 @@ const MyProfilePage: React.FC = memo(({}) => {
   };
 
   console.log(userId);
+
   // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
   const getUserInfo = async () => {
     setUserInfoLoading(true);
@@ -103,9 +103,8 @@ const MyProfilePage: React.FC = memo(({}) => {
       const response = await GetAxiosInstance<GetUserInfoResponse>(
         `/v1/users/${userId}`,
       );
-      if (response.data.result.userId !== userInfo?.userId) {
-        setUserInfo(response.data.result);
-      } // 이전에 받아온 데이터와 다른 경우에만 set을 해줌
+      setUserInfo(response.data.result);
+
       console.log('UserInfo:', response.data.result);
       console.log(`/v1/users/${userId}/`);
     } catch (error) {
@@ -118,7 +117,7 @@ const MyProfilePage: React.FC = memo(({}) => {
   useEffect(() => {
     // 현재 경로에 따라 userId를 설정
     if (location.pathname === '/myProfilePage') {
-      setUserId(userId);
+      setUserId(3);
     } else if (location.pathname.startsWith('/friendProfilePage')) {
       setUserId(friendId);
     }
@@ -192,14 +191,14 @@ const MyProfilePage: React.FC = memo(({}) => {
         <GroupBarComponent color="purple" direction="col" />
         <styles.ProfileContainer>
           {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
-          {!userInfoLoading && userInfo ? ( //유저 정보가 새로 로딩이 된 경우
+          {!userInfoLoading && userInfo ? (
             <ProfileNameImageComponent
               isEditProfile={isEditProfile}
               isFriend={isFriend}
               userInfo={userInfo}
             />
           ) : (
-            <LoadingModalComponent />
+            <LoadingModalComponent /> //로딩이 끝나고 새 데이터를 받아오는 시간차 때문에 화면이 너무 깜빡거려서 일단 데이터 가져오는 동안 로딩 컴포넌트 뛰워둠
           )}
           {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼이 들어있는 컴포넌트 */}
           {!userInfoLoading && userInfo ? (
