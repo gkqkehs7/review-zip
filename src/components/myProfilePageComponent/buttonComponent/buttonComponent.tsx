@@ -7,6 +7,7 @@ interface ButtonClickedProps {
   setPostClicked: React.Dispatch<React.SetStateAction<boolean>>;
   storageIsClicked: boolean;
   setStorageClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsScrab: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ButtonComponent: React.FC<ButtonClickedProps> = ({
@@ -14,6 +15,7 @@ const ButtonComponent: React.FC<ButtonClickedProps> = ({
   setPostClicked,
   storageIsClicked,
   setStorageClicked,
+  setIsScrab,
 }) => {
   return (
     <styles.TopButtonContainer>
@@ -26,6 +28,7 @@ const ButtonComponent: React.FC<ButtonClickedProps> = ({
         onClick={() => {
           setPostClicked(true);
           setStorageClicked(false);
+          setIsScrab('');
         }}
       >
         <styles.Buttonimg src={PostItem} />
@@ -36,6 +39,7 @@ const ButtonComponent: React.FC<ButtonClickedProps> = ({
         onClick={() => {
           setPostClicked(false);
           setStorageClicked(true);
+          setIsScrab('/scrabs');
         }}
       >
         <styles.Buttonimg src={Storage} />

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import { GetUserInfoResponse } from '@/types/response.types';
 import styles from './style';
 import Map from '/images/friendProfilePage/MapImage.png';
 
@@ -9,6 +9,7 @@ export interface UserProfileStatsProps {
   isEditProfile: boolean;
   isFriend: boolean | undefined;
   setFriendListOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userInfo?: GetUserInfoResponse;
 }
 const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   setIsClicked,
@@ -16,6 +17,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   isEditProfile,
   isFriend,
   setFriendListOpen,
+  userInfo = defaultUserInfo,
 }) => {
   return (
     <div>
@@ -25,7 +27,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
             setIsClicked([true, false, false]);
           }}
         >
-          게시물 09
+          게시물
         </styles.UserProfileStats>
         <styles.UserProfileStats
           onClick={() => {
@@ -33,7 +35,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
             setFriendListOpen(true);
           }}
         >
-          리뷰어 30
+          리뷰어 {userInfo.followerNum}
         </styles.UserProfileStats>
         <styles.UserProfileStats
           onClick={() => {
@@ -41,7 +43,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
             setFriendListOpen(true);
           }}
         >
-          리뷰잉 30
+          리뷰잉 {userInfo.followingNum}
         </styles.UserProfileStats>
       </styles.UserProfileStatsContainer>
       <styles.EditProfileButtonContainer>
@@ -55,7 +57,7 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
           {isFriend ? '리뷰잉' : '프로필 수정'}
         </styles.EditProfileButton>
         {isFriend && (
-          <Link to="">
+          <Link to="/mapPage">
             <styles.PlusButton src={Map} />
           </Link>
         )}
@@ -64,4 +66,13 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   );
 };
 
+const defaultUserInfo: GetUserInfoResponse = {
+  userId: 0,
+  name: 'string',
+  nickname: 'string',
+  profileUrl: 'string',
+  followingNum: 0,
+  followerNum: 0,
+  following: true,
+};
 export default UserProfileStatsComponent;

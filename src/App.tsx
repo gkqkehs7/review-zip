@@ -10,7 +10,6 @@ import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import UploadPage from '@/pages/uploadPage/uploadPage';
 import TestPage from '@pages/testPage/testPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
-import FreindProfilePage from '@/pages/friendProfilePage/freindProfilePage';
 import KakaoLoginPage from './pages/kakaoLoginPage/kakaoLoginPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -40,10 +39,7 @@ function App() {
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/testPage" element={<TestPage />}></Route>
           <Route path="/hashtagPage" element={<HashtagPage />}></Route>
-          <Route
-            path="/friendProfilePage"
-            element={<FreindProfilePage />}
-          ></Route>
+          <Route path="/friendProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/mapPage" element={<MapPage />}></Route>
         </Routes>
       </BrowserRouter>

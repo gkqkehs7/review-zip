@@ -8,6 +8,7 @@ import { changeInputValue } from '@/hooks/chageInputValue';
 import { User } from '@/types/common.types';
 
 import styles from './style';
+import { GetUserInfoResponse } from '@/types/response.types';
 
 interface LikeListComponentProps {
   users: User[];
@@ -15,6 +16,9 @@ interface LikeListComponentProps {
   likeListOpen: boolean;
   isReviewer?: boolean;
   isReviewing?: boolean;
+  setFriendId: React.Dispatch<React.SetStateAction<number>>;
+  setIsFriend: React.Dispatch<React.SetStateAction<boolean>>;
+  userInfo?: GetUserInfoResponse;
 }
 
 const LikeListComponent: React.FC<LikeListComponentProps> = ({
@@ -23,6 +27,9 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
   likeListOpen,
   isReviewer,
   isReviewing,
+  setFriendId,
+  setIsFriend,
+  userInfo,
 }) => {
   const [searchInput, setSearchInput] = useState<string>('');
   //리뷰잉 취소
@@ -45,7 +52,12 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         <>
           {filterUserlist.map((user: User) => (
             <styles.UserList key={user.id}>
-              <Link to="/friendProfilePage">
+              <Link
+                to="/friendProfilePage"
+                onClick={() => {
+                  setFriendId(1);
+                }}
+              >
                 <styles.UserData>
                   <styles.UserImage src={user.profileUrl} />
                   <styles.UserName>{user.nickname}</styles.UserName>
