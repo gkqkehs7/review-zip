@@ -40,10 +40,7 @@ function App() {
           <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/testPage" element={<TestPage />}></Route>
           <Route path="/hashtagPage" element={<HashtagPage />}></Route>
-          <Route
-            path="/friendProfilePage"
-            element={<FreindProfilePage />}
-          ></Route>
+          <Route path="/friendProfilePage" element={<MyProfilePage />}></Route>
           <Route path="/mapPage" element={<MapPage />}></Route>
         </Routes>
       </BrowserRouter>

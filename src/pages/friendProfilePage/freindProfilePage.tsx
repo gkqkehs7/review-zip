@@ -33,15 +33,7 @@ const FreindProfilePage: React.FC = () => {
     setIsFriend(true);
   }, []);
 
-  return (
-    <MyProfilePage
-      isFriend={isFriend}
-      friendImage={FriendImage}
-      pictures={posts}
-      friendId={friendId}
-      setFriendId={setFriendId}
-    />
-  );
+  return <MyProfilePage />;
 };
 
 export default FreindProfilePage;

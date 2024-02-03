@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
-
+import { useState, useCallback, useEffect, memo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { GetAxiosInstance } from '@/api/axios.methods';
 import { CurtPost } from '@/types/common.types';
 import {
@@ -16,6 +16,7 @@ import PostComponent from '@/components/postComponent/postComponent';
 import styles from './style';
 import MainLogo from '/images/myProfilePage/MainLogoImage.png';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
+import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
 
 //게시물 정보를 담은 배열의 게시물 타입
 export type PictureType = {
@@ -25,22 +26,7 @@ export type PictureType = {
   scrabNum: number;
 };
 
-//프로필 페이지 Props 타입
-interface ProfilePageProps {
-  isFriend?: boolean;
-  friendImage?: string;
-  pictures?: PictureType[];
-  friendId: number;
-  setFriendId: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const MyProfilePage: React.FC<ProfilePageProps> = ({
-  isFriend,
-  friendImage,
-  pictures,
-  friendId,
-  setFriendId,
-}) => {
+const MyProfilePage: React.FC = memo(({}) => {
   //게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
   const [postItemIsClicked, setPostClicked] = useState<boolean>(true);
   const [storageIsClicked, setStorageClicked] = useState<boolean>(false);
@@ -63,42 +49,72 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
   const [userId, setUserId] = useState<string | number>(3);
   //프로필 상단에 들어갈 유저 정보
   const [userInfo, setUserInfo] = useState<GetUserInfoResponse>();
+  const [isFriend, setIsFriend] = useState<boolean>(false);
+  //userId에 본인 프로필 페이지인 경우 me가 들어가고, 다른 유저인 경우는 숫자가 들어감
+  const [friendId, setFriendId] = useState<number>(1);
+  //***문제 == > 데이터를 서버에서 받아와도 그 이전에 받아온 데이터를 props로 내려버려서 화면에 이전에 받아온 데이터가 떠버림 근데 그래도 state가 바뀌면 재랜더링이 되야 되는데 안됨 -> loading이 끝났을 때만 화면에 띄우게끔 state를 만듦
+  const [curtPostLoading, setCurtPostLoading] = useState<boolean>(false);
+  //userInfo의 로딩
+  const [userInfoLoading, setUserInfoLoading] = useState<boolean>(false);
+
+  const location = useLocation();
+
   // 포스트들 가져오기
   const getCurtPosts = async () => {
+    setCurtPostLoading(true);
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
         `/v1/users/${userId}/posts${isScrab}?page=0&size=8`,
       );
-
-      setCurtPosts(response.data.result.postList);
+      //일단은 배열 길이로 같은 데이터인지 다른 데이터인지 구볋함
+      if (response.data.result.postList.length !== curtPosts.length) {
+        setCurtPosts(response.data.result.postList);
+      }
       console.log('Posts:', response.data.result);
       console.log(`/v1/users/${userId}/posts${isScrab}?page=0&size=8`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setCurtPostLoading(false); //로딩이 끝난 경우 false로 바꾸기
     }
   };
 
+  console.log(userId);
   // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
   const getUserInfo = async () => {
+    setUserInfoLoading(true);
     try {
       const response = await GetAxiosInstance<GetUserInfoResponse>(
         `/v1/users/${userId}`,
       );
-
-      setUserInfo(response.data.result);
+      if (response.data.result.userId !== userInfo?.userId) {
+        setUserInfo(response.data.result);
+      } // 이전에 받아온 데이터와 다른 경우에만 set을 해줌
       console.log('UserInfo:', response.data.result);
       console.log(`/v1/users/${userId}/`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setUserInfoLoading(false);
     }
   };
 
   useEffect(() => {
-    isFriend && setUserId(friendId);
-    console.log(friendId); //프로필 페이지에서 친구 prop을 받은 경우
-    getCurtPosts();
-    getUserInfo();
-  }, [isScrab]);
+    // 현재 경로에 따라 userId를 설정
+    if (location.pathname === '/myProfilePage') {
+      setUserId(userId);
+    } else if (location.pathname.startsWith('/friendProfilePage')) {
+      setUserId(friendId);
+    }
+  }, [location.pathname, friendId]);
+
+  //경로가 이동되면서 userId가 바뀌거나 아니면 저장소 버튼을 눌러서 isScrab이 달라지면 서버에서 데이터를 호출
+  useEffect(() => {
+    if (userId) {
+      getCurtPosts();
+      getUserInfo();
+    }
+  }, [userId, isScrab]);
 
   const modalOpen = useCallback(() => {
     setOpenModal(true);
@@ -124,6 +140,7 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
           isReviewer={isClicked[1]}
           isReviewing={isClicked[2]}
           setFriendId={setFriendId}
+          setIsFriend={setIsFriend}
         />
       )}
       {isClicked[2] && (
@@ -133,6 +150,7 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
           isReviewer={isClicked[1]}
           isReviewing={isClicked[2]}
           setFriendId={setFriendId}
+          setIsFriend={setIsFriend}
         />
       )}
       {/* 게시물이 클릭이 된 경우  */}
@@ -154,16 +172,17 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
         <GroupBarComponent color="purple" direction="col" />
         <styles.ProfileContainer>
           {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
-          {userInfo && (
+          {!userInfoLoading && userInfo ? ( //유저 정보가 새로 로딩이 된 경우
             <ProfileNameImageComponent
               isEditProfile={isEditProfile}
-              friendProfileImage={friendImage}
               isFriend={isFriend}
               userInfo={userInfo}
             />
+          ) : (
+            <LoadingModalComponent />
           )}
           {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼이 들어있는 컴포넌트 */}
-          {userInfo && (
+          {!userInfoLoading && userInfo ? (
             <UserProfileStatsComponent
               setIsClicked={setIsClicked}
               setIsEditProfile={setIsEditProfile}
@@ -172,6 +191,8 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
               setFriendListOpen={setFriendListOpen}
               userInfo={userInfo}
             />
+          ) : (
+            <LoadingModalComponent />
           )}
         </styles.ProfileContainer>
         {/*게시물 ,저장소 버튼 컴포넌트  */}
@@ -183,26 +204,17 @@ const MyProfilePage: React.FC<ProfilePageProps> = ({
           setIsScrab={setIsScrab}
         />
         {/* 리뷰 게시물 이미지 컴포넌트 */}
-        {curtPosts.length > 0 && (
+        {!curtPostLoading && curtPosts ? (
           <ReviewPictureComponent
             storageIsClicked={storageIsClicked}
             setPostISClicked={setPostIsClicked}
-            picture={pictures}
             curtPost={curtPosts}
           />
+        ) : (
+          <></>
         )}
       </styles.ProfilePictureContainer>
     </styles.Container>
   );
-};
-
-const defaultUserInfo: GetUserInfoResponse = {
-  userId: 1,
-  name: 'string',
-  nickname: 'string',
-  profileUrl: 'string',
-  followingNum: 0,
-  followerNum: 0,
-  following: true,
-};
+});
 export default MyProfilePage;

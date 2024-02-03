@@ -73,6 +73,7 @@ interface LikeListComponentProps {
   isReviewer?: boolean;
   isReviewing?: boolean;
   setFriendId: React.Dispatch<React.SetStateAction<number>>;
+  setIsFriend: React.Dispatch<React.SetStateAction<boolean>>;
   userInfo?: GetUserInfoResponse;
 }
 
@@ -82,6 +83,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
   isReviewer,
   isReviewing,
   setFriendId,
+  setIsFriend,
   userInfo,
 }) => {
   const [searchInput, setSearchInput] = useState<string>('');
