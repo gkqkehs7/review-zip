@@ -1,8 +1,8 @@
 interface User {
-  id: number;
+  userId: number;
   nickname: string;
   profileUrl: string;
-  isFollowing?: boolean;
+  following?: boolean;
 }
 
 interface Post {

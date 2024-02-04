@@ -41,8 +41,6 @@ const PostComponent: React.FC<PostComponentProps> = ({
         `/v1/posts/${post.postId}/users`,
       );
 
-      console.log(response.data.result);
-
       setPostLikedUsers(response.data.result);
     } catch (error) {
       console.log(error);
@@ -151,6 +149,8 @@ const PostComponent: React.FC<PostComponentProps> = ({
         users={postLikedUsers}
         likeListOpen={likeListOpen}
         closeLikeListModal={closeLikeListModal}
+        isReviewer={false}
+        isReviewing={false}
       />
     </styles.Container>
   );
