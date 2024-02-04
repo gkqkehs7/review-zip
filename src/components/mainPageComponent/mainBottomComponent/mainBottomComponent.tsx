@@ -32,7 +32,7 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   const getRandomPost = async () => {
     try {
       const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/80');
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/83');
 
       setRandomPost(response.data.result);
     } catch (error) {
@@ -45,6 +45,8 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
     try {
       setAlertModalOpen(false);
       await DeleteAxiosInstance(`/v1/posts/${randomPost?.postId}`);
+
+      // 삭제하고 새로운 게시글 불러오기
       await newPost();
     } catch (error) {
       console.error(error);
