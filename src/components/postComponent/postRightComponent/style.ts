@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 const moveRight = () => keyframes`
   to {
@@ -46,10 +47,16 @@ const styles = {
           `}
   `,
 
-  UserContainer: styled.div`
+  TopContainer: styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 5px;
+  `,
+
+  TopLeftContainer: styled.div`
+    display: flex;
+    align-items: center;
   `,
 
   UserImage: styled.img`
@@ -63,7 +70,23 @@ const styles = {
     margin: 0 15px 0 8px;
   `,
 
+  TopRightContainer: styled.div`
+    display: flex;
+    align-items: center;
+  `,
+
   PostDate: styled.div``,
+
+  DeleteButton: styled(FaRegTrashAlt)`
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  `,
 
   Line: styled.div`
     border-top: 1px solid black;

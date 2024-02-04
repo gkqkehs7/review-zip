@@ -12,6 +12,7 @@ interface Post {
   likeNum: number;
   checkLike: boolean;
   checkScrab: boolean;
+  checkMine: boolean;
   createdAt: string;
   userInfo: User;
   hashtags: string[];

@@ -18,6 +18,7 @@ interface PostComponentProps {
   post: Post;
   modalOpen: () => void;
   modalClose: () => void;
+  openAlertModal: () => void;
   setPostIsClicked?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -25,6 +26,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   post,
   modalOpen,
   modalClose,
+  openAlertModal,
   setPostIsClicked,
 }) => {
   const [postLikedUsers, setPostLikedUsers] = useState<User[]>([]);
@@ -131,6 +133,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
         unLikePost={unLikePost}
         scrabPost={scrabPost}
         unScrabPost={unScrabPost}
+        openAlertModal={openAlertModal}
       />
 
       <PostLeft

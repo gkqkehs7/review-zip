@@ -5,11 +5,12 @@ import LoadingModalComponent from '@/components/common/loadingModalComponent/loa
 
 import { Post } from '@/types/common.types';
 import { GetRandomPostResponse } from '@/types/response.types';
-import { GetAxiosInstance } from '@/api/axios.methods';
+import { DeleteAxiosInstance, GetAxiosInstance } from '@/api/axios.methods';
 
 import styles from './style';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 import TopButtonImage from '/images/mainPage/TopButton.png';
+import AlertComponent from '@/components/common/alertComponent/alertComponent';
 
 interface MainBottomComponentProps {
   modalOpen: () => void;
@@ -23,41 +24,73 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   scrollToTop,
 }) => {
   const [randomPost, setRandomPost] = useState<Post>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [blur, setBlur] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false); // loading modal 띄우기용
+  const [blur, setBlur] = useState<boolean>(false); // 모자이크 처리용
+  const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false); // delete modal 띄우기용
 
   // 랜덤으로 게시글 한개 가져오기
   const getRandomPost = async () => {
     try {
       const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/91');
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/80');
 
       setRandomPost(response.data.result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 게시글 삭제
+  const deletePost = useCallback(async () => {
+    try {
+      setAlertModalOpen(false);
+      await DeleteAxiosInstance(`/v1/posts/${randomPost?.postId}`);
+      await newPost();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  // alert창 열기
+  const openAlertModal = useCallback(() => {
+    setAlertModalOpen(true);
+  }, []);
+
+  // alert창 닫기
+  const closeAlertModal = useCallback(() => {
+    setAlertModalOpen(false);
+  }, []);
+
+  // 새로운 게시글 가져오기
+  const newPost = async () => {
+    try {
+      // 스크롤이 아래로 내려갔을 때의 조건 (loading중엔 재스크롤 막기)
+      setLoading(true);
+      setBlur(true);
+
+      const response =
+        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/89');
+
+      setTimeout(() => {
+        if (response) {
+          setRandomPost(response.data.result);
+          setLoading(false);
+          setBlur(false);
+        }
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
   };
 
   // 마우스 아래 휠 이벤트 감지해서 새로운 포스트 불러오기
-  const newPost = useCallback(
+  const DetectScrollDown = useCallback(
     async (event: React.WheelEvent<HTMLDivElement>) => {
       try {
         // 스크롤이 아래로 내려갔을 때의 조건 (loading중엔 재스크롤 막기)
         if (event.deltaY > 0 && event.deltaY > 0) {
           if (!loading) {
-            setLoading(true);
-            setBlur(true);
-
-            const response =
-              await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/89');
-
-            setTimeout(() => {
-              if (response) {
-                setRandomPost(response.data.result);
-                setLoading(false);
-                setBlur(false);
-              }
-            }, 2000);
+            await newPost();
           }
         }
       } catch (error) {
@@ -72,7 +105,7 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   }, []);
 
   return (
-    <styles.Container onWheel={(e) => newPost(e)}>
+    <styles.Container onWheel={(e) => DetectScrollDown(e)}>
       <styles.InnerContainer
         style={{
           filter: blur ? 'blur(10px)' : 'blur(0px)',
@@ -86,6 +119,7 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
             post={randomPost}
             modalOpen={modalOpen}
             modalClose={modalClose}
+            openAlertModal={openAlertModal}
           />
         )}
 
@@ -97,6 +131,13 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
       </styles.InnerContainer>
 
       {loading && <LoadingModalComponent />}
+
+      {alertModalOpen && (
+        <AlertComponent
+          closeAlertModal={closeAlertModal}
+          deletePost={deletePost}
+        />
+      )}
     </styles.Container>
   );
 };
