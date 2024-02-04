@@ -300,8 +300,8 @@ const defaultPost: Post = {
   likeNum: 0,
   checkLike: false,
   checkScrab: false,
-  createdAt: new Date(),
-  userInfo: { id: 3, nickname: 'ahffk', profileUrl: '', following: true },
+  createdAt: '',
+  userInfo: { id: 3, nickname: 'ahffk', profileUrl: '' },
   hashtags: [],
   postImages: [],
 };
