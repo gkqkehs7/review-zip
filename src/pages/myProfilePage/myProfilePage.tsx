@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, memo } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GetAxiosInstance } from '@/api/axios.methods';
 import { CurtPost, Post, User } from '@/types/common.types';
@@ -27,7 +27,7 @@ export type PictureType = {
   scrabNum: number;
 };
 
-const MyProfilePage: React.FC = memo(({}) => {
+const MyProfilePage: React.FC = ({}) => {
   //게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
   const [postItemIsClicked, setPostClicked] = useState<boolean>(true);
   const [storageIsClicked, setStorageClicked] = useState<boolean>(false);
@@ -46,10 +46,19 @@ const MyProfilePage: React.FC = memo(({}) => {
   const [isScrab, setIsScrab] = useState<string>('');
   //간단한 게시물 정보
   const [curtPosts, setCurtPosts] = useState<CurtPost[]>([]);
-  //userId 본인 프로필 페이지인 경우 me 다른 유저들은 숫자 일단은 3을 기본으로
-  const [userId, setUserId] = useState<string | number>(3);
-  //프로필 상단에 들어갈 유저 정보
+  //userId
+  const [userId, setUserId] = useState<string | number>(1);
+  //본인 스크랩 게시물 정보
+  const [scrabPosts, setScrabPosts] = useState<CurtPost[]>([]);
+  //다른 유저 게시물 정보
+  const [userCurtPosts, setUserCurtPosts] = useState<CurtPost[]>([]);
+  //다른 유저 스크랩  게시물 정보
+  const [userScrabPosts, setUserScrabPosts] = useState<CurtPost[]>([]);
+  //유저 정보
   const [userInfo, setUserInfo] = useState<GetUserInfoResponse>();
+  //유저 정보
+  const [myInfo, setMyInfo] = useState<GetUserInfoResponse>();
+
   const [isFriend, setIsFriend] = useState<boolean>(false);
   //userId에 본인 프로필 페이지인 경우 me가 들어가고, 다른 유저인 경우는 숫자가 들어감
   const [friendId, setFriendId] = useState<number>(1);
@@ -76,29 +85,61 @@ const MyProfilePage: React.FC = memo(({}) => {
     }
   };
 
-  // 포스트들 가져오기
+  // 내 포스트들 가져오기
   const getCurtPosts = async () => {
-    setCurtPostLoading(true); //***문제 == > 데이터를 서버에서 받아와도 그 이전에 받아온 데이터를 props로 내려버려서 화면에 이전에 받아온 데이터가 떠버림 근데 그래도 state가 바뀌면서 props로 내려가는게 바뀌면 리랜더링이 되야 되는데 안됨 -> 일단 loading이 끝났을 때만 화면에 띄우게끔 state를 만듦
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts${isScrab}?page=0&size=8`,
+        '/v1/users/3/posts?page=0&size=8',
       );
       setCurtPosts(response.data.result.postList);
 
-      console.log('Posts:', response.data.result);
-      console.log(`/v1/users/${userId}/posts${isScrab}?page=0&size=8`);
+      console.log('MyPosts:', response.data.result);
     } catch (error) {
       console.log(error);
-    } finally {
-      setCurtPostLoading(false); //로딩이 끝난 경우 false로 바꾸기
+    }
+  };
+  // 내 포스트들 가져오기
+  const getScrabPosts = async () => {
+    try {
+      const response = await GetAxiosInstance<GetUserPostsResponse>(
+        '/v1/users/3/posts/scrab?page=0&size=8',
+      );
+      setCurtPosts(response.data.result.postList);
+
+      console.log('MyPosts:', response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 내 포스트들 가져오기
+  const getUserPosts = async () => {
+    try {
+      const response = await GetAxiosInstance<GetUserPostsResponse>(
+        `/v1/users/${userId}/posts?page=0&size=8`,
+      );
+      setCurtPosts(response.data.result.postList);
+
+      console.log('MyPosts:', response.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 내 포스트들 가져오기
+  const getUserScrabPosts = async () => {
+    try {
+      const response = await GetAxiosInstance<GetUserPostsResponse>(
+        `/v1/users/${userId}/posts/scrab?page=0&size=8`,
+      );
+      setCurtPosts(response.data.result.postList);
+
+      console.log('MyPosts:', response.data.result);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  console.log(userId);
-
   // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
   const getUserInfo = async () => {
-    setUserInfoLoading(true);
     try {
       const response = await GetAxiosInstance<GetUserInfoResponse>(
         `/v1/users/${userId}`,
@@ -109,16 +150,27 @@ const MyProfilePage: React.FC = memo(({}) => {
       console.log(`/v1/users/${userId}/`);
     } catch (error) {
       console.log(error);
-    } finally {
-      setUserInfoLoading(false);
+    }
+  };
+
+  // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
+  const getMyInfo = async () => {
+    try {
+      const response =
+        await GetAxiosInstance<GetUserInfoResponse>('/v1/users/3');
+      setUserInfo(response.data.result);
+
+      console.log('MyInfo:', response.data.result);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     // 현재 경로에 따라 userId를 설정
-    if (location.pathname === '/myProfilePage') {
+    if (location.pathname === '/profilePage/3') {
       setUserId(3);
-    } else if (location.pathname.startsWith('/friendProfilePage')) {
+    } else if (location.pathname.startsWith('/profilePage')) {
       setUserId(friendId);
     }
   }, [location.pathname, friendId]);
@@ -126,11 +178,19 @@ const MyProfilePage: React.FC = memo(({}) => {
   //경로가 이동되면서 userId가 바뀌거나 아니면 저장소 버튼을 눌러서 isScrab이 달라지면 서버에서 데이터를 호출
   useEffect(() => {
     if (userId) {
-      getCurtPosts();
+      getUserPosts();
+      getUserScrabPosts();
       getUserInfo();
       getPost();
     }
   }, [userId, isScrab]);
+
+  useEffect(() => {
+    getCurtPosts();
+    getScrabPosts();
+    getMyInfo();
+    getPost();
+  }, [isScrab]);
 
   const modalOpen = useCallback(() => {
     setOpenModal(true);
@@ -191,27 +251,23 @@ const MyProfilePage: React.FC = memo(({}) => {
         <GroupBarComponent color="purple" direction="col" />
         <styles.ProfileContainer>
           {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
-          {!userInfoLoading && userInfo ? (
+          {myInfo && (
             <ProfileNameImageComponent
               isEditProfile={isEditProfile}
               isFriend={isFriend}
-              userInfo={userInfo}
+              myInfo={myInfo}
             />
-          ) : (
-            <LoadingModalComponent /> //로딩이 끝나고 새 데이터를 받아오는 시간차 때문에 화면이 너무 깜빡거려서 일단 데이터 가져오는 동안 로딩 컴포넌트 뛰워둠
           )}
           {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼이 들어있는 컴포넌트 */}
-          {!userInfoLoading && userInfo ? (
+          {myInfo && (
             <UserProfileStatsComponent
               setIsClicked={setIsClicked}
               setIsEditProfile={setIsEditProfile}
               isEditProfile={isEditProfile}
               isFriend={isFriend}
               setFriendListOpen={setFriendListOpen}
-              userInfo={userInfo}
+              myInfo={myInfo}
             />
-          ) : (
-            <LoadingModalComponent />
           )}
         </styles.ProfileContainer>
         {/*게시물 ,저장소 버튼 컴포넌트  */}
@@ -235,7 +291,7 @@ const MyProfilePage: React.FC = memo(({}) => {
       </styles.ProfilePictureContainer>
     </styles.Container>
   );
-});
+};
 
 const defaultPost: Post = {
   postId: 0,

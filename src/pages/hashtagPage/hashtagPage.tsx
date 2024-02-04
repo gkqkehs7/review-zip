@@ -78,10 +78,7 @@ const HashtagPage = () => {
         {/*최신순 정렬을 기본으로 하는 드롭다운 컴포넌트 */}
         <DropdownComponent />
         {/*해시태그 이미지 컴포넌트  */}
-        <ReviewPictureComponent
-          storageIsClicked={false}
-          picture={hashtagPictures}
-        />
+        {/*<ReviewPictureComponent storageIsClicked={false} curtPost={} />*/}
       </styles.HashtagContainer>
     </styles.Container>
   );

@@ -13,6 +13,8 @@ export interface ProfileNameImagePrps {
   isFriend?: boolean;
   friend?: string;
   userInfo?: GetUserInfoResponse;
+  myInfo?: GetUserInfoResponse;
+  userId?: string | number;
 }
 
 const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
@@ -21,6 +23,8 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   isFriend = false,
   friend = '',
   userInfo = defaultUserInfo,
+  myInfo,
+  userId,
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>();
   const [userName, setUserName] = useState<string>(userInfo.nickname);

@@ -10,6 +10,8 @@ export interface UserProfileStatsProps {
   isFriend: boolean | undefined;
   setFriendListOpen: React.Dispatch<React.SetStateAction<boolean>>;
   userInfo?: GetUserInfoResponse;
+  myInfo?: GetUserInfoResponse;
+  userId?: string | number;
 }
 const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   setIsClicked,
@@ -18,6 +20,8 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   isFriend,
   setFriendListOpen,
   userInfo = defaultUserInfo,
+  myInfo,
+  userId,
 }) => {
   return (
     <div>

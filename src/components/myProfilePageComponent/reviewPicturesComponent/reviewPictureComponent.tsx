@@ -12,6 +12,7 @@ interface ChangePageProps {
   setPostISClicked: React.Dispatch<React.SetStateAction<boolean>>;
   picture?: PictureType[];
   curtPost: CurtPost[];
+  userId?: number | string;
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
@@ -19,6 +20,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   picture,
   setPostISClicked,
   curtPost,
+  userId,
 }) => {
   return (
     <styles.RveiwPicturesContainer>

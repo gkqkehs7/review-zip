@@ -19,6 +19,7 @@ const styles = {
     position: relative;
     left: 0;
     transition: left 0.5s linear;
+    visibility: hidden; //일단 숨겨놓음
 
     @media (max-width: 900px) {
       left: -100%; // 화면 너비가 600px 이하일 때 왼쪽으로 밀어내기
