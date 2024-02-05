@@ -34,7 +34,7 @@ const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
           </styles.HashTagLink>
 
           {/* 리뷰 보기 버튼 */}
-          <styles.SeeReviewButton to="">리뷰 보기</styles.SeeReviewButton>
+          {/* <styles.SeeReviewButton to="">리뷰 보기</styles.SeeReviewButton> */}
         </styles.HashtagContainer>
       ))}
     </div>

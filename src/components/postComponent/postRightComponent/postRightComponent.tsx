@@ -11,6 +11,7 @@ import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostRightComponentProps {
   post: Post;
+  postLikeNum: number;
   split: boolean;
   openLikeListModal: () => void;
   checkLike: boolean;
@@ -24,6 +25,7 @@ interface PostRightComponentProps {
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
   post,
+  postLikeNum,
   split,
   openLikeListModal,
   checkLike,
@@ -68,7 +70,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       {/* 좋아요 개수 */}
       <styles.LikeContainer>
         <styles.LikeText onClick={openLikeListModal}>
-          {post.likeNum}명이 이 게시글을 좋아합니다
+          {postLikeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
         <styles.LikeUserImage src={post.userInfo.profileUrl} />
       </styles.LikeContainer>

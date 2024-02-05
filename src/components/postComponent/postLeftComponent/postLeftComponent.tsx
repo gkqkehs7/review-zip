@@ -1,3 +1,5 @@
+import { useCallback, useState } from 'react';
+
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
@@ -12,6 +14,7 @@ import SpaceShipImage from '/images/post/SpaceShip.png';
 
 interface PostLeftComponentProps {
   post: Post;
+  postLikeNum: number;
   split: boolean;
   splitPost: () => void;
   checkLike: boolean;
@@ -25,6 +28,7 @@ interface PostLeftComponentProps {
 const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
   split,
   post,
+  postLikeNum,
   splitPost,
   checkLike,
   checkScrab,
@@ -110,7 +114,7 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           {/* 좋아요 개수 */}
           <styles.LikeContainer>
             <styles.LikeText>
-              {post.likeNum}명이 이 게시글을 좋아합니다
+              {postLikeNum}명이 이 게시글을 좋아합니다
             </styles.LikeText>
             {/* <styles.LikeUserImage src={post.userInfo.nickname} /> */}
           </styles.LikeContainer>

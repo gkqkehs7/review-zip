@@ -4,11 +4,12 @@ import SearchBarComponent from '@/components/searchPageComponent/searchBarCompon
 import SearchBarExtendComponent from '@/components/searchPageComponent/searchBarExtendComponent/searchBarExtendComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
-import { GetAxiosInstance } from '@/api/axios.methods';
-import { Hashtag, User } from '@/types/common.types';
+import { DeleteAxiosInstance, GetAxiosInstance } from '@/api/axios.methods';
+import { Hashtag, History, User } from '@/types/common.types';
 
 import styles from './style';
 import {
+  GetSearchHistoriesResponse,
   SearchHashtagResponse,
   SearchUserByNicknameResponse,
 } from '@/types/response.types';
@@ -18,6 +19,7 @@ const SearchPage: React.FC = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [searchUsers, setSearchUsers] = useState<User[]>([]);
   const [searchHashtags, setSearchHashtags] = useState<Hashtag[]>([]);
+  const [searchHistories, setSearchHistories] = useState<History[]>([]);
 
   const searchUserByNickname = useCallback(async () => {
     try {
@@ -34,7 +36,7 @@ const SearchPage: React.FC = () => {
     }
   }, [searchInputValue]);
 
-  const searchHashtage = useCallback(async () => {
+  const searchHashtag = useCallback(async () => {
     try {
       const searchHashtag = searchInputValue.slice(1);
 
@@ -50,9 +52,39 @@ const SearchPage: React.FC = () => {
     }
   }, [searchInputValue]);
 
+  const getSearchHistories = useCallback(async () => {
+    try {
+      const response = await GetAxiosInstance<GetSearchHistoriesResponse>(
+        '/v1/users/1/histories',
+      );
+
+      setSearchHistories(response.data.result);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  const deleteHistory = useCallback(
+    async (historyId: number) => {
+      try {
+        const newSearchHistories = searchHistories.filter(
+          (searchHistory) => searchHistory.historyId !== historyId,
+        );
+
+        console.log(newSearchHistories);
+        setSearchHistories(newSearchHistories);
+        // await DeleteAxiosInstance(`/v1/history/${historyId}`);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [searchHistories],
+  );
+
   useEffect(() => {
     searchUserByNickname();
-    searchHashtage();
+    searchHashtag();
+    getSearchHistories();
   }, [searchInputValue]);
 
   return (
@@ -70,6 +102,8 @@ const SearchPage: React.FC = () => {
           searchInputValue={searchInputValue}
           searchUsers={searchUsers}
           searchHashtags={searchHashtags}
+          searchHistories={searchHistories}
+          deleteHistory={deleteHistory}
         />
       </styles.SearchBarContainer>
     </styles.Container>
