@@ -36,6 +36,8 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const [checkLike, setCheckLiked] = useState<boolean>(post.checkLike);
   const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab);
 
+  const [postLikeNum, setPostLikeNum] = useState<number>(post.likeNum);
+
   // 좋아요 누른 목록 가져오기 나중에 postId로 변경
   const getLikeUsers = async () => {
     try {
@@ -52,26 +54,30 @@ const PostComponent: React.FC<PostComponentProps> = ({
   // 좋아요 누르기
   const likePost = useCallback(async () => {
     try {
+      setPostLikeNum(postLikeNum + 1);
       setCheckLiked(true);
 
       await PostAxiosInstance(`/v1/posts/${post.postId}/like`);
     } catch (error) {
+      setPostLikeNum(postLikeNum - 1);
       setCheckLiked(false);
       console.log(error);
     }
-  }, []);
+  }, [postLikeNum]);
 
   // 좋아요 취소
   const unLikePost = useCallback(async () => {
     try {
+      setPostLikeNum(postLikeNum - 1);
       setCheckLiked(false);
 
       await DeleteAxiosInstance(`/v1/posts/${post.postId}/like`);
     } catch (error) {
+      setPostLikeNum(postLikeNum + 1);
       setCheckLiked(true);
       console.log(error);
     }
-  }, []);
+  }, [postLikeNum]);
 
   // 스크랩하기
   const scrabPost = useCallback(async () => {
@@ -127,6 +133,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
         split={split}
         openLikeListModal={openLikeListModal}
         post={post}
+        postLikeNum={postLikeNum}
         checkLike={checkLike}
         checkScrab={checkScrab}
         likePost={likePost}
@@ -139,6 +146,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
       <PostLeft
         split={split}
         post={post}
+        postLikeNum={postLikeNum}
         splitPost={splitPost}
         checkLike={checkLike}
         checkScrab={checkScrab}
