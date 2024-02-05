@@ -156,7 +156,7 @@ const MyProfilePage: React.FC = () => {
   );
 };
 
-const defaultPost: Post = {
+const defaultPost: any = {
   postId: 0,
   comment: '',
   point: 0,
@@ -170,7 +170,7 @@ const defaultPost: Post = {
   postImages: [],
 };
 
-const defaultUser: User[] = [
+const defaultUser: any = [
   {
     userId: 3,
     nickname: 'ahffk',
