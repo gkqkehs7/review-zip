@@ -10,6 +10,46 @@ import { GetAxiosInstance } from '@/api/axios.methods';
 import styles from './style';
 import MainLogo from '/images/myProfilePage/MainLogoImage.png';
 
+//더미 데이터
+const curtPosts = [
+  {
+    postId: 0,
+    postImageUrl: '/images/hashtagPage/Component1.png ',
+    likeNum: 0,
+    scrabNum: 0,
+  },
+  {
+    postId: 1,
+    postImageUrl: '/images/hashtagPage/Component2.png',
+    likeNum: 5,
+    scrabNum: 2,
+  },
+  {
+    postId: 2,
+    postImageUrl: '/images/hashtagPage/Component3.png',
+    likeNum: 10,
+    scrabNum: 5,
+  },
+  {
+    postId: 3,
+    postImageUrl: '/images/hashtagPage/Component4.png',
+    likeNum: 20,
+    scrabNum: 10,
+  },
+  {
+    postId: 4,
+    postImageUrl: '/images/hashtagPage/Component5.png',
+    likeNum: 7,
+    scrabNum: 3,
+  },
+  {
+    postId: 5,
+    postImageUrl: '/images/hashtagPage/Component6.png',
+    likeNum: 15,
+    scrabNum: 7,
+  },
+];
+
 const HashtagPage: React.FC = () => {
   const { hashtagId } = useParams();
 
@@ -23,8 +63,10 @@ const HashtagPage: React.FC = () => {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
         `/v1/posts/hashtags/${hashtagId}?page=0&size=8`,
       );
-      //if (!response.data.result.postList[0].postId) {
+
       setPost(response.data.result.postList);
+
+      console.log(`/v1/posts/hashtags/${hashtagId}?page=0&size=8`);
     } catch (error) {
       console.log(error);
     }
@@ -45,13 +87,13 @@ const HashtagPage: React.FC = () => {
       </styles.MainLogoContainer>
       <styles.HashtagContainer>
         {/*유저가 검색한 해시태그와 해당 태그 수를 표시하는 컴포넌트 */}
-        <HashtagTopComponent />
+        <HashtagTopComponent hashtag="#강남역" tagNum={curtPosts.length} />
         {/*최신순 정렬을 기본으로 하는 드롭다운 컴포넌트 */}
         <DropdownComponent />
         {/*해시태그 이미지 컴포넌트  */}
         {post && (
           <ReviewPictureComponent
-            curtPost={post}
+            curtPost={curtPosts}
             setPostISClicked={setPostIsClicked}
             setPostId={setPostId}
           />

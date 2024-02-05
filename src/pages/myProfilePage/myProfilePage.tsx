@@ -68,9 +68,6 @@ const MyProfilePage: React.FC = () => {
         `/v1/users/${userId}/posts${isScrab}?page=0&size=8`,
       );
       setCurtPosts(response.data.result.postList);
-
-      console.log('Posts:', response.data.result);
-      console.log(`/v1/users/${userId}/posts${isScrab}?page=0&size=8`);
     } catch (error) {
       console.log(error);
     }
@@ -85,9 +82,6 @@ const MyProfilePage: React.FC = () => {
         `/v1/users/${userId}`,
       );
       setUserInfo(response.data.result);
-
-      console.log('UserInfo:', response.data.result);
-      console.log(`/v1/users/${userId}/`);
     } catch (error) {
       console.log(error);
     }
