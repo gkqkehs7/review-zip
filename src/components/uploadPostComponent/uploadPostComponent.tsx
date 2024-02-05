@@ -22,7 +22,7 @@ const UploadPostComponent: React.FC = () => {
   const [previewImages, setPreviewPostImages] = useState<
     { id: number; url: string }[]
   >([]);
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>([]); // 게시글 사진
 
   const [split, setSplit] = useState<boolean>(false); // post 분리용 변수
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false); // 로딩창 띄우기용 변수

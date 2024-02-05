@@ -31,4 +31,10 @@ interface CurtPost {
   scrabNum: number;
 }
 
-export type { User, Post, PostImages, CurtPost };
+interface Hashtag {
+  id: number;
+  name: string;
+  postNum?: number;
+}
+
+export type { User, Post, PostImages, CurtPost, Hashtag };

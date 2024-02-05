@@ -11,14 +11,10 @@ import SearchImage from '/images/searchPage/SearchImage.png';
 export interface SearchBarComponentProps {
   searchInputValue: string;
   setSearchInputValue: React.Dispatch<React.SetStateAction<string>>;
-  isClicked: boolean;
-  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
   searchInputValue,
   setSearchInputValue,
-  isClicked,
-  setIsClicked,
 }) => {
   const device = checkDevice();
 
@@ -35,10 +31,6 @@ const SearchBarComponent: React.FC<SearchBarComponentProps> = ({
         { width: 500, height: 50 },
         { width: 500, height: 50 },
       )}
-      isClicked={isClicked}
-      onClick={() => {
-        setIsClicked(!isClicked);
-      }}
     >
       {/* 돋보기 div */}
       <styles.Search

@@ -1,3 +1,6 @@
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+import { checkDevice } from '@/utils/checkDeviceSize';
+
 import styles from './styles';
 
 const searchHistories = [
@@ -42,8 +45,20 @@ const searchHistories = [
 interface SearchHistoryComponent {}
 
 const SearchHistoryComponent: React.FC<SearchHistoryComponent> = () => {
+  const device = checkDevice();
+
   return (
-    <div>
+    <styles.Container
+      style={responsiveWidthHeight(
+        device,
+        { width: 2000, height: 400 },
+        { width: 1700, height: 400 },
+        { width: 1400, height: 400 },
+        { width: 1080, height: 400 },
+        { width: 500, height: 400 },
+        { width: 500, height: 400 },
+      )}
+    >
       {searchHistories.map((searchHistory, index) => (
         <div key={index}>
           <styles.HistoryContainer>
@@ -55,7 +70,7 @@ const SearchHistoryComponent: React.FC<SearchHistoryComponent> = () => {
           </styles.HistoryContainer>
         </div>
       ))}
-    </div>
+    </styles.Container>
   );
 };
 
