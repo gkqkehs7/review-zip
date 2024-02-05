@@ -5,7 +5,7 @@ import HashtagListComponent from '@/components/searchPageComponent/hashtagListCo
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 
-import { Hashtag, User } from '@/types/common.types';
+import { Hashtag, History, User } from '@/types/common.types';
 
 import styles from './style';
 import { useCallback } from 'react';
@@ -14,12 +14,16 @@ interface SearchBarExtendComponentProps {
   searchInputValue: string;
   searchUsers: User[];
   searchHashtags: Hashtag[];
+  searchHistories: History[];
+  deleteHistory: (historyId: number) => Promise<void>;
 }
 
 const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
   searchInputValue,
   searchUsers,
   searchHashtags,
+  searchHistories,
+  deleteHistory,
 }) => {
   const device = checkDevice();
 
@@ -54,7 +58,10 @@ const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
       </styles.Top>
 
       {!searchInputValue && ( // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
-        <SearchHistoryComponent />
+        <SearchHistoryComponent
+          searchHistories={searchHistories}
+          deleteHistory={deleteHistory}
+        />
       )}
 
       {searchInputValue && ( // 검색창의 입력값이 비어있지 않고 진행중인 경우

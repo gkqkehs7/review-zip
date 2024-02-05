@@ -6,12 +6,19 @@ const styles = {
     overflow: auto;
   `,
   UserContainer: styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 40px;
     border-bottom: 2px solid white;
     height: 50px;
+
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
   `,
 
   UserData: styled.div`

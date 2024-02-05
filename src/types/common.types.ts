@@ -1,6 +1,7 @@
 interface User {
   userId: number;
   nickname: string;
+  name: string;
   profileUrl: string;
   following?: boolean;
 }
@@ -31,10 +32,17 @@ interface CurtPost {
   scrabNum: number;
 }
 
+interface History {
+  historyId: number;
+  type: 'USER' | 'HASHTAG';
+  user: User | null;
+  hashtag: string | null;
+}
+
 interface Hashtag {
   id: number;
   name: string;
   postNum?: number;
 }
 
-export type { User, Post, PostImages, CurtPost, Hashtag };
+export type { User, Post, PostImages, CurtPost, Hashtag, History };

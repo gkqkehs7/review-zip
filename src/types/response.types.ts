@@ -1,4 +1,4 @@
-import { User, Post, CurtPost, Hashtag } from './common.types';
+import { User, Post, CurtPost, Hashtag, History } from './common.types';
 
 // KAKAO CONTROLLER
 // /v1/oauth/kakao
@@ -30,6 +30,9 @@ interface GetUserInfoResponse {
 
 // [Get] /v1/users/search/nickname
 interface SearchUserByNicknameResponse extends Array<User> {}
+
+// [Get] /v1/users/{userId}/histories
+interface GetSearchHistoriesResponse extends Array<History> {}
 
 // POST CONTROLLER
 // [Post] /v1/posts
@@ -70,4 +73,5 @@ export type {
   GetRandomPostResponse,
   GetPostLikedUsersResponse,
   SearchHashtagResponse,
+  GetSearchHistoriesResponse,
 };
