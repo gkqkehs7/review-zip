@@ -65,7 +65,7 @@ const KakaoLoginPage: React.FC = () => {
 
   return (
     <div>
-      <LoadingModalComponent />
+      <LoadingModalComponent message="로그인 중입니다..." />
     </div>
   );
 };

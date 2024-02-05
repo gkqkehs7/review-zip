@@ -6,30 +6,24 @@ import ReviewingStopModalComponent from '@/components/myProfilePageComponent/rev
 import { changeInputValue } from '@/hooks/chageInputValue';
 
 import { User } from '@/types/common.types';
+import { DeleteAxiosInstance, PostAxiosInstance } from '@/api/axios.methods';
 
 import styles from './style';
-import { GetUserInfoResponse } from '@/types/response.types';
 
 interface LikeListComponentProps {
   users: User[];
-  closeLikeListModal: () => void;
   likeListOpen: boolean;
-  isReviewer?: boolean;
-  isReviewing?: boolean;
-  setFriendId: React.Dispatch<React.SetStateAction<number>>;
-  setIsFriend: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo?: GetUserInfoResponse;
+  isReviewer: boolean;
+  isReviewing: boolean;
+  closeLikeListModal: () => void;
 }
 
 const LikeListComponent: React.FC<LikeListComponentProps> = ({
   users,
-  closeLikeListModal,
   likeListOpen,
   isReviewer,
   isReviewing,
-  setFriendId,
-  setIsFriend,
-  userInfo,
+  closeLikeListModal,
 }) => {
   const [searchInput, setSearchInput] = useState<string>('');
   //리뷰잉 취소
@@ -41,7 +35,52 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
 
   const userList = useRef<HTMLDivElement>(null);
 
-  const followUser = () => {};
+  const followUser = useCallback(
+    async (user: User) => {
+      try {
+        PostAxiosInstance(`/v1/follows/users/${user.userId}`);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [users],
+  );
+
+  const unFollowUser = useCallback(
+    async (user: User) => {
+      try {
+        await DeleteAxiosInstance(`/v1/follows/users/${user.userId}`);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [users],
+  );
+
+  // 유저 리스트에 focus되도록 하는 함수
+  useEffect(() => {
+    if (userList.current) {
+      userList.current.focus();
+    }
+  }, []);
+
+  const followButton = useCallback((user: User) => {
+    if (isReviewer || isReviewing) {
+      return (
+        <>
+          {user.following ? (
+            <styles.FollowButton onClick={() => unFollowUser(user)}>
+              <styles.FollowButtonText>삭제</styles.FollowButtonText>
+            </styles.FollowButton>
+          ) : (
+            <styles.FollowButton onClick={() => followUser(user)}>
+              <styles.FollowButtonText>리뷰잉</styles.FollowButtonText>
+            </styles.FollowButton>
+          )}
+        </>
+      );
+    }
+  }, []);
 
   // 검색시에 유저 filter되게 해주는 함수
   const filterUsers = useCallback(
@@ -50,39 +89,28 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         user.nickname.includes(searchInput),
       );
 
+      console.log(isReviewer || isReviewing);
       return (
         <>
           {filterUserlist.map((user: User) => (
-            <styles.UserList key={user.id}>
-              <Link
-                to="/friendProfilePage"
-                onClick={() => {
-                  setFriendId(1);
-                }}
-              >
+            <styles.UserList key={user.userId}>
+              <Link to={`/profilePage/${user.userId}`}>
                 <styles.UserData>
                   <styles.UserImage src={user.profileUrl} />
                   <styles.UserName>{user.nickname}</styles.UserName>
-                  {user.isFollowing && (
+                  {user.following && (
                     <styles.Reviewing>•리뷰잉</styles.Reviewing>
                   )}
                 </styles.UserData>
               </Link>
 
-              {!user.isFollowing && (
-                <styles.FollowButton>
-                  <styles.FollowButtonText>리뷰잉</styles.FollowButtonText>
-                </styles.FollowButton>
-              )}
-
-              {/*리뷰어 ,리뷰잉 , 공감 리스트에 따라 버튼 다르게 하는 함수 */}
-              {/* {chooseButton(user.profileUrl, user.nickname)} */}
+              {followButton(user)}
             </styles.UserList>
           ))}
         </>
       );
     },
-    [searchInput],
+    [searchInput, users],
   );
 
   // const chooseButton = (profileImage: string, name: string) => {
@@ -110,13 +138,6 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
   //     return <></>;
   //   }
   // };
-
-  // 유저 리스트에 focus되도록 하는 함수
-  useEffect(() => {
-    if (userList.current) {
-      userList.current.focus();
-    }
-  }, []);
 
   return (
     <>

@@ -1,8 +1,8 @@
 interface User {
-  id: number;
+  userId: number;
   nickname: string;
   profileUrl: string;
-  isFollowing?: boolean;
+  following?: boolean;
 }
 
 interface Post {
@@ -12,6 +12,7 @@ interface Post {
   likeNum: number;
   checkLike: boolean;
   checkScrab: boolean;
+  checkMine: boolean;
   createdAt: string;
   userInfo: User;
   hashtags: string[];
@@ -30,4 +31,10 @@ interface CurtPost {
   scrabNum: number;
 }
 
-export type { User, Post, PostImages, CurtPost };
+interface Hashtag {
+  id: number;
+  name: string;
+  postNum?: number;
+}
+
+export type { User, Post, PostImages, CurtPost, Hashtag };

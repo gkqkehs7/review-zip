@@ -2,25 +2,18 @@ import styles from './style';
 import StarImage from '/images/myProfilePage/StarImage.png';
 import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
-import { PictureType } from '@/pages/myProfilePage/myProfilePage';
 import { CurtPost } from '@/types/common.types';
-import { useState, useEffect } from 'react';
-import axiosInstance from '@/api/apiInstance';
 
 interface ChangePageProps {
-  storageIsClicked: boolean;
   setPostISClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  picture?: PictureType[];
   curtPost: CurtPost[];
-  userId?: number | string;
+  setPostId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
-  storageIsClicked,
-  picture,
   setPostISClicked,
   curtPost,
-  userId,
+  setPostId,
 }) => {
   return (
     <styles.RveiwPicturesContainer>
@@ -30,6 +23,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
           key={index}
           onClick={() => {
             setPostISClicked(true);
+            setPostId(post.postId);
           }}
         >
           <styles.PictureBorder>

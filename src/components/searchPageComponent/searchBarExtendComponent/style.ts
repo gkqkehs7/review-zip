@@ -6,19 +6,27 @@ export interface SearchTypeProps {
 
 const styles = {
   Container: styled.div`
-    background-color: rgba(255, 255, 255, 0.4);
     font-size: 20px;
-    border: none;
     z-index: 100;
-    border-radius: 0 0 30.5px 30.5px;
-    overflow: auto; //요소가 많은 경우 안보이게
   `,
+
+  Temp: styled.div``,
 
   //위의 컴포넌트를 감싸 확장 영역의 맨 위에 표시될 컨테이너
   Top: styled.div`
+    background-color: rgba(255, 255, 255, 0.4);
     display: flex;
-    justify-content: space-evenly;
+
+    justify-content: center;
     align-items: center;
+    border-radius: 10px;
+
+    margin: 20px 0;
+    padding: 10px 0;
+  `,
+
+  TopText: styled.div`
+    font-weight: bold;
   `,
 
   //searchInput값에 입력이 생기면 나타날 컴포넌트 :리뷰잉과 태그를 표현할 때 사용

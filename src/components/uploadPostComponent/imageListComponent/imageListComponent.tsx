@@ -65,6 +65,7 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
 
   // 이미지 삭제
   const deleteImage = (postImageId: number) => {
+    // TODO: 여기서 files도 삭제 해줘야 함
     const updatedImages = postImages.filter(
       (image) => image.id !== postImageId,
     );

@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const styles = {
+  Container: styled.div`
+    overflow: auto;
+  `,
   UserContainer: styled.div`
     display: flex;
     justify-content: space-between;
@@ -12,6 +15,7 @@ const styles = {
   `,
 
   UserData: styled.div`
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,7 +33,11 @@ const styles = {
     font-size: 20px;
   `,
 
-  PlusFriendLink: styled(Link)``,
+  PlusFriendLink: styled(Link)`
+    &:hover {
+      transform: scale(1.1);
+    }
+  `,
 
   //친구 추가 이미지
   PlusFriend: styled.img`

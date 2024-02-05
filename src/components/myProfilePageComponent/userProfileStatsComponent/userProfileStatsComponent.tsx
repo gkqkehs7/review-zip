@@ -20,8 +20,6 @@ const UserProfileStatsComponent: React.FC<UserProfileStatsProps> = ({
   isFriend,
   setFriendListOpen,
   userInfo = defaultUserInfo,
-  myInfo,
-  userId,
 }) => {
   return (
     <div>
