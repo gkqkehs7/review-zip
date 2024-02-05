@@ -46,6 +46,7 @@ function App() {
         <Route path="/mapPage" element={<MapPage />}></Route>
       </Route>,
     ),
+    { basename: '/review-zip' },
   );
 
   return (
