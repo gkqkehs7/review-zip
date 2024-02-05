@@ -8,6 +8,7 @@ const styles = {
     background-size: cover;
     width: 100vw;
     height: 100vh;
+    padding: 0 0 10vh 0;
     overflow-y: scroll;
   `,
   ProfilePictureContainer: styled.div`
