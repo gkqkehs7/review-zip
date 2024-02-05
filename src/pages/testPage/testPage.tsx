@@ -5,14 +5,6 @@ import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions';
 import styles from './styles';
 
 const TestPage = () => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const [inputValue, setInputValue] = useState<string>('');
-
-  const inputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
   const data = [
     {
       id: 1,
