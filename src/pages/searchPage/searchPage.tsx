@@ -4,7 +4,11 @@ import SearchBarComponent from '@/components/searchPageComponent/searchBarCompon
 import SearchBarExtendComponent from '@/components/searchPageComponent/searchBarExtendComponent/searchBarExtendComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
-import { DeleteAxiosInstance, GetAxiosInstance } from '@/api/axios.methods';
+import {
+  DeleteAxiosInstance,
+  GetAxiosInstance,
+  PostAxiosInstance,
+} from '@/api/axios.methods';
 import { Hashtag, History, User } from '@/types/common.types';
 
 import styles from './style';
@@ -21,6 +25,7 @@ const SearchPage: React.FC = () => {
   const [searchHashtags, setSearchHashtags] = useState<Hashtag[]>([]);
   const [searchHistories, setSearchHistories] = useState<History[]>([]);
 
+  // user 닉네임으로 검색
   const searchUserByNickname = useCallback(async () => {
     try {
       if (searchInputValue.trim().length > 0) {
@@ -28,7 +33,6 @@ const SearchPage: React.FC = () => {
           `/v1/users/search/nickname?nickname=${searchInputValue}`,
         );
 
-        console.log(response.data.result);
         setSearchUsers(response.data.result);
       }
     } catch (error) {
@@ -36,6 +40,7 @@ const SearchPage: React.FC = () => {
     }
   }, [searchInputValue]);
 
+  // hastag 검색
   const searchHashtag = useCallback(async () => {
     try {
       const searchHashtag = searchInputValue.slice(1);
@@ -52,10 +57,11 @@ const SearchPage: React.FC = () => {
     }
   }, [searchInputValue]);
 
+  // 검색 기록 가져오기
   const getSearchHistories = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetSearchHistoriesResponse>(
-        '/v1/users/1/histories',
+        '/v1/users/histories',
       );
 
       setSearchHistories(response.data.result);
@@ -64,6 +70,7 @@ const SearchPage: React.FC = () => {
     }
   }, []);
 
+  // 검색 기록 삭제
   const deleteHistory = useCallback(
     async (historyId: number) => {
       try {
@@ -71,14 +78,61 @@ const SearchPage: React.FC = () => {
           (searchHistory) => searchHistory.historyId !== historyId,
         );
 
-        console.log(newSearchHistories);
         setSearchHistories(newSearchHistories);
-        // await DeleteAxiosInstance(`/v1/history/${historyId}`);
+
+        await DeleteAxiosInstance(`/v1/history/${historyId}`);
       } catch (error) {
         console.error(error);
       }
     },
     [searchHistories],
+  );
+
+  // 유저 검색 저장
+  const saveSearchUserHistory = useCallback(
+    async (user: User) => {
+      try {
+        await PostAxiosInstance(`/v1/history/users/${user.userId}`);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [searchUsers],
+  );
+
+  // 태그 검색 저장
+  const saveSearchHashtagHistory = useCallback(
+    async (hashtag: string) => {
+      try {
+        await PostAxiosInstance(`/v1/history/hashtags?hashtag=${hashtag}`);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [searchHashtags],
+  );
+
+  // 유저 팔로우
+  const followUser = useCallback(
+    async (user: User) => {
+      try {
+        const followUserIndex = searchUsers.findIndex(
+          (searchUser) => searchUser.userId === user.userId,
+        );
+
+        const newSearchUsers = [...searchUsers];
+
+        newSearchUsers[followUserIndex].following = true;
+
+        setSearchUsers(newSearchUsers);
+
+        await PostAxiosInstance(`/v1/follows/users/${user.userId}`);
+        await saveSearchUserHistory(user);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [searchUsers],
   );
 
   useEffect(() => {
@@ -104,6 +158,8 @@ const SearchPage: React.FC = () => {
           searchHashtags={searchHashtags}
           searchHistories={searchHistories}
           deleteHistory={deleteHistory}
+          followUser={followUser}
+          saveSearchHashtagHistory={saveSearchHashtagHistory}
         />
       </styles.SearchBarContainer>
     </styles.Container>

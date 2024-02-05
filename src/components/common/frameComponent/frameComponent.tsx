@@ -42,7 +42,7 @@ const FrameComponent: React.FC<FrameComponentProps> = ({
         )}
       >
         <styles.ImageContainer>
-          <styles.Image src={post.postImages[0].url} />
+          <styles.Image src={post.postImages[0]?.url} />
           <styles.StarContainer>
             <StarRating count={post.point} all={false} />
           </styles.StarContainer>

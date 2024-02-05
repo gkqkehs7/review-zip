@@ -16,6 +16,8 @@ interface SearchBarExtendComponentProps {
   searchHashtags: Hashtag[];
   searchHistories: History[];
   deleteHistory: (historyId: number) => Promise<void>;
+  followUser: (user: User) => Promise<void>;
+  saveSearchHashtagHistory: (hashtag: string) => Promise<void>;
 }
 
 const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
@@ -24,6 +26,8 @@ const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
   searchHashtags,
   searchHistories,
   deleteHistory,
+  followUser,
+  saveSearchHashtagHistory,
 }) => {
   const device = checkDevice();
 
@@ -67,9 +71,12 @@ const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
       {searchInputValue && ( // 검색창의 입력값이 비어있지 않고 진행중인 경우
         <div>
           {searchInputValue[0] === '#' ? (
-            <HashtagListComponent hashtags={searchHashtags} />
+            <HashtagListComponent
+              hashtags={searchHashtags}
+              saveSearchHashtagHistory={saveSearchHashtagHistory}
+            />
           ) : (
-            <UserListComponent users={searchUsers} />
+            <UserListComponent users={searchUsers} followUser={followUser} />
           )}
         </div>
       )}

@@ -44,11 +44,14 @@ interface CreatePostResponse {
   imageIds: number[];
 }
 
-// [Get] /v1/posts/random
+// [Get] /v1/posts/random-one
+interface GetRandomPostResponse extends Post {}
+
+// [Get] /v1/posts/random-three
 interface GetRandomPostsResponse extends Array<Post> {}
 
 // [Get] /v1/posts/{postId}
-interface GetRandomPostResponse extends Post {}
+interface GetPostResponse extends Post {}
 
 // [Get] /v1/posts/like/{postId}/users
 interface GetPostLikedUsersResponse extends Array<User> {}
@@ -71,6 +74,7 @@ export type {
   SearchUserByNicknameResponse,
   GetUserInfoResponse,
   GetRandomPostResponse,
+  GetPostResponse,
   GetPostLikedUsersResponse,
   SearchHashtagResponse,
   GetSearchHistoriesResponse,

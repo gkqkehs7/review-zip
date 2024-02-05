@@ -22,7 +22,7 @@ const styles = {
     }
   `,
 
-  HashTagLink: styled(Link)`
+  HashTagLink: styled.div`
     text-align: center;
   `,
 

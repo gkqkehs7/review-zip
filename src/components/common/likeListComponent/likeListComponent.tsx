@@ -89,7 +89,6 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         user.nickname.includes(searchInput),
       );
 
-      console.log(isReviewer || isReviewing);
       return (
         <>
           {filterUserlist.map((user: User) => (

@@ -31,8 +31,9 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   // 랜덤으로 게시글 한개 가져오기
   const getRandomPost = async () => {
     try {
-      const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/103');
+      const response = await GetAxiosInstance<GetRandomPostResponse>(
+        '/v1/posts/random-one',
+      );
 
       setRandomPost(response.data.result);
     } catch (error) {
@@ -70,8 +71,11 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
       setLoading(true);
       setBlur(true);
 
-      const response =
-        await GetAxiosInstance<GetRandomPostResponse>('/v1/posts/89');
+      const response = await GetAxiosInstance<GetRandomPostResponse>(
+        '/v1/posts/random-one',
+      );
+
+      setRandomPost(response.data.result);
 
       setTimeout(() => {
         if (response) {

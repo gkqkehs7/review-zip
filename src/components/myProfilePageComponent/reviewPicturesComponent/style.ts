@@ -43,6 +43,7 @@ const Picture = styled.img`
   height: 100%;
   flex: 1;
   border-radius: 20px;
+  object-fit: cover;
 `;
 const PictureContainer = styled.div`
   overflow: hidden;
