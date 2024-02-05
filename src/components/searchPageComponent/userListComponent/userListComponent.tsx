@@ -4,12 +4,15 @@ import { checkDevice } from '@/utils/checkDeviceSize';
 import styles from './style';
 import PlusFriend from '/images/searchPage/PlusFriendImage.png';
 import { User } from '@/types/common.types';
-
 interface UserListComponentProps {
   users: User[];
+  followUser: (user: User) => Promise<void>;
 }
 
-const UserListComponent: React.FC<UserListComponentProps> = ({ users }) => {
+const UserListComponent: React.FC<UserListComponentProps> = ({
+  users,
+  followUser,
+}) => {
   const device = checkDevice();
 
   return (
@@ -40,12 +43,18 @@ const UserListComponent: React.FC<UserListComponentProps> = ({ users }) => {
               )}
             />
 
-            <styles.UserName>{user.nickname}</styles.UserName>
+            <styles.UserNicknameName>
+              <styles.UserNickname>{user.nickname}</styles.UserNickname>
+              <styles.UserName>{user.name}</styles.UserName>
+            </styles.UserNicknameName>
           </styles.UserData>
 
-          <styles.PlusFriendLink to="">
-            <styles.PlusFriend src={PlusFriend} />
-          </styles.PlusFriendLink>
+          {!user.following && (
+            <styles.PlusFriend
+              src={PlusFriend}
+              onClick={() => followUser(user)}
+            />
+          )}
         </styles.UserContainer>
       ))}
     </styles.Container>

@@ -45,7 +45,10 @@ const SearchHistoryComponent: React.FC<SearchHistoryComponent> = ({
             )}
           />
 
-          <styles.UserName>{user.nickname}</styles.UserName>
+          <styles.UserNicknameName>
+            <styles.UserNickname>{user.nickname}</styles.UserNickname>
+            <styles.UserName>{user.name}</styles.UserName>
+          </styles.UserNicknameName>
         </styles.UserData>
 
         <styles.DeleteButton onClick={() => deleteHistory(historyId)} />

@@ -51,12 +51,22 @@ const styles = {
     margin-right: 10px;
   `,
 
-  //위의 이미지 옆에 표시될 내용 username이나 hashtag
-  UserName: styled.div`
+  UserNickname: styled.div`
     color: black;
     font-size: 20px;
   `,
 
+  //위의 이미지 옆에 표시될 내용 username이나 hashtag
+  UserName: styled.div`
+    color: black;
+    font-size: 12px;
+  `,
+
+  UserNicknameName: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  `,
   PlusFriendLink: styled(Link)`
     &:hover {
       transform: scale(1.1);

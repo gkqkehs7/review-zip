@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Hashtag } from '@/types/common.types';
 
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
@@ -7,12 +9,25 @@ import styles from './style';
 
 interface HashtaglistComponentProps {
   hashtags: Hashtag[];
+  saveSearchHashtagHistory: (hashtag: string) => Promise<void>;
 }
 
 const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
   hashtags,
+  saveSearchHashtagHistory,
 }) => {
+  const navigate = useNavigate();
   const device = checkDevice();
+
+  // 검색 기록 저장하면서 hashtag 페이지로 이동
+  const toHashtag = async (hashtag: Hashtag) => {
+    try {
+      navigate(`/hashtagPage/${hashtag.id}`);
+      await saveSearchHashtagHistory(hashtag.name);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -27,9 +42,12 @@ const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
       )}
     >
       {hashtags.map((hashtag) => (
-        <styles.HashtagContainer key={hashtag.id}>
+        <styles.HashtagContainer
+          key={hashtag.id}
+          onClick={() => toHashtag(hashtag)}
+        >
           {/* 해시 태그 */}
-          <styles.HashTagLink to="/hashtagPage">
+          <styles.HashTagLink>
             <styles.Content>#{hashtag.name}</styles.Content>
           </styles.HashTagLink>
 
