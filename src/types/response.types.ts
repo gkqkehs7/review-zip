@@ -17,7 +17,7 @@ interface GetUserPostsResponse {
   isLast: boolean;
 }
 
-///v1/users/{userId}
+// /v1/users/{userId}
 interface GetUserInfoResponse {
   userId: number;
   name: string;

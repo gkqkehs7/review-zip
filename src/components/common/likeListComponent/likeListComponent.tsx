@@ -94,7 +94,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         <>
           {filterUserlist.map((user: User) => (
             <styles.UserList key={user.userId}>
-              <Link to={`/friendProfilePage/${user.userId}`}>
+              <Link to={`/profilePage/${user.userId}`}>
                 <styles.UserData>
                   <styles.UserImage src={user.profileUrl} />
                   <styles.UserName>{user.nickname}</styles.UserName>

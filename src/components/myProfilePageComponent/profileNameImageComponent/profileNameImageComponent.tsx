@@ -13,13 +13,12 @@ export interface ProfileNameImagePrps {
   isFriend?: boolean;
   friend?: string;
   userInfo?: GetUserInfoResponse;
+  myInfo?: GetUserInfoResponse;
+  userId?: string | number;
 }
 
 const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   isEditProfile,
-  friendProfileImage,
-  isFriend = false,
-  friend = '',
   userInfo = defaultUserInfo,
 }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>();
@@ -33,9 +32,9 @@ const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({
   };
 
   useEffect(() => {
-    isFriend && setUserName(userInfo.nickname);
-  }, [isFriend]);
-  console.log(userInfo);
+    setUserName(userInfo.nickname);
+  }, [userInfo.nickname]);
+
   return (
     <styles.NameImageContainer>
       {/* 유저가 고른 이미지가 있을 경우 해당 이미지 url 아닌 경우 기본 이미지 주소 */}

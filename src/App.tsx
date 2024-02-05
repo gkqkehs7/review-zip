@@ -41,10 +41,9 @@ function App() {
         <Route path="/mainPage" element={<MainPage />}></Route>
         <Route path="/searchPage" element={<SearchPage />}></Route>
         <Route path="/uploadPage" element={<UploadPage />}></Route>
-        <Route path="/myProfilePage" element={<MyProfilePage />}></Route>
+        <Route path="/profilePage/:userId" element={<MyProfilePage />}></Route>
         <Route path="/testPage" element={<TestPage />}></Route>
-        <Route path="/hashtagPage" element={<HashtagPage />}></Route>
-        <Route path="/friendProfilePage" element={<MyProfilePage />}></Route>
+        <Route path="/hashtagPage/:hashtagId" element={<HashtagPage />}></Route>
         <Route path="/mapPage" element={<MapPage />}></Route>
       </Route>,
     ),

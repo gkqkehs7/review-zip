@@ -1,15 +1,7 @@
 import styled from 'styled-components';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const styles = {
-  Container: styled.div`
-    // 화면 전체 사용하게
-    background-image: url('images/myProfilePage/ProfileBackgroundImage.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    overflow-y: scroll;
-  `,
   ProfilePictureContainer: styled.div`
     positipn: relative;
     top: 0;
