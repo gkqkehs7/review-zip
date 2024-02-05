@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@rollup/rollup-win32-x64-msvc": "^4.9.6",
     "autosize": "^6.0.1",
     "axios": "^1.6.7",
     "dotenv": "^16.4.1",
