@@ -46,7 +46,8 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
         </styles.TopLeftContainer>
 
         <styles.TopRightContainer>
-          <styles.DeleteButton onClick={openAlertModal} />
+          {post.checkMine && <styles.DeleteButton onClick={openAlertModal} />}
+
           <styles.PostDate>{post.createdAt}</styles.PostDate>
         </styles.TopRightContainer>
       </styles.TopContainer>

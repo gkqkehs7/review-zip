@@ -4,7 +4,11 @@ import SearchBarComponent from '@/components/searchPageComponent/searchBarCompon
 import SearchBarExtendComponent from '@/components/searchPageComponent/searchBarExtendComponent/searchBarExtendComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 
-import { GetAxiosInstance, PostAxiosInstance } from '@/api/axios.methods';
+import {
+  DeleteAxiosInstance,
+  GetAxiosInstance,
+  PostAxiosInstance,
+} from '@/api/axios.methods';
 import { Hashtag, History, User } from '@/types/common.types';
 
 import styles from './style';
@@ -57,7 +61,7 @@ const SearchPage: React.FC = () => {
   const getSearchHistories = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetSearchHistoriesResponse>(
-        '/v1/users/1/histories',
+        '/v1/users/histories',
       );
 
       setSearchHistories(response.data.result);
@@ -75,7 +79,8 @@ const SearchPage: React.FC = () => {
         );
 
         setSearchHistories(newSearchHistories);
-        // await DeleteAxiosInstance(`/v1/history/${historyId}`);
+
+        await DeleteAxiosInstance(`/v1/history/${historyId}`);
       } catch (error) {
         console.error(error);
       }
@@ -121,9 +126,8 @@ const SearchPage: React.FC = () => {
 
         setSearchUsers(newSearchUsers);
 
-        // Promise.all 처리?
-        // await PostAxiosInstance(`/v1/follows/users/${user.userId}`);
-        // await saveSearchUserHistory(user);
+        await PostAxiosInstance(`/v1/follows/users/${user.userId}`);
+        await saveSearchUserHistory(user);
       } catch (error) {
         console.error(error);
       }
