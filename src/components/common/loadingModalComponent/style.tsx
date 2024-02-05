@@ -19,6 +19,7 @@ const styles = {
     z-index: 1000;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -30,6 +31,13 @@ const styles = {
     width: 122px;
     height: 122px;
     animation: ${rotateAnimation} 3s linear infinite;
+  `,
+
+  Message: styled.div`
+    margin-top: 20px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
   `,
 };
 

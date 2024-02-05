@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { MdOutlineDelete } from 'react-icons/md';
 
 const styles = {
+  Container: styled.div`
+    overflow: auto;
+  `,
+
   HistoryContainer: styled.div`
     display: flex;
     justify-content: space-between;

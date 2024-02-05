@@ -5,45 +5,52 @@ import HashtagListComponent from '@/components/searchPageComponent/hashtagListCo
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 
+import { Hashtag, User } from '@/types/common.types';
+
 import styles from './style';
+import { useCallback } from 'react';
 
 interface SearchBarExtendComponentProps {
   searchInputValue: string;
+  searchUsers: User[];
+  searchHashtags: Hashtag[];
 }
 
 const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
   searchInputValue,
+  searchUsers,
+  searchHashtags,
 }) => {
   const device = checkDevice();
+
+  const sectionText = useCallback<
+    () => '검색기록' | '해시태그' | '리뷰잉'
+  >(() => {
+    if (searchInputValue.trim().length === 0) {
+      return '검색기록';
+    }
+
+    if (searchInputValue[0] === '#') {
+      return '해시태그';
+    }
+
+    return '리뷰잉';
+  }, [searchInputValue]);
+
   return (
-    <styles.Container
-      style={responsiveWidthHeight(
-        device,
-        { width: 2000, height: 'auto' },
-        { width: 1700, height: 'auto' },
-        { width: 1400, height: 'auto' },
-        { width: 1080, height: 'auto' },
-        { width: 500, height: 'auto' },
-        { width: 500, height: 'auto' },
-      )}
-    >
-      <styles.Top>
-        {searchInputValue ? (
-          <>
-            <styles.SearchType isBorder={!searchInputValue.includes('#')}>
-              리뷰잉
-            </styles.SearchType>
-            <styles.SearchType isBorder={searchInputValue.includes('#')}>
-              태그
-            </styles.SearchType>
-          </>
-        ) : (
-          <>
-            <styles.SearchType isBorder={!searchInputValue.includes('#')}>
-              검색기록
-            </styles.SearchType>
-          </>
+    <styles.Container>
+      <styles.Top
+        style={responsiveWidthHeight(
+          device,
+          { width: 2000, height: 40 },
+          { width: 1700, height: 50 },
+          { width: 1400, height: 50 },
+          { width: 1080, height: 50 },
+          { width: 500, height: 50 },
+          { width: 500, height: 50 },
         )}
+      >
+        <styles.TopText>{sectionText()}</styles.TopText>
       </styles.Top>
 
       {!searchInputValue && ( // 검색창의 입력값이 비어있는 경우 화면에 보일 검색 기록
@@ -52,10 +59,10 @@ const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
 
       {searchInputValue && ( // 검색창의 입력값이 비어있지 않고 진행중인 경우
         <div>
-          {searchInputValue.includes('#') ? (
-            <HashtagListComponent />
+          {searchInputValue[0] === '#' ? (
+            <HashtagListComponent hashtags={searchHashtags} />
           ) : (
-            <UserListComponent />
+            <UserListComponent users={searchUsers} />
           )}
         </div>
       )}

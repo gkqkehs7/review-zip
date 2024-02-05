@@ -126,13 +126,17 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
         )}
 
         {/* 아래 화살표 */}
-        <styles.ArrowImage src={DownArrowImage} />
+        <styles.ArrowImage onClick={newPost} src={DownArrowImage} />
 
         {/* 위로 가는 화살표 */}
         <styles.TopButton src={TopButtonImage} onClick={scrollToTop} />
       </styles.InnerContainer>
 
-      {loading && <LoadingModalComponent />}
+      {loading && (
+        <LoadingModalComponent
+          message={'새로운 게시글을 불러오는 중입니다...'}
+        />
+      )}
 
       {alertModalOpen && (
         <AlertComponent

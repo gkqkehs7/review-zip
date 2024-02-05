@@ -1,36 +1,36 @@
+import { Hashtag } from '@/types/common.types';
+
+import { responsiveWidthHeight } from '@/utils/reponsiveSize';
+import { checkDevice } from '@/utils/checkDeviceSize';
+
 import styles from './style';
 
-const hashtags = [
-  {
-    id: 1,
-    hashtag: 'hashtag1',
-  },
-  {
-    id: 2,
-    hashtag: 'hashtag2',
-  },
-  {
-    id: 3,
-    hashtag: 'hashtag3',
-  },
-  {
-    id: 4,
-    hashtag: 'hashtag4',
-  },
-  {
-    id: 5,
-    hashtag: 'hashtag5',
-  },
-];
+interface HashtaglistComponentProps {
+  hashtags: Hashtag[];
+}
 
-const HashtagListComponent: React.FC = () => {
+const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
+  hashtags,
+}) => {
+  const device = checkDevice();
+
   return (
-    <div>
+    <div
+      style={responsiveWidthHeight(
+        device,
+        { width: 2000, height: 400 },
+        { width: 1700, height: 400 },
+        { width: 1400, height: 400 },
+        { width: 1080, height: 400 },
+        { width: 500, height: 400 },
+        { width: 500, height: 400 },
+      )}
+    >
       {hashtags.map((hashtag) => (
-        <styles.HashtagContainer>
+        <styles.HashtagContainer key={hashtag.id}>
           {/* 해시 태그 */}
           <styles.HashTagLink to="/hashtagPage">
-            <styles.Content>#{hashtag.hashtag}</styles.Content>
+            <styles.Content>#{hashtag.name}</styles.Content>
           </styles.HashTagLink>
 
           {/* 리뷰 보기 버튼 */}
