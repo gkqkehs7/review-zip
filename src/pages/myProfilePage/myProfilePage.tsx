@@ -12,6 +12,7 @@ import {
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import ProfileClickComponent from '@/components/myProfilePageComponent/profileClickComponent/profileClickComponent';
 import LogoComponent from '@/components/myProfilePageComponent/logoComponent/logoComponent';
+import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
 
 import styles from './style';
 import ProfileComponent from '@/components/myProfilePageComponent/profileComponent/profileComponent';
@@ -104,6 +105,11 @@ const MyProfilePage: React.FC = () => {
     if (userId) {
       getUserInfo();
     }
+    if (userId === 'me') {
+      setIsFriend(false); //isFriend를 props로 넘겨줘서 프로필 수정 가능 여부를 결정
+    } else {
+      setIsFriend(true);
+    }
   }, [userId]);
 
   //클릭한 psotId가 바뀌면 포스트 데이터 다시 호출
@@ -114,40 +120,45 @@ const MyProfilePage: React.FC = () => {
   }, [postId]);
 
   return (
-    <styles.Container>
-      {/*보라색 세로 그룹 바  */}
-      <GroupBarComponent color="purple" direction="row" />
-      {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔하고 post클릭 이벤트 같이 클릭과 관련된 컴포넌트  */}
-      <ProfileClickComponent
-        users={users}
-        post={post}
-        friendListOpen={friendListOpen}
-        isClicked={isClicked}
-        setFriendListOpen={setFriendListOpen}
-        setPostIsClicked={setPostIsClicked}
-        postIsClicked={postIsClicked}
-      />
-      <LogoComponent />
-      {/*프로필 (프로필 사진, 이름, 게시물 컴포넌트 등등) 상위 컴포넌트 */}
-      <ProfileComponent
-        isEditProfile={isEditProfile}
-        isFriend={isFriend}
-        userInfo={userInfo}
-        userId={userId}
-        setIsClicked={setIsClicked}
-        setIsEditProfile={setIsEditProfile}
-        setFriendListOpen={setFriendListOpen}
-        postItemIsClicked={postItemIsClicked}
-        setPostClicked={setPostClicked}
-        storageIsClicked={storageIsClicked}
-        setStorageClicked={setStorageClicked}
-        setIsScrab={setIsScrab}
-        setPostIsClicked={setPostIsClicked}
-        curtPosts={curtPosts}
-        setPostId={setPostId}
-      />
-      s
-    </styles.Container>
+    <>
+      {userInfo && curtPosts ? (
+        <styles.Container>
+          {/*보라색 세로 그룹 바  */}
+          <GroupBarComponent color="purple" direction="row" />
+          {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔하고 post클릭 이벤트 같이 클릭과 관련된 컴포넌트  */}
+          <ProfileClickComponent
+            users={users}
+            post={post}
+            friendListOpen={friendListOpen}
+            isClicked={isClicked}
+            setFriendListOpen={setFriendListOpen}
+            setPostIsClicked={setPostIsClicked}
+            postIsClicked={postIsClicked}
+          />
+          <LogoComponent />
+          {/*프로필 (프로필 사진, 이름, 게시물 컴포넌트 등등) 상위 컴포넌트 */}
+          <ProfileComponent
+            isEditProfile={isEditProfile}
+            isFriend={isFriend}
+            userInfo={userInfo}
+            userId={userId}
+            setIsClicked={setIsClicked}
+            setIsEditProfile={setIsEditProfile}
+            setFriendListOpen={setFriendListOpen}
+            postItemIsClicked={postItemIsClicked}
+            setPostClicked={setPostClicked}
+            storageIsClicked={storageIsClicked}
+            setStorageClicked={setStorageClicked}
+            setIsScrab={setIsScrab}
+            setPostIsClicked={setPostIsClicked}
+            curtPosts={curtPosts}
+            setPostId={setPostId}
+          />
+        </styles.Container>
+      ) : (
+        <LoadingModalComponent message="데이터 로딩중" />
+      )}
+    </>
   );
 };
 

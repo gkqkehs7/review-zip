@@ -5,7 +5,6 @@ import ProfileNameImageComponent from '@components/myProfilePageComponent/profil
 import UserProfileStatsComponent from '@components/myProfilePageComponent/userProfileStatsComponent/userProfileStatsComponent';
 import ButtonComponent from '@components/myProfilePageComponent/buttonComponent/buttonComponent';
 import ReviewPictureComponent from '@components/myProfilePageComponent/reviewPicturesComponent/reviewPictureComponent';
-import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
 import styles from './style';
 
 export interface ProfileProps {
@@ -46,14 +45,12 @@ const ProfileComponent: React.FC<ProfileProps> = ({
     <styles.ProfilePictureContainer>
       <styles.ProfileContainer>
         {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
-        {userInfo ? (
+        {userInfo && (
           <ProfileNameImageComponent
             isEditProfile={isEditProfile}
             isFriend={isFriend}
             userInfo={userInfo}
           />
-        ) : (
-          <LoadingModalComponent message="데이터 로딩중" />
         )}
         {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼이 들어있는 컴포넌트 */}
         {userInfo && (
@@ -76,14 +73,12 @@ const ProfileComponent: React.FC<ProfileProps> = ({
         setIsScrab={setIsScrab}
       />
       {/* 리뷰 게시물 이미지 컴포넌트 */}
-      {curtPosts ? (
+      {curtPosts && (
         <ReviewPictureComponent
           setPostISClicked={setPostIsClicked}
           curtPost={curtPosts}
           setPostId={setPostId}
         />
-      ) : (
-        <LoadingModalComponent message="데이터 로딩중" />
       )}
     </styles.ProfilePictureContainer>
   );
