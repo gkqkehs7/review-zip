@@ -3,7 +3,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Routes,
   Route,
 } from 'react-router-dom';
 import SigninPage from '@/pages/signinPage/signinPage';
