@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { GetUserInfoResponse } from '@/types/response.types';
 import styles from './style';
 import Map from '/images/friendProfilePage/MapImage.png';
+import { User } from '@/types/common.types';
 
 export interface UserProfileStatsProps {
   setIsClicked: React.Dispatch<React.SetStateAction<boolean[]>>;
@@ -9,7 +10,7 @@ export interface UserProfileStatsProps {
   isEditProfile: boolean;
   isFriend: boolean | undefined;
   setFriendListOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo?: GetUserInfoResponse;
+  userInfo?: User;
   myInfo?: GetUserInfoResponse;
   userId?: string | number;
 }

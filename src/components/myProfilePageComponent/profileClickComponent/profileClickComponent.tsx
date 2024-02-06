@@ -9,7 +9,8 @@ import styles from './style';
 //게시물 정보를 담은 배열의 게시물 타입
 export type DataType = {
   post: Post;
-  users: User[];
+  followings: User[];
+  followers: User[];
   friendListOpen: boolean;
   isClicked: boolean[];
   setFriendListOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +19,8 @@ export type DataType = {
 };
 
 const ProfileClickComponent: React.FC<DataType> = ({
-  users,
+  followings,
+  followers,
   post,
   friendListOpen,
   isClicked,
@@ -30,6 +32,7 @@ const ProfileClickComponent: React.FC<DataType> = ({
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false); // delete modal 띄우기용
+
   const modalOpen = useCallback(() => {
     setOpenModal(true);
   }, [openModal]);
@@ -43,16 +46,18 @@ const ProfileClickComponent: React.FC<DataType> = ({
     setFriendListOpen(false);
     modalClose();
   };
+
   // alert창 열기
   const openAlertModal = useCallback(() => {
     setAlertModalOpen(true);
   }, []);
+
   return (
     <div>
       {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔 */}
       {isClicked[1] && (
         <LikeListComponent
-          users={users}
+          users={followers}
           closeLikeListModal={closeFriendListModal}
           likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}
@@ -61,7 +66,7 @@ const ProfileClickComponent: React.FC<DataType> = ({
       )}
       {isClicked[2] && (
         <LikeListComponent
-          users={users}
+          users={followings}
           closeLikeListModal={closeFriendListModal}
           likeListOpen={friendListOpen}
           isReviewer={isClicked[1]}

@@ -34,6 +34,12 @@ interface SearchUserByNicknameResponse extends Array<User> {}
 // [Get] /v1/users/{userId}/histories
 interface GetSearchHistoriesResponse extends Array<History> {}
 
+// [Get] /v1/users/{userId}/followings
+interface GetFollowingsResponse extends Array<User> {}
+
+// [Get] /v1/users/{userId}/followers
+interface GetFollowersResponse extends Array<User> {}
+
 // POST CONTROLLER
 // [Post] /v1/posts
 interface CreatePostResponse {
@@ -73,6 +79,8 @@ export type {
   GetUserPostsResponse,
   SearchUserByNicknameResponse,
   GetUserInfoResponse,
+  GetFollowersResponse,
+  GetFollowingsResponse,
   GetRandomPostResponse,
   GetPostResponse,
   GetPostLikedUsersResponse,

@@ -33,8 +33,8 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const [split, setSplit] = useState<boolean>(false);
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
 
-  const [checkLike, setCheckLiked] = useState<boolean>(post.checkLike);
-  const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab);
+  const [checkLike, setCheckLiked] = useState<boolean>(post.checkLike!);
+  const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab!);
 
   const [postLikeNum, setPostLikeNum] = useState<number>(post.likeNum);
 
@@ -56,14 +56,13 @@ const PostComponent: React.FC<PostComponentProps> = ({
     try {
       setPostLikeNum(postLikeNum + 1);
       setCheckLiked(true);
-
       await PostAxiosInstance(`/v1/posts/${post.postId}/like`);
     } catch (error) {
       setPostLikeNum(postLikeNum - 1);
       setCheckLiked(false);
       console.log(error);
     }
-  }, [postLikeNum]);
+  }, [post, postLikeNum]);
 
   // 좋아요 취소
   const unLikePost = useCallback(async () => {
@@ -77,7 +76,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
       setCheckLiked(true);
       console.log(error);
     }
-  }, [postLikeNum]);
+  }, [post, postLikeNum]);
 
   // 스크랩하기
   const scrabPost = useCallback(async () => {
@@ -88,7 +87,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
     } catch (error) {
       setCheckScrab(false);
     }
-  }, []);
+  }, [post]);
 
   // 스크랩 취소
   const unScrabPost = useCallback(async () => {
@@ -99,7 +98,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
     } catch (error) {
       setCheckScrab(true);
     }
-  }, []);
+  }, [post]);
 
   const splitPost = () => {
     setSplit(!split);

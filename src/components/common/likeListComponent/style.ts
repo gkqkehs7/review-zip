@@ -9,6 +9,8 @@ const styles = {
     height: 100vh;
     z-index: 1000;
 
+    top: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;

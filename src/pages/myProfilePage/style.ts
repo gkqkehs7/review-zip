@@ -10,9 +10,12 @@ const styles = {
     height: 100vh;
     padding: 0 0 10vh 0;
     overflow-y: scroll;
+
+    position: relative;
   `,
+
   ProfilePictureContainer: styled.div`
-    positipn: relative;
+    position: relative;
     top: 0;
     width: 900px;
     min-width: 400px;

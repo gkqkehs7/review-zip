@@ -24,6 +24,8 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
           onClick={() => {
             setPostISClicked(true);
             setPostId(post.postId);
+
+            console.log(post.postId);
           }}
         >
           <styles.PictureBorder>
