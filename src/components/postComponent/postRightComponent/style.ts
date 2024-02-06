@@ -57,6 +57,7 @@ const styles = {
   TopLeftContainer: styled.div`
     display: flex;
     align-items: center;
+    cursor: pointer;
   `,
 
   UserImage: styled.img`

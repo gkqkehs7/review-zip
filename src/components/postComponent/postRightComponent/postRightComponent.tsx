@@ -8,6 +8,7 @@ import LikeButtonImage from '/images/post/LikeButton.png';
 import NotScrabButtonImage from '/images/post/NotScrabButton.png';
 import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
+import { useNavigate } from 'react-router-dom';
 
 interface PostRightComponentProps {
   post: Post;
@@ -36,11 +37,17 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
   unScrabPost,
   openAlertModal,
 }) => {
+  const navigation = useNavigate();
+
   return (
     <styles.Container splitPost={split}>
       {/* 유저 정보 */}
       <styles.TopContainer>
-        <styles.TopLeftContainer>
+        <styles.TopLeftContainer
+          onClick={() => {
+            navigation(`/profilePage/${post.userInfo.userId}`);
+          }}
+        >
           <styles.UserImage src={post.userInfo.profileUrl} />
           <styles.UserName>{post.userInfo.nickname}</styles.UserName>
         </styles.TopLeftContainer>
@@ -62,7 +69,12 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       {/* 해시태그들 */}
       <styles.HashTagContainer>
         {post.hashtags.map((hashtag, index) => (
-          <styles.HashTag key={index}>
+          <styles.HashTag
+            key={index}
+            onClick={() => {
+              navigation(`/hashtagPage/${hashtag}`);
+            }}
+          >
             <styles.HashTagText># {hashtag}</styles.HashTagText>
           </styles.HashTag>
         ))}

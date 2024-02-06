@@ -1,5 +1,4 @@
-import { useCallback, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import ImageSliderComponent from '@/components/common/imageSliderComponent/imageSliderComponent';
 
@@ -37,6 +36,8 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
   scrabPost,
   unScrabPost,
 }) => {
+  const navigation = useNavigate();
+
   const splitContent = (content: string): string => {
     if (content.length < 15) {
       return content;
@@ -73,7 +74,11 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           <styles.Line />
 
           {/* 맨 위 유저 정보, 게시글 날짜 */}
-          <styles.UserContainer>
+          <styles.UserContainer
+            onClick={() => {
+              navigation(`/profilePage/${post.userInfo.userId}`);
+            }}
+          >
             <styles.UserImage src={post.userInfo.profileUrl} />
             <styles.UserName>{post.userInfo.nickname}</styles.UserName>
             <styles.PostDate>{post.createdAt}</styles.PostDate>
