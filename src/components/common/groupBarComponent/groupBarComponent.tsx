@@ -142,7 +142,7 @@ const GroupBarComponent: React.FC<GroupBarComponentProps> = ({
                 지도
               </rowStyles.MenuText>
             </rowStyles.Menu>
-            <rowStyles.Menu to="/profilePage/me">
+            <rowStyles.Menu to="/profilePage/1">
               <rowStyles.MenuText isVisible={menuVisible}>
                 프로필
               </rowStyles.MenuText>
@@ -221,7 +221,7 @@ const GroupBarComponent: React.FC<GroupBarComponentProps> = ({
                 지도
               </colStyles.MenuText>
             </colStyles.Menu>
-            <colStyles.Menu to="/myProfilePage">
+            <colStyles.Menu to="/profilePage/1">
               <colStyles.MenuText isVisible={menuVisible}>
                 프로필
               </colStyles.MenuText>

@@ -6,13 +6,14 @@ import ProfilePhotoImage from '/images/myProfilePage/ProfilePhotoImage.png';
 import PencilImage from '/images/myProfilePage/Pencil.png';
 import CameraImage from '/images/myProfilePage/Camera.png';
 import { GetUserInfoResponse } from '@/types/response.types';
+import { User } from '@/types/common.types';
 
 export interface ProfileNameImagePrps {
   isEditProfile: boolean;
   friendProfileImage?: string;
   isFriend?: boolean;
   friend?: string;
-  userInfo?: GetUserInfoResponse;
+  userInfo?: User;
   myInfo?: GetUserInfoResponse;
   userId?: string | number;
 }

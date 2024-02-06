@@ -1,4 +1,4 @@
-import { CurtPost } from '@/types/common.types';
+import { CurtPost, User } from '@/types/common.types';
 import { GetUserInfoResponse } from '@/types/response.types';
 
 import ProfileNameImageComponent from '@components/myProfilePageComponent/profileNameImageComponent/profileNameImageComponent';
@@ -10,7 +10,7 @@ import styles from './style';
 export interface ProfileProps {
   isEditProfile: boolean;
   isFriend?: boolean;
-  userInfo?: GetUserInfoResponse;
+  userInfo?: User;
   userId?: string | number;
   setIsClicked: React.Dispatch<React.SetStateAction<boolean[]>>;
   setIsEditProfile: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,26 +45,24 @@ const ProfileComponent: React.FC<ProfileProps> = ({
     <styles.ProfilePictureContainer>
       <styles.ProfileContainer>
         {/*좌측의 이름과 프로필 사진이 뜨는 컴포넌트 */}
-        {userInfo && (
-          <ProfileNameImageComponent
-            isEditProfile={isEditProfile}
-            isFriend={isFriend}
-            userInfo={userInfo}
-          />
-        )}
+        <ProfileNameImageComponent
+          isEditProfile={isEditProfile}
+          isFriend={isFriend}
+          userInfo={userInfo}
+        />
+
         {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼이 들어있는 컴포넌트 */}
-        {userInfo && (
-          <UserProfileStatsComponent
-            setIsClicked={setIsClicked}
-            setIsEditProfile={setIsEditProfile}
-            isEditProfile={isEditProfile}
-            isFriend={isFriend}
-            setFriendListOpen={setFriendListOpen}
-            userInfo={userInfo}
-          />
-        )}
+        <UserProfileStatsComponent
+          setIsClicked={setIsClicked}
+          setIsEditProfile={setIsEditProfile}
+          isEditProfile={isEditProfile}
+          isFriend={isFriend}
+          setFriendListOpen={setFriendListOpen}
+          userInfo={userInfo}
+        />
       </styles.ProfileContainer>
-      {/*게시물 ,저장소 버튼 컴포넌트  */}
+
+      {/* 게시물 ,저장소 버튼 컴포넌트  */}
       <ButtonComponent
         postItemIsClicked={postItemIsClicked}
         setPostClicked={setPostClicked}
@@ -72,14 +70,13 @@ const ProfileComponent: React.FC<ProfileProps> = ({
         setStorageClicked={setStorageClicked}
         setIsScrab={setIsScrab}
       />
+
       {/* 리뷰 게시물 이미지 컴포넌트 */}
-      {curtPosts && (
-        <ReviewPictureComponent
-          setPostISClicked={setPostIsClicked}
-          curtPost={curtPosts}
-          setPostId={setPostId}
-        />
-      )}
+      <ReviewPictureComponent
+        setPostISClicked={setPostIsClicked}
+        curtPost={curtPosts}
+        setPostId={setPostId}
+      />
     </styles.ProfilePictureContainer>
   );
 };

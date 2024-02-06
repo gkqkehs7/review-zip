@@ -4,6 +4,8 @@ interface User {
   name: string;
   profileUrl: string;
   following?: boolean;
+  followingNum?: number;
+  followerNum?: number;
 }
 
 interface Post {
@@ -11,9 +13,9 @@ interface Post {
   comment: string;
   point: number;
   likeNum: number;
-  checkLike: boolean;
-  checkScrab: boolean;
-  checkMine: boolean;
+  checkLike?: boolean;
+  checkScrab?: boolean;
+  checkMine?: boolean;
   createdAt: string;
   userInfo: User;
   hashtags: string[];
