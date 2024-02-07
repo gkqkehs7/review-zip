@@ -155,6 +155,7 @@ const MyProfilePage: React.FC = () => {
     getFollowerList(); // 팔로워 리스트 가져오기
   }, []);
 
+  const clickedPost = posts.find((post) => post.postId === postIsClicked);
   return (
     <>
       {userInfo && posts ? (
@@ -162,10 +163,10 @@ const MyProfilePage: React.FC = () => {
           {/*보라색 가로 그룹 바  */}
           <GroupBarComponent color="purple" direction="row" />
           {/* 게시물이 클릭이 된 경우  */}
-          {postOpen && (
+          {clickedPost && (
             <styles.Overlay>
               <PostComponent
-                post={posts[postIsClicked]}
+                post={clickedPost}
                 modalOpen={modalOpen}
                 modalClose={modalClose}
                 openAlertModal={openAlertModal}
