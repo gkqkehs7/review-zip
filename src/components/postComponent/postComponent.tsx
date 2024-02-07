@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
 import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
@@ -18,6 +18,7 @@ interface PostComponentProps {
   post: Post;
   modalOpen: () => void;
   modalClose: () => void;
+  openAlertModal: () => void;
   setPostIsClicked?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -25,14 +26,17 @@ const PostComponent: React.FC<PostComponentProps> = ({
   post,
   modalOpen,
   modalClose,
+  openAlertModal,
   setPostIsClicked,
 }) => {
   const [postLikedUsers, setPostLikedUsers] = useState<User[]>([]);
   const [split, setSplit] = useState<boolean>(false);
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
 
-  const [checkLike, setCheckLiked] = useState<boolean>(post.checkLike);
-  const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab);
+  const [checkLike, setCheckLiked] = useState<boolean>(post.checkLike!);
+  const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab!);
+
+  const [postLikeNum, setPostLikeNum] = useState<number>(post.likeNum);
 
   // 좋아요 누른 목록 가져오기 나중에 postId로 변경
   const getLikeUsers = async () => {
@@ -48,44 +52,53 @@ const PostComponent: React.FC<PostComponentProps> = ({
   };
 
   // 좋아요 누르기
-  const likePost = async () => {
+  const likePost = useCallback(async () => {
     try {
+      setPostLikeNum(postLikeNum + 1);
       setCheckLiked(true);
-
       await PostAxiosInstance(`/v1/posts/${post.postId}/like`);
     } catch (error) {
+      setPostLikeNum(postLikeNum - 1);
       setCheckLiked(false);
       console.log(error);
     }
-  };
+  }, [post, postLikeNum]);
 
   // 좋아요 취소
-  const unLikePost = async () => {
+  const unLikePost = useCallback(async () => {
     try {
+      setPostLikeNum(postLikeNum - 1);
       setCheckLiked(false);
 
       await DeleteAxiosInstance(`/v1/posts/${post.postId}/like`);
     } catch (error) {
+      setPostLikeNum(postLikeNum + 1);
       setCheckLiked(true);
       console.log(error);
     }
-  };
+  }, [post, postLikeNum]);
 
-  const scrabPost = async () => {
+  // 스크랩하기
+  const scrabPost = useCallback(async () => {
     try {
       setCheckScrab(true);
+
+      await PostAxiosInstance(`/v1/posts/${post.postId}/scrabs`);
     } catch (error) {
       setCheckScrab(false);
     }
-  };
+  }, [post]);
 
-  const unScrabPost = async () => {
+  // 스크랩 취소
+  const unScrabPost = useCallback(async () => {
     try {
       setCheckScrab(false);
+
+      await DeleteAxiosInstance(`/v1/posts/${post.postId}/scrabs`);
     } catch (error) {
       setCheckScrab(true);
     }
-  };
+  }, [post]);
 
   const splitPost = () => {
     setSplit(!split);
@@ -104,7 +117,6 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const handleOutsideClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
-    // 클릭된 요소가 Container 자체인 경우에만 postIsClicked 상태를 변경
     if (event.target === event.currentTarget) {
       setPostIsClicked && setPostIsClicked(false);
     }
@@ -120,17 +132,20 @@ const PostComponent: React.FC<PostComponentProps> = ({
         split={split}
         openLikeListModal={openLikeListModal}
         post={post}
+        postLikeNum={postLikeNum}
         checkLike={checkLike}
         checkScrab={checkScrab}
         likePost={likePost}
         unLikePost={unLikePost}
         scrabPost={scrabPost}
         unScrabPost={unScrabPost}
+        openAlertModal={openAlertModal}
       />
 
       <PostLeft
         split={split}
         post={post}
+        postLikeNum={postLikeNum}
         splitPost={splitPost}
         checkLike={checkLike}
         checkScrab={checkScrab}
@@ -144,6 +159,8 @@ const PostComponent: React.FC<PostComponentProps> = ({
         users={postLikedUsers}
         likeListOpen={likeListOpen}
         closeLikeListModal={closeLikeListModal}
+        isReviewer={false}
+        isReviewing={false}
       />
     </styles.Container>
   );

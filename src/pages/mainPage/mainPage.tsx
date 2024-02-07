@@ -16,10 +16,10 @@ const MainPage: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);
 
   // 랜덤으로 3개 게시물 가져오기
-  const getRandomPosts = async () => {
+  const getRandomPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetRandomPostsResponse>(
-        '/v1/posts/random?userId=1',
+        '/v1/posts/random-three',
       );
 
       const randomPosts = response.data.result;
@@ -28,7 +28,7 @@ const MainPage: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getRandomPosts();

@@ -3,49 +3,35 @@ import { checkDevice } from '@/utils/checkDeviceSize';
 
 import styles from './style';
 import PlusFriend from '/images/searchPage/PlusFriendImage.png';
-const users = [
-  {
-    id: 1,
-    type: 'username',
-    value: 'username',
-    searchWordImage: 'images/searchPage/UserNameImage.png',
-  },
-  {
-    id: 2,
-    type: 'username',
-    value: 'username',
-    searchWordImage: 'images/searchPage/UserNameImage.png',
-  },
-  {
-    id: 3,
-    type: 'username',
-    value: 'username',
-    searchWordImage: 'images/searchPage/UserNameImage.png',
-  },
-  {
-    id: 4,
-    type: 'username',
-    value: 'username',
-    searchWordImage: 'images/searchPage/UserNameImage.png',
-  },
-  {
-    id: 5,
-    type: 'username',
-    value: 'username',
-    searchWordImage: 'images/searchPage/UserNameImage.png',
-  },
-];
+import { User } from '@/types/common.types';
+interface UserListComponentProps {
+  users: User[];
+  followUser: (user: User) => Promise<void>;
+}
 
-const UserListComponent: React.FC = () => {
+const UserListComponent: React.FC<UserListComponentProps> = ({
+  users,
+  followUser,
+}) => {
   const device = checkDevice();
 
   return (
-    <div>
+    <styles.Container
+      style={responsiveWidthHeight(
+        device,
+        { width: 2000, height: 400 },
+        { width: 1700, height: 400 },
+        { width: 1400, height: 400 },
+        { width: 1080, height: 400 },
+        { width: 500, height: 400 },
+        { width: 500, height: 400 },
+      )}
+    >
       {users.map((user) => (
         <styles.UserContainer>
           <styles.UserData>
             <styles.UserImage
-              src={user.searchWordImage}
+              src={user.profileUrl}
               style={responsiveWidthHeight(
                 device,
                 { width: 56, height: 56 },
@@ -57,15 +43,21 @@ const UserListComponent: React.FC = () => {
               )}
             />
 
-            <styles.UserName>{user.value}</styles.UserName>
+            <styles.UserNicknameName>
+              <styles.UserNickname>{user.nickname}</styles.UserNickname>
+              <styles.UserName>{user.name}</styles.UserName>
+            </styles.UserNicknameName>
           </styles.UserData>
 
-          <styles.PlusFriendLink to="">
-            <styles.PlusFriend src={PlusFriend} />
-          </styles.PlusFriendLink>
+          {!user.following && (
+            <styles.PlusFriend
+              src={PlusFriend}
+              onClick={() => followUser(user)}
+            />
+          )}
         </styles.UserContainer>
       ))}
-    </div>
+    </styles.Container>
   );
 };
 

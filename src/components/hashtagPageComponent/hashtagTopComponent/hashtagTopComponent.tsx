@@ -1,13 +1,20 @@
 import styles from './style';
 
-const HashtagTopComponent = () => {
+interface HashtagTopProps {
+  hashtag: string;
+  tagNum: number;
+}
+const HashtagTopComponent: React.FC<HashtagTopProps> = ({
+  hashtag,
+  tagNum,
+}) => {
   return (
     <styles.HashtagTopContainer>
       <div>
-        <styles.TagName>#강남역</styles.TagName>
+        <styles.TagName>{hashtag}</styles.TagName>
       </div>
       <div>
-        <styles.TagCount>태그 56</styles.TagCount>
+        <styles.TagCount>태그 {tagNum}</styles.TagCount>
       </div>
     </styles.HashtagTopContainer>
   );

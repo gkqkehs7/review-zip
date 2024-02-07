@@ -55,7 +55,7 @@ const styles = {
     width: 30px;
     height: 30px;
     bottom: 0;
-    left: 49%;
+    left: 50%;
     transform: translateX(-50%);
     z-index: 999;
 

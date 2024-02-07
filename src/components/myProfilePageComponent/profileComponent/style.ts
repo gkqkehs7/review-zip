@@ -1,19 +1,7 @@
 import styled from 'styled-components';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const styles = {
-  Container: styled.div`
-    // 화면 전체 사용하게
-    background-image: url('images/myProfilePage/ProfileBackgroundImage.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
-    padding: 0 0 10vh 0;
-    overflow-y: scroll;
-
-    position: relative;
-  `,
-
   ProfilePictureContainer: styled.div`
     position: relative;
     top: 0;
@@ -21,12 +9,14 @@ const styles = {
     min-width: 400px;
     margin: 0 auto;
   `,
+
   ProfileContainer: styled.div`
     display: flex;
     justify-content: center;
     margin: 0 auto;
     border-bottom: solid 2px #d5b2ff;
   `,
+
   PostComponentContainer: styled.div`
     width: 100%;
     display: flex;

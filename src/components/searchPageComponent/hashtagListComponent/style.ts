@@ -2,16 +2,27 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const styles = {
+  Container: styled.div`
+    overflow: auto;
+  `,
+
   HashtagContainer: styled.div`
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 40px;
     border-bottom: 2px solid white;
     height: 50px;
+
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
   `,
 
-  HashTagLink: styled(Link)`
+  HashTagLink: styled.div`
     text-align: center;
   `,
 

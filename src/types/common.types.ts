@@ -1,8 +1,11 @@
 interface User {
-  id: number;
+  userId: number;
   nickname: string;
+  name: string;
   profileUrl: string;
   following?: boolean;
+  followingNum?: number;
+  followerNum?: number;
 }
 
 interface Post {
@@ -10,9 +13,10 @@ interface Post {
   comment: string;
   point: number;
   likeNum: number;
-  checkLike: boolean;
-  checkScrab: boolean;
-  createdAt: Date;
+  checkLike?: boolean;
+  checkScrab?: boolean;
+  checkMine?: boolean;
+  createdAt: string;
   userInfo: User;
   hashtags: string[];
   postImages: PostImages[];
@@ -23,4 +27,24 @@ interface PostImages {
   url: string;
 }
 
-export type { User, Post, PostImages };
+interface CurtPost {
+  postId: number;
+  postImageUrl: string;
+  likeNum: number;
+  scrabNum: number;
+}
+
+interface History {
+  historyId: number;
+  type: 'USER' | 'HASHTAG';
+  user: User | null;
+  hashtag: string | null;
+}
+
+interface Hashtag {
+  id: number;
+  name: string;
+  postNum?: number;
+}
+
+export type { User, Post, PostImages, CurtPost, Hashtag, History };

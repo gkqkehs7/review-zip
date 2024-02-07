@@ -17,7 +17,7 @@ const revert = () => keyframes`
 `;
 
 interface ContainerProps {
-  splitPost: boolean;
+  splitpost: boolean;
 }
 
 const styles = {
@@ -38,7 +38,7 @@ const styles = {
     transform: translate(-50%, -50%);
 
     ${(props) =>
-      props.splitPost
+      props.splitpost
         ? css`
             animation: ${moveRight()} 2s forwards;
           `

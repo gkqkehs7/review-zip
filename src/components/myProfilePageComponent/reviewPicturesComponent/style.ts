@@ -39,8 +39,11 @@ const Picture = styled.img`
   display: flex;
   justify-content: center;
   align-items: cneter;
+  width: 100%;
+  height: 100%;
   flex: 1;
   border-radius: 20px;
+  object-fit: cover;
 `;
 const PictureContainer = styled.div`
   overflow: hidden;
