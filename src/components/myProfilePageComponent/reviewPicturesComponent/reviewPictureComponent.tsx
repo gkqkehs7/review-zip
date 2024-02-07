@@ -5,27 +5,22 @@ import Union from '/images/myProfilePage/Union.png';
 import { CurtPost } from '@/types/common.types';
 
 interface ChangePageProps {
-  setPostISClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  curtPost: CurtPost[];
-  setPostId: React.Dispatch<React.SetStateAction<number>>;
+  setPostIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  posts: CurtPost[];
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
-  setPostISClicked,
-  curtPost,
-  setPostId,
+  setPostIsClicked,
+  posts,
 }) => {
   return (
     <styles.RveiwPicturesContainer>
       {/*props를 받아서 저장소 버튼이 클릭이 되어있으면 저장소 데이터 배열을 map에 전달하고 게시물을 클릭하면 해당 데이터를 전달 */}
-      {curtPost.map((post, index) => (
+      {posts.map((post, index) => (
         <styles.PictureContainer
           key={index}
           onClick={() => {
-            setPostISClicked(true);
-            setPostId(post.postId);
-
-            console.log(post.postId);
+            setPostIsClicked(true);
           }}
         >
           <styles.PictureBorder>

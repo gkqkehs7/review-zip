@@ -13,7 +13,7 @@ const styles = {
   ProfileContainer: styled.div`
     display: flex;
     justify-content: center;
-    margin: 0 auto;
+    margin: 10vh 0 auto;
     border-bottom: solid 2px #d5b2ff;
   `,
 

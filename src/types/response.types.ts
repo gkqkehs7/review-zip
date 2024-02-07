@@ -1,4 +1,4 @@
-import { User, Post, CurtPost, Hashtag, History } from './common.types';
+import { User, Post, Hashtag, History } from './common.types';
 
 // KAKAO CONTROLLER
 // /v1/oauth/kakao
@@ -9,7 +9,7 @@ interface KakaoLoginType {
 // USER CONTROLLER
 // /v1/users/{userId}/posts
 interface GetUserPostsResponse {
-  postList: CurtPost[];
+  postList: Post[];
   listSize: number;
   totalPage: number;
   totalElements: number;

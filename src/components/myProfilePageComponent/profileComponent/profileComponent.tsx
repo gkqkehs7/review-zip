@@ -68,14 +68,12 @@ const ProfileComponent: React.FC<ProfileProps> = ({
         setPostClicked={setPostClicked}
         storageIsClicked={storageIsClicked}
         setStorageClicked={setStorageClicked}
-        setIsScrab={setIsScrab}
       />
 
       {/* 리뷰 게시물 이미지 컴포넌트 */}
       <ReviewPictureComponent
-        setPostISClicked={setPostIsClicked}
-        curtPost={curtPosts}
-        setPostId={setPostId}
+        setPostIsClicked={setPostIsClicked}
+        posts={curtPosts}
       />
     </styles.ProfilePictureContainer>
   );
