@@ -5,7 +5,7 @@ import Union from '/images/myProfilePage/Union.png';
 import { Post } from '@/types/common.types';
 
 interface ChangePageProps {
-  setPostIsClicked: React.Dispatch<React.SetStateAction<number>>;
+  setPostIsClicked: React.Dispatch<React.SetStateAction<number | undefined>>;
   posts: Post[];
 }
 
@@ -20,7 +20,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
         <styles.PictureContainer
           key={index}
           onClick={() => {
-            setPostIsClicked(post.postId);
+            setPostIsClicked(post.postId); //클릭한 post의 postId를 넣어줌
           }}
         >
           <styles.PictureBorder>

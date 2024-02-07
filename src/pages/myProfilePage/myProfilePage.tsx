@@ -17,7 +17,6 @@ import GroupBarComponent from '@/components/common/groupBarComponent/groupBarCom
 import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
 import PostComponent from '@/components/postComponent/postComponent';
 import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
-import ButtonComponent from '@components/myProfilePageComponent/buttonComponent/buttonComponent';
 import PostListComponent from '@/components/myProfilePageComponent/postListComponent/postListComponent';
 import ScrabPostListComponent from '@/components/myProfilePageComponent/scrabPostListComponent/scrabPostListComponent';
 
@@ -44,16 +43,17 @@ const MyProfilePage: React.FC = () => {
 
   //const [listLikeOpen ]; //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
-  //게시물이 클릭되서 어떤 postId의 포스트가 열릴지
-  const [postIsClicked, setPostIsClicked] = useState<number>(1);
-  const [postOpen, setPostOpen] = useState<boolean>(false);
+  //게시물이 클릭되서 어떤 postId의 포스트가 열릴지 닫을 때는 undefined
+  const [postIsClicked, setPostIsClicked] = useState<number | undefined>();
+
+  const [clickedPost, setClickedPost] = useState<Post>();
 
   const [userInfo, setUserInfo] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
   const [scrabPosts, setScrabPosts] = useState<Post[]>();
   const [followings, setFollowings] = useState<User[]>([]);
   const [followers, setFollowers] = useState<User[]>([]);
-  const [post, setPost] = useState<Post>();
+
   //프로필 변경시 고른 이미지
   const [selectedImage, setSelectedImage] = useState<File | null>();
   //유저 이름 프로필 수정시에 업데이트
@@ -155,7 +155,11 @@ const MyProfilePage: React.FC = () => {
     getFollowerList(); // 팔로워 리스트 가져오기
   }, []);
 
-  const clickedPost = posts.find((post) => post.postId === postIsClicked);
+  //클릭된 포스트의 아이디가 달라질 때마다 바꿔주기
+  useEffect(() => {
+    setClickedPost(posts.find((post) => post.postId === postIsClicked));
+  }, [postIsClicked]);
+
   return (
     <>
       {userInfo && posts ? (
@@ -170,7 +174,7 @@ const MyProfilePage: React.FC = () => {
                 modalOpen={modalOpen}
                 modalClose={modalClose}
                 openAlertModal={openAlertModal}
-                setPostOpen={setPostOpen}
+                setPostIsClicked={setPostIsClicked}
               />
             </styles.Overlay>
           )}
