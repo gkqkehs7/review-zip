@@ -5,9 +5,15 @@ import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 
 interface ZoomControllerProps {
   deltaY: number;
+  height: number;
+  width: number;
 }
 
-const ZoomControllerComponent: React.FC<ZoomControllerProps> = ({ deltaY }) => {
+const ZoomControllerComponent: React.FC<ZoomControllerProps> = ({
+  deltaY,
+  height,
+  width,
+}) => {
   const device = checkDevice();
 
   return (
@@ -15,24 +21,24 @@ const ZoomControllerComponent: React.FC<ZoomControllerProps> = ({ deltaY }) => {
     <styles.ZoomContainer
       style={responsiveWidthHeight(
         device,
-        { width: 62, height: 520 },
-        { width: 62, height: 500 },
-        { width: 62, height: 480 },
-        { width: 62, height: 420 },
-        { width: 62, height: 380 },
-        { width: 62, height: 30 },
+        { width: 0.6 * width, height: 5.2 * height },
+        { width: 0.6 * width, height: 5 * height },
+        { width: 0.6 * width, height: 4.8 * height },
+        { width: 0.6 * width, height: 4.2 * height },
+        { width: 0.6 * width, height: 3.8 * height },
+        { width: 0.6 * width, height: 3 * height },
       )}
     >
       <styles.ZoominImage />
       <styles.ZoomVerticalBar
         style={responsiveWidthHeight(
           device,
-          { width: 15, height: 390 },
-          { width: 15, height: 375 },
-          { width: 15, height: 360 },
-          { width: 15, height: 315 },
-          { width: 15, height: 275 },
-          { width: 15, height: 240 },
+          { width: 15, height: 3.9 * height },
+          { width: 15, height: 3.75 * height },
+          { width: 15, height: 3.6 * height },
+          { width: 15, height: 3.15 * height },
+          { width: 15, height: 2.75 * height },
+          { width: 15, height: 2.4 * height },
         )}
       >
         <styles.ZoomHorizonBar

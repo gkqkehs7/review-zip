@@ -3,18 +3,27 @@ import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
+import { PlaceInfo } from '../mapComponent/mapComponent';
 
 interface LocationSearchprops {
   mapRef: React.RefObject<kakao.maps.Map>;
+  width: number;
+  height: number;
+  setPlaceInnfo: React.Dispatch<React.SetStateAction<PlaceInfo>>;
 }
 
-const LocationSearchComponent: React.FC<LocationSearchprops> = ({ mapRef }) => {
+const LocationSearchComponent: React.FC<LocationSearchprops> = ({
+  mapRef,
+  width,
+  height,
+  setPlaceInnfo,
+}) => {
   const [keyword, setkeyword] = useState('');
   const ListRef = useRef<HTMLUListElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchPlace(keyword, ListRef, mapRef);
+    searchPlace(keyword, ListRef, mapRef, setPlaceInnfo);
   };
 
   const device = checkDevice();
@@ -23,19 +32,52 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({ mapRef }) => {
       <styles.Container
         style={responsiveWidthHeight(
           device,
-          { width: 484, height: '100%' },
-          { width: 444, height: '100%' },
-          { width: 404, height: '100%' },
-          { width: 364, height: '100%' },
-          { width: 324, height: '100%' },
-          { width: 284, height: '100%' },
+          { width: width * 4, height: '100%' },
+          { width: width * 4, height: '100%' },
+          { width: width * 4, height: '100%' },
+          { width: width * 3.5, height: '100%' },
+          { width: width * 3.2, height: '100%' },
+          { width: width * 2.8, height: '100%' }, //100
         )}
       >
-        <styles.TopImage />
+        <styles.TopImage
+          style={responsiveWidthHeight(
+            device,
+            { width: width * 2.7, height: 61 },
+            { width: width * 2.7, height: 61 },
+            { width: width * 2.7, height: 61 },
+            { width: width * 2.42, height: 55 },
+            { width: width * 2.16, height: 49 },
+            { width: width * 1.9, height: 43 },
+          )}
+        >
+          REVIEW.ZIP
+        </styles.TopImage>
 
-        <styles.SearchingContainer>
+        <styles.SearchingContainer
+          style={responsiveWidthHeight(
+            device,
+            { width: width * 2.9, height: '100%' },
+            { width: width * 2.9, height: '100%' },
+            { width: width * 2.9, height: '100%' },
+            { width: width * 2.6, height: '100%' },
+            { width: width * 2.3, height: '100%' },
+            { width: width * 2.1, height: '100%' },
+          )}
+        >
           <styles.SearchBarForm onSubmit={handleSubmit}>
-            <styles.SearchIcon src="images/mapPage/Search.png" />
+            <styles.SearchIcon
+              src="images/mapPage/Search.png"
+              style={responsiveWidthHeight(
+                device,
+                { width: 29, height: 29 },
+                { width: 29, height: 29 },
+                { width: 29, height: 29 },
+                { width: 26, height: 26 },
+                { width: 23.1, height: 23.1 },
+                { width: 20.2, height: 20.2 },
+              )}
+            />
             <styles.SearchBar
               type="text"
               placeholder="장소,버스.지하철,도로검색"
@@ -50,12 +92,12 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({ mapRef }) => {
         <styles.StarsImage
           style={responsiveWidthHeight(
             device,
-            { width: 265, height: 460 },
-            { width: 245, height: 440 },
-            { width: 225, height: 420 },
-            { width: 205, height: 400 },
-            { width: 185, height: 380 },
-            { width: 165, height: 360 },
+            { width: width * 2.66, height: height * 4.61 },
+            { width: width * 2.66, height: height * 4.61 },
+            { width: width * 2.66, height: height * 4.61 },
+            { width: width * 2.25, height: height * 3.81 },
+            { width: width * 1.85, height: height * 3.4 },
+            { width: width * 1.46, height: height * 3 },
           )}
         />
       </styles.Container>

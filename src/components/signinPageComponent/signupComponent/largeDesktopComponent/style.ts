@@ -101,13 +101,12 @@ const styles = {
     height: 8vh;
     z-index: 3;
   `,
-  Right: styled.div`
+  FormContainer: styled.form`
     postion: relative;
     width: 625px;
     height: 750px;
-    margin: 300px 0px 0px 60vw;
-
-    z-index: 5;
+    margin: 250px 0px 0px 60vw;
+    z-index: 3;
   `,
 
   InputContainer: styled.div`
@@ -126,6 +125,7 @@ const styles = {
   `,
 
   Input: styled.input`
+    position: relative;
     background-color: rgba(255, 255, 255, 0.3);
     width: 100%;
     height: 40px;
@@ -133,27 +133,52 @@ const styles = {
     box-sizing: border-box;
     border-radius: 100px;
     color: white;
-
+    outline: none;
     font-size: 90%;
     &::placeholder {
       color: white;
     }
   `,
-
+  CheckNickName: styled.div`
+    display: none;
+    position: relative;
+    background-image: url('images/signinPage/Check.png');
+    background-size: 100% 100%;
+    width: 25px;
+    height: 25px;
+    z-index: 4;
+    left: 580px;
+    bottom: 32.5px;
+    border: 1px solid white;
+  `,
+  CheckPassWord: styled.div`
+    display: none;
+    position: relative;
+    background-image: url('images/signinPage/Check.png');
+    background-size: 100% 100%;
+    width: 25px;
+    height: 25px;
+    z-index: 3;
+    left: 580px;
+    bottom: 32.5px;
+  `,
   WarnText: styled.p`
-    margin: 10px 0px 30px 15px;
+    margin: 15px 0px 30px 15px;
     color: white;
     font-size: 80%;
     text-decoration: underline;
     white-space: nowrap;
   `,
 
-  SignUpBtn: styled(Link)`
-    width: 100%;
-    height: 29px;
-    margin: 0px 0px 0px 0px;
-    color: white;
-    font-size: 300%;
+  SignUpBtn: styled.input`
+    background-image: url('images/signinPage/SignUp.png');
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 40px;
+    margin: 40px 0px 0px 0px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    font-size: 0%;
     cursor: pointer;
   `,
 

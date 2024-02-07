@@ -6,11 +6,11 @@ const styles = {
     flex-direction: column;
     justify-content: space-around;
     position: absolute;
-    top: 16vh;
+    top: 50px;
     right: 50px;
     background-color: rgba(255, 255, 255, 0.7);
     width: 62px;
-    height: 520px;
+    height: 500px;
     border-radius: 31px;
     z-index: 1;
   `,
@@ -36,7 +36,7 @@ const styles = {
     background-color: rgba(0, 0, 0, 0.6);
     margin: auto 0px auto -18px;
     width: 50px;
-    height: 15px;
+    height: 12.5px;
   `,
 
   ZoomOutImage: styled.div`

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
-import styles from './style';
+import styles from './styles';
 
-const PasswordRecoveryPage: React.FC = () => {
+const MobileComponent: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
@@ -64,4 +64,4 @@ const PasswordRecoveryPage: React.FC = () => {
   );
 };
 
-export default PasswordRecoveryPage;
+export default MobileComponent;

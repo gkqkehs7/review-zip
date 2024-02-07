@@ -5,87 +5,82 @@ import React from 'react';
 //signinPage 서버먼저 연결한뒤 해결 고민중.
 const InfoWindowComponent: React.FC = () => {
   return (
-    <div
+    <li
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '330px',
-        height: '160px',
-
-        backgroundColor: 'rgba(151, 102, 209, 0.8)',
+        width: '261px',
+        height: '100px',
+        listStyle: 'none',
+        padding: '12.5px 0px 0px 10px',
+        border: '1px solid black',
       }}
     >
+      {/* 장소명 */}
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
-          height: '35%',
-
-          marginTop: '8%',
-          flexWrap: 'wrap',
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: '110%',
-          marginBottom: '-30px',
-          marginLeft: '20px',
         }}
       >
-        <img
-          src="images/mapPage/PlaceIcon.png"
-          style={{ width: '30px', height: '30px' }}
-        />
-        <div
+        <span
           style={{
-            marginLeft: '20px',
-            overflowWrap: 'break-word',
+            color: 'blue',
+            fontSize: '120%',
+            fontWeight: 'bold',
           }}
         >
-          <div></div>
-          <div>역곡로.................</div>
-        </div>
+          {' '}
+          A
+        </span>
+        <span
+          style={{
+            fontSize: '120%',
+            fontWeight: 'bold',
+            marginLeft: '10px',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+          }}
+        >
+          {/* placeData.Placename */}
+          고강사거리라고 해주세요
+        </span>
+      </div>
+      {/* 주소 */}
+      <div
+        style={{
+          display: 'flex',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          fontSize: '90%',
+          marginTop: '5px',
+        }}
+      >
+        {/* placeData.adressName */}
+        서울강남구 강남대로 지하차도
       </div>
 
       <div
         style={{
           display: 'flex',
-          height: '35%',
-
-          color: 'white',
-          fontWeight: 'bold',
-          marginTop: '8%',
-          fontSize: '110%',
-          alignItems: 'center',
-          marginLeft: '20px',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          fontSize: '90%',
+          marginTop: '1px',
         }}
       >
-        <img
-          src="images/mapPage/SaveStar.png"
-          style={{ width: '30px', height: '30px' }}
-        />
-        <div
-          style={{
-            marginLeft: '20px',
-          }}
-        >
-          <div
-            style={{
-              cursor: 'pointer',
-            }}
-          >
-            위치저장하기
-          </div>
-        </div>
+        강남로 2030140
       </div>
-      <img
-        src="images/mapPage/Delete.png"
+      {/* placeData.phone */}
+      <div
         style={{
-          display: 'none',
-          width: '15px',
-          height: '15px',
-          marginLeft: '90%',
+          display: 'flex',
+          fontSize: '90%',
+          marginTop: '0px',
+          color: 'rgba(12, 147, 90, 0.9)',
         }}
-      />
-    </div>
+      >
+        02-6222-1255
+      </div>
+    </li>
   );
 };
 
