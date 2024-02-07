@@ -10,12 +10,9 @@ import { User } from '@/types/common.types';
 
 export interface ProfileNameImagePrps {
   isEditProfile: boolean;
-  friendProfileImage?: string;
   isFriend?: boolean;
   friend?: string;
   userInfo?: User;
-  myInfo?: GetUserInfoResponse;
-  userId?: string | number;
 }
 
 const ProfileNameImageComponent: React.FC<ProfileNameImagePrps> = ({

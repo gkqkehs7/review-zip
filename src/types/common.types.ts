@@ -27,13 +27,6 @@ interface PostImages {
   url: string;
 }
 
-interface CurtPost {
-  postId: number;
-  postImageUrl: string;
-  likeNum: number;
-  scrabNum: number;
-}
-
 interface History {
   historyId: number;
   type: 'USER' | 'HASHTAG';
@@ -47,4 +40,4 @@ interface Hashtag {
   postNum?: number;
 }
 
-export type { User, Post, PostImages, CurtPost, Hashtag, History };
+export type { User, Post, PostImages, Hashtag, History };
