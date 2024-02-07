@@ -5,97 +5,94 @@ const styles = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    postion: relative;
+    position: relative;
     background-image: url('images/mapPage/Background.png');
-    background-size: 110% 110%;
-    background-position: -10px -30px;
-    width: 454px;
-    height: 100%;
+    background-size: 108% 105%;
+    background-position: 0px -17.5px;
     margin: 0px 0px 0px -10px;
     z-index: 0;
   `,
 
-  TopImage: styled.div`
-    background-image: url('images/mapPage/Top.png');
-    background-size: 100% 100%;
-    width: 300px;
-    height: 61px;
-    margin: 71px 0 0 0;
+  TopImage: styled.h2`
+    position: absolute;
+    color: white;
+    text-align: center;
+    margin: 71px 0px 0px 0px;
+    font-size: 235%;
+    z-index: 3;
   `,
 
   SearchingContainer: styled.div`
     display: flex;
+    position: absolute;
     flex-direction: column;
-    width: 350px;
-    height: 800px;
+    top: 0px;
     margin: 0px 0px 0px 0px;
   `,
 
   SearchBarForm: styled.form`
     display: flex;
-    postion: relative;
     align-items: center;
-    width: 320px;
-    height: 70px;
-    border: 0px;
-    margin: 50px auto;
+    position: absolute;
+    width: 100%;
+    height: 46px;
+    margin: 150px auto;
     padding: 0px 0px 0px 0px;
+    border: 0px;
+    z-index: 3;
   `,
 
   SearchIcon: styled.img`
     position: absolute;
-    width: 40px;
-    height: 40px;
+    margin: 0px 0px 0px 10px;
     z-index: 3;
-    padding: 0px 0px 0px 10px;
   `,
 
   SearchBar: styled.input`
     background-color: rgba(255, 255, 255, 0.4);
     width: 100%;
-    height: 45px;
-    border-radius: 22px;
-    outline: none;
-    color: white;
-    z-index: 3;
-    font-size: 110%;
+    height: 40px;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 55px;
+    border-radius: 22px;
+    outline: none;
+    border: 0;
+    color: white;
+    font-size: 110%;
+    z-index: 3;
 
     &::placeholder {
       color: white;
+      font-size: 90%;
       text-align: center;
       margin-left: 35px;
     }
   `,
 
   PlaceList: styled.ul`
-    position: relative;
     display: flex;
     flex-direction: column;
-    width: 320px;
-    height: fit-content;
-    margin: 0px auto 0px auto;
-    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 225px auto 0px auto;
+    padding: 0px;
     color: black;
     overflow: auto;
-    padding: 0px;
-  `,
+    z-index: 3;
 
-  Pagnitation: styled.div``,
+    &:: -webkit-scrollbar {
+      display: none;
+    }
+  `,
 
   StarsImage: styled.div`
     position: absolute;
-    top: 90px;
-    left: 0px;
     background-image: url('images/mapPage/Stars.png');
-    background-size: 115% 115%;
-    width: 265.94px;
-    height: 461.43px;
-    margin: 200px 0px 0px 0px;
-
-    transform: rotate(-12deg);
-    z-index: 0;
+    background-size: 100% 100%;
+    top: 250px;
+    left: -20px;
+    z-index: 2;
   `,
 };
 

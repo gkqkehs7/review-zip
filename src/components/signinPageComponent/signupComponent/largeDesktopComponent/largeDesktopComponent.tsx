@@ -3,10 +3,17 @@ import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
 const LargeDesktopComponent: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const regex = new RegExp('[0-1]{3}-[0-9]{4}-[0-9]{4}');
+
+  if (phoneNumber.length > 12 && regex.test(phoneNumber) == false) {
+    setPhoneNumber('');
+  }
 
   return (
     <styles.Container>
@@ -17,13 +24,26 @@ const LargeDesktopComponent: React.FC = () => {
       <styles.LargeStart />
       <styles.Union />
       <styles.MiniStart />
-      <styles.Right>
+      <styles.FormContainer>
+        <styles.InputContainer>
+          {/* 휴대폰 번호입력 */}
+          <styles.InputTitle>이메일 주소</styles.InputTitle>
+          <styles.Input
+            type="email"
+            placeholder="Enter your Email Adress"
+            value={email}
+            pattern=".+@example\.com"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setEmail)
+            }
+          />
+        </styles.InputContainer>
         <styles.InputContainer>
           {/* 휴대폰 번호입력 */}
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
           <styles.Input
             type="tel"
-            placeholder="010-1234-5678"
+            placeholder="Enter your Phone Number"
             value={phoneNumber}
             pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -57,8 +77,8 @@ const LargeDesktopComponent: React.FC = () => {
             }
           />
         </styles.InputContainer>
+        <styles.CheckNickName />
 
-        {/*비밀번호 입력*/}
         <styles.InputContainer>
           {/* 비밀번호 입력 */}
           <styles.InputTitle>비밀번호</styles.InputTitle>
@@ -71,23 +91,22 @@ const LargeDesktopComponent: React.FC = () => {
               changeInputValue(e, setPassword)
             }
           />
-
+          <styles.CheckPassWord />
           {/* 비밀번호 입력시 주의사항 */}
           <styles.WarnText>
             대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.{' '}
           </styles.WarnText>
         </styles.InputContainer>
+
         {/* 회원가입 완료Link */}
-        <styles.SignUpBtn to="/CompleteSigninPage">
-          &gt; SIGN UP
-        </styles.SignUpBtn>
+        <styles.SignUpBtn type="submit"></styles.SignUpBtn>
 
         {/* 로그인 페이지로 가는 Link */}
         <styles.SignInContainer>
           <p>계정이 있으신가요?</p>
           <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
         </styles.SignInContainer>
-      </styles.Right>
+      </styles.FormContainer>
     </styles.Container>
   );
 };
