@@ -2,11 +2,11 @@ import styles from './style';
 import StarImage from '/images/myProfilePage/StarImage.png';
 import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
-import { CurtPost } from '@/types/common.types';
+import { Post } from '@/types/common.types';
 
 interface ChangePageProps {
-  setPostIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  posts: CurtPost[];
+  setPostIsClicked: React.Dispatch<React.SetStateAction<number>>;
+  posts: Post[];
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
@@ -20,12 +20,12 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
         <styles.PictureContainer
           key={index}
           onClick={() => {
-            setPostIsClicked(true);
+            setPostIsClicked(post.postId);
           }}
         >
           <styles.PictureBorder>
             <styles.Picture
-              src={post.postImageUrl}
+              src={post.postImages[-1].url}
               alt={'Picture' + String(post.postId)}
             />
           </styles.PictureBorder>
@@ -43,7 +43,8 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
             </styles.IconBox>
             <styles.IconBox>
               <styles.Icon src={Storage} />
-              <styles.Count>{post.scrabNum}</styles.Count>
+              <styles.Count>{3 /*post.scrabNum*/}</styles.Count>{' '}
+              {/*스크랩 수가 없음 */}
             </styles.IconBox>
           </styles.IconContainer>
         </styles.PictureContainer>

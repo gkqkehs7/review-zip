@@ -44,8 +44,9 @@ const MyProfilePage: React.FC = () => {
 
   //const [listLikeOpen ]; //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
-  // const [postOpen] ;//게시물이 클릭되서 포스트가 열릴지
-  const [postIsClicked, setPostIsClicked] = useState<boolean>(false);
+  //게시물이 클릭되서 어떤 postId의 포스트가 열릴지
+  const [postIsClicked, setPostIsClicked] = useState<number>(1);
+  const [postOpen, setPostOpen] = useState<boolean>(false);
 
   const [userInfo, setUserInfo] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
@@ -161,14 +162,14 @@ const MyProfilePage: React.FC = () => {
           {/*보라색 가로 그룹 바  */}
           <GroupBarComponent color="purple" direction="row" />
           {/* 게시물이 클릭이 된 경우  */}
-          {postIsClicked && (
+          {postOpen && (
             <styles.Overlay>
               <PostComponent
-                post={posts}
+                post={posts[postIsClicked]}
                 modalOpen={modalOpen}
                 modalClose={modalClose}
-                setPostIsClicked={setPostIsClicked}
                 openAlertModal={openAlertModal}
+                setPostOpen={setPostOpen}
               />
             </styles.Overlay>
           )}

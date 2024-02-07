@@ -19,7 +19,7 @@ interface PostComponentProps {
   modalOpen: () => void;
   modalClose: () => void;
   openAlertModal: () => void;
-  setPostIsClicked?: React.Dispatch<React.SetStateAction<boolean>>;
+  setPostOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
@@ -27,7 +27,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
   modalOpen,
   modalClose,
   openAlertModal,
-  setPostIsClicked,
+  setPostOpen,
 }) => {
   const [postLikedUsers, setPostLikedUsers] = useState<User[]>([]);
   const [split, setSplit] = useState<boolean>(false);
@@ -118,7 +118,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     if (event.target === event.currentTarget) {
-      setPostIsClicked && setPostIsClicked(false);
+      setPostOpen && setPostOpen(false);
     }
   };
 

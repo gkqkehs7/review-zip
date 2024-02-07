@@ -2,7 +2,7 @@ import ReviewPictureComponent from '../reviewPicturesComponent/reviewPictureComp
 import { Post } from '@/types/common.types';
 
 interface PostProps {
-  setPostIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  setPostIsClicked: React.Dispatch<React.SetStateAction<number>>;
   post: Post[];
 }
 const PostListComponent: React.FC<PostProps> = ({ setPostIsClicked, post }) => {
