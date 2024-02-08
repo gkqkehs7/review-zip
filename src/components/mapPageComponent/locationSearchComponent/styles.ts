@@ -17,7 +17,7 @@ const styles = {
     position: absolute;
     color: white;
     text-align: center;
-    margin: 71px 0px 0px 0px;
+    margin: 60px 0px 0px 0px;
     font-size: 235%;
     z-index: 3;
   `,
@@ -36,7 +36,7 @@ const styles = {
     position: absolute;
     width: 100%;
     height: 46px;
-    margin: 150px auto;
+    margin: 130px auto;
     padding: 0px 0px 0px 0px;
     border: 0px;
     z-index: 3;
@@ -75,7 +75,7 @@ const styles = {
     position: relative;
     width: 100%;
     height: 100%;
-    margin: 225px auto 0px auto;
+    margin: 195px auto 0px auto;
     padding: 0px;
     color: black;
     overflow: auto;
