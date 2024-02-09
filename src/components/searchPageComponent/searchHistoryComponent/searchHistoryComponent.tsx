@@ -20,7 +20,7 @@ const SearchHistoryComponent: React.FC<SearchHistoryComponent> = ({
       <styles.HistoryContainer>
         {/* 해시 태그 */}
         <styles.HashTagLink to="/hashtagPage">
-          <styles.Content>#{hashtag}</styles.Content>
+          <styles.Content># {hashtag}</styles.Content>
         </styles.HashTagLink>
 
         <styles.DeleteButton onClick={() => deleteHistory(historyId)} />
@@ -31,7 +31,7 @@ const SearchHistoryComponent: React.FC<SearchHistoryComponent> = ({
   const userInfo = (user: User, historyId: number) => {
     return (
       <styles.HistoryContainer>
-        <styles.UserData>
+        <styles.UserData to={`/profilepage/${user.userId}`}>
           <styles.UserImage
             src={user.profileUrl}
             style={responsiveWidthHeight(

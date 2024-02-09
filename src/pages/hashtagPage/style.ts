@@ -11,13 +11,37 @@ const styles = {
     height: 100vh;
     overflow-y: scroll;
   `,
+
+  HashtagTopContainer: styled.div`
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 100px;
+    border-bottom: solid 2px #d5b2ff;
+  `,
+
+  TagName: styled.p`
+    margin-left: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bolder;
+  `,
+
+  TagCount: styled.p`
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+  `,
+
   HashtagContainer: styled.div`
-    positipn: relative;
+    position: relative;
     top: 0;
     width: 900px;
     min-width: 400px;
     margin: 0 auto;
   `,
+
   MainLogoImage: styled.img`
     width: 200px;
     height: 50px;

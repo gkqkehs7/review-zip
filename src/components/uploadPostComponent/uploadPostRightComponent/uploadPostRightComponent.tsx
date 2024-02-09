@@ -1,12 +1,13 @@
-import { faker } from '@faker-js/faker';
+import { useCallback } from 'react';
+import { User } from '@/types/common.types';
 
 import styles from './style';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import InputBoxComponent from '../inputBoxComponent/inputBoxComponent';
-import { useCallback } from 'react';
 
 interface PostRightComponentProps {
+  userInfo: User;
   split: boolean;
   sendPost: () => void;
   textInput: string;
@@ -18,6 +19,7 @@ interface PostRightComponentProps {
 }
 
 const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
+  userInfo,
   split,
   sendPost,
   textInput,
@@ -39,8 +41,8 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
       {/* 유저 정보 */}
       <styles.TopContainer>
         <styles.UserContainer>
-          <styles.UserImage src={faker.image.avatar()} />
-          <styles.UserName>{'미누'}</styles.UserName>
+          <styles.UserImage src={userInfo.profileUrl} />
+          <styles.UserName>{userInfo.nickname}</styles.UserName>
         </styles.UserContainer>
 
         <styles.SendButton onClick={sendPost}>보내기</styles.SendButton>

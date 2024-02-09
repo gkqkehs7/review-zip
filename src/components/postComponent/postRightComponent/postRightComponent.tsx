@@ -45,11 +45,11 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.TopContainer>
         <styles.TopLeftContainer
           onClick={() => {
-            navigation(`/profilePage/${post.userInfo.userId}`);
+            navigation(`/profilePage/${post.user.userId}`);
           }}
         >
-          <styles.UserImage src={post.userInfo.profileUrl} />
-          <styles.UserName>{post.userInfo.nickname}</styles.UserName>
+          <styles.UserImage src={post.user.profileUrl} />
+          <styles.UserName>{post.user.nickname}</styles.UserName>
         </styles.TopLeftContainer>
 
         <styles.TopRightContainer>
@@ -70,12 +70,12 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       <styles.HashTagContainer>
         {post.hashtags.map((hashtag, index) => (
           <styles.HashTag
-            key={index}
+            key={hashtag.hashtagId}
             onClick={() => {
-              navigation(`/hashtagPage/${hashtag}`);
+              navigation(`/hashtagPage/${hashtag.hashtagId}`);
             }}
           >
-            <styles.HashTagText># {hashtag}</styles.HashTagText>
+            <styles.HashTagText># {hashtag.tagName}</styles.HashTagText>
           </styles.HashTag>
         ))}
       </styles.HashTagContainer>
@@ -85,7 +85,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
         <styles.LikeText onClick={openLikeListModal}>
           {postLikeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
-        <styles.LikeUserImage src={post.userInfo.profileUrl} />
+        <styles.LikeUserImage src={post.user.profileUrl} />
       </styles.LikeContainer>
 
       {/* 아래 선 */}

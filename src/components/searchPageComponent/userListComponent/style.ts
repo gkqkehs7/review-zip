@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const styles = {
@@ -20,7 +21,7 @@ const styles = {
     }
   `,
 
-  UserData: styled.div`
+  UserData: styled(Link)`
     cursor: pointer;
     display: flex;
     align-items: center;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './style';
@@ -7,12 +7,20 @@ import UploadPostRightComponent from './uploadPostRightComponent/uploadPostRight
 import SpaceLoadingModalComponent from '../common/spaceLoadingModalComponent/spaceLoadingModalComponent';
 import { CreatePostRequest } from '@/types/request.types';
 import { PostAxiosInstance } from '@/api/axios.methods';
+
+import { User } from '@/types/common.types';
 import {
   CreatePostResponse,
   CreateImagesResponse,
 } from '@/types/response.types';
 
-const UploadPostComponent: React.FC = () => {
+interface UploadPostComponentProps {
+  userInfo: User;
+}
+
+const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
+  userInfo,
+}) => {
   const navigate = useNavigate();
 
   // post로 보낼 내용들
@@ -87,6 +95,7 @@ const UploadPostComponent: React.FC = () => {
     <styles.Container>
       {/* 게시글 업로드 부분 */}
       <UploadPostRightComponent
+        userInfo={userInfo}
         split={split}
         sendPost={sendPost}
         textInput={textInput}

@@ -5,11 +5,27 @@ import UploadPostComponent from '@/components/uploadPostComponent/uploadPostComp
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import ErrorModalComponent from '@/components/common/errorModalComponent/errorModalComponent';
 
+import { User } from '@/types/common.types';
 import styles from './style';
+import { GetAxiosInstance } from '@/api/axios.methods';
+import { GetUserInfoResponse } from '@/types/response.types';
+import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
 
 const UploagePage = () => {
+  const [userInfo, setUserInfo] = useState<User>();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [errorModalOpen, SetErrorModalOpen] = useState<boolean>(false);
+
+  const getMyInfo = async () => {
+    try {
+      const response =
+        await GetAxiosInstance<GetUserInfoResponse>(`/v1/users/me`);
+
+      setUserInfo(response.data.result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const closeErrorModal = () => {
     SetErrorModalOpen(false);
@@ -47,17 +63,25 @@ const UploagePage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    getMyInfo();
+  }, []);
+
   return (
     <styles.Container>
-      <GroupBarComponent color="purple" direction="col" />
-
-      <ErrorModalComponent
-        errorMessage={errorMessage}
-        errorModalOpen={errorModalOpen}
-        closeErrorModal={closeErrorModal}
-      />
-
-      <UploadPostComponent />
+      {userInfo ? (
+        <>
+          <GroupBarComponent color="purple" direction="col" />
+          <ErrorModalComponent
+            errorMessage={errorMessage}
+            errorModalOpen={errorModalOpen}
+            closeErrorModal={closeErrorModal}
+          />
+          <UploadPostComponent userInfo={userInfo} />
+        </>
+      ) : (
+        <LoadingModalComponent message="유저 정보를 가져오는 중입니다" />
+      )}
     </styles.Container>
   );
 };

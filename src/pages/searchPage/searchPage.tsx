@@ -61,7 +61,7 @@ const SearchPage: React.FC = () => {
   const getSearchHistories = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetSearchHistoriesResponse>(
-        '/v1/users/histories',
+        '/v1/users/me/histories',
       );
 
       setSearchHistories(response.data.result);

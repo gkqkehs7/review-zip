@@ -5,8 +5,8 @@ const RveiwPicturesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 auto;
-  overflow: auto; // 밑에 사진 나오는 것들 props={posts} 이 compoennt안에서 map으로 보여줄 수 있게 -> 여기만 overflow: auto */}
+  margin: 30px auto;
+  overflow: auto;
 `;
 
 const IconContainer = styled.div`

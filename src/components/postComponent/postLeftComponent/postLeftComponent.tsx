@@ -76,11 +76,11 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
           {/* 맨 위 유저 정보, 게시글 날짜 */}
           <styles.UserContainer
             onClick={() => {
-              navigation(`/profilePage/${post.userInfo.userId}`);
+              navigation(`/profilePage/${post.user.userId}`);
             }}
           >
-            <styles.UserImage src={post.userInfo.profileUrl} />
-            <styles.UserName>{post.userInfo.nickname}</styles.UserName>
+            <styles.UserImage src={post.user.profileUrl} />
+            <styles.UserName>{post.user.nickname}</styles.UserName>
             <styles.PostDate>{post.createdAt}</styles.PostDate>
           </styles.UserContainer>
 

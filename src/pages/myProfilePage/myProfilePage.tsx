@@ -81,6 +81,7 @@ const MyProfilePage: React.FC = () => {
   const openAlertModal = useCallback(() => {
     setAlertModalOpen(true);
   }, []);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const imageFile = event.target.files[0];
@@ -92,9 +93,10 @@ const MyProfilePage: React.FC = () => {
   const getPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts?page=0&size=8`,
+        `/v1/users/${userId}/posts`,
       );
-      setPosts(response.data.result.postList);
+
+      setPosts(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -104,9 +106,9 @@ const MyProfilePage: React.FC = () => {
   const getScrabPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts/scrabs?page=0&size=8`,
+        `/v1/users/${userId}/posts/scrabs`,
       );
-      setScrabPosts(response.data.result.postList);
+      setScrabPosts(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -149,13 +151,13 @@ const MyProfilePage: React.FC = () => {
 
   useEffect(() => {
     getPosts(); // 내 게시글 가져오기
-    getScrabPosts; //스크랩한 게시글 가져오기
+    getScrabPosts(); //스크랩한 게시글 가져오기
     getUserInfo(); // 유저 정보 가져오기
     getFollowingList(); // 팔로잉 리스트 가져오기
     getFollowerList(); // 팔로워 리스트 가져오기
-  }, []);
+  }, [userId]);
 
-  //클릭된 포스트의 아이디가 달라질 때마다 바꿔주기
+  // 클릭된 포스트의 아이디가 달라질 때마다 바꿔주기
   useEffect(() => {
     setClickedPost(posts.find((post) => post.postId === postIsClicked));
   }, [postIsClicked]);
@@ -295,6 +297,7 @@ const MyProfilePage: React.FC = () => {
                 post={posts}
               />
             )}
+
             {/* 저장소에 저장한 게시물*/}
             {!postButtonClicked && scrabPosts && (
               <ScrabPostListComponent

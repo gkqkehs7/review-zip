@@ -25,7 +25,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
         >
           <styles.PictureBorder>
             <styles.Picture
-              src={'' /*post.postImages[0].url*/} //postImages 배열이 undefined로 에러가 남
+              src={post.postImages[0].imageUrl} //postImages 배열이 undefined로 에러가 남
               alt={'Picture' + String(post.postId)}
             />
           </styles.PictureBorder>
