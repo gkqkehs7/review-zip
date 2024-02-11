@@ -15,7 +15,8 @@ interface UploadPostLeftComponentProps {
   setPreviewPostImages: React.Dispatch<
     React.SetStateAction<{ id: number; url: string }[]>
   >;
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  files: { id: number; file: File }[];
+  setFiles: React.Dispatch<React.SetStateAction<{ id: number; file: File }[]>>;
   openMapModal: () => void;
 }
 
@@ -24,6 +25,7 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   splitpost,
   previewImages,
   setPreviewPostImages,
+  files,
   setFiles,
   openMapModal,
 }) => {
@@ -67,6 +69,7 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         setPostImages={setPreviewPostImages}
         imageListOpen={imageListOpen}
         setClickedImage={setClickedImage}
+        files={files}
         setFiles={setFiles}
       />
 

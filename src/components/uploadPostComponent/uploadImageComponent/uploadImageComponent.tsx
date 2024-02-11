@@ -7,7 +7,7 @@ type UploadImageComponentProps = {
   postImages: { id: number; url: string }[];
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
   setClickedImage: Dispatch<SetStateAction<string>>;
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  setFiles: React.Dispatch<React.SetStateAction<{ id: number; file: File }[]>>;
 };
 
 const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
@@ -66,7 +66,10 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
       for (let i = 0; i < files.length; i++) {
         const file: File = files[i];
 
-        setFiles((prevFiles) => [...prevFiles, file]);
+        setFiles!((prevFiles) => [
+          ...prevFiles,
+          { id: prevFiles.length, file: file },
+        ]);
 
         reader.onload = (e: ProgressEvent<FileReader>) => {
           const arrayBuffer: ArrayBuffer | null = e.target
@@ -81,7 +84,7 @@ const UploadImageComponent: React.FC<UploadImageComponentProps> = ({
           // 이미지 front에 보여주기 위한 용도로 번수에 저장
           setPostImages((prevPostImages) => [
             ...prevPostImages,
-            { id: prevPostImages.length + 1, url: imageUrl },
+            { id: prevPostImages.length, url: imageUrl },
           ]);
 
           setClickedImage(imageUrl);

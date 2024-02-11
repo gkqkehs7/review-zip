@@ -1,4 +1,4 @@
-import { PlaceInfo } from '@/components/mapPageComponent/mapComponent/mapComponent';
+import { PlaceInfo } from '@/types/common.types';
 import { Status } from 'kakao-maps-sdk';
 import React, { useEffect } from 'react';
 

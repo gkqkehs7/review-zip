@@ -31,7 +31,7 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
   const [previewImages, setPreviewPostImages] = useState<
     { id: number; url: string }[]
   >([]);
-  const [files, setFiles] = useState<File[]>([]); // 게시글 사진
+  const [files, setFiles] = useState<{ id: number; file: File }[]>([]); // 게시글 사진
   const [placeData, setPlaceData] = useState<PlaceInfo>();
 
   const [split, setSplit] = useState<boolean>(false); // post 분리용 변수
@@ -73,7 +73,7 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
 
       // 이미지들 파일에 저장
       files.forEach((file) => {
-        formData.append('fileList', file);
+        formData.append('fileList', file.file);
       });
 
       // 이미지 먼저 업로드
@@ -124,6 +124,7 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
         splitpost={splitpost}
         previewImages={previewImages}
         setPreviewPostImages={setPreviewPostImages}
+        files={files}
         setFiles={setFiles}
         openMapModal={openMapModal}
       />
