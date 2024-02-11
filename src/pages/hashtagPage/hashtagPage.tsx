@@ -63,7 +63,7 @@ const HashtagPage: React.FC = () => {
             <styles.HashtagTopContainer>
               <styles.TagName>{hashtagInfo.tagName}</styles.TagName>
 
-              <styles.TagCount>태그 10</styles.TagCount>
+              <styles.TagCount>태그 {hashtagInfo.postNum}</styles.TagCount>
             </styles.HashtagTopContainer>
           </styles.HashtagContainer>
 

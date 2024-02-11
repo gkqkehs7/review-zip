@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const styles = {
   Container: styled.div`
@@ -14,15 +15,14 @@ const styles = {
     transition: opacity 0.3s ease-in-out;
   `,
 
-  CloseBtn: styled.div`
-    background-image: url('images/mapPage/Close.png');
-    background-size: 100% 100%;
-    background-color: transparent;
+  CloseBtn: styled(IoCloseSharp)`
     position: absolute;
     top: 0px;
     right: 0px;
-    width: 20px;
-    height: 20px;
+    width: 50px;
+    height: 50px;
+    color: black;
+
     cursor: pointer;
     z-index: 2;
   `,
@@ -34,7 +34,7 @@ const styles = {
 
   MapContainer: styled.div`
     display: flex;
-    postion: relative;
+    position: relative;
     width: 100%;
     height: 100%;
     z-index: 2;

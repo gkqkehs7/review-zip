@@ -93,6 +93,28 @@ const styles = {
     padding: 10px 0;
   `,
 
+  ButtonsContainer: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  `,
+
+  MapButtonContainer: styled.div`
+    display: flex;
+    justify-content: flex-end;
+  `,
+
+  MapButton: styled.img`
+    cursor: pointer;
+    align-items: right;
+    width: 45px;
+    height: auto;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  `,
+
   ImageUploadedContainer: styled.div`
     display: flex;
     justify-content: flex-end;
@@ -102,6 +124,7 @@ const styles = {
     cursor: pointer;
     align-items: right;
     width: 45px;
+    margin-left: 10px;
     height: auto;
 
     &:hover {

@@ -40,4 +40,13 @@ interface Hashtag {
   postNum?: number;
 }
 
-export type { User, Post, PostImages, Hashtag, History };
+interface PlaceInfo {
+  place_name: string;
+  address_name: string;
+  road_address_name: string;
+  phone: string;
+  x: string;
+  y: string;
+}
+
+export type { User, Post, PostImages, Hashtag, History, PlaceInfo };

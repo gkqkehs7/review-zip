@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { checkDevice } from '@/utils/checkDeviceSize';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 
+import styles from './style';
 import BlackStarImage from '/images/star/BlackStar.png';
 import YellowStarImage from '/images/star/YellowStar.png';
 
@@ -23,9 +24,15 @@ const StarRatingComponent: React.FC<StarRatingComponentProps> = ({
 
   const [changeStarCount, setChangeStarCount] = useState<number>(count);
 
+  useEffect(() => {
+    if (setStarCount) {
+      setStarCount(changeStarCount);
+    }
+  }, [changeStarCount]);
+
   // count만큼의 노란색 별을 가진 배열 생성
   const yellowStars = Array.from({ length: changeStarCount }, (_, index) => (
-    <img
+    <styles.starImage
       key={index}
       src={YellowStarImage}
       style={responsiveWidthHeight(
@@ -39,7 +46,6 @@ const StarRatingComponent: React.FC<StarRatingComponentProps> = ({
       )}
       onClick={(e) => {
         click && setChangeStarCount(index + 1);
-        click && setStarCount!(yellowStars.length + 1);
       }}
     />
   ));
@@ -48,7 +54,7 @@ const StarRatingComponent: React.FC<StarRatingComponentProps> = ({
   const remainingStars = Array.from(
     { length: 5 - changeStarCount },
     (_, index) => (
-      <img
+      <styles.starImage
         key={index}
         src={BlackStarImage}
         style={responsiveWidthHeight(

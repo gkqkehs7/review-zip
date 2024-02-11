@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './style';
@@ -8,11 +8,12 @@ import SpaceLoadingModalComponent from '../common/spaceLoadingModalComponent/spa
 import { CreatePostRequest } from '@/types/request.types';
 import { PostAxiosInstance } from '@/api/axios.methods';
 
-import { User } from '@/types/common.types';
+import { PlaceInfo, User } from '@/types/common.types';
 import {
   CreatePostResponse,
   CreateImagesResponse,
 } from '@/types/response.types';
+import MapComponent from '../mapPageComponent/mapComponent/mapComponent';
 
 interface UploadPostComponentProps {
   userInfo: User;
@@ -31,14 +32,25 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
     { id: number; url: string }[]
   >([]);
   const [files, setFiles] = useState<File[]>([]); // 게시글 사진
+  const [placeData, setPlaceData] = useState<PlaceInfo>();
 
   const [split, setSplit] = useState<boolean>(false); // post 분리용 변수
   const [loadingModalOpen, setLoadingModalOpen] = useState<boolean>(false); // 로딩창 띄우기용 변수
+  const [mapModalOpen, setMapModalOpen] = useState<boolean>(false); // 맵 모달 띄우기용 변수
 
   // 포스트 왼쪽 오른쪽 분리하기
   const splitpost = () => {
     setSplit(!split);
   };
+
+  // map 모달 열기
+  const openMapModal = useCallback(() => {
+    setMapModalOpen(true);
+  }, [mapModalOpen]);
+
+  const closeMapModal = useCallback(() => {
+    setMapModalOpen(false);
+  }, [mapModalOpen]);
 
   // 게시글 보내기 - post이후 success가 오면 mainPage로 이동
   const sendPost = async () => {
@@ -113,10 +125,20 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
         previewImages={previewImages}
         setPreviewPostImages={setPreviewPostImages}
         setFiles={setFiles}
+        openMapModal={openMapModal}
       />
 
       {/* 로딩 */}
       <SpaceLoadingModalComponent loadingModalOpen={loadingModalOpen} />
+
+      {mapModalOpen && (
+        <MapComponent
+          width={80}
+          height={80}
+          closeMapModal={closeMapModal}
+          savePlaceData={setPlaceData}
+        />
+      )}
     </styles.Container>
   );
 };

@@ -4,8 +4,8 @@ const RveiwPicturesContainer = styled.div`
   width: 600px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 30px auto;
+  justify-content: center;
+  margin: 0 auto;
   overflow: auto;
 `;
 
