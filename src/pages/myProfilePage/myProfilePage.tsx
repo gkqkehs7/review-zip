@@ -32,19 +32,17 @@ const MyProfilePage: React.FC = () => {
 
   const isFriend = userId === 'me' ? false : true;
 
-  //게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
+  // 게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
   const [postButtonClicked, setPostButtonClicked] = useState<boolean>(true);
 
-  //프로필 수정
+  // 프로필 수정
   const [isEditProfile, setIsEditProfile] = useState<boolean>(false);
 
   // 화면에 표시된 순서대로 게시물, 리뷰어 , 리뷰잉이 클릭이 된건지에 대한 값이 배열에 들어감
   const [isClicked, setIsClicked] = useState<boolean[]>([false, false, false]);
 
-  //const [listLikeOpen ]; //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
+  // 리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
   const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
-  //게시물이 클릭되서 어떤 postId의 포스트가 열릴지 닫을 때는 undefined
-  const [postIsClicked, setPostIsClicked] = useState<number | undefined>();
 
   const [clickedPost, setClickedPost] = useState<Post>();
 
@@ -56,31 +54,15 @@ const MyProfilePage: React.FC = () => {
 
   //프로필 변경시 고른 이미지
   const [selectedImage, setSelectedImage] = useState<File | null>();
+
   //유저 이름 프로필 수정시에 업데이트
   const [userName, setUserName] = useState<string>('');
-  //모달 오픈
-  const [openModal, setOpenModal] = useState<boolean>(false);
-
-  const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false); // delete modal 띄우기용
-
-  const modalOpen = useCallback(() => {
-    setOpenModal(true);
-  }, [openModal]);
-
-  const modalClose = useCallback(() => {
-    setOpenModal(false);
-  }, [openModal]);
 
   // '친구 목록' 모달을 닫는 함수
   const closeLikeListModal = () => {
     setLikeListOpen(false);
-    modalClose();
   };
 
-  // alert창 열기
-  const openAlertModal = useCallback(() => {
-    setAlertModalOpen(true);
-  }, []);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const imageFile = event.target.files[0];
@@ -92,9 +74,10 @@ const MyProfilePage: React.FC = () => {
   const getPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts?page=0&size=8`,
+        `/v1/users/${userId}/posts`,
       );
-      setPosts(response.data.result.postList);
+
+      setPosts(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -104,9 +87,9 @@ const MyProfilePage: React.FC = () => {
   const getScrabPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts/scrabs?page=0&size=8`,
+        `/v1/users/${userId}/posts/scrabs`,
       );
-      setScrabPosts(response.data.result.postList);
+      setScrabPosts(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -149,35 +132,31 @@ const MyProfilePage: React.FC = () => {
 
   useEffect(() => {
     getPosts(); // 내 게시글 가져오기
-    getScrabPosts; //스크랩한 게시글 가져오기
+    getScrabPosts(); //스크랩한 게시글 가져오기
     getUserInfo(); // 유저 정보 가져오기
     getFollowingList(); // 팔로잉 리스트 가져오기
     getFollowerList(); // 팔로워 리스트 가져오기
-  }, []);
-
-  //클릭된 포스트의 아이디가 달라질 때마다 바꿔주기
-  useEffect(() => {
-    setClickedPost(posts.find((post) => post.postId === postIsClicked));
-  }, [postIsClicked]);
+  }, [userId]);
 
   return (
     <>
       {userInfo && posts ? (
         <styles.Container>
-          {/*보라색 가로 그룹 바  */}
+          {/* 그룹 바 */}
           <GroupBarComponent color="purple" direction="row" />
+
           {/* 게시물이 클릭이 된 경우  */}
           {clickedPost && (
             <styles.Overlay>
               <PostComponent
                 post={clickedPost}
-                modalOpen={modalOpen}
-                modalClose={modalClose}
-                openAlertModal={openAlertModal}
-                setPostIsClicked={setPostIsClicked}
+                setClickedPost={setClickedPost}
+                canDelete={true}
               />
             </styles.Overlay>
           )}
+
+          {/* 유저 프로필 */}
           <styles.ProfilePictureContainer>
             <styles.ProfileContainer>
               {/*좌측의 이름과 프로필 사진이 뜨는 컨테이너 */}
@@ -202,7 +181,6 @@ const MyProfilePage: React.FC = () => {
                   </>
                 )}
                 <styles.UserNameContainer isEditProfile={isEditProfile}>
-                  {' '}
                   {/*프로필 수정시에는 컨테이너 밑에 밑줄을 위한 props*/}
                   <styles.UserName>
                     {/* 프로필 수정시에 유저 이름 받을 input*/}
@@ -244,6 +222,7 @@ const MyProfilePage: React.FC = () => {
                     리뷰잉 {userInfo.followingNum}
                   </styles.UserProfileStats>
                 </styles.UserProfileStatsContainer>
+
                 {/*userId가 me => 프로필 수정 number => 리뷰잉 버튼이 들어갈 컨테이너 */}
                 <styles.EditProfileButtonContainer>
                   <styles.EditProfileButton
@@ -255,15 +234,14 @@ const MyProfilePage: React.FC = () => {
                   >
                     {isFriend ? '리뷰잉' : '프로필 수정'}
                   </styles.EditProfileButton>
-                  {/* 다른 유저의 프로필 페이지인 경우 map Icon도 옆에 뜸 */}
-                  {isFriend && (
-                    <Link to="/mapPage">
-                      <styles.MapButton src={Map} />
-                    </Link>
-                  )}
+
+                  <Link to="/mapPage">
+                    <styles.MapButton src={Map} />
+                  </Link>
                 </styles.EditProfileButtonContainer>
               </div>
             </styles.ProfileContainer>
+
             {/* 게시물 ,저장소 버튼 컨테이너  */}
             <styles.TopButtonContainer>
               {/* 게시물 버튼 클릭시에 위에 표시될 보라색 도형 */}
@@ -278,6 +256,8 @@ const MyProfilePage: React.FC = () => {
                 <styles.Buttonimg src={PostItem} />
                 <styles.ButtonName>게시물</styles.ButtonName>
               </styles.ButtonContainer>
+
+              {/* 스크랩 게시물 버튼 */}
               <styles.ButtonContainer
                 onClick={() => {
                   setPostButtonClicked(false); //저장소 버튼 클릭시 false
@@ -290,15 +270,13 @@ const MyProfilePage: React.FC = () => {
 
             {/* 내가 작성한 게시물*/}
             {postButtonClicked && posts && (
-              <PostListComponent
-                setPostIsClicked={setPostIsClicked}
-                post={posts}
-              />
+              <PostListComponent setClickedPost={setClickedPost} post={posts} />
             )}
+
             {/* 저장소에 저장한 게시물*/}
             {!postButtonClicked && scrabPosts && (
               <ScrabPostListComponent
-                setPostIsClicked={setPostIsClicked}
+                setClickedPost={setClickedPost}
                 scrabPost={scrabPosts}
               />
             )}
@@ -314,6 +292,7 @@ const MyProfilePage: React.FC = () => {
               isReviewing={isClicked[2]}
             />
           )}
+
           {/* 리뷰잉용 <LikeListComponent /> */}
           {isClicked[2] && (
             <LikeListComponent

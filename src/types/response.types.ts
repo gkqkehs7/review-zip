@@ -8,14 +8,7 @@ interface KakaoLoginType {
 
 // USER CONTROLLER
 // /v1/users/{userId}/posts
-interface GetUserPostsResponse {
-  postList: Post[];
-  listSize: number;
-  totalPage: number;
-  totalElements: number;
-  isFirst: boolean;
-  isLast: boolean;
-}
+interface GetUserPostsResponse extends Array<Post> {}
 
 // /v1/users/{userId}
 interface GetUserInfoResponse {
@@ -63,6 +56,10 @@ interface GetPostResponse extends Post {}
 interface GetPostLikedUsersResponse extends Array<User> {}
 
 // HASHTAG CONTROLLER
+// [Get] /v1/hashtags/{hashtagId}
+interface GetHashtagInfoResponse extends Hashtag {}
+
+// [Get] /v1/hashtags/search
 interface SearchHashtagResponse extends Array<Hashtag> {}
 
 // IMAGE CONTROLLER
@@ -84,6 +81,7 @@ export type {
   GetRandomPostResponse,
   GetPostResponse,
   GetPostLikedUsersResponse,
+  GetHashtagInfoResponse,
   SearchHashtagResponse,
   GetSearchHistoriesResponse,
 };

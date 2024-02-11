@@ -6,7 +6,7 @@ const RveiwPicturesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
-  overflow: auto; // 밑에 사진 나오는 것들 props={posts} 이 compoennt안에서 map으로 보여줄 수 있게 -> 여기만 overflow: auto */}
+  overflow: auto;
 `;
 
 const IconContainer = styled.div`
@@ -38,17 +38,18 @@ const IconUnion = styled.img`
 const Picture = styled.img`
   display: flex;
   justify-content: center;
-  align-items: cneter;
+  align-items: center;
   width: 100%;
   height: 100%;
   flex: 1;
   border-radius: 20px;
   object-fit: cover;
 `;
+
 const PictureContainer = styled.div`
   overflow: hidden;
   position: relative;
-  margin: 10px;
+  margin: 20px 10px;
   width: 150px;
   height: 150px;
   cursor: pointer;

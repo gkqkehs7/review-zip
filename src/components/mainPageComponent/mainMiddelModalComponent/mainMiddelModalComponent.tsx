@@ -40,7 +40,9 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
           {/* 해시태그들 */}
           <styles.HashTagContainer>
             {post.hashtags.map((hashtag, index) => (
-              <styles.HashTagText key={index}>#{hashtag}</styles.HashTagText>
+              <styles.HashTagText key={hashtag.hashtagId}>
+                #{hashtag.tagName}
+              </styles.HashTagText>
             ))}
           </styles.HashTagContainer>
 

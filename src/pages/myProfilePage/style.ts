@@ -14,8 +14,6 @@ const styles = {
     background-size: cover;
     width: 100vw;
     height: 100vh;
-    padding: 0 0 10vh 0;
-
     position: relative;
   `,
   //post Component 클릭 시

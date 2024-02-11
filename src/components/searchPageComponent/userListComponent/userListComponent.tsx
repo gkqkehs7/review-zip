@@ -29,7 +29,7 @@ const UserListComponent: React.FC<UserListComponentProps> = ({
     >
       {users.map((user) => (
         <styles.UserContainer>
-          <styles.UserData>
+          <styles.UserData to={`/profilepage/${user.userId}`}>
             <styles.UserImage
               src={user.profileUrl}
               style={responsiveWidthHeight(
