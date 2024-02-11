@@ -4,7 +4,7 @@ const RveiwPicturesContainer = styled.div`
   width: 600px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   margin: 30px auto;
   overflow: auto;
 `;
@@ -38,17 +38,18 @@ const IconUnion = styled.img`
 const Picture = styled.img`
   display: flex;
   justify-content: center;
-  align-items: cneter;
+  align-items: center;
   width: 100%;
   height: 100%;
   flex: 1;
   border-radius: 20px;
   object-fit: cover;
 `;
+
 const PictureContainer = styled.div`
   overflow: hidden;
   position: relative;
-  margin: 10px;
+  margin: 20px 10px;
   width: 150px;
   height: 150px;
   cursor: pointer;

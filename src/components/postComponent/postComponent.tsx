@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
 import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
 import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
+import AlertComponent from '../common/alertComponent/alertComponent';
 
 import styles from './style';
 import { Post, User } from '@/types/common.types';
@@ -12,22 +13,17 @@ import {
   PostAxiosInstance,
 } from '@/api/axios.methods';
 import { GetPostLikedUsersResponse } from '@/types/response.types';
-import { IoTrendingUp } from 'react-icons/io5';
 
 interface PostComponentProps {
   post: Post;
-  modalOpen: () => void;
-  modalClose: () => void;
-  openAlertModal: () => void;
-  setPostIsClicked?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setClickedPost?: React.Dispatch<React.SetStateAction<Post | undefined>>;
+  canDelete: boolean;
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
   post,
-  modalOpen,
-  modalClose,
-  openAlertModal,
-  setPostIsClicked,
+  setClickedPost,
+  canDelete,
 }) => {
   const [postLikedUsers, setPostLikedUsers] = useState<User[]>([]);
   const [split, setSplit] = useState<boolean>(false);
@@ -37,6 +33,8 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab!);
 
   const [postLikeNum, setPostLikeNum] = useState<number>(post.likeNum);
+
+  const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false); // delete modal 띄우기용
 
   // 좋아요 누른 목록 가져오기 나중에 postId로 변경
   const getLikeUsers = async () => {
@@ -100,25 +98,45 @@ const PostComponent: React.FC<PostComponentProps> = ({
     }
   }, [post]);
 
+  // 게시글 삭제
+  const deletePost = useCallback(async () => {
+    try {
+      setAlertModalOpen(false);
+      await DeleteAxiosInstance(`/v1/posts/${post.postId}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   const splitPost = () => {
     setSplit(!split);
   };
 
+  // alert창 열기
+  const openAlertModal = useCallback(() => {
+    setAlertModalOpen(true);
+  }, []);
+
+  // alert창 닫기
+  const closeAlertModal = useCallback(() => {
+    setAlertModalOpen(false);
+  }, []);
+
+  // 좋아요 목록 열기
   const openLikeListModal = () => {
     setLikeListOpen(true);
-    modalOpen();
   };
 
+  // 좋아요 목록 닫기
   const closeLikeListModal = () => {
     setLikeListOpen(false);
-    modalClose();
   };
 
   const handleOutsideClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     if (event.target === event.currentTarget) {
-      setPostIsClicked && setPostIsClicked(undefined);
+      setClickedPost && setClickedPost(undefined);
     }
   };
 
@@ -140,6 +158,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
         scrabPost={scrabPost}
         unScrabPost={unScrabPost}
         openAlertModal={openAlertModal}
+        canDelete={canDelete}
       />
 
       <PostLeft
@@ -162,6 +181,13 @@ const PostComponent: React.FC<PostComponentProps> = ({
         isReviewer={false}
         isReviewing={false}
       />
+
+      {alertModalOpen && (
+        <AlertComponent
+          closeAlertModal={closeAlertModal}
+          deletePost={deletePost}
+        />
+      )}
     </styles.Container>
   );
 };

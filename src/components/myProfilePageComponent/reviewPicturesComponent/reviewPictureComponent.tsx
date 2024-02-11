@@ -5,12 +5,12 @@ import Union from '/images/myProfilePage/Union.png';
 import { Post } from '@/types/common.types';
 
 interface ChangePageProps {
-  setPostIsClicked: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setClickedPost: React.Dispatch<React.SetStateAction<Post | undefined>>;
   posts: Post[];
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
-  setPostIsClicked,
+  setClickedPost,
   posts,
 }) => {
   return (
@@ -20,7 +20,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
         <styles.PictureContainer
           key={index}
           onClick={() => {
-            setPostIsClicked(post.postId); //클릭한 post의 postId를 넣어줌
+            setClickedPost(post); //클릭한 post의 postId를 넣어줌
           }}
         >
           <styles.PictureBorder>
@@ -35,6 +35,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
           ) : (
             <styles.IconUnion style={{ visibility: 'hidden' }} />
           )}
+
           {/* 게시물에 마우스 hover시에만 보일 아이콘들 */}
           <styles.IconContainer>
             <styles.IconBox>

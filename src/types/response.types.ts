@@ -56,6 +56,10 @@ interface GetPostResponse extends Post {}
 interface GetPostLikedUsersResponse extends Array<User> {}
 
 // HASHTAG CONTROLLER
+// [Get] /v1/hashtags/{hashtagId}
+interface GetHashtagInfoResponse extends Hashtag {}
+
+// [Get] /v1/hashtags/search
 interface SearchHashtagResponse extends Array<Hashtag> {}
 
 // IMAGE CONTROLLER
@@ -77,6 +81,7 @@ export type {
   GetRandomPostResponse,
   GetPostResponse,
   GetPostLikedUsersResponse,
+  GetHashtagInfoResponse,
   SearchHashtagResponse,
   GetSearchHistoriesResponse,
 };

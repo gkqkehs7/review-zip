@@ -22,6 +22,7 @@ interface PostRightComponentProps {
   scrabPost: () => Promise<void>;
   unScrabPost: () => Promise<void>;
   openAlertModal: () => void;
+  canDelete: boolean;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
@@ -36,6 +37,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
   scrabPost,
   unScrabPost,
   openAlertModal,
+  canDelete,
 }) => {
   const navigation = useNavigate();
 
@@ -53,7 +55,9 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
         </styles.TopLeftContainer>
 
         <styles.TopRightContainer>
-          {post.checkMine && <styles.DeleteButton onClick={openAlertModal} />}
+          {canDelete && post.checkMine && (
+            <styles.DeleteButton onClick={openAlertModal} />
+          )}
 
           <styles.PostDate>{post.createdAt}</styles.PostDate>
         </styles.TopRightContainer>
