@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import styles from './style';
+
 import UploadPostLeftComponent from './uploadPostLeftComponent/uploadPostLeftComponent';
 import UploadPostRightComponent from './uploadPostRightComponent/uploadPostRightComponent';
 import SpaceLoadingModalComponent from '../common/spaceLoadingModalComponent/spaceLoadingModalComponent';
@@ -17,10 +17,12 @@ import MapComponent from '../mapPageComponent/mapComponent/mapComponent';
 
 interface UploadPostComponentProps {
   userInfo: User;
+  setBlock: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
   userInfo,
+  setBlock,
 }) => {
   const navigate = useNavigate();
 
@@ -67,6 +69,8 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
     }
 
     setLoadingModalOpen(true);
+
+    setBlock(false);
 
     try {
       const formData = new FormData();
