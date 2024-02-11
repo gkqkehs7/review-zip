@@ -13,6 +13,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   setClickedPost,
   posts,
 }) => {
+  console.log(posts);
   return (
     <>
       {posts.length === 0 ? (

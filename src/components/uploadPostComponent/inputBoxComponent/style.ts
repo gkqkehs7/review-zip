@@ -14,6 +14,7 @@ const styles = {
     }
 
     & textarea {
+      color: black;
       padding: 9px 10px !important;
       outline: none !important;
       border-radius: 4px !important;
