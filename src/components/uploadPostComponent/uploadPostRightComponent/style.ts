@@ -66,6 +66,7 @@ const styles = {
   `,
 
   UserName: styled.div`
+    color: black;
     margin: 0 15px 0 8px;
     font-weight: bold;
   `,
