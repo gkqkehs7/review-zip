@@ -8,7 +8,7 @@ import styles from './style';
 
 interface LikeListComponentProps {
   users: User[];
-  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  setUsers?: React.Dispatch<React.SetStateAction<User[]>>;
   likeListOpen: boolean;
   isReviewer: boolean;
   isReviewing: boolean;
@@ -35,10 +35,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
       const updatedFollowers = users.map((follower) => {
         if (follower.userId === user.userId) {
           return {
-            userId: follower.userId,
-            name: follower.name,
-            nickname: follower.nickname,
-            profileUrl: follower.profileUrl,
+            ...follower,
             following: true,
           };
         }
@@ -46,11 +43,16 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         return follower;
       });
 
-      setUsers(updatedFollowers);
+      if (setUsers) {
+        setUsers(updatedFollowers);
+      }
+
       try {
         PostAxiosInstance(`/v1/follows/users/${user.userId}`);
       } catch (error) {
-        setUsers(originUsers);
+        if (setUsers) {
+          setUsers(originUsers);
+        }
         console.error(error);
       }
     },
@@ -65,10 +67,7 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
       const updatedFollowers = users.map((follower) => {
         if (follower.userId === user.userId) {
           return {
-            userId: follower.userId,
-            name: follower.name,
-            nickname: follower.nickname,
-            profileUrl: follower.profileUrl,
+            ...follower,
             following: false,
           };
         }
@@ -76,11 +75,16 @@ const LikeListComponent: React.FC<LikeListComponentProps> = ({
         return follower;
       });
 
-      setUsers(updatedFollowers);
+      if (setUsers) {
+        setUsers(updatedFollowers);
+      }
+
       try {
         await DeleteAxiosInstance(`/v1/follows/users/${user.userId}`);
       } catch (error) {
-        setUsers(originUsers);
+        if (setUsers) {
+          setUsers(originUsers);
+        }
         console.error(error);
       }
     },

@@ -135,8 +135,24 @@ const styles = {
     align-items: flex-end;
     margin: 50px 0 20px;
   `,
+
+  FollowButton: styled.div`
+    background-color: #957db3;
+    width: 95px;
+    height: 30px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+    border-radius: 7px;
+    cursor: pointer;
+  `,
+
   //프로필 수정 버튼 다른 유저인 경우 리뷰잉 버튼
-  EditProfileButton: styled.button`
+  EditProfileButton: styled.div`
     background-color: #957db3;
     width: 95px;
     height: 30px;
@@ -149,6 +165,7 @@ const styles = {
     border-radius: 7px;
     cursor: pointer;
   `,
+
   //다른 유저인 경우 띄울 지도 버튼
   MapButton: styled.img`
     width: 30px;
