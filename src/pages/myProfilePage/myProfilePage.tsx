@@ -3,12 +3,15 @@ import { useParams, Link } from 'react-router-dom';
 
 import { changeInputValue } from '@/hooks/chageInputValue';
 
-import { GetAxiosInstance } from '@/api/axios.methods';
+import {
+  DeleteAxiosInstance,
+  GetAxiosInstance,
+  PostAxiosInstance,
+} from '@/api/axios.methods';
 import { Post, User } from '@/types/common.types';
 import {
   GetUserPostsResponse,
   GetUserInfoResponse,
-  GetRandomPostResponse,
   GetFollowingsResponse,
   GetFollowersResponse,
 } from '@/types/response.types';
@@ -48,7 +51,7 @@ const MyProfilePage: React.FC = () => {
 
   const [userInfo, setUserInfo] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
-  const [scrabPosts, setScrabPosts] = useState<Post[]>();
+  const [scrabPosts, setScrabPosts] = useState<Post[]>([]);
   const [followings, setFollowings] = useState<User[]>([]);
   const [followers, setFollowers] = useState<User[]>([]);
 
@@ -130,6 +133,27 @@ const MyProfilePage: React.FC = () => {
     setFollowers(response.data.result);
   }, [userId]);
 
+  // 팔로우 하기
+  const followUser = async (user: User) => {
+    setUserInfo({ ...user, following: true });
+    try {
+      await PostAxiosInstance(`/v1/follows/users/${userId}`);
+    } catch (error) {
+      setUserInfo({ ...user, following: false });
+      console.error(error);
+    }
+  };
+
+  const unFollowUser = async (user: User) => {
+    setUserInfo({ ...user, following: false });
+    try {
+      await DeleteAxiosInstance(`/v1/follows/users/${userId}`);
+    } catch (error) {
+      setUserInfo({ ...user, following: true });
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getPosts(); // 내 게시글 가져오기
     getScrabPosts(); //스크랩한 게시글 가져오기
@@ -150,6 +174,10 @@ const MyProfilePage: React.FC = () => {
             <styles.Overlay>
               <PostComponent
                 post={clickedPost}
+                posts={posts}
+                setPosts={setPosts}
+                scrabPosts={scrabPosts}
+                setScrabPosts={setScrabPosts}
                 setClickedPost={setClickedPost}
                 canDelete={true}
               />
@@ -223,17 +251,31 @@ const MyProfilePage: React.FC = () => {
                   </styles.UserProfileStats>
                 </styles.UserProfileStatsContainer>
 
-                {/*userId가 me => 프로필 수정 number => 리뷰잉 버튼이 들어갈 컨테이너 */}
                 <styles.EditProfileButtonContainer>
-                  <styles.EditProfileButton
-                    onClick={() => {
-                      isFriend
-                        ? setIsEditProfile(false)
-                        : setIsEditProfile(!isEditProfile);
-                    }}
-                  >
-                    {isFriend ? '리뷰잉' : '프로필 수정'}
-                  </styles.EditProfileButton>
+                  {/* 친구이고 팔로우가 안되어있는 경우 */}
+                  {isFriend && !userInfo.following && (
+                    <styles.FollowButton onClick={() => followUser(userInfo)}>
+                      팔로우
+                    </styles.FollowButton>
+                  )}
+
+                  {/* 친구이고 팔로우가 되어있는 경우 */}
+                  {isFriend && userInfo.following && (
+                    <styles.FollowButton onClick={() => unFollowUser(userInfo)}>
+                      언팔로우
+                    </styles.FollowButton>
+                  )}
+
+                  {/* 나인경우  */}
+                  {!isFriend && (
+                    <styles.EditProfileButton
+                      onClick={() => {
+                        setIsEditProfile(!isEditProfile);
+                      }}
+                    >
+                      프로필 수정
+                    </styles.EditProfileButton>
+                  )}
 
                   <Link to="/mapPage">
                     <styles.MapButton src={Map} />
@@ -286,6 +328,7 @@ const MyProfilePage: React.FC = () => {
           {isClicked[1] && (
             <LikeListComponent
               users={followers}
+              setUsers={setFollowers}
               closeLikeListModal={closeLikeListModal}
               likeListOpen={likeListOpen}
               isReviewer={isClicked[1]}
@@ -297,6 +340,7 @@ const MyProfilePage: React.FC = () => {
           {isClicked[2] && (
             <LikeListComponent
               users={followings}
+              setUsers={setFollowings}
               closeLikeListModal={closeLikeListModal}
               likeListOpen={likeListOpen}
               isReviewer={isClicked[1]}

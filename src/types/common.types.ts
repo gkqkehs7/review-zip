@@ -12,6 +12,7 @@ interface Post {
   postId: number;
   comment: string;
   point: number;
+  scrabNum: number;
   likeNum: number;
   checkLike?: boolean;
   checkScrab?: boolean;

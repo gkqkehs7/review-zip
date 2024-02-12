@@ -13,7 +13,6 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   setClickedPost,
   posts,
 }) => {
-  console.log(posts);
   return (
     <>
       {posts.length === 0 ? (
@@ -48,7 +47,7 @@ const ReviewPictureComponent: React.FC<ChangePageProps> = ({
                 </styles.IconBox>
                 <styles.IconBox>
                   <styles.Icon src={Storage} />
-                  <styles.Count>{3 /*post.scrabNum*/}</styles.Count>{' '}
+                  <styles.Count>{post.scrabNum}</styles.Count>{' '}
                   {/*스크랩 수가 없음 */}
                 </styles.IconBox>
               </styles.IconContainer>

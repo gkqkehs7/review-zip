@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import PostLeft from '@/components/postComponent/postLeftComponent/postLeftComponent';
 import PostRight from '@/components/postComponent/postRightComponent/postRightComponent';
@@ -16,12 +16,20 @@ import { GetPostLikedUsersResponse } from '@/types/response.types';
 
 interface PostComponentProps {
   post: Post;
+  posts?: Post[];
+  scrabPosts?: Post[];
+  setPosts?: React.Dispatch<React.SetStateAction<Post[]>>;
+  setScrabPosts?: React.Dispatch<React.SetStateAction<Post[]>>;
   setClickedPost?: React.Dispatch<React.SetStateAction<Post | undefined>>;
   canDelete: boolean;
 }
 
 const PostComponent: React.FC<PostComponentProps> = ({
   post,
+  posts,
+  scrabPosts,
+  setPosts,
+  setScrabPosts,
   setClickedPost,
   canDelete,
 }) => {
@@ -78,17 +86,56 @@ const PostComponent: React.FC<PostComponentProps> = ({
 
   // 스크랩하기
   const scrabPost = useCallback(async () => {
+    if (scrabPosts && setScrabPosts && posts && setPosts) {
+      const updatedPost = { ...post, checkScrab: true };
+
+      const updatedScrabPosts = [...scrabPosts, updatedPost];
+
+      const updatedPosts = posts.map((post_) => {
+        if (post_.postId === post.postId) {
+          return {
+            ...post_,
+            checkScrab: true,
+          };
+        }
+
+        return post_;
+      });
+
+      setPosts(updatedPosts);
+      setScrabPosts(updatedScrabPosts);
+    }
+
     try {
       setCheckScrab(true);
-
       await PostAxiosInstance(`/v1/posts/${post.postId}/scrabs`);
     } catch (error) {
       setCheckScrab(false);
     }
-  }, [post]);
+  }, [post, posts, scrabPosts]);
 
   // 스크랩 취소
   const unScrabPost = useCallback(async () => {
+    if (scrabPosts && setScrabPosts && posts && setPosts) {
+      const updatedScrabPosts = scrabPosts.filter(
+        (scrabPost) => scrabPost.postId !== post.postId,
+      );
+
+      const updatedPosts = posts.map((post_) => {
+        if (post_.postId === post.postId) {
+          return {
+            ...post_,
+            checkScrab: false,
+          };
+        }
+
+        return post_;
+      });
+
+      setPosts(updatedPosts);
+      setScrabPosts(updatedScrabPosts);
+    }
+
     try {
       setCheckScrab(false);
 
@@ -96,17 +143,34 @@ const PostComponent: React.FC<PostComponentProps> = ({
     } catch (error) {
       setCheckScrab(true);
     }
-  }, [post]);
+  }, [post, posts, scrabPosts]);
 
   // 게시글 삭제
   const deletePost = useCallback(async () => {
+    if (scrabPosts && setScrabPosts && posts && setPosts) {
+      const updatedScrabPosts = scrabPosts.filter(
+        (scrabPost) => scrabPost.postId !== post.postId,
+      );
+
+      const updatedPosts = posts.filter(
+        (post_) => post_.postId !== post.postId,
+      );
+
+      setPosts(updatedPosts);
+      setScrabPosts(updatedScrabPosts);
+    }
+
+    if (setClickedPost) {
+      setClickedPost(undefined);
+    }
+
     try {
       setAlertModalOpen(false);
       await DeleteAxiosInstance(`/v1/posts/${post.postId}`);
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [post, posts, scrabPosts]);
 
   const splitPost = () => {
     setSplit(!split);

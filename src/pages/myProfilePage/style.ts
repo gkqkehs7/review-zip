@@ -12,8 +12,8 @@ const styles = {
     background-image: url('images/myProfilePage/ProfileBackgroundImage.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
   `,
   //post Component 클릭 시
@@ -34,12 +34,12 @@ const styles = {
     width: 900px;
     min-width: 400px;
     margin: 0 auto;
+    padding: 40px 0;
   `,
   //프로필 상단을 감싸는 컨테이너
   ProfileContainer: styled.div`
     display: flex;
     justify-content: center;
-    margin: 7vh auto 0;
     padding: 0 0 2vh 0;
     border-bottom: solid 2px #d5b2ff;
   `,
@@ -135,8 +135,24 @@ const styles = {
     align-items: flex-end;
     margin: 50px 0 20px;
   `,
+
+  FollowButton: styled.div`
+    background-color: #957db3;
+    width: 95px;
+    height: 30px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+    border-radius: 7px;
+    cursor: pointer;
+  `,
+
   //프로필 수정 버튼 다른 유저인 경우 리뷰잉 버튼
-  EditProfileButton: styled.button`
+  EditProfileButton: styled.div`
     background-color: #957db3;
     width: 95px;
     height: 30px;
@@ -149,6 +165,7 @@ const styles = {
     border-radius: 7px;
     cursor: pointer;
   `,
+
   //다른 유저인 경우 띄울 지도 버튼
   MapButton: styled.img`
     width: 30px;
