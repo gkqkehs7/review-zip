@@ -286,6 +286,7 @@ const MyProfilePage: React.FC = () => {
           {isClicked[1] && (
             <LikeListComponent
               users={followers}
+              setUsers={setFollowers}
               closeLikeListModal={closeLikeListModal}
               likeListOpen={likeListOpen}
               isReviewer={isClicked[1]}
@@ -297,6 +298,7 @@ const MyProfilePage: React.FC = () => {
           {isClicked[2] && (
             <LikeListComponent
               users={followings}
+              setUsers={setFollowings}
               closeLikeListModal={closeLikeListModal}
               likeListOpen={likeListOpen}
               isReviewer={isClicked[1]}

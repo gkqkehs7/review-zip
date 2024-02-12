@@ -12,8 +12,8 @@ const styles = {
     background-image: url('images/myProfilePage/ProfileBackgroundImage.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
   `,
   //post Component 클릭 시
@@ -34,12 +34,12 @@ const styles = {
     width: 900px;
     min-width: 400px;
     margin: 0 auto;
+    padding: 40px 0;
   `,
   //프로필 상단을 감싸는 컨테이너
   ProfileContainer: styled.div`
     display: flex;
     justify-content: center;
-    margin: 7vh auto 0;
     padding: 0 0 2vh 0;
     border-bottom: solid 2px #d5b2ff;
   `,
