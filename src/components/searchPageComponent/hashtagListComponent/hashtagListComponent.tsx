@@ -22,8 +22,9 @@ const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
   // 검색 기록 저장하면서 hashtag 페이지로 이동
   const toHashtag = async (hashtag: Hashtag) => {
     try {
-      navigate(`/hashtagPage/${hashtag.hashtagId}`);
       await saveSearchHashtagHistory(hashtag.tagName);
+
+      return navigate(`/hashtagPage/${hashtag.hashtagId}`);
     } catch (error) {
       console.error(error);
     }

@@ -32,7 +32,7 @@ interface History {
   historyId: number;
   type: 'USER' | 'HASHTAG';
   user: User | null;
-  hashtag: string | null;
+  hashtag: Hashtag | null;
 }
 
 interface Hashtag {

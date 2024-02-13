@@ -7,11 +7,13 @@ import { User } from '@/types/common.types';
 interface UserListComponentProps {
   users: User[];
   followUser: (user: User) => Promise<void>;
+  saveSearchUserHistory: (user: User) => Promise<void>;
 }
 
 const UserListComponent: React.FC<UserListComponentProps> = ({
   users,
   followUser,
+  saveSearchUserHistory,
 }) => {
   const device = checkDevice();
 
@@ -28,8 +30,8 @@ const UserListComponent: React.FC<UserListComponentProps> = ({
       )}
     >
       {users.map((user) => (
-        <styles.UserContainer>
-          <styles.UserData to={`/profilepage/${user.userId}`}>
+        <styles.UserContainer onClick={() => saveSearchUserHistory(user)}>
+          <styles.UserData>
             <styles.UserImage
               src={user.profileUrl}
               style={responsiveWidthHeight(

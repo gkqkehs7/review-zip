@@ -17,9 +17,12 @@ import {
   SearchHashtagResponse,
   SearchUserByNicknameResponse,
 } from '@/types/response.types';
+import { useNavigate } from 'react-router-dom';
 
 // SearchType 컴포넌트에 대한 타입 정의
 const SearchPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [searchUsers, setSearchUsers] = useState<User[]>([]);
   const [searchHashtags, setSearchHashtags] = useState<Hashtag[]>([]);
@@ -93,6 +96,8 @@ const SearchPage: React.FC = () => {
     async (user: User) => {
       try {
         await PostAxiosInstance(`/v1/history/users/${user.userId}`);
+
+        return navigate(`/profilepage/${user.userId}`);
       } catch (error) {
         console.error(error);
       }
@@ -159,6 +164,7 @@ const SearchPage: React.FC = () => {
           searchHistories={searchHistories}
           deleteHistory={deleteHistory}
           followUser={followUser}
+          saveSearchUserHistory={saveSearchUserHistory}
           saveSearchHashtagHistory={saveSearchHashtagHistory}
         />
       </styles.SearchBarContainer>

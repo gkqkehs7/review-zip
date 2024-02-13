@@ -2,7 +2,7 @@ import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 
 import styles from './styles';
-import { History, User } from '@/types/common.types';
+import { Hashtag, History, User } from '@/types/common.types';
 
 interface SearchHistoryComponent {
   searchHistories: History[];
@@ -15,12 +15,12 @@ const SearchHistoryComponent: React.FC<SearchHistoryComponent> = ({
 }) => {
   const device = checkDevice();
 
-  const hashTagInfo = (hashtag: string, historyId: number) => {
+  const hashTagInfo = (hashtag: Hashtag, historyId: number) => {
     return (
-      <styles.HistoryContainer>
+      <styles.HistoryContainer to={`/hashtagpage/${hashtag.hashtagId}`}>
         {/* 해시 태그 */}
-        <styles.HashTagLink to="/hashtagPage">
-          <styles.Content># {hashtag}</styles.Content>
+        <styles.HashTagLink>
+          <styles.Content># {hashtag.tagName}</styles.Content>
         </styles.HashTagLink>
 
         <styles.DeleteButton onClick={() => deleteHistory(historyId)} />
@@ -30,8 +30,8 @@ const SearchHistoryComponent: React.FC<SearchHistoryComponent> = ({
 
   const userInfo = (user: User, historyId: number) => {
     return (
-      <styles.HistoryContainer>
-        <styles.UserData to={`/profilepage/${user.userId}`}>
+      <styles.HistoryContainer to={`/profilepage/${user.userId}`}>
+        <styles.UserData>
           <styles.UserImage
             src={user.profileUrl}
             style={responsiveWidthHeight(
