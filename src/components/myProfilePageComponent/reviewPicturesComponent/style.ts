@@ -4,6 +4,7 @@ const RveiwPicturesContainer = styled.div`
   width: 600px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   margin: 0 auto;
   overflow: auto;
@@ -89,6 +90,31 @@ const Count = styled.p`
   font-size: 10px;
 `;
 
+const NoPostContainer = styled.div`
+  width: 736px;
+  height: 211px;
+  background-color: transparent;
+  border-radius: 21px;
+  border: 1px solid #d5b2ff;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NoPostText = styled.div`
+  color: white;
+  margin-bottom: 15px;
+`;
+
+const NoPostImage = styled.img`
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+`;
+
 export default {
   RveiwPicturesContainer,
   PictureBorder,
@@ -99,4 +125,7 @@ export default {
   Icon,
   Count,
   IconBox,
+  NoPostContainer,
+  NoPostText,
+  NoPostImage,
 };

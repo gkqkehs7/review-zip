@@ -312,7 +312,11 @@ const MyProfilePage: React.FC = () => {
 
             {/* 내가 작성한 게시물*/}
             {postButtonClicked && posts && (
-              <PostListComponent setClickedPost={setClickedPost} post={posts} />
+              <PostListComponent
+                setClickedPost={setClickedPost}
+                post={posts}
+                isFriend={isFriend}
+              />
             )}
 
             {/* 저장소에 저장한 게시물*/}
@@ -320,6 +324,7 @@ const MyProfilePage: React.FC = () => {
               <ScrabPostListComponent
                 setClickedPost={setClickedPost}
                 scrabPost={scrabPosts}
+                isFriend={isFriend}
               />
             )}
           </styles.ProfilePictureContainer>
