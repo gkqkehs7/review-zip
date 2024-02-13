@@ -15,7 +15,8 @@ import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import UploadPage from '@/pages/uploadPage/uploadPage';
 import TestPage from '@pages/testPage/testPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
-import KakaoLoginPage from './pages/kakaoLoginPage/kakaoLoginPage';
+import KakaoLoginPage from '@/pages/kakaoLoginPage/kakaoLoginPage';
+import NotFoundPage from '@/pages/notFoundPage/notFoundPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -44,6 +45,7 @@ function App() {
         <Route path="/testPage" element={<TestPage />}></Route>
         <Route path="/hashtagPage/:hashtagId" element={<HashtagPage />}></Route>
         <Route path="/mapPage" element={<MapPage />}></Route>
+        <Route path="/*" element={<NotFoundPage />} />
       </Route>,
     ),
     { basename: '/review-zip' },
