@@ -2,21 +2,76 @@ import styles from './style';
 import StarImage from '/images/myProfilePage/StarImage.png';
 import Storage from '/images/myProfilePage/StorageImage.png';
 import Union from '/images/myProfilePage/Union.png';
+import NoPostImage from '/images/myProfilePage/NoPostImage.png';
+import NoScrabImage from '/images/myProfilePage/NoScrabImage.png';
 import { Post } from '@/types/common.types';
 
 interface ChangePageProps {
   setClickedPost: React.Dispatch<React.SetStateAction<Post | undefined>>;
   posts: Post[];
+  post?: boolean;
+  scrab?: boolean;
+  isFriend?: boolean;
 }
 
 const ReviewPictureComponent: React.FC<ChangePageProps> = ({
   setClickedPost,
   posts,
+  post,
+  scrab,
+  isFriend,
 }) => {
+  const NoPosts = () => {
+    if (scrab) {
+      if (isFriend) {
+        return (
+          <styles.NoPostContainer>
+            <styles.NoPostImage src={NoScrabImage} />
+            <styles.NoPostText>저장물이 없습니다</styles.NoPostText>
+          </styles.NoPostContainer>
+        );
+      }
+
+      return (
+        <styles.NoPostContainer>
+          <styles.NoPostImage src={NoScrabImage} />
+          <styles.NoPostText>친구들의 멋진 공간을 담아보세요</styles.NoPostText>
+          <styles.NoPostText>친구들의 게시글을 저장해보세요</styles.NoPostText>
+        </styles.NoPostContainer>
+      );
+    }
+
+    if (post) {
+      if (isFriend) {
+        return (
+          <styles.NoPostContainer>
+            <styles.NoPostImage src={NoPostImage} />
+            <styles.NoPostText>게시물이 없습니다</styles.NoPostText>
+          </styles.NoPostContainer>
+        );
+      }
+
+      return (
+        <styles.NoPostContainer>
+          <styles.NoPostImage src={NoPostImage} />
+          <styles.NoPostText>당신의 소중한 공간을 남겨보세요</styles.NoPostText>
+          <styles.NoPostText>첫 게시글을 업로드 해보세요</styles.NoPostText>
+        </styles.NoPostContainer>
+      );
+    }
+
+    return (
+      <styles.NoPostContainer>
+        <styles.NoPostImage src={NoPostImage} />
+        <styles.NoPostText>게시물이 없습니다</styles.NoPostText>
+      </styles.NoPostContainer>
+    );
+  };
+
   return (
     <>
       {posts.length === 0 ? (
-        <div>게시글 없음</div>
+        NoPosts()
       ) : (
         <styles.RveiwPicturesContainer>
           {posts.map((post, index) => (

@@ -17,6 +17,7 @@ interface SearchBarExtendComponentProps {
   searchHistories: History[];
   deleteHistory: (historyId: number) => Promise<void>;
   followUser: (user: User) => Promise<void>;
+  saveSearchUserHistory: (user: User) => Promise<void>;
   saveSearchHashtagHistory: (hashtag: string) => Promise<void>;
 }
 
@@ -27,6 +28,7 @@ const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
   searchHistories,
   deleteHistory,
   followUser,
+  saveSearchUserHistory,
   saveSearchHashtagHistory,
 }) => {
   const device = checkDevice();
@@ -76,7 +78,11 @@ const SearchBarExtendComponent: React.FC<SearchBarExtendComponentProps> = ({
               saveSearchHashtagHistory={saveSearchHashtagHistory}
             />
           ) : (
-            <UserListComponent users={searchUsers} followUser={followUser} />
+            <UserListComponent
+              users={searchUsers}
+              followUser={followUser}
+              saveSearchUserHistory={saveSearchUserHistory}
+            />
           )}
         </div>
       )}

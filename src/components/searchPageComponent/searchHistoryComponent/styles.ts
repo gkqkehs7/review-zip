@@ -7,7 +7,7 @@ const styles = {
     overflow: auto;
   `,
 
-  HistoryContainer: styled.div`
+  HistoryContainer: styled(Link)`
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -38,7 +38,7 @@ const styles = {
     }
   `,
 
-  UserData: styled(Link)`
+  UserData: styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -73,7 +73,7 @@ const styles = {
     }
   `,
 
-  HashTagLink: styled(Link)`
+  HashTagLink: styled.div`
     text-align: center;
   `,
 

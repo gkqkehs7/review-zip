@@ -21,7 +21,7 @@ const styles = {
     }
   `,
 
-  UserData: styled(Link)`
+  UserData: styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
