@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 import DesktopComponent from '@/components/signinPageComponent/signinComponent/desktopComponent/desktopComponent';
 import LargeDesktopComponent from '@/components/signinPageComponent/signinComponent/largeDesktopComponent/largeDesktopComponent';
