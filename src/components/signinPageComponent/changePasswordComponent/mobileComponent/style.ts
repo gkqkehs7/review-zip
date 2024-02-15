@@ -5,48 +5,48 @@ const styles = {
   Container: styled.div`
     background-image: url('images/signinPage/Background.png');
     background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100vw;
     height: 100vh;
-    font-size: 115%;
+    font-size: 100%;
     font-weight: bold;
   `,
 
   Right: styled.div`
+    width: 350px;
+    margin: 0px auto 0px auto;
+    font-size: 105%;
+    font-weight: bold;
+  `,
+  InputContainer: styled.div`
     display: flex;
     flex-direction: column;
-    width: 494.6px;
-    height: 700px;
-    margin: 0px 0px 0px 0px;
+    width: 100%;
+    margin: 0px auto 0px auto;
   `,
 
-  InputContainer: styled.p`
-    width: 100%;
-    margin: 10px 0px 0px 0px;
-  `,
-
-  InputTitle: styled.div`
-    width: 100%;
-    height: fit-content;
-    margin: 20px 0px 60px 0px;
+  InputTitle: styled.p`
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 16px;
+    margin: 30px 0px 30px 0px;
     font-weight: bold;
     color: white;
+    white-space: nowrap;
   `,
 
   Input: styled.input`
     background-color: rgba(255, 255, 255, 0.3);
-    width: 100%;
-    height: 40px;
+    width: 350px;
+    height: 26.5px;
     padding-left: 10px;
     box-sizing: border-box;
     border-radius: 100px;
     color: white;
-
+    outline: none;
+    border: 0;
     font-size: 90%;
     &::placeholder {
       color: white;
@@ -55,46 +55,50 @@ const styles = {
 
   WarnText: styled.p`
     width: fit-content;
-    margin: 10px 0px 100px 15px;
+    margin: 15px 0px 90px 5px;
     color: white;
-    font-size: 80%;
+    font-size: 70%;
     text-decoration: underline;
     white-space: nowrap;
   `,
 
   ChangeBtn: styled(Link)`
+    display: flex;
     width: 100%;
     height: fit-content;
-    margin: 0px 0px 0px 0px;
+    margin: 0px auto 50px auto;
     color: white;
-    font-size: 250%;
-    white-space: nowrap;
+    font-size: 200%;
     cursor: pointer;
   `,
 
   Footer: styled.div`
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 40px;
-    margin: 50px auto 0px auto;
-    padding: 0px 0px 0px 5px;
+    margin: 0px auto 0px auto;
   `,
+
   SignUp: styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 69px;
-    height: fit-content;
-    margin: 0px 0vw 0px 0vw;
+    height: 16px;
+    margin: 0px 0px 0px 0px;
     color: white;
     white-space: nowrap;
     cursor: pointer;
   `,
 
   PrivacyPolicy: styled.p`
-    width: fit-content;
-    margin: 0px 0px 0px 50px;
+    width: 116px;
+    margin: 0px 0px 0px 0px;
     color: #323a54;
-    font-size: 125%;
+    font-size: 100%;
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;

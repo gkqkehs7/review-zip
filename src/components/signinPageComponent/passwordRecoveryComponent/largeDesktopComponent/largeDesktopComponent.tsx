@@ -22,8 +22,7 @@ const LargeDesktopComponent: React.FC = () => {
           <styles.InputTitle>성명</styles.InputTitle>
           <styles.Input
             type="text"
-            pattern=".+@example\.com"
-            placeholder="홍길동"
+            placeholder="Enter your name"
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setName)
@@ -36,7 +35,7 @@ const LargeDesktopComponent: React.FC = () => {
           <styles.InputTitle>휴대폰 번호</styles.InputTitle>
           <styles.Input
             type="password"
-            placeholder="Enter UserName"
+            placeholder="Enter your phoneNumber"
             value={phoneNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setPhoneNumber)
@@ -50,16 +49,17 @@ const LargeDesktopComponent: React.FC = () => {
             <styles.InputMessage>
               아래의 SMS 인증번호를 입력해주세요.
             </styles.InputMessage>
-          </styles.CertificationNumber>
 
-          <styles.OrSignContainer>
-            <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
-            <styles.KaKaoIcon />
-          </styles.OrSignContainer>
+            <styles.CheckContainer>
+              <styles.CheckIcon src="images/signinPage/Check.png" />
+              정상적으로 확인되셨습니다.
+            </styles.CheckContainer>
+          </styles.CertificationNumber>
         </styles.CertificationContainer>
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
+      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
     </styles.Container>
   );
 };

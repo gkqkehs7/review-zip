@@ -10,7 +10,7 @@ const styles = {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    font-size: 115%;
+    font-size: 100%;
     font-weight: bold;
     z-index: 0;
   `,
@@ -19,95 +19,88 @@ const styles = {
     top: 0px;
     right: 0px;
     background-image: url('images/signinPage/PerkyMilkyWay.png');
-    background-size: 100% 140%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: 50px 0px;
-    width: 800px;
-    height: 650px;
+    background-position: 50px 30px;
+    width: 873px;
+    height: 565px;
     z-index: 0;
   `,
   PurpleCloud: styled.div`
     position: absolute;
-    bottom: 0vh;
+    bottom: 0px;
+    left: 0px;
     background-image: url('images/signinPage/PurpleCloud.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: bottom;
-    width: 1000px;
-    height: 85vh;
+    width: 1031px;
+    height: 608px;
     z-index: 0;
   `,
   Ellipse: styled.div`
     position: absolute;
-    top: 32.5%;
+    top: 292px;
+    left: -15px;
     background-image: url('images/signinPage/Ellipse.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 600px;
-    height: 40vh;
+    width: 624px;
+    height: 355px;
+    transform: rotate(0deg);
     z-index: 2;
-  `,
-
-  MilkyWay: styled.div`
-    position: absolute;
-    bottom: 0;
-    background-image: url('images/signinPage/MilkyWay.png');
-    background-size: 100% 100%;
-    width: 600px;
-    height: 50vh;
-    z-index: 3;
   `,
 
   Title: styled.div`
     position: absolute;
-    top: 43.5%;
-    left: 140px;
+    top: 423.94px;
+    left: 130px;
     background-image: url('images/signinPage/Title.png');
     background-size: 100% 100%;
-    width: 400px;
-    height: 12vh;
+    width: 402px;
+    height: 85px;
     z-index: 3;
   `,
 
   LargeStart: styled.div`
     position: absolute;
     display: flex;
-    top: 62.5%;
-    left: 100px;
+    top: 544px;
+    left: 110px;
     background-image: url('images/signinPage/LargeStar.png');
     background-size: 100% 100%;
-    width: 150px;
-    height: 17.5vh;
+    width: 165px;
+    height: 182px;
     z-index: 4;
   `,
 
   Union: styled.div`
     position: absolute;
-    top: 20vh;
-    left: 125px;
+    top: 216px;
+    left: 230px;
     background-image: url('images/signinPage/Union.png');
     background-size: 100% 100%;
-    width: 100px;
-    height: 8vh;
+    width: 81px;
+    height: 78px;
   `,
 
   MiniStart: styled.div`
     position: absolute;
-    top: 30vh;
-    left: 525px;
+    top: 266px;
+    left: 550px;
     background-image: url('images/signinPage/MiniStar.png');
     background-size: 100% 100%;
-    width: 75px;
-    height: 8vh;
+    width: 68px;
+    height: 71px;
     z-index: 3;
   `,
-
   Right: styled.div`
     display: flex;
     flex-flow: row wrap;
     width: 400px;
-    height: 1650px;
-    margin: 450px 0px 0px 60vw;
+    height: 450px;
+    margin: 300px 0px 0px 60vw;
+    padding: 50px 0px 0px 0px;
+
     z-index: 5;
   `,
 
@@ -115,36 +108,39 @@ const styles = {
     background-image: url('images/signinPage/SuccessIcon.png');
     background-size: 100% 100%;
     margin: 0px 0px 0px 0px;
-    width: 20%;
-    height: 20%;
+    width: 74px;
+    height: 74px;
   `,
 
   SuccessText: styled(Link)`
     background-image: url('images/signinPage/SuccessText.png');
     background-size: 100% 100%;
-    margin: -20px 0px 0px 0px;
-    width: 100%;
-    height: 7%;
+    margin: -70px 0px 0px 0px;
+    width: 400px;
+    height: 25px;
   `,
-
+  SignUp: styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 69px;
+    height: 16px;
+    margin: -70px 0px 0px 400px;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: pointer;
+  `,
   PrivacyPolicy: styled.p`
+    align-self: end;
     width: fit-content;
-    margin: 250px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
     color: #323a54;
     font-size: 125%;
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
-  `,
-  SignUp: styled(Link)`
-    position: relative;
-    left: 500px;
-    bottom: 170px;
-    width: fit-content;
-    color: white;
-    font-size: 125%;
-    font-weight: bold;
-    z-index: 3;
   `,
 };
 export default styles;

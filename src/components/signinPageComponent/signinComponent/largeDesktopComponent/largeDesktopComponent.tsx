@@ -1,6 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
+import {
+  DeleteAxiosInstance,
+  GetAxiosInstance,
+  PostAxiosInstance,
+} from '@/api/axios.methods';
+import { useNavigate } from 'react-router-dom';
 
 interface LargeDesktopComponentProps {
   kakaoLoginUrl: string;
@@ -11,7 +17,23 @@ const LargeDesktopComponent: React.FC<LargeDesktopComponentProps> = ({
 }) => {
   const [email, setEamil] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
+  const requestSignup = useCallback(async () => {
+    try {
+      const data = {
+        email: email,
+        password: password,
+      };
+      const response = await PostAxiosInstance('/v1/auth/local/login', data);
+      console.log(data);
+      navigate('/mainPage');
+    } catch (error) {
+      //아이디/비밀번호 재입력 요구
+      alert('이메일 또는 비밀번호를 다시 입력해주세요');
+      console.log(error);
+    }
+  }, [email, password]);
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -57,7 +79,9 @@ const LargeDesktopComponent: React.FC<LargeDesktopComponentProps> = ({
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="/mainPage">&gt; SIGN IN</styles.SignInBtn>
+        <styles.SignInBtn onClick={requestSignup}>
+          &gt; SIGN IN
+        </styles.SignInBtn>
 
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>

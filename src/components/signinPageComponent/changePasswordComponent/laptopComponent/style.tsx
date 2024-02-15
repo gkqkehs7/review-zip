@@ -3,70 +3,152 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   Container: styled.div`
-    // background-image: url('images/signinPage/Signin.png');
+    background-image: url('images/signinPage/Background.png');
     background-size: 100% 100%;
-    background-position: center;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    font-size: 115%;
+    font-size: 100%;
     font-weight: bold;
+    z-index: 0;
+  `,
+  PerkyMilkyWay: styled.div`
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-image: url('images/signinPage/PerkyMilkyWay.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50px 30px;
+    width: 873px;
+    height: 565px;
+    z-index: 0;
+  `,
+  PurpleCloud: styled.div`
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-image: url('images/signinPage/PurpleCloud.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 1031px;
+    height: 608px;
+    z-index: 0;
+  `,
+  Ellipse: styled.div`
+    position: absolute;
+    top: 292px;
+    left: -15px;
+    background-image: url('images/signinPage/Ellipse.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 624px;
+    height: 355px;
+    transform: rotate(0deg);
+    z-index: 2;
   `,
 
+  Title: styled.div`
+    position: absolute;
+    top: 423.94px;
+    left: 130px;
+    background-image: url('images/signinPage/Title.png');
+    background-size: 100% 100%;
+    width: 402px;
+    height: 85px;
+    z-index: 3;
+  `,
+
+  LargeStart: styled.div`
+    position: absolute;
+    display: flex;
+    top: 544px;
+    left: 110px;
+    background-image: url('images/signinPage/LargeStar.png');
+    background-size: 100% 100%;
+    width: 165px;
+    height: 182px;
+    z-index: 4;
+  `,
+
+  Union: styled.div`
+    position: absolute;
+    top: 216px;
+    left: 230px;
+    background-image: url('images/signinPage/Union.png');
+    background-size: 100% 100%;
+    width: 81px;
+    height: 78px;
+  `,
+
+  MiniStart: styled.div`
+    position: absolute;
+    top: 266px;
+    left: 550px;
+    background-image: url('images/signinPage/MiniStar.png');
+    background-size: 100% 100%;
+    width: 68px;
+    height: 71px;
+    z-index: 3;
+  `,
   Right: styled.div`
+    postion: relative;
+    width: 340px;
+    height: 550px;
+    margin: 150px 0px 0px 60vw;
+    z-index: 5;
+  `,
+
+  InputContainer: styled.div`
     display: flex;
     flex-direction: column;
-    width: 494.6px;
-    height: fit-content;
-    margin: 285px 0px 0px 50vw;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
   `,
 
-  InputContainer: styled.p`
-    width: 100%;
-    margin: 20px 0px 0px 0px;
-  `,
-
-  InputTitle: styled.div`
-    width: 100%;
-    height: fit-content;
-    margin: 20px 0px 75px 0px;
+  InputTitle: styled.p`
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 16px;
+    margin: 70px 0px 30px 0px;
     font-weight: bold;
     color: white;
+    white-space: nowrap;
   `,
 
   Input: styled.input`
     background-color: rgba(255, 255, 255, 0.3);
     width: 100%;
-    height: 40px;
+    height: 26.5px;
     padding-left: 10px;
     box-sizing: border-box;
     border-radius: 100px;
     color: white;
-
+    outline: none;
+    border: 0;
     font-size: 90%;
     &::placeholder {
       color: white;
     }
   `,
-
   WarnText: styled.p`
-    width: fit-content;
-    margin: 10px 0px 140px 15px;
+    margin: 10px 0px 100px 15px;
     color: white;
-    font-size: 80%;
+    font-size: 60%;
     text-decoration: underline;
     white-space: nowrap;
   `,
 
   ChangeBtn: styled(Link)`
-    width: 100%;
-    height: fit-content;
-    margin: 0px 0px 0px 0px;
+    width: 200px;
+    height: 29px;
+    margin: 10px 0px 0px 0px;
     color: white;
-    font-size: 250%;
-    white-space: nowrap;
+    font-weight: bold;
+    font-size: 225%;
     cursor: pointer;
   `,
 
@@ -78,18 +160,24 @@ const styles = {
     height: 40px;
     margin: -40px 0px 0px 0px;
   `,
+
   SignUp: styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     width: 69px;
-    height: fit-content;
-    margin: 0px 0vw 0px 22.5vw;
+    height: 16px;
+    margin: 15px 0px 0px 400px;
     color: white;
+    font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
   `,
 
   PrivacyPolicy: styled.p`
     width: fit-content;
-    margin: 70px 0px 0px 0px;
+    margin: 106px 0px 0px 0px;
     color: #323a54;
     font-size: 125%;
     font-weight: bold;

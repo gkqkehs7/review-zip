@@ -37,13 +37,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
 
   const mapRef = useRef<kakao.maps.Map>(null);
 
-  var times = 37.5;
-
-  if (height == 100) {
-    times = height / 3;
-  } else if (height == 80) {
-    times = height / 2.8;
-  }
+  var times = height / 2.8;
 
   const device = checkDevice();
   return (
