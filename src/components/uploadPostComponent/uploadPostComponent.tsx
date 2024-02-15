@@ -28,7 +28,7 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
 
   // post로 보낼 내용들
   const [textInput, setTextInput] = useState<string>(''); // 게시글 내용
-  const [hashTags, setHashTags] = useState<string[]>([]); // hashtag들
+  const [hashTags, setHashTags] = useState<{ id: number; tag: string }[]>([]); // hashtag들
   const [starCount, setStarCount] = useState<number>(0); // 별점
   const [previewImages, setPreviewPostImages] = useState<
     { id: number; url: string }[]
