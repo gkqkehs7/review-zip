@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { User } from '@/types/common.types';
 
 import styles from './style';
@@ -12,8 +11,10 @@ interface PostRightComponentProps {
   sendPost: () => void;
   textInput: string;
   setTextInput: React.Dispatch<React.SetStateAction<string>>;
-  hashTags: string[];
-  setHashTags: React.Dispatch<React.SetStateAction<string[]>>;
+  hashTags: { id: number; tag: string }[];
+  setHashTags: React.Dispatch<
+    React.SetStateAction<{ id: number; tag: string }[]>
+  >;
   starCount: number;
   setStarCount: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -28,13 +29,12 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   setHashTags,
   setStarCount,
 }) => {
-  // textInput 수정 함수
-  const textInputChange = useCallback(
-    (e: any) => {
-      setTextInput(e.target.value);
-    },
-    [textInput],
-  );
+  const deleteHashtag = (hashtag: { id: number; tag: string }) => {
+    const filteredHashtag = hashTags.filter(
+      (hashTag) => hashTag.id !== hashtag.id,
+    );
+    setHashTags(filteredHashtag);
+  };
 
   return (
     <styles.Container splitpost={split}>
@@ -51,18 +51,23 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
       {/* 윗부분 선 */}
       <styles.Line />
 
-      {/* mention input textarea */}
-      <InputBoxComponent
-        textInput={textInput}
-        textInputChange={textInputChange}
-        setHashTags={setHashTags}
+      <styles.InputText
+        value={textInput}
+        onChange={(e) => setTextInput(e.target.value)}
+        placeholder="게시글 내용을 입력해주세요."
       />
+
+      {/* mention input textarea */}
+      <InputBoxComponent hashTags={hashTags} setHashTags={setHashTags} />
 
       {/* 해시태그들 */}
       <styles.HashTagContainer>
         {hashTags.map((hashTag, index) => (
-          <styles.HashTag key={index}>
-            <styles.HashTagText># {hashTag}</styles.HashTagText>
+          <styles.HashTag key={hashTag.id}>
+            <styles.HashTagText># {hashTag.tag}</styles.HashTagText>
+            <styles.HashTagDeleteButton
+              onClick={() => deleteHashtag(hashTag)}
+            />
           </styles.HashTag>
         ))}
       </styles.HashTagContainer>
