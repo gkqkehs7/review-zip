@@ -79,11 +79,7 @@ const MainPage: React.FC = () => {
         />
       )}
 
-      <MainBottomComponent
-        modalOpen={modalOpen}
-        modalClose={modalClose}
-        scrollToTop={scrollToTop}
-      />
+      <MainBottomComponent scrollToTop={scrollToTop} />
     </RemoveScroll>
   );
 };

@@ -74,7 +74,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
         </styles.SignInBtn>
 
         <styles.Footer>
-          <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+          <styles.SignUp>Sign Up</styles.SignUp>
           <styles.ForgotPwd to="/passwordRecoveryPage">
             Forgot the Password ?
           </styles.ForgotPwd>

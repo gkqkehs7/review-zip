@@ -9,7 +9,8 @@ interface ImageListComponentProps {
   setPostImages: Dispatch<SetStateAction<{ id: number; url: string }[]>>;
   imageListOpen: boolean;
   setClickedImage: Dispatch<SetStateAction<string>>;
-  setFiles?: React.Dispatch<React.SetStateAction<File[]>>;
+  files: { id: number; file: File }[];
+  setFiles: React.Dispatch<React.SetStateAction<{ id: number; file: File }[]>>;
 }
 
 const ImageListComponent: React.FC<ImageListComponentProps> = ({
@@ -17,6 +18,7 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
   setPostImages,
   imageListOpen,
   setClickedImage,
+  files,
   setFiles,
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -27,7 +29,10 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
       for (let i = 0; i < files.length; i++) {
         const file: File = files[i];
 
-        setFiles!((prevFiles) => [...prevFiles, file]);
+        setFiles!((prevFiles) => [
+          ...prevFiles,
+          { id: prevFiles.length, file: file },
+        ]);
 
         const reader: FileReader = new FileReader();
 
@@ -43,7 +48,7 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
 
           setPostImages((prevPostImages) => [
             ...prevPostImages,
-            { id: prevPostImages.length + 1, url: imageUrl },
+            { id: prevPostImages.length, url: imageUrl },
           ]);
 
           // 클릭된 이미지 보이게 하기
@@ -66,10 +71,14 @@ const ImageListComponent: React.FC<ImageListComponentProps> = ({
   // 이미지 삭제
   const deleteImage = (postImageId: number) => {
     // TODO: 여기서 files도 삭제 해줘야 함
-    const updatedImages = postImages.filter(
+    const updatedPreviewImages = postImages.filter(
       (image) => image.id !== postImageId,
     );
-    setPostImages(updatedImages);
+
+    const updateFiles = files.filter((file) => file.id !== postImageId);
+
+    setPostImages(updatedPreviewImages);
+    setFiles(updateFiles);
   };
 
   return (

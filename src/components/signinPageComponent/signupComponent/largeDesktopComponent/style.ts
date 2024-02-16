@@ -102,7 +102,7 @@ const styles = {
     z-index: 3;
   `,
 
-  InputContainer: styled.div`
+  InputContainer: styled.form`
     display: flex;
     flex-direction: column;
     width: 100%;

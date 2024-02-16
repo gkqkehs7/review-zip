@@ -13,14 +13,10 @@ import TopButtonImage from '/images/mainPage/TopButton.png';
 import AlertComponent from '@/components/common/alertComponent/alertComponent';
 
 interface MainBottomComponentProps {
-  modalOpen: () => void;
-  modalClose: () => void;
   scrollToTop: () => void;
 }
 
 const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
-  modalOpen,
-  modalClose,
   scrollToTop,
 }) => {
   const [randomPost, setRandomPost] = useState<Post>();
@@ -40,29 +36,6 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
       console.error(error);
     }
   };
-
-  // 게시글 삭제
-  const deletePost = useCallback(async () => {
-    try {
-      setAlertModalOpen(false);
-      await DeleteAxiosInstance(`/v1/posts/${randomPost?.postId}`);
-
-      // 삭제하고 새로운 게시글 불러오기
-      await newPost();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  // alert창 열기
-  const openAlertModal = useCallback(() => {
-    setAlertModalOpen(true);
-  }, []);
-
-  // alert창 닫기
-  const closeAlertModal = useCallback(() => {
-    setAlertModalOpen(false);
-  }, []);
 
   // 새로운 게시글 가져오기
   const newPost = async () => {
@@ -120,14 +93,7 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
         }}
       >
         {/* 게시글 component */}
-        {randomPost && (
-          <PostComponent
-            post={randomPost}
-            modalOpen={modalOpen}
-            modalClose={modalClose}
-            openAlertModal={openAlertModal}
-          />
-        )}
+        {randomPost && <PostComponent post={randomPost} canDelete={false} />}
 
         {/* 아래 화살표 */}
         <styles.ArrowImage onClick={newPost} src={DownArrowImage} />
@@ -139,13 +105,6 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
       {loading && (
         <LoadingModalComponent
           message={'새로운 게시글을 불러오는 중입니다...'}
-        />
-      )}
-
-      {alertModalOpen && (
-        <AlertComponent
-          closeAlertModal={closeAlertModal}
-          deletePost={deletePost}
         />
       )}
     </styles.Container>

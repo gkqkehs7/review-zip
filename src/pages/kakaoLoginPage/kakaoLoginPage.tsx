@@ -45,7 +45,7 @@ const KakaoLoginPage: React.FC = () => {
       if (kakaoToken) {
         try {
           const response = await PostAxiosInstance<KakaoLoginType>(
-            '/v1/oauth/kakao',
+            '/v1/auth/kakao/login',
             {
               token: kakaoToken,
             },

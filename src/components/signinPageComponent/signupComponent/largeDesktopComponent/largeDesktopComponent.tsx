@@ -53,7 +53,7 @@ const LargeDesktopComponent: React.FC = () => {
             type="email"
             placeholder="Enter your Email Adress"
             value={email}
-            pattern=".+@example\.com"
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setEmail)
             }
@@ -121,7 +121,7 @@ const LargeDesktopComponent: React.FC = () => {
             type="password"
             placeholder="Enter Password"
             value={password}
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
+            pattern="/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/;"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setPassword)
             }

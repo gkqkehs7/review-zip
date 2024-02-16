@@ -25,6 +25,7 @@ const DesktopComponent: React.FC = () => {
         nickname: nickname,
         phoneNum: phoneNum,
       };
+
       const response = await PostAxiosInstance('/v1/auth/local/sign-up', data);
       navigate('/completeSigninPage');
     } catch (error) {
@@ -54,7 +55,10 @@ const DesktopComponent: React.FC = () => {
             type="email"
             placeholder="Enter your Email Adress"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setEmail)
+            }
           />
         </styles.InputContainer>
         <styles.InputContainer>
@@ -70,7 +74,9 @@ const DesktopComponent: React.FC = () => {
             placeholder="Enter your Phone Number"
             value={phoneNum}
             pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
-            onChange={(e) => setPhoneNum(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setPhoneNum)
+            }
           />
         </styles.InputContainer>
 
@@ -81,7 +87,9 @@ const DesktopComponent: React.FC = () => {
             type="text"
             placeholder="Enter your name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setName)
+            }
           />
         </styles.InputContainer>
 
@@ -114,7 +122,9 @@ const DesktopComponent: React.FC = () => {
             placeholder="Enter Password"
             value={password}
             pattern="/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/;"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setPassword)
+            }
           />
 
           {/* 비밀번호 입력시 주의사항 */}

@@ -1,9 +1,10 @@
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+import { PostImages } from '@/types/common.types';
 import styles from './style';
 
 type ImageSliderComponentProps = {
-  sliderImages: { id: number; url: string }[];
+  sliderImages: PostImages[];
 };
 
 const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
@@ -27,7 +28,7 @@ const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
     >
       {sliderImages.map((slideImage) => (
         <styles.ImageContainer
-          key={slideImage.id}
+          key={slideImage.imageId}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -36,7 +37,7 @@ const ImageSliderComponent: React.FC<ImageSliderComponentProps> = ({
           }}
         >
           <styles.Image
-            src={slideImage.url}
+            src={slideImage.imageUrl}
             style={{
               objectFit: 'cover',
               width: '100%',

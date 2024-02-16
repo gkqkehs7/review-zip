@@ -57,6 +57,7 @@ const styles = {
   TopLeftContainer: styled.div`
     display: flex;
     align-items: center;
+    cursor: pointer;
   `,
 
   UserImage: styled.img`
@@ -104,6 +105,7 @@ const styles = {
   `,
 
   HashTag: styled.div`
+    cursor: pointer;
     background-color: #e5d9f4;
     display: flex;
     justify-content: center;
@@ -112,6 +114,10 @@ const styles = {
 
     border-radius: 13px;
     margin-right: 10px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   HashTagText: styled.div`

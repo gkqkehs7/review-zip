@@ -8,8 +8,6 @@ import spaceShipImage from '/images/groupBar/SpaceShip.png';
 import userImage from '/images/groupBar/User.png';
 import { rowStyles, colStyles } from './style';
 
-//  background-color: ;
-
 interface GroupBarComponentProps {
   direction: 'row' | 'col';
   color: 'purple' | 'white';
@@ -142,7 +140,7 @@ const GroupBarComponent: React.FC<GroupBarComponentProps> = ({
                 지도
               </rowStyles.MenuText>
             </rowStyles.Menu>
-            <rowStyles.Menu to="/profilePage/1">
+            <rowStyles.Menu to="/profilePage/me">
               <rowStyles.MenuText isVisible={menuVisible}>
                 프로필
               </rowStyles.MenuText>
@@ -221,7 +219,7 @@ const GroupBarComponent: React.FC<GroupBarComponentProps> = ({
                 지도
               </colStyles.MenuText>
             </colStyles.Menu>
-            <colStyles.Menu to="/profilePage/1">
+            <colStyles.Menu to="/profilePage/me">
               <colStyles.MenuText isVisible={menuVisible}>
                 프로필
               </colStyles.MenuText>

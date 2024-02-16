@@ -2,17 +2,21 @@ import ReviewPictureComponent from '../reviewPicturesComponent/reviewPictureComp
 import { Post } from '@/types/common.types';
 
 interface scrabPostProps {
-  setPostIsClicked: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setClickedPost: React.Dispatch<React.SetStateAction<Post | undefined>>;
   scrabPost: Post[]; //나중에 Post[]가 들어감
+  isFriend: boolean;
 }
 const ScrabPostListComponent: React.FC<scrabPostProps> = ({
-  setPostIsClicked,
+  setClickedPost,
   scrabPost,
+  isFriend,
 }) => {
   return (
     <ReviewPictureComponent
-      setPostIsClicked={setPostIsClicked}
+      setClickedPost={setClickedPost}
       posts={scrabPost}
+      scrab={true}
+      isFriend={isFriend}
     />
   );
 };

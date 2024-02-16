@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { keyframes, css } from 'styled-components';
 import { BsBackspace } from 'react-icons/bs';
 
@@ -130,6 +131,8 @@ const styles = {
   UserContainer: styled.div`
     display: flex;
     align-items: center;
+
+    cursor: pointer;
   `,
 
   UserImage: styled.img`

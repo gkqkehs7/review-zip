@@ -1,48 +1,56 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect, useState } from 'react';
 import { Mention, SuggestionDataItem } from 'react-mentions';
 import autosize from 'autosize';
 
 import styles from './style';
+import { GetAxiosInstance } from '@/api/axios.methods';
+import { SearchHashtagResponse } from '@/types/response.types';
+import { Hashtag } from '@/types/common.types';
 
 interface InputBoxComponentProps {
-  textInput: string;
-  textInputChange: (e: any) => void;
-  setHashTags: React.Dispatch<React.SetStateAction<string[]>>;
+  hashTags: { id: number; tag: string }[];
+  setHashTags: React.Dispatch<
+    React.SetStateAction<{ id: number; tag: string }[]>
+  >;
 }
 
-const hashTagsData = [
-  {
-    id: 1,
-    hashTag: '여름',
-    postnum: '10k+',
-  },
-  {
-    id: 2,
-    hashTag: '여름이였다',
-    postnum: '100k+',
-  },
-  {
-    id: 2,
-    hashTag: '여름인건가',
-    postnum: '1000k+',
-  },
-];
-
 const InputBoxComponent: React.FC<InputBoxComponentProps> = ({
-  textInput,
-  textInputChange,
+  hashTags,
   setHashTags,
 }) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [hashtagInput, setHashtagInput] = useState<string>('');
+  const [searchHashtags, setSearchHashtags] = useState<Hashtag[]>([]);
+
+  const hashtagInputChange = (e: any) => {
+    setHashtagInput(e.target.value);
+  };
+
+  const searchHashtag = async () => {
+    try {
+      const searchHashtag = hashtagInput.slice(1);
+
+      if (searchHashtag.trim().length > 0) {
+        const response = await GetAxiosInstance<SearchHashtagResponse>(
+          `/v1/hashtags/search?hashtag=${searchHashtag}`,
+        );
+
+        setSearchHashtags(response.data.result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    if (textareaRef.current) {
-      autosize(textareaRef.current);
-    }
-  }, []);
+    searchHashtag();
+  }, [hashtagInput]);
 
   const handleAddMention = (id: string | number, display: string) => {
-    setHashTags((prevHashTags) => [...prevHashTags, display]);
+    setHashtagInput('');
+    setHashTags((prevHashTags) => [
+      ...prevHashTags,
+      { id: hashTags.length, tag: display },
+    ]);
   };
 
   const renderUserSuggestion: (
@@ -53,7 +61,7 @@ const InputBoxComponent: React.FC<InputBoxComponentProps> = ({
     focused: boolean,
   ) => React.ReactNode = useCallback(
     (member, search, highlightedDisplay, index, focus) => {
-      if (!hashTagsData) {
+      if (!searchHashtags) {
         return null;
       }
 
@@ -63,22 +71,24 @@ const InputBoxComponent: React.FC<InputBoxComponentProps> = ({
         </styles.EachMention>
       );
     },
-    [hashTagsData],
+    [searchHashtags],
   );
 
   return (
     <styles.MentionsTextarea
       id="editor-chat"
-      value={textInput}
-      onChange={textInputChange}
-      inputRef={textareaRef}
+      value={hashtagInput}
+      onChange={hashtagInputChange}
       forceSuggestionsAboveCursor={true}
     >
       <Mention
         appendSpaceOnAdd
         trigger="#"
         data={
-          hashTagsData?.map((v) => ({ id: v.id, display: v.hashTag })) || []
+          searchHashtags?.map((hashtag) => ({
+            id: hashtag.hashtagId,
+            display: `${hashtag.tagName} `,
+          })) || []
         }
         renderSuggestion={renderUserSuggestion}
         onAdd={handleAddMention}

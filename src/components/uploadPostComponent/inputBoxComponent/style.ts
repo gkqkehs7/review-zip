@@ -3,24 +3,29 @@ import { MentionsInput } from 'react-mentions';
 
 const styles = {
   MentionsTextarea: styled(MentionsInput)`
-    flex: 1;
+    height: 40px;
+    width: 100%;
     font-family: Slack-Lato, appleLogo, sans-serif;
     font-size: 15px;
     padding: 8px 9px;
-    overflow: auto;
+    border: 2px solid #d5b2ff;
+    border-radius: 10px;
+    margin-top: 10px;
 
     & strong {
       background-color: #e5d9f4;
     }
 
     & textarea {
+      color: black;
       padding: 9px 10px !important;
       outline: none !important;
       border-radius: 4px !important;
       resize: none !important;
       line-height: 22px;
       border: none;
-      overflow-y: auto;
+      resize: none;
+      overflow-y: hidden;
     }
 
     & ul {
@@ -29,7 +34,6 @@ const styles = {
       overflow-y: auto;
       padding: 9px 10px;
       background: white;
-      border-radius: 4px;
       width: 150px;
     }
   `,
