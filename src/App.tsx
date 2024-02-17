@@ -15,9 +15,8 @@ import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import UploadPage from '@/pages/uploadPage/uploadPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import KakaoLoginPage from './pages/kakaoLoginPage/kakaoLoginPage';
-import CompleteSigninPage from './pages/completeSigninPage/CompleteSigninPage';
-import CompleteChangePasswordPage from './pages/completeChangePasswordPage/CompleteChangePasswordPage';
-import KakaoLoginPage from '@/pages/kakaoLoginPage/kakaoLoginPage';
+import CompleteSigninPage from './pages/CompleteSigninPage/CompleteSigninPage';
+import CompleteChangePasswordPage from './pages/CompleteChangePasswordPage/CompleteChangePasswordPage';
 import NotFoundPage from '@/pages/notFoundPage/notFoundPage';
 import MapPage from './pages/mapPage/mapPage';
 import PrivateRoute from './privateRoute';
@@ -43,6 +42,14 @@ function App() {
           <Route
             path="/changePasswordPage"
             element={<ChangePasswordPage />}
+          ></Route>
+          <Route
+            path="/CompleteSigninPage"
+            element={<CompleteSigninPage />}
+          ></Route>
+          <Route
+            path="/CompleteChangePasswordPage"
+            element={<CompleteChangePasswordPage />}
           ></Route>
         </Route>
 

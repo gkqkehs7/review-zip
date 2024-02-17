@@ -6,6 +6,12 @@ interface KakaoLoginType {
   accessToken: string;
 }
 
+interface LocalSignInResponse {
+  accessToken: string;
+  refreshToken: string;
+  grantType: string;
+}
+
 // USER CONTROLLER
 // /v1/users/{userId}/posts
 interface GetUserPostsResponse extends Array<Post> {}
@@ -70,6 +76,7 @@ interface CreateImagesResponse {
 
 export type {
   KakaoLoginType,
+  LocalSignInResponse,
   CreatePostResponse,
   CreateImagesResponse,
   GetRandomPostsResponse,

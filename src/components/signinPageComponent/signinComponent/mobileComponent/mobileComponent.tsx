@@ -1,36 +1,23 @@
-import { useCallback, useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import { useNavigate } from 'react-router-dom';
-import {
-  DeleteAxiosInstance,
-  GetAxiosInstance,
-  PostAxiosInstance,
-} from '@/api/axios.methods';
+
 interface MobileComponentProps {
   kakaoLoginUrl: string;
+  requestSignup: () => Promise<void>;
+  email: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
-
-  const requestSignup = useCallback(async () => {
-    try {
-      const data = {
-        email: email,
-        password: password,
-      };
-      const response = await PostAxiosInstance('/v1/auth/local/login', data);
-      console.log(data);
-      navigate('/mainPage');
-    } catch (error) {
-      //아이디/비밀번호 재입력 요구
-      alert('이메일 또는 비밀번호를 다시 입력해주세요');
-      console.log(error);
-    }
-  }, [email, password]);
+const MobileComponent: React.FC<MobileComponentProps> = ({
+  kakaoLoginUrl,
+  requestSignup,
+  email,
+  password,
+  setEmail,
+  setPassword,
+}) => {
   return (
     <styles.Container>
       <styles.Right>
@@ -44,7 +31,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
             placeholder="Enter ID or Email Adress"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
+              changeInputValue(e, setEmail)
             }
           />
         </styles.InputContainer>
