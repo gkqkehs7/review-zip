@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import UploadImageComponent from '@/components/uploadPostComponent/uploadImageComponent/uploadImageComponent';
+import ImageListComponent from '../imageListComponent/imageListComponent';
 
 import styles from './style';
 import ImageUploadedImage from '/images/uploadPost/ImageUploaded.png';
 import ImageNotUploadedImage from '/images/uploadPost/ImageNotUploaded.png';
-import ImageListComponent from '../imageListComponent/imageListComponent';
+import MapButtonImage from '/images/uploadPost/MapButton.png';
 
 interface UploadPostLeftComponentProps {
   split: boolean;
@@ -14,7 +15,9 @@ interface UploadPostLeftComponentProps {
   setPreviewPostImages: React.Dispatch<
     React.SetStateAction<{ id: number; url: string }[]>
   >;
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  files: { id: number; file: File }[];
+  setFiles: React.Dispatch<React.SetStateAction<{ id: number; file: File }[]>>;
+  openMapModal: () => void;
 }
 
 const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
@@ -22,7 +25,9 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
   splitpost,
   previewImages,
   setPreviewPostImages,
+  files,
   setFiles,
+  openMapModal,
 }) => {
   const [clickedImage, setClickedImage] = useState<string>('');
 
@@ -64,25 +69,32 @@ const UploadPostLeftComponent: React.FC<UploadPostLeftComponentProps> = ({
         setPostImages={setPreviewPostImages}
         imageListOpen={imageListOpen}
         setClickedImage={setClickedImage}
+        files={files}
         setFiles={setFiles}
       />
 
-      {/* 이미지 업로드 여부 이미지 */}
-      {previewImages.length > 0 ? (
-        <styles.ImageUploadedContainer>
-          <styles.ImageUploaded
-            src={ImageUploadedImage}
-            onClick={toggleImageList}
-          />
-        </styles.ImageUploadedContainer>
-      ) : (
-        <styles.ImageUploadedContainer>
-          <styles.ImageUploaded
-            src={ImageNotUploadedImage}
-            onClick={toggleImageList}
-          />
-        </styles.ImageUploadedContainer>
-      )}
+      <styles.ButtonsContainer>
+        <styles.MapButtonContainer onClick={openMapModal}>
+          <styles.MapButton src={MapButtonImage} />
+        </styles.MapButtonContainer>
+
+        {/* 이미지 업로드 여부 이미지 */}
+        {previewImages.length > 0 ? (
+          <styles.ImageUploadedContainer>
+            <styles.ImageUploaded
+              src={ImageUploadedImage}
+              onClick={toggleImageList}
+            />
+          </styles.ImageUploadedContainer>
+        ) : (
+          <styles.ImageUploadedContainer>
+            <styles.ImageUploaded
+              src={ImageNotUploadedImage}
+              onClick={toggleImageList}
+            />
+          </styles.ImageUploadedContainer>
+        )}
+      </styles.ButtonsContainer>
     </styles.Container>
   );
 };

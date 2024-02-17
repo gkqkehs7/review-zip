@@ -12,32 +12,42 @@ interface Post {
   postId: number;
   comment: string;
   point: number;
+  scrabNum: number;
   likeNum: number;
   checkLike?: boolean;
   checkScrab?: boolean;
   checkMine?: boolean;
   createdAt: string;
-  userInfo: User;
-  hashtags: string[];
+  user: User;
+  hashtags: Hashtag[];
   postImages: PostImages[];
 }
 
 interface PostImages {
-  id: number;
-  url: string;
+  imageId: number;
+  imageUrl: string;
 }
 
 interface History {
   historyId: number;
   type: 'USER' | 'HASHTAG';
   user: User | null;
-  hashtag: string | null;
+  hashtag: Hashtag | null;
 }
 
 interface Hashtag {
-  id: number;
-  name: string;
+  hashtagId: number;
+  tagName: string;
   postNum?: number;
 }
 
-export type { User, Post, PostImages, Hashtag, History };
+interface PlaceInfo {
+  place_name: string;
+  address_name: string;
+  road_address_name: string;
+  phone: string;
+  x: string;
+  y: string;
+}
+
+export type { User, Post, PostImages, Hashtag, History, PlaceInfo };

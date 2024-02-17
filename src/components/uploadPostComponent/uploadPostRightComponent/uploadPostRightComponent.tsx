@@ -1,23 +1,26 @@
-import { faker } from '@faker-js/faker';
+import { User } from '@/types/common.types';
 
 import styles from './style';
 import SpaceShipImage from '/images/post/SpaceShip.png';
 import StarRatingComponent from '@/components/common/starRatingComponent/starsRatingComponent';
 import InputBoxComponent from '../inputBoxComponent/inputBoxComponent';
-import { useCallback } from 'react';
 
 interface PostRightComponentProps {
+  userInfo: User;
   split: boolean;
   sendPost: () => void;
   textInput: string;
   setTextInput: React.Dispatch<React.SetStateAction<string>>;
-  hashTags: string[];
-  setHashTags: React.Dispatch<React.SetStateAction<string[]>>;
+  hashTags: { id: number; tag: string }[];
+  setHashTags: React.Dispatch<
+    React.SetStateAction<{ id: number; tag: string }[]>
+  >;
   starCount: number;
   setStarCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
+  userInfo,
   split,
   sendPost,
   textInput,
@@ -26,21 +29,20 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
   setHashTags,
   setStarCount,
 }) => {
-  // textInput 수정 함수
-  const textInputChange = useCallback(
-    (e: any) => {
-      setTextInput(e.target.value);
-    },
-    [textInput],
-  );
+  const deleteHashtag = (hashtag: { id: number; tag: string }) => {
+    const filteredHashtag = hashTags.filter(
+      (hashTag) => hashTag.id !== hashtag.id,
+    );
+    setHashTags(filteredHashtag);
+  };
 
   return (
     <styles.Container splitpost={split}>
       {/* 유저 정보 */}
       <styles.TopContainer>
         <styles.UserContainer>
-          <styles.UserImage src={faker.image.avatar()} />
-          <styles.UserName>{'미누'}</styles.UserName>
+          <styles.UserImage src={userInfo.profileUrl} />
+          <styles.UserName>{userInfo.nickname}</styles.UserName>
         </styles.UserContainer>
 
         <styles.SendButton onClick={sendPost}>보내기</styles.SendButton>
@@ -49,18 +51,23 @@ const UploadPostRightComponent: React.FC<PostRightComponentProps> = ({
       {/* 윗부분 선 */}
       <styles.Line />
 
-      {/* mention input textarea */}
-      <InputBoxComponent
-        textInput={textInput}
-        textInputChange={textInputChange}
-        setHashTags={setHashTags}
+      <styles.InputText
+        value={textInput}
+        onChange={(e) => setTextInput(e.target.value)}
+        placeholder="게시글 내용을 입력해주세요."
       />
+
+      {/* mention input textarea */}
+      <InputBoxComponent hashTags={hashTags} setHashTags={setHashTags} />
 
       {/* 해시태그들 */}
       <styles.HashTagContainer>
         {hashTags.map((hashTag, index) => (
-          <styles.HashTag key={index}>
-            <styles.HashTagText># {hashTag}</styles.HashTagText>
+          <styles.HashTag key={hashTag.id}>
+            <styles.HashTagText># {hashTag.tag}</styles.HashTagText>
+            <styles.HashTagDeleteButton
+              onClick={() => deleteHashtag(hashTag)}
+            />
           </styles.HashTag>
         ))}
       </styles.HashTagContainer>

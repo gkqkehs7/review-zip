@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import ReviewingStopModalComponent from '@/components/myProfilePageComponent/reviewingStopModalComponent/reviewingStopModalComponent';
-
 import { changeInputValue } from '@/hooks/chageInputValue';
-
 import { User } from '@/types/common.types';
 import { DeleteAxiosInstance, PostAxiosInstance } from '@/api/axios.methods';
 
@@ -12,6 +8,7 @@ import styles from './style';
 
 interface LikeListComponentProps {
   users: User[];
+  setUsers?: React.Dispatch<React.SetStateAction<User[]>>;
   likeListOpen: boolean;
   isReviewer: boolean;
   isReviewing: boolean;
@@ -20,37 +17,74 @@ interface LikeListComponentProps {
 
 const LikeListComponent: React.FC<LikeListComponentProps> = ({
   users,
+  setUsers,
   likeListOpen,
   isReviewer,
   isReviewing,
   closeLikeListModal,
 }) => {
   const [searchInput, setSearchInput] = useState<string>('');
-  //리뷰잉 취소
-  const [reviewingStop, setReviewingStop] = useState<boolean>(false);
-  //리뷰잉 취소 이미지
-  const [reviewingUSer, setReviewingUSer] = useState<string>('');
-  //리뷰잉 취소 상대
-  const [reviewingUserName, setReviewingUserName] = useState<string>('');
 
   const userList = useRef<HTMLDivElement>(null);
 
+  // 팔로우 하기
   const followUser = useCallback(
     async (user: User) => {
+      const originUsers = [...users];
+
+      const updatedFollowers = users.map((follower) => {
+        if (follower.userId === user.userId) {
+          return {
+            ...follower,
+            following: true,
+          };
+        }
+
+        return follower;
+      });
+
+      if (setUsers) {
+        setUsers(updatedFollowers);
+      }
+
       try {
         PostAxiosInstance(`/v1/follows/users/${user.userId}`);
       } catch (error) {
+        if (setUsers) {
+          setUsers(originUsers);
+        }
         console.error(error);
       }
     },
     [users],
   );
 
+  // 팔로잉 취소
   const unFollowUser = useCallback(
     async (user: User) => {
+      const originUsers = [...users];
+
+      const updatedFollowers = users.map((follower) => {
+        if (follower.userId === user.userId) {
+          return {
+            ...follower,
+            following: false,
+          };
+        }
+
+        return follower;
+      });
+
+      if (setUsers) {
+        setUsers(updatedFollowers);
+      }
+
       try {
         await DeleteAxiosInstance(`/v1/follows/users/${user.userId}`);
       } catch (error) {
+        if (setUsers) {
+          setUsers(originUsers);
+        }
         console.error(error);
       }
     },

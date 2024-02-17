@@ -1,5 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
-import { MentionsInput, Mention } from 'react-mentions';
+import { MentionsInput } from 'react-mentions';
+import { IoClose } from 'react-icons/io5';
 
 const moveRight = () => keyframes`
   to {
@@ -66,6 +67,7 @@ const styles = {
   `,
 
   UserName: styled.div`
+    color: black;
     margin: 0 15px 0 8px;
     font-weight: bold;
   `,
@@ -135,9 +137,21 @@ const styles = {
     `};
   `,
 
+  InputText: styled.textarea`
+    flex: 1;
+    font-size: 20px;
+    background-color: white;
+    padding: 5px;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  `,
+
   HashTagContainer: styled.div`
     display: flex;
-    margin-bottom: 10px;
+    margin: 10px 0;
   `,
 
   HashTag: styled.div`
@@ -153,6 +167,12 @@ const styles = {
 
   HashTagText: styled.div`
     font-weight: 600;
+  `,
+
+  HashTagDeleteButton: styled(IoClose)`
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
   `,
 
   Buttons: styled.div`

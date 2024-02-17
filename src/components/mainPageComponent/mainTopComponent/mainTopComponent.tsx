@@ -3,6 +3,7 @@ import styles from './style';
 import { useEffect, useState } from 'react';
 import mainTopBackgroundImage from '/images/mainPage/MainTopBackground.png';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
+import MapComponent from '@/components/mapPageComponent/mapComponent/mapComponent';
 
 interface MainTopComponentProps {
   openModal: boolean;

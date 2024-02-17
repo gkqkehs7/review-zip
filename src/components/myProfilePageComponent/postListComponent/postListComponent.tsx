@@ -2,12 +2,22 @@ import ReviewPictureComponent from '../reviewPicturesComponent/reviewPictureComp
 import { Post } from '@/types/common.types';
 
 interface PostProps {
-  setPostIsClicked: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setClickedPost: React.Dispatch<React.SetStateAction<Post | undefined>>;
   post: Post[];
+  isFriend: boolean;
 }
-const PostListComponent: React.FC<PostProps> = ({ setPostIsClicked, post }) => {
+const PostListComponent: React.FC<PostProps> = ({
+  setClickedPost,
+  post,
+  isFriend,
+}) => {
   return (
-    <ReviewPictureComponent setPostIsClicked={setPostIsClicked} posts={post} />
+    <ReviewPictureComponent
+      setClickedPost={setClickedPost}
+      posts={post}
+      post={true}
+      isFriend={isFriend}
+    />
   );
 };
 

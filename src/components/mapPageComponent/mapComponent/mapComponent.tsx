@@ -1,31 +1,36 @@
-import { Map } from 'react-kakao-maps-sdk';
-import ZoomController from '@/components/mapPageComponent/zoomControllerComponent/zoomControllerComponent';
-import styles from './styles';
 import React, { useEffect, useRef, useState } from 'react';
+import { Map } from 'react-kakao-maps-sdk';
+import styles from './styles';
+
+import ZoomController from '@/components/mapPageComponent/zoomControllerComponent/zoomControllerComponent';
 import LocationSearchComponent from '../locationSearchComponent/loactionSearchComponent';
+import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
+
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
-import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
+
+import { PlaceInfo } from '@/types/common.types';
 
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
+  closeMapModal?: () => void;
+  savePlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
 }
 
-export interface PlaceInfo {
-  place_name: string;
-  address_name: string;
-  road_address_name: string;
-  phone: string;
-  x: string;
-  y: string;
-}
+const MapComponent: React.FC<MapComponentProps> = ({
+  width,
+  height,
+  closeMapModal,
+  savePlaceData,
+}) => {
+  const device = checkDevice();
 
-const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
+  const mapRef = useRef<kakao.maps.Map>(null);
+
   const [previous, setPrevious] = useState<number>(6); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
-
-  //장소에 대한 데이터를 담는 변수
+  // 장소에 대한 데이터를 담는 변수
   const [placeData, setPlaceData] = useState<PlaceInfo>({
     place_name: '',
     address_name: '',
@@ -35,11 +40,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
     y: '',
   });
 
-  const mapRef = useRef<kakao.maps.Map>(null);
+  // 장소 저장
+  useEffect(() => {
+    if (savePlaceData) {
+      savePlaceData(placeData);
+    }
+  }, [placeData]);
 
   var times = height / 2.8;
 
-  const device = checkDevice();
   return (
     <styles.Container>
       <styles.InnerContainer
@@ -55,8 +64,8 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
           setPlaceInnfo={setPlaceData}
         />
         <styles.MapContainer>
-          <styles.CloseBtn onClick={() => alert('close')} />
           <GroupBarComponent direction="col" color="white" />
+          <styles.CloseBtn onClick={closeMapModal} />
           <Map
             id="map"
             ref={mapRef}
@@ -76,11 +85,10 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
                 setDeltaY((deltaY) => deltaY - times * (previous - current));
               } else if (previous < current) {
                 setDeltaY((deltaY) => deltaY + times * (current - previous));
-                console.log('최대: ' + deltaY);
               }
             }}
           ></Map>
-          <ZoomController deltaY={deltaY} height={height} width={width} />
+          {/* <ZoomController deltaY={deltaY} height={height} width={width} /> */}
         </styles.MapContainer>
 
         <styles.PurpleStar
