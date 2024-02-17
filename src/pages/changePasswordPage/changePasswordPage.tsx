@@ -3,6 +3,7 @@ import LargeDesktopComponent from '@/components/signinPageComponent/changePasswo
 import DesktopComponent from '@/components/signinPageComponent/changePasswordComponent/desktopComponent/desktopComponent';
 import LaptopComponent from '@/components/signinPageComponent/changePasswordComponent/laptopComponent/laptopComponent';
 import MobileComponent from '@/components/signinPageComponent/changePasswordComponent/mobileComponent/mobileveComponent';
+import { useState } from 'react';
 
 const ChangePasswordPage: React.FC = () => {
   const isLargeDesktop: boolean = useMediaQuery({
@@ -22,29 +23,44 @@ const ChangePasswordPage: React.FC = () => {
     query: '(max-width : 1025px)',
   });
 
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [reEnterPassword, setReEnterPassword] = useState<string>('');
+
   return (
     <>
       <div>
         {isLargeDesktop && (
-          <>
-            <LargeDesktopComponent />
-          </>
+          <LargeDesktopComponent
+            newPassword={newPassword}
+            setNewPassword={setNewPassword}
+            reEnterPassword={reEnterPassword}
+            setReEnterPassword={setReEnterPassword}
+          />
         )}
         {isDesktop && (
-          <>
-            <DesktopComponent />
-          </>
+          <DesktopComponent
+            newPassword={newPassword}
+            setNewPassword={setNewPassword}
+            reEnterPassword={reEnterPassword}
+            setReEnterPassword={setReEnterPassword}
+          />
         )}
 
         {isLaptop && (
-          <>
-            <LaptopComponent />
-          </>
+          <LaptopComponent
+            newPassword={newPassword}
+            setNewPassword={setNewPassword}
+            reEnterPassword={reEnterPassword}
+            setReEnterPassword={setReEnterPassword}
+          />
         )}
         {isMobile && (
-          <>
-            <MobileComponent />
-          </>
+          <MobileComponent
+            newPassword={newPassword}
+            setNewPassword={setNewPassword}
+            reEnterPassword={reEnterPassword}
+            setReEnterPassword={setReEnterPassword}
+          />
         )}
       </div>
     </>

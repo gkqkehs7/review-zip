@@ -14,13 +14,13 @@ import SearchPage from '@/pages/searchPage/searchPage';
 import MyProfilePage from '@/pages/myProfilePage/myProfilePage';
 import UploadPage from '@/pages/uploadPage/uploadPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
-import KakaoLoginPage from '@/pages/kakaoLoginPage/kakaoLoginPage';
+import KakaoLoginPage from './pages/kakaoLoginPage/kakaoLoginPage';
+import CompleteSigninPage from './pages/completeSigninPage/CompleteSigninPage';
+import CompleteChangePasswordPage from './pages/completeChangePasswordPage/CompleteChangePasswordPage';
 import NotFoundPage from '@/pages/notFoundPage/notFoundPage';
 import MapPage from './pages/mapPage/mapPage';
 import PrivateRoute from './privateRoute';
 import PublicRoute from './publicRoute';
-import CompleteSigninPage from './pages/completeSigninPage/CompleteSigninPage';
-import CompleteChangePasswordPage from './pages/completeChangePasswordPage/CompleteChangePasswordPage';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -44,11 +44,11 @@ function App() {
             element={<ChangePasswordPage />}
           ></Route>
           <Route
-            path="/completeSigninPage"
+            path="/CompleteSigninPage"
             element={<CompleteSigninPage />}
           ></Route>
           <Route
-            path="/completeChangePasswordPage"
+            path="/CompleteChangePasswordPage"
             element={<CompleteChangePasswordPage />}
           ></Route>
         </Route>

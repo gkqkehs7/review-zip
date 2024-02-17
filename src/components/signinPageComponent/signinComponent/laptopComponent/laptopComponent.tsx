@@ -1,36 +1,23 @@
-import { useCallback, useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import {
-  DeleteAxiosInstance,
-  GetAxiosInstance,
-  PostAxiosInstance,
-} from '@/api/axios.methods';
-import { useNavigate } from 'react-router-dom';
+
 interface LaptopComponentProps {
   kakaoLoginUrl: string;
+  requestSignin: () => Promise<void>;
+  email: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const LaptopComponent: React.FC<LaptopComponentProps> = ({ kakaoLoginUrl }) => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
-
-  const requestSignup = useCallback(async () => {
-    try {
-      const data = {
-        email: email,
-        password: password,
-      };
-      const response = await PostAxiosInstance('/v1/auth/local/login', data);
-      console.log(data);
-      navigate('/mainPage');
-    } catch (error) {
-      //아이디/비밀번호 재입력 요구
-      alert('이메일 또는 비밀번호를 다시 입력해주세요');
-      console.log(error);
-    }
-  }, [email, password]);
+const LaptopComponent: React.FC<LaptopComponentProps> = ({
+  kakaoLoginUrl,
+  requestSignin,
+  email,
+  password,
+  setEmail,
+  setPassword,
+}) => {
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -51,7 +38,7 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({ kakaoLoginUrl }) => {
             placeholder="Enter ID or Email Adress"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
+              changeInputValue(e, setEmail)
             }
           ></styles.Input>
         </styles.InputContainer>
@@ -76,7 +63,7 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({ kakaoLoginUrl }) => {
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn onClick={requestSignup}>
+        <styles.SignInBtn onClick={requestSignin}>
           &gt; SIGN IN
         </styles.SignInBtn>
 
