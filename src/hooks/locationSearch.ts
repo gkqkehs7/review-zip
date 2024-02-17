@@ -15,6 +15,7 @@ export interface SearchResult {
   y: string;
 }
 
+var onlyDisplay = false;
 var markers: kakao.maps.Marker[] = [];
 var open = false;
 
@@ -24,6 +25,7 @@ export const searchPlace = (
   resultList: React.RefObject<HTMLUListElement>,
   map: React.RefObject<kakao.maps.Map>,
   setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  fullScreen: boolean,
 ) => {
   var ps = new kakao.maps.services.Places();
 
@@ -31,6 +33,12 @@ export const searchPlace = (
     alert('키워드를 입력해주세요');
     return false;
   }
+
+  if (fullScreen) {
+    onlyDisplay = true;
+  }
+
+  console.log(fullScreen);
 
   ps.keywordSearch(
     keyword,
@@ -239,7 +247,7 @@ const addMarker = (
     position: markerPosition,
     image: markerImage,
   });
-
+  // 마커 객체를 생성하고 지도에 표시까지 했음.
   markers[idx] = marker; //이미지랑 위치만 가지고 있는 객체
 
   marker.setMap(map);
@@ -289,9 +297,8 @@ const windowContents = (
   );
 };
 
-//htmlString을 작성해주는 함수 jsx-> string으로 바꾸는
+//htmlString을 작성해주는 함수
 const setHtmlString = (
-  // parmeter : idx, placeInfo , SavePlace(result , idx ,setPlaceInfo)
   idx: number,
   result: SearchResult[],
   savePlace: (
@@ -343,32 +350,52 @@ const setHtmlString = (
   placeContainer.appendChild(placeName);
   placeContainer.appendChild(address_name);
 
-  var bottomcontainer = document.createElement('div');
+  if (onlyDisplay == false) {
+    var bottomcontainer = document.createElement('div');
 
-  bottomcontainer.style.display = 'flex';
-  bottomcontainer.style.alignItems = 'center';
-  bottomcontainer.style.height = '35%';
-  bottomcontainer.style.marginTop = '8%';
-  bottomcontainer.style.color = 'white';
-  bottomcontainer.style.fontWeight = 'bold';
-  bottomcontainer.style.fontSize = '110%';
-  bottomcontainer.style.marginLeft = '20px';
+    bottomcontainer.style.display = 'flex';
+    bottomcontainer.style.alignItems = 'center';
+    bottomcontainer.style.height = '35%';
+    bottomcontainer.style.marginTop = '8%';
+    bottomcontainer.style.color = 'white';
+    bottomcontainer.style.fontWeight = 'bold';
+    bottomcontainer.style.fontSize = '110%';
+    bottomcontainer.style.marginLeft = '20px';
 
-  const starImg = document.createElement('img');
-  starImg.src = 'images/mapPage/SaveStar.png';
-  starImg.style.width = '30px';
-  starImg.style.height = '30px';
+    const starImg = document.createElement('img');
+    starImg.src = 'images/mapPage/SaveStar.png';
+    starImg.style.width = '30px';
+    starImg.style.height = '30px';
 
-  var saveBtn = document.createElement('div');
-  saveBtn.innerHTML = '위치 저장하기';
-  saveBtn.style.cursor = 'pointer';
-  saveBtn.style.marginLeft = '20px';
+    var saveBtn = document.createElement('div');
+    saveBtn.innerHTML = '위치 저장하기';
+    saveBtn.style.cursor = 'pointer';
+    saveBtn.style.marginLeft = '20px';
 
-  container.appendChild(bottomcontainer);
-  bottomcontainer.appendChild(starImg);
-  bottomcontainer.appendChild(saveBtn);
+    container.appendChild(bottomcontainer);
+    bottomcontainer.appendChild(starImg);
+    bottomcontainer.appendChild(saveBtn);
 
-  saveBtn.addEventListener('click', () => savePlace(idx, result, setPlaceInfo));
+    saveBtn.addEventListener('click', () =>
+      savePlace(idx, result, setPlaceInfo),
+    );
+  } else {
+    /*클릭한 장소가 저잘되어있는 장소일때.
+      저장된 장소가 아니면 removeIcon은 만들필요 없음.
+    
+    
+    */
+
+    var removeIcon = document.createElement('img');
+    removeIcon.style.width = '15px';
+    removeIcon.style.height = '15px';
+    removeIcon.src = 'images/mapPage/Delete.png';
+    removeIcon.style.margin = '100px 10px 0px 370px';
+    removeIcon.style.cursor = 'pointer';
+    container.appendChild(removeIcon);
+
+    removeIcon.addEventListener('click', () => console.log('장소에서 제거'));
+  }
 
   //========================Windfow Info에 들어갈 ELMENT
   return container;
@@ -388,4 +415,8 @@ const savePlace = (
     x: result[idx].x,
     y: result[idx].y,
   });
+};
+
+const removeMyPlace = () => {
+  //서버에서 해당장소를 제거함.
 };

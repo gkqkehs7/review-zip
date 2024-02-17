@@ -4,7 +4,7 @@ import styles from './styles';
 const MapPage: React.FC = () => {
   return (
     <styles.Container>
-      <MapComponent width={80} height={80} />
+      <MapComponent width={100} height={100} />
     </styles.Container>
   );
 };
