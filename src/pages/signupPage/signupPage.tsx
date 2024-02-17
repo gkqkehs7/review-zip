@@ -45,7 +45,7 @@ const SignupPage: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, name, nickname, phoneNum]);
+  }, []);
   return (
     <>
       <div>
