@@ -22,91 +22,84 @@ const styles = {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: 50px 30px;
-    width: 1200px;
-    height: 850px;
+    width: 973px;
+    height: 565px;
     z-index: 0;
   `,
   PurpleCloud: styled.div`
     position: absolute;
-    bottom: 0vh;
+    bottom: 0px;
+    left: 0px;
     background-image: url('images/signinPage/PurpleCloud.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: bottom;
-    width: 1800px;
-    height: 85vh;
+    width: 1231px;
+    height: 658px;
     z-index: 0;
   `,
   Ellipse: styled.div`
     position: absolute;
-    top: 32.5%;
+    top: 292px;
+    left: -15px;
     background-image: url('images/signinPage/Ellipse.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 1100px;
-    height: 40vh;
+    width: 824px;
+    height: 395px;
+    transform: rotate(0deg);
     z-index: 2;
-  `,
-
-  MilkyWay: styled.div`
-    position: absolute;
-    bottom: 0;
-    background-image: url('images/signinPage/MilkyWay.png');
-    background-size: 1125px 600px;
-    width: 1125px;
-    height: 50vh;
-    z-index: 3;
   `,
 
   Title: styled.div`
     position: absolute;
-    top: 43.5%;
-    left: 300px;
+    top: 423.94px;
+    left: 200px;
     background-image: url('images/signinPage/Title.png');
     background-size: 100% 100%;
-    width: 800px;
-    height: 12vh;
+    width: 602px;
+    height: 85px;
     z-index: 3;
   `,
 
   LargeStart: styled.div`
     position: absolute;
     display: flex;
-    top: 62.5%;
-    left: 150px;
+    top: 574px;
+    left: 130px;
     background-image: url('images/signinPage/LargeStar.png');
     background-size: 100% 100%;
-    width: 250px;
-    height: 17.5vh;
+    width: 225px;
+    height: 232px;
     z-index: 4;
   `,
 
   Union: styled.div`
     position: absolute;
-    top: 20vh;
-    left: 325px;
+    top: 216px;
+    left: 230px;
     background-image: url('images/signinPage/Union.png');
     background-size: 100% 100%;
-    width: 100px;
-    height: 8vh;
+    width: 81px;
+    height: 78px;
   `,
 
   MiniStart: styled.div`
     position: absolute;
-    top: 30vh;
-    left: 1000px;
+    top: 266px;
+    left: 750px;
     background-image: url('images/signinPage/MiniStar.png');
     background-size: 100% 100%;
-    width: 100px;
-    height: 8vh;
+    width: 88px;
+    height: 91px;
     z-index: 3;
   `,
+
   Right: styled.div`
     display: flex;
     flex-flow: row wrap;
-    width: 625px;
-    height: 650px;
-    margin: 500px 0px 0px 60vw;
+    width: 500px;
+    height: 450px;
+    margin: 350px 0px 0px 60vw;
     z-index: 5;
   `,
 
@@ -114,16 +107,16 @@ const styles = {
     background-image: url('images/signinPage/SuccessIcon.png');
     background-size: 100% 100%;
     margin: 0px 0px 0px 0px;
-    width: 20%;
-    height: 20%;
+    width: 94px;
+    height: 94px;
   `,
 
-  SuccessText: styled(Link)`
+  SuccessSignin: styled(Link)`
     background-image: url('images/signinPage/SuccessSignin.png');
     background-size: 100% 100%;
     margin: 0px 0px 0px 0px;
-    width: 100%;
-    height: 7%;
+    width: 420px;
+    height: 25px;
   `,
 
   PrivacyPolicy: styled.p`

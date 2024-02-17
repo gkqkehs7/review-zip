@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
@@ -21,9 +21,22 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({
   const [keyword, setkeyword] = useState('');
   const ListRef = useRef<HTMLUListElement>(null);
 
+  if (width == 100 && height == 100) {
+    useEffect(() => {
+      //등록된 관심장소를 불러오기
+    }, []);
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchPlace(keyword, ListRef, mapRef, setPlaceInnfo);
+
+    if (width == 80 && height == 80) {
+      //창모드일때
+      searchPlace(keyword, ListRef, mapRef, setPlaceInnfo);
+    } else if (width == 100 && height == 100) {
+      //전체화면일때
+      searchPlace(keyword, ListRef, mapRef, setPlaceInnfo);
+    }
   };
 
   const device = checkDevice();

@@ -10,11 +10,11 @@ const DesktopComponent: React.FC = () => {
       <styles.PerkyMilkyWay />
       <styles.PurpleCloud />
       <styles.Ellipse />
-      <styles.MilkyWay />
       <styles.Title />
       <styles.LargeStart />
       <styles.Union />
       <styles.MiniStart />
+
       <styles.Right>
         {/* 비밀번호 입력 */}
         <styles.InputContainer>
@@ -54,9 +54,8 @@ const DesktopComponent: React.FC = () => {
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
       {/* 회원가입 및 개인정책  */}
-      <styles.Footer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-      </styles.Footer>
+
+      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
     </styles.Container>
   );
 };

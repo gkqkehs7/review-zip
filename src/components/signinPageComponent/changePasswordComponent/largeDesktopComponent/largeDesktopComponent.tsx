@@ -10,7 +10,6 @@ const LargeDesktopComponent: React.FC = () => {
       <styles.PerkyMilkyWay />
       <styles.PurpleCloud />
       <styles.Ellipse />
-      <styles.MilkyWay />
       <styles.Title />
       <styles.LargeStart />
       <styles.Union />
@@ -55,9 +54,7 @@ const LargeDesktopComponent: React.FC = () => {
       </styles.Right>
 
       {/* 회원가입 및 개인정책  */}
-      <styles.Footer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-      </styles.Footer>
+      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
     </styles.Container>
   );
 };

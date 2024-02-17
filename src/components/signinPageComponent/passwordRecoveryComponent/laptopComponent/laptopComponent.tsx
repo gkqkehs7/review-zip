@@ -50,12 +50,12 @@ const LaptopComponent: React.FC = () => {
             <styles.InputMessage>
               아래의 SMS 인증번호를 입력해주세요.
             </styles.InputMessage>
-          </styles.CertificationNumber>
 
-          <styles.OrSignContainer>
-            <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
-            <styles.KaKaoIcon />
-          </styles.OrSignContainer>
+            <styles.CheckContainer>
+              <styles.CheckIcon src="images/signinPage/Check.png" />
+              정상적으로 확인되셨습니다.
+            </styles.CheckContainer>
+          </styles.CertificationNumber>
         </styles.CertificationContainer>
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
