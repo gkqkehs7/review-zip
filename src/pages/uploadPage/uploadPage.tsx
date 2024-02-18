@@ -4,15 +4,23 @@ import { useBlocker, useNavigate } from 'react-router-dom';
 import UploadPostComponent from '@/components/uploadPostComponent/uploadPostComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import ErrorModalComponent from '@/components/common/errorModalComponent/errorModalComponent';
-
-import { User } from '@/types/common.types';
-import styles from './style';
-import { GetAxiosInstance } from '@/api/axios.methods';
-import { GetUserInfoResponse } from '@/types/response.types';
 import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
 
+import { User } from '@/types/common.types';
+
+import { GetAxiosInstance } from '@/api/axios.methods';
+import { GetUserInfoResponse } from '@/types/response.types';
+
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveBackgroundImageSize } from '@/utils/responsiveBackgroundImageSize';
+
+import styles from './style';
+import MainBottomBackgroundImage1440 from '/images/mainPage/MainBottomBackground1440.png';
+import MainBottomBackgroundImage1680 from '/images/mainPage/MainBottomBackground1680.png';
+import MainBottomBackgroundImage1920 from '/images/mainPage/MainBottomBackground1920.png';
+
 const UploagePage = () => {
-  const navigate = useNavigate();
+  const device = checkDevice();
 
   const [userInfo, setUserInfo] = useState<User>();
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -80,7 +88,17 @@ const UploagePage = () => {
   }, []);
 
   return (
-    <styles.Container>
+    <styles.Container
+      style={responsiveBackgroundImageSize(
+        device,
+        { imageUrl: MainBottomBackgroundImage1920 },
+        { imageUrl: MainBottomBackgroundImage1920 },
+        { imageUrl: MainBottomBackgroundImage1680 },
+        { imageUrl: MainBottomBackgroundImage1680 },
+        { imageUrl: MainBottomBackgroundImage1440 },
+        { imageUrl: MainBottomBackgroundImage1440 },
+      )}
+    >
       {userInfo ? (
         <>
           <GroupBarComponent color="purple" direction="col" />

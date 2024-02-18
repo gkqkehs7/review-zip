@@ -52,6 +52,10 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
 
   const closeMapModal = useCallback(() => {
     setMapModalOpen(false);
+
+    if (placeData) {
+      return alert('장소 설정이 완료되었습니다.');
+    }
   }, [mapModalOpen]);
 
   // 게시글 보내기 - post이후 success가 오면 mainPage로 이동
@@ -68,6 +72,10 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
       return alert('별점을 매겨주세요!');
     }
 
+    if (!placeData) {
+      return alert('장소를 등록해주세요!');
+    }
+
     setLoadingModalOpen(true);
 
     setBlock(false);
@@ -82,7 +90,7 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
 
       // 이미지 먼저 업로드
       const response = await PostAxiosInstance<CreateImagesResponse>(
-        '/v1/images/users/1',
+        '/v1/images/upload',
         formData,
       );
 
@@ -93,13 +101,25 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
         comment: textInput,
         point: starCount,
         imageIds: imageIds,
+        storeInfo: {
+          name: placeData.place_name,
+          addressName: placeData.address_name,
+          roadAddressName: placeData.road_address_name,
+          longitude: placeData.x,
+          latitude: placeData.y,
+        },
       };
 
       // 받아온 이미지 id들로 게시글 업로드
-      await PostAxiosInstance<CreatePostResponse>(
+      const createPostResponse = await PostAxiosInstance<CreatePostResponse>(
         '/v1/posts',
         createPostRequest,
       );
+
+      const { postId } = createPostResponse.data.result;
+
+      // 받은 게시글 id로 해시태그 생성
+      await PostAxiosInstance(`/v1/posts/${postId}/hashtags`, {});
 
       return navigate('/mainPage');
     } catch (error) {

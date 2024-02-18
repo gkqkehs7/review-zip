@@ -37,6 +37,11 @@ const styles = {
     justify-content: center;
     align-items: center;
     position: relative;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
   `,
 
   InnerContainer: styled.div`

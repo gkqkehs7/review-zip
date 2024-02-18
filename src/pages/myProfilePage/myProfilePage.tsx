@@ -16,6 +16,9 @@ import {
   GetFollowersResponse,
 } from '@/types/response.types';
 
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveBackgroundImageSize } from '@/utils/responsiveBackgroundImageSize';
+
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
 import PostComponent from '@/components/postComponent/postComponent';
@@ -24,13 +27,18 @@ import PostListComponent from '@/components/myProfilePageComponent/postListCompo
 import ScrabPostListComponent from '@/components/myProfilePageComponent/scrabPostListComponent/scrabPostListComponent';
 
 import styles from './style';
-import PencilImage from '/images/myProfilePage/Pencil.png'; //프롤필 변경시 이름 옆에 뜰 연필 이미지
-import CameraImage from '/images/myProfilePage/Camera.png'; //프로필 변경시 프로필 사진 옆에 뜰 카메라 이미지
-import Map from '/images/friendProfilePage/MapImage.png'; //친구페이지에 뜰 지도 버튼 이미지
-import Storage from '/images/myProfilePage/StorageImage.png'; //
+import ProfileBackgroundImage1440 from '/images/myProfilePage/ProfileBackground1440.png';
+import ProfileBackgroundImage1680 from '/images/myProfilePage/ProfileBackground1680.png';
+import ProfileBackgroundImage1920 from '/images/myProfilePage/ProfileBackground1920.png';
+import PencilImage from '/images/myProfilePage/Pencil.png';
+import CameraImage from '/images/myProfilePage/Camera.png';
+import Map from '/images/friendProfilePage/MapImage.png';
+import Storage from '/images/myProfilePage/StorageImage.png';
 import PostItem from '/images/myProfilePage/PostItemImage.png';
 
 const MyProfilePage: React.FC = () => {
+  const device = checkDevice();
+
   const { userId } = useParams(); // me or number
 
   const isFriend = userId === 'me' ? false : true;
@@ -165,7 +173,17 @@ const MyProfilePage: React.FC = () => {
   return (
     <>
       {userInfo && posts ? (
-        <styles.Container>
+        <styles.Container
+          style={responsiveBackgroundImageSize(
+            device,
+            { imageUrl: ProfileBackgroundImage1920 },
+            { imageUrl: ProfileBackgroundImage1920 },
+            { imageUrl: ProfileBackgroundImage1680 },
+            { imageUrl: ProfileBackgroundImage1680 },
+            { imageUrl: ProfileBackgroundImage1440 },
+            { imageUrl: ProfileBackgroundImage1440 },
+          )}
+        >
           {/* 그룹 바 */}
           <GroupBarComponent color="purple" direction="row" />
 

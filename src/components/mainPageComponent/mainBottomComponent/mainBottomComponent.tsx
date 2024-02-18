@@ -5,12 +5,17 @@ import LoadingModalComponent from '@/components/common/loadingModalComponent/loa
 
 import { Post } from '@/types/common.types';
 import { GetRandomPostResponse } from '@/types/response.types';
-import { DeleteAxiosInstance, GetAxiosInstance } from '@/api/axios.methods';
+import { GetAxiosInstance } from '@/api/axios.methods';
+
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveBackgroundImageSize } from '@/utils/responsiveBackgroundImageSize';
 
 import styles from './style';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 import TopButtonImage from '/images/mainPage/TopButton.png';
-import AlertComponent from '@/components/common/alertComponent/alertComponent';
+import MainBottomBackgroundImage1440 from '/images/mainPage/MainBottomBackground1440.png';
+import MainBottomBackgroundImage1680 from '/images/mainPage/MainBottomBackground1680.png';
+import MainBottomBackgroundImage1920 from '/images/mainPage/MainBottomBackground1920.png';
 
 interface MainBottomComponentProps {
   scrollToTop: () => void;
@@ -19,6 +24,8 @@ interface MainBottomComponentProps {
 const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   scrollToTop,
 }) => {
+  const device = checkDevice();
+
   const [randomPost, setRandomPost] = useState<Post>();
   const [loading, setLoading] = useState<boolean>(false); // loading modal 띄우기용
   const [blur, setBlur] = useState<boolean>(false); // 모자이크 처리용
@@ -84,7 +91,18 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   }, []);
 
   return (
-    <styles.Container onWheel={(e) => DetectScrollDown(e)}>
+    <styles.Container
+      onWheel={(e) => DetectScrollDown(e)}
+      style={responsiveBackgroundImageSize(
+        device,
+        { imageUrl: MainBottomBackgroundImage1920 },
+        { imageUrl: MainBottomBackgroundImage1920 },
+        { imageUrl: MainBottomBackgroundImage1680 },
+        { imageUrl: MainBottomBackgroundImage1680 },
+        { imageUrl: MainBottomBackgroundImage1440 },
+        { imageUrl: MainBottomBackgroundImage1440 },
+      )}
+    >
       <styles.InnerContainer
         style={{
           filter: blur ? 'blur(10px)' : 'blur(0px)',

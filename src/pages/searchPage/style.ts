@@ -3,9 +3,11 @@ import styled from 'styled-components';
 const styles = {
   Container: styled.div`
     // 화면 전체 사용하게
-    background-image: url('images/searchPage/SearchBackgroundImage.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    text-align: center;
+
     display: flex;
     justify-content: center;
     align-items: center;
