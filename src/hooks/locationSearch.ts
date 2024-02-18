@@ -1,6 +1,6 @@
 import { PlaceInfo } from '@/components/mapPageComponent/mapComponent/mapComponent';
 import { Status } from 'kakao-maps-sdk';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 //카카오 공식문서 Sample "장소검색 후 목록으로 나타내기" 코드참고
 
@@ -16,14 +16,17 @@ export interface SearchResult {
 }
 
 var onlyDisplay = false;
-var markers: kakao.maps.Marker[] = [];
+// var marker: kakao.maps.Marker;
 var open = false;
+var map: kakao.maps.Map;
+// var lat: number;
+// var lng: number;
 
 // 키워드를 검색하는 함수
 export const searchPlace = (
   keyword: string,
   resultList: React.RefObject<HTMLUListElement>,
-  map: React.RefObject<kakao.maps.Map>,
+  mapRef: React.RefObject<kakao.maps.Map>,
   setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
   fullScreen: boolean,
 ) => {
@@ -38,12 +41,14 @@ export const searchPlace = (
     onlyDisplay = true;
   }
 
-  console.log(fullScreen);
+  if (mapRef.current) {
+    map = mapRef.current;
+  }
 
   ps.keywordSearch(
     keyword,
     (PlaceData, status) =>
-      placeSearchCB(PlaceData, status, resultList, map, setPlaceInfo),
+      placeSearchCB(PlaceData, status, resultList, setPlaceInfo),
     { useMapBounds: true },
   );
 };
@@ -53,11 +58,10 @@ export const placeSearchCB = (
   searchResult: SearchResult[], //data
   status: Status,
   resultList: React.RefObject<HTMLUListElement>,
-  map: React.RefObject<kakao.maps.Map>,
   setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ) => {
   if (status === kakao.maps.services.Status.OK) {
-    displayPlace(searchResult, resultList, map, setPlaceInfo);
+    displayPlace(searchResult, resultList, setPlaceInfo);
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
     alert('검색 결과가 존재하지 않습니다.');
     return;
@@ -69,10 +73,8 @@ export const placeSearchCB = (
 
 // 검색한 장소를 화면에 보여주는 함수
 export const displayPlace = (
-  //placeData
   result: SearchResult[], //검색한 장소의 데이터
   listEl: React.RefObject<HTMLUListElement>,
-  mapRef: React.RefObject<kakao.maps.Map>,
   setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): void => {
   let fragment = document.createDocumentFragment();
@@ -80,6 +82,7 @@ export const displayPlace = (
   removeAllChildNodes(listEl);
 
   for (let i = 0; i < result.length; i++) {
+    //검색된 장소 데이터 각각을  element형식으로 가져온뒤 자식 요소로 추가함.
     var itemEl = getListItem(i, result[i]);
 
     //검색지역 클릭시 좌표이동을 해주는 이벤트 리스너
@@ -87,14 +90,10 @@ export const displayPlace = (
     itemEl.addEventListener('click', () => {
       var lat = parseFloat(result[i].y); //위도
       var lng = parseFloat(result[i].x); //경도
-
       var placePostion = new kakao.maps.LatLng(lat, lng); //좌표객체
-      if (mapRef.current) {
-        const map: kakao.maps.Map = mapRef.current;
-        map.setCenter(placePostion);
-        map.setLevel(1);
-        addMarker(lat, lng, map, i, result, setPlaceInfo); //클릭한 장소에대한 idx전달
-      }
+      map.setCenter(placePostion);
+      map.setLevel(1);
+      setMarker(lat, lng, i, result, setPlaceInfo, createMarker(lat, lng));
     });
 
     fragment.appendChild(itemEl);
@@ -228,15 +227,8 @@ const styleElement = (el: HTMLElement): void => {
   el.style.padding = '15px';
 };
 
-//마커를 지도에 생성해주는 함수
-const addMarker = (
-  lat: number,
-  lng: number,
-  map: kakao.maps.Map,
-  idx: number,
-  result: SearchResult[],
-  setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
-) => {
+//클릭한 장소의 좌표값을 가진 마커를 생성해줌
+const createMarker = (lat: number, lng: number): kakao.maps.Marker => {
   const imageSrc = 'images/mapPage/Marker.png';
   let imageSize = new kakao.maps.Size(30, 30);
 
@@ -247,21 +239,53 @@ const addMarker = (
     position: markerPosition,
     image: markerImage,
   });
-  // 마커 객체를 생성하고 지도에 표시까지 했음.
-  markers[idx] = marker; //이미지랑 위치만 가지고 있는 객체
 
+  return marker;
+};
+
+//핫플레이스의 좌표값을 통해 마커를 생성하는 함수
+const createHotplaceMarker = (lat: number, lng: number): kakao.maps.Marker => {
+  const imageSrc = 'images/mapPage/Marker.png';
+  let imageSize = new kakao.maps.Size(30, 30);
+
+  let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+  var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+  var marker = new kakao.maps.Marker({
+    position: markerPosition,
+    image: markerImage,
+  });
+
+  return marker;
+};
+
+export const setMarker = (
+  lat: number,
+  lng: number,
+  idx: number,
+  result: SearchResult[],
+  setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  marker: kakao.maps.Marker,
+) => {
   marker.setMap(map);
 
   var infoWindow = createInfoWindow(lat, lng, idx, result, setPlaceInfo);
-  kakao.maps.event.addListener(markers[idx], 'click', () => {
+  kakao.maps.event.addListener(marker, 'click', () => {
+    /*마커의 좌표값을 서버에  전송해 핫플레이스인지 아닌지 판단함. 
+      lat  , lng를 서버에 전송하여 값을 받아온다.
+      값에따라서 infoWindow의 객체가 다르다.
+    */
+
     if (!open) {
-      infoWindow.open(map, markers[idx]);
+      infoWindow.open(map, marker);
       open = !open;
     } else {
       infoWindow.close();
       open = !open;
     }
   });
+  //핫플레이스인지 아닌지에 따라 로직이 다르게 적용될것.
+  //핫플레이스의 좌표값을 데이터로 받아서 그 위치에 마커를 생성함.
 };
 
 // 윈도우 인포객체를 생성하는 함수
@@ -308,7 +332,6 @@ const setHtmlString = (
   ) => void,
   setPlaceInfo: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): HTMLElement => {
-  //Windfow Info에 들어갈 ELMENT========================
   var container = document.createElement('div');
   container.style.display = 'flex';
   container.style.flexDirection = 'column';
@@ -382,8 +405,6 @@ const setHtmlString = (
   } else {
     /*클릭한 장소가 저잘되어있는 장소일때.
       저장된 장소가 아니면 removeIcon은 만들필요 없음.
-    
-    
     */
 
     var removeIcon = document.createElement('img');
@@ -397,11 +418,10 @@ const setHtmlString = (
     removeIcon.addEventListener('click', () => console.log('장소에서 제거'));
   }
 
-  //========================Windfow Info에 들어갈 ELMENT
   return container;
 };
 
-// 저장버튼을 누르면 클릭되어있는 장소데이터를 서버에 전송한다.
+// 클릭한 장소의 데이터를 변수에 저장
 const savePlace = (
   idx: number,
   result: SearchResult[],

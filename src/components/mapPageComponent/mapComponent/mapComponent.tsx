@@ -26,7 +26,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
   const [previous, setPrevious] = useState<number>(6); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
 
-  //장소에 대한 데이터를 담는 변수
+  //장소에 대한 데이터를 담는 변수. 서버로 전송될 데이터다.
   const [placeData, setPlaceData] = useState<PlaceInfo>({
     place_name: '',
     address_name: '',
@@ -46,13 +46,13 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
       */
       const getData = async (userId: string) => {
         try {
-          const response = await GetAxiosInstance(`v1/user/${userId}/stores`);
+          const response = await GetAxiosInstance(`v1/user/${userId}/stores`); // 받아온 좌표값을 hotplace함수에 넣어여함.
           console.log(response);
         } catch (error) {
           console.log(error);
         }
       };
-      getData('asd');
+      getData('');
     }); // 이작업은 화면이 처음 랜더링 되었을때만 실행한다.
   }
   const mapRef = useRef<kakao.maps.Map>(null);
