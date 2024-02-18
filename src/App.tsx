@@ -16,7 +16,7 @@ import UploadPage from '@/pages/uploadPage/uploadPage';
 import HashtagPage from '@pages/hashtagPage/hashtagPage';
 import KakaoLoginPage from '@pages/kakaoLoginPage/kakaoLoginPage';
 import CompleteSigninPage from './pages/afterSigninPage/afterSigninPage';
-import CompleteChangePasswordPage from '@pages/completeChangePasswordPage/completeChangePasswordPage';
+import CompleteChangePasswordPage from '@/pages/afterChangePasswordPage/afterChangePasswordPage';
 import NotFoundPage from '@/pages/notFoundPage/notFoundPage';
 import MapPage from '@pages/mapPage/mapPage';
 import PrivateRoute from './privateRoute';
