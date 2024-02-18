@@ -3,7 +3,7 @@ import styles from './style';
 
 interface DesktopComponentProps {
   kakaoLoginUrl: string;
-  requestSignup: () => Promise<void>;
+  requestSignin: () => Promise<void>;
   email: string;
   password: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -12,7 +12,7 @@ interface DesktopComponentProps {
 
 const desktopComponent: React.FC<DesktopComponentProps> = ({
   kakaoLoginUrl,
-  requestSignup,
+  requestSignin,
   email,
   password,
   setEmail,
@@ -63,7 +63,7 @@ const desktopComponent: React.FC<DesktopComponentProps> = ({
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn onClick={requestSignup}>
+        <styles.SignInBtn onClick={requestSignin}>
           &gt; SIGN IN
         </styles.SignInBtn>
 

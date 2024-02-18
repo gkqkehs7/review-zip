@@ -1,38 +1,33 @@
-import { useCallback, useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import {
-  DeleteAxiosInstance,
-  GetAxiosInstance,
-  PostAxiosInstance,
-} from '@/api/axios.methods';
-import { useNavigate } from 'react-router-dom';
 
-const DesktopComponent: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [phoneNum, setPhoneNum] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [nickname, setNickname] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+interface LaptopComponentProps {
+  requestSignup: () => Promise<void>;
+  email: string;
+  phoneNum: string;
+  name: string;
+  nickName: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPhoneNum: React.Dispatch<React.SetStateAction<string>>;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  setNickName: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  const navigate = useNavigate();
-
-  const requestSignup = useCallback(async () => {
-    try {
-      const data = {
-        email: email,
-        password: password,
-        name: name,
-        nickname: nickname,
-        phoneNum: phoneNum,
-      };
-      const response = await PostAxiosInstance('/v1/auth/local/sign-up', data);
-      navigate('/completeSigninPage');
-    } catch (error) {
-      console.log(error);
-    }
-  }, [email, password, name, nickname, phoneNum]);
-
+const LaptopComponent: React.FC<LaptopComponentProps> = ({
+  requestSignup,
+  email,
+  phoneNum,
+  name,
+  nickName,
+  password,
+  setEmail,
+  setPhoneNum,
+  setName,
+  setNickName,
+  setPassword,
+}) => {
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -103,9 +98,9 @@ const DesktopComponent: React.FC = () => {
           <styles.Input
             type="text"
             placeholder="Enter user name"
-            value={nickname}
+            value={nickName}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setNickname)
+              changeInputValue(e, setNickName)
             }
           />
         </styles.InputContainer>
@@ -147,4 +142,4 @@ const DesktopComponent: React.FC = () => {
   );
 };
 
-export default DesktopComponent;
+export default LaptopComponent;

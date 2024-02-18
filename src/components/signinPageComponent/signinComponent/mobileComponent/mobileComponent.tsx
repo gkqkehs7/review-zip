@@ -3,7 +3,7 @@ import styles from './style';
 
 interface MobileComponentProps {
   kakaoLoginUrl: string;
-  requestSignup: () => Promise<void>;
+  requestSignin: () => Promise<void>;
   email: string;
   password: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -12,7 +12,7 @@ interface MobileComponentProps {
 
 const MobileComponent: React.FC<MobileComponentProps> = ({
   kakaoLoginUrl,
-  requestSignup,
+  requestSignin,
   email,
   password,
   setEmail,
@@ -56,12 +56,12 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn onClick={requestSignup}>
+        <styles.SignInBtn onClick={requestSignin}>
           &gt; SIGN IN
         </styles.SignInBtn>
 
         <styles.Footer>
-          <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+          <styles.SignUp>Sign Up</styles.SignUp>
           <styles.ForgotPwd to="/passwordRecoveryPage">
             Forgot the Password ?
           </styles.ForgotPwd>

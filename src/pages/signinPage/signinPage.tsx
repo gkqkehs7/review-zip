@@ -34,7 +34,7 @@ const SigninPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
-  const requestSignup = useCallback(async () => {
+  const requestSignin = useCallback(async () => {
     try {
       const response = await PostAxiosInstance<LocalSignInResponse>(
         '/v1/auth/local/login',
@@ -66,7 +66,7 @@ const SigninPage: React.FC = () => {
             password={password}
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
-            requestSignup={requestSignup}
+            requestSignin={requestSignin}
           />
         )}
         {isDesktop && (
@@ -76,7 +76,7 @@ const SigninPage: React.FC = () => {
             password={password}
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
-            requestSignup={requestSignup}
+            requestSignin={requestSignin}
           />
         )}
 
@@ -87,7 +87,7 @@ const SigninPage: React.FC = () => {
             password={password}
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
-            requestSignup={requestSignup}
+            requestSignin={requestSignin}
           />
         )}
         {isMobile && (
@@ -97,7 +97,7 @@ const SigninPage: React.FC = () => {
             password={password}
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
-            requestSignup={requestSignup}
+            requestSignin={requestSignin}
           />
         )}
       </div>

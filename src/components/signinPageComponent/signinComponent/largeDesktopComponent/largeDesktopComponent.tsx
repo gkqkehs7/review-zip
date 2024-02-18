@@ -3,7 +3,7 @@ import styles from './style';
 
 interface LargeDesktopComponentProps {
   kakaoLoginUrl: string;
-  requestSignup: () => Promise<void>;
+  requestSignin: () => Promise<void>;
   email: string;
   password: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -12,7 +12,7 @@ interface LargeDesktopComponentProps {
 
 const LargeDesktopComponent: React.FC<LargeDesktopComponentProps> = ({
   kakaoLoginUrl,
-  requestSignup,
+  requestSignin,
   email,
   password,
   setEmail,
@@ -63,7 +63,7 @@ const LargeDesktopComponent: React.FC<LargeDesktopComponentProps> = ({
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn onClick={requestSignup}>
+        <styles.SignInBtn onClick={requestSignin}>
           &gt; SIGN IN
         </styles.SignInBtn>
 
@@ -71,7 +71,7 @@ const LargeDesktopComponent: React.FC<LargeDesktopComponentProps> = ({
       </styles.Right>
 
       <styles.Footer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+        <styles.SignUp>Sign Up</styles.SignUp>
         <styles.ForgotPwd to="/passwordRecoveryPage">
           Forgot the Password ?
         </styles.ForgotPwd>

@@ -1,37 +1,33 @@
-import { useCallback, useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import {
-  DeleteAxiosInstance,
-  GetAxiosInstance,
-  PostAxiosInstance,
-} from '@/api/axios.methods';
-import { useNavigate } from 'react-router-dom';
 
-const DesktopComponent: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [phoneNum, setPhoneNum] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [nickname, setNickname] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
+interface DesktopComponentProps {
+  requestSignup: () => Promise<void>;
+  email: string;
+  phoneNum: string;
+  name: string;
+  nickName: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPhoneNum: React.Dispatch<React.SetStateAction<string>>;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  setNickName: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  const requestSignup = useCallback(async () => {
-    try {
-      const data = {
-        email: email,
-        password: password,
-        name: name,
-        nickname: nickname,
-        phoneNum: phoneNum,
-      };
-      const response = await PostAxiosInstance('/v1/auth/local/sign-up', data);
-      navigate('/completeSigninPage');
-    } catch (error) {
-      console.log(error);
-    }
-  }, [email, password, name, nickname, phoneNum]);
-
+const DesktopComponent: React.FC<DesktopComponentProps> = ({
+  requestSignup,
+  email,
+  phoneNum,
+  name,
+  nickName,
+  password,
+  setEmail,
+  setPhoneNum,
+  setName,
+  setNickName,
+  setPassword,
+}) => {
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -54,7 +50,10 @@ const DesktopComponent: React.FC = () => {
             type="email"
             placeholder="Enter your Email Adress"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setEmail)
+            }
           />
         </styles.InputContainer>
         <styles.InputContainer>
@@ -70,7 +69,9 @@ const DesktopComponent: React.FC = () => {
             placeholder="Enter your Phone Number"
             value={phoneNum}
             pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
-            onChange={(e) => setPhoneNum(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setPhoneNum)
+            }
           />
         </styles.InputContainer>
 
@@ -81,7 +82,9 @@ const DesktopComponent: React.FC = () => {
             type="text"
             placeholder="Enter your name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setName)
+            }
           />
         </styles.InputContainer>
 
@@ -96,8 +99,10 @@ const DesktopComponent: React.FC = () => {
           <styles.Input
             type="text"
             placeholder="Enter user name"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
+            value={nickName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setNickName)
+            }
           />
         </styles.InputContainer>
 
@@ -114,7 +119,9 @@ const DesktopComponent: React.FC = () => {
             placeholder="Enter Password"
             value={password}
             pattern="/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/;"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              changeInputValue(e, setPassword)
+            }
           />
 
           {/* 비밀번호 입력시 주의사항 */}

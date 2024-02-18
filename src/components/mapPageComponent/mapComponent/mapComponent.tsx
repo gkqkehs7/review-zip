@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import styles from './styles';
-
 import ZoomController from '@/components/mapPageComponent/zoomControllerComponent/zoomControllerComponent';
 import LocationSearchComponent from '../locationSearchComponent/loactionSearchComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
-
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
-
 import { PlaceInfo } from '@/types/common.types';
 
 interface MapComponentProps {
@@ -40,13 +37,6 @@ const MapComponent: React.FC<MapComponentProps> = ({
     y: '',
   });
 
-  // 장소 저장
-  useEffect(() => {
-    if (savePlaceData) {
-      savePlaceData(placeData);
-    }
-  }, [placeData]);
-
   var times = height / 2.8;
 
   return (
@@ -65,6 +55,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
         />
         <styles.MapContainer>
           <GroupBarComponent direction="col" color="white" />
+          <styles.CloseBtn onClick={closeMapModal} />
           <styles.CloseBtn onClick={closeMapModal} />
           <Map
             id="map"
@@ -88,7 +79,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
               }
             }}
           ></Map>
-          {/* <ZoomController deltaY={deltaY} height={height} width={width} /> */}
+          <ZoomController deltaY={deltaY} height={height} width={width} />
         </styles.MapContainer>
 
         <styles.PurpleStar
