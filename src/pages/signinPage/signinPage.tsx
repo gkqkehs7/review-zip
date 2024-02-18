@@ -54,7 +54,7 @@ const SigninPage: React.FC = () => {
       alert('이메일 또는 비밀번호를 다시 입력해주세요');
       console.log(error);
     }
-  }, []);
+  }, [email, password]);
 
   return (
     <>

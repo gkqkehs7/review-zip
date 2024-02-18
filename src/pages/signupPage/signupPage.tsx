@@ -42,7 +42,8 @@ const SignupPage: React.FC = () => {
         password: password,
       });
       navigate('/completeSigninPage');
-    } catch (error) {
+    } catch (error: any) {
+      alert(error.response.data.message);
       console.log(error);
     }
   }, [email, phoneNum, name, nickname, password]);

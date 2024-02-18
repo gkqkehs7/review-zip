@@ -37,6 +37,13 @@ const MapComponent: React.FC<MapComponentProps> = ({
     y: '',
   });
 
+  // 장소 저장
+  useEffect(() => {
+    if (savePlaceData) {
+      savePlaceData(placeData);
+    }
+  }, [placeData]);
+
   var times = height / 2.8;
 
   return (

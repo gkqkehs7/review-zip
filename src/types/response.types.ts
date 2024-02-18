@@ -41,13 +41,7 @@ interface GetFollowersResponse extends Array<User> {}
 
 // POST CONTROLLER
 // [Post] /v1/posts
-interface CreatePostResponse {
-  postId: number;
-  userId: number;
-  comment: string;
-  point: number;
-  imageIds: number[];
-}
+interface CreatePostResponse extends Post {}
 
 // [Get] /v1/posts/random-one
 interface GetRandomPostResponse extends Post {}

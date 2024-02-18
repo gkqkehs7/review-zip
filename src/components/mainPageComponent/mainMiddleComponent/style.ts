@@ -26,6 +26,8 @@ const styles = {
     background-position: center;
     text-align: center;
     position: relative;
+
+    background: linear-gradient(#251a34 50%, #331b50 50%);
   `,
 
   InnerConainer: styled.div``,
