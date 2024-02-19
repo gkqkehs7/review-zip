@@ -1,8 +1,18 @@
 import { useCallback, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import SearchBarComponent from '@/components/searchPageComponent/searchBarComponent/searchBarComponent';
 import SearchBarExtendComponent from '@/components/searchPageComponent/searchBarExtendComponent/searchBarExtendComponent';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
+
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveBackgroundImageSize } from '@/utils/responsiveBackgroundImageSize';
+
+import {
+  GetSearchHistoriesResponse,
+  SearchHashtagResponse,
+  SearchUserByNicknameResponse,
+} from '@/types/response.types';
 
 import {
   DeleteAxiosInstance,
@@ -12,14 +22,16 @@ import {
 import { Hashtag, History, User } from '@/types/common.types';
 
 import styles from './style';
-import {
-  GetSearchHistoriesResponse,
-  SearchHashtagResponse,
-  SearchUserByNicknameResponse,
-} from '@/types/response.types';
+import SearchBackgroundImage1440 from '/images/searchPage/searchBackground1440.png';
+import SearchBackgroundImage1680 from '/images/searchPage/searchBackground1680.png';
+import SearchBackgroundImage1920 from '/images/searchPage/searchBackground1920.png';
 
 // SearchType 컴포넌트에 대한 타입 정의
 const SearchPage: React.FC = () => {
+  const device = checkDevice();
+
+  const navigate = useNavigate();
+
   const [searchInputValue, setSearchInputValue] = useState<string>('');
   const [searchUsers, setSearchUsers] = useState<User[]>([]);
   const [searchHashtags, setSearchHashtags] = useState<Hashtag[]>([]);
@@ -61,7 +73,7 @@ const SearchPage: React.FC = () => {
   const getSearchHistories = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetSearchHistoriesResponse>(
-        '/v1/users/histories',
+        '/v1/users/me/histories',
       );
 
       setSearchHistories(response.data.result);
@@ -93,6 +105,8 @@ const SearchPage: React.FC = () => {
     async (user: User) => {
       try {
         await PostAxiosInstance(`/v1/history/users/${user.userId}`);
+
+        return navigate(`/profilepage/${user.userId}`);
       } catch (error) {
         console.error(error);
       }
@@ -142,7 +156,17 @@ const SearchPage: React.FC = () => {
   }, [searchInputValue]);
 
   return (
-    <styles.Container>
+    <styles.Container
+      style={responsiveBackgroundImageSize(
+        device,
+        { imageUrl: SearchBackgroundImage1920 },
+        { imageUrl: SearchBackgroundImage1920 },
+        { imageUrl: SearchBackgroundImage1680 },
+        { imageUrl: SearchBackgroundImage1680 },
+        { imageUrl: SearchBackgroundImage1440 },
+        { imageUrl: SearchBackgroundImage1440 },
+      )}
+    >
       <GroupBarComponent direction="col" color="white" />
       {/* 돋보기와 기본 검색창을 감싸는 컨테이너 */}
       <styles.SearchBarContainer>
@@ -159,6 +183,7 @@ const SearchPage: React.FC = () => {
           searchHistories={searchHistories}
           deleteHistory={deleteHistory}
           followUser={followUser}
+          saveSearchUserHistory={saveSearchUserHistory}
           saveSearchHashtagHistory={saveSearchHashtagHistory}
         />
       </styles.SearchBarContainer>

@@ -19,24 +19,24 @@ const styles = {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 500px;
+    width: 400px;
     height: 500px;
-    z-index: 5;
+    z-index: 3;
   `,
   SuccessIcon: styled.div`
     background-image: url('images/signinPage/SuccessIcon.png');
     background-size: 100% 100%;
     margin: 0px 0px 0px 0px;
-    width: 20%;
-    height: 20%;
+    width: 64px;
+    height: 64px;
   `,
 
-  SuccessText: styled(Link)`
+  SuccessSignin: styled(Link)`
     background-image: url('images/signinPage/SuccessSignin.png');
     background-size: 100% 100%;
-    margin: 0px 0px 0px 0px;
-    width: 100%;
-    height: 7%;
+    margin: -70px 0px 0px 0px;
+    width: 350px;
+    height: 25px;
   `,
 
   PrivacyPolicy: styled.p`

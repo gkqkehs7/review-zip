@@ -1,82 +1,94 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import { GetAxiosInstance } from '@/api/axios.methods';
-import { CurtPost, Post, User } from '@/types/common.types';
+import { changeInputValue } from '@/hooks/chageInputValue';
+
+import {
+  DeleteAxiosInstance,
+  GetAxiosInstance,
+  PostAxiosInstance,
+} from '@/api/axios.methods';
+import { Post, User } from '@/types/common.types';
 import {
   GetUserPostsResponse,
   GetUserInfoResponse,
-  GetRandomPostResponse,
   GetFollowingsResponse,
   GetFollowersResponse,
 } from '@/types/response.types';
 
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveBackgroundImageSize } from '@/utils/responsiveBackgroundImageSize';
+
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
-import ProfileClickComponent from '@/components/myProfilePageComponent/profileClickComponent/profileClickComponent';
-import LogoComponent from '@/components/myProfilePageComponent/logoComponent/logoComponent';
+import LikeListComponent from '@/components/common/likeListComponent/likeListComponent';
+import PostComponent from '@/components/postComponent/postComponent';
 import LoadingModalComponent from '@/components/common/loadingModalComponent/loadingModalComponent';
-import ProfileComponent from '@/components/myProfilePageComponent/profileComponent/profileComponent';
+import PostListComponent from '@/components/myProfilePageComponent/postListComponent/postListComponent';
+import ScrabPostListComponent from '@/components/myProfilePageComponent/scrabPostListComponent/scrabPostListComponent';
 
 import styles from './style';
+import ProfileBackgroundImage1440 from '/images/myProfilePage/ProfileBackground1440.png';
+import ProfileBackgroundImage1680 from '/images/myProfilePage/ProfileBackground1680.png';
+import ProfileBackgroundImage1920 from '/images/myProfilePage/ProfileBackground1920.png';
+import PencilImage from '/images/myProfilePage/Pencil.png';
+import CameraImage from '/images/myProfilePage/Camera.png';
+import Map from '/images/friendProfilePage/MapImage.png';
+import Storage from '/images/myProfilePage/StorageImage.png';
+import PostItem from '/images/myProfilePage/PostItemImage.png';
 
 const MyProfilePage: React.FC = () => {
+  const device = checkDevice();
+
   const { userId } = useParams(); // me or number
 
-  // const isFriend = userId === 'me' ? false : true;
+  const isFriend = userId === 'me' ? false : true;
 
-  //게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
-  const [postItemIsClicked, setPostClicked] = useState<boolean>(true);
-  const [storageIsClicked, setStorageClicked] = useState<boolean>(false);
+  // 게시물 버튼을 클릭한 경우, 저장소 버튼을 클릭한 경우에 대한 state
+  const [postButtonClicked, setPostButtonClicked] = useState<boolean>(true);
 
-  //프로필 수정
+  // 프로필 수정
   const [isEditProfile, setIsEditProfile] = useState<boolean>(false);
-
-  //게시물이 클릭
-  const [postIsClicked, setPostIsClicked] = useState<boolean>(false);
-
-  //리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
-  const [friendListOpen, setFriendListOpen] = useState<boolean>(false);
 
   // 화면에 표시된 순서대로 게시물, 리뷰어 , 리뷰잉이 클릭이 된건지에 대한 값이 배열에 들어감
   const [isClicked, setIsClicked] = useState<boolean[]>([false, false, false]);
 
-  //post가 클릭 됐을 때 아이디
-  const [postId, setPostId] = useState<number>(0);
+  // 리뷰잉이나 리뷰어 눌렀을 때 쓸 컴폰넌트 오픈
+  const [likeListOpen, setLikeListOpen] = useState<boolean>(false);
 
-  // 스크랩한 게시물인 경우 /scrab이 붙음
-  const [isScrab, setIsScrab] = useState<string>('');
-  const [isFriend, setIsFriend] = useState<boolean>(false);
-
-  // const [listLikeOpen ];
-  // const [postOpen] ;
+  const [clickedPost, setClickedPost] = useState<Post>();
 
   const [userInfo, setUserInfo] = useState<User>();
-  const [curtPosts, setCurtPosts] = useState<CurtPost[]>([]);
-  const [scrabPosts, setScrabPosts] = useState<CurtPost[]>();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [scrabPosts, setScrabPosts] = useState<Post[]>([]);
   const [followings, setFollowings] = useState<User[]>([]);
   const [followers, setFollowers] = useState<User[]>([]);
-  const [post, setPost] = useState<Post>();
 
-  // 클릭된 포스트 가져오기
-  const getPost = useCallback(async () => {
-    try {
-      const response = await GetAxiosInstance<GetRandomPostResponse>(
-        `/v1/posts/${postId}`,
-      );
+  //프로필 변경시 고른 이미지
+  const [selectedImage, setSelectedImage] = useState<File | null>();
 
-      setPost(response.data.result);
-    } catch (error) {
-      console.log(error);
+  //유저 이름 프로필 수정시에 업데이트
+  const [userName, setUserName] = useState<string>('');
+
+  // '친구 목록' 모달을 닫는 함수
+  const closeLikeListModal = () => {
+    setLikeListOpen(false);
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const imageFile = event.target.files[0];
+      setSelectedImage(imageFile);
     }
-  }, [postId]);
+  };
 
   // 올린 게시글들 가져오기
-  const getCurtPosts = useCallback(async () => {
+  const getPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts?page=0&size=8`,
+        `/v1/users/${userId}/posts`,
       );
-      setCurtPosts(response.data.result.postList);
+
+      setPosts(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -86,9 +98,9 @@ const MyProfilePage: React.FC = () => {
   const getScrabPosts = useCallback(async () => {
     try {
       const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts/scrabs?page=0&size=8`,
+        `/v1/users/${userId}/posts/scrabs`,
       );
-      setScrabPosts(response.data.result.postList);
+      setScrabPosts(response.data.result);
     } catch (error) {
       console.log(error);
     }
@@ -101,6 +113,7 @@ const MyProfilePage: React.FC = () => {
         `/v1/users/${userId}`,
       );
       setUserInfo(response.data.result);
+      setUserName(response.data.result.nickname);
     } catch (error) {
       console.log(error);
     }
@@ -128,75 +141,235 @@ const MyProfilePage: React.FC = () => {
     setFollowers(response.data.result);
   }, [userId]);
 
-  useEffect(() => {
-    if (postId) {
-      getPost();
+  // 팔로우 하기
+  const followUser = async (user: User) => {
+    setUserInfo({ ...user, following: true });
+    try {
+      await PostAxiosInstance(`/v1/follows/users/${userId}`);
+    } catch (error) {
+      setUserInfo({ ...user, following: false });
+      console.error(error);
     }
-  }, [postId]);
+  };
+
+  const unFollowUser = async (user: User) => {
+    setUserInfo({ ...user, following: false });
+    try {
+      await DeleteAxiosInstance(`/v1/follows/users/${userId}`);
+    } catch (error) {
+      setUserInfo({ ...user, following: true });
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    getCurtPosts(); // 게시글들 가져오기
-    getScrabPosts(); // 스크랩 게시글들 가져오기
+    getPosts(); // 내 게시글 가져오기
+    getScrabPosts(); //스크랩한 게시글 가져오기
     getUserInfo(); // 유저 정보 가져오기
     getFollowingList(); // 팔로잉 리스트 가져오기
     getFollowerList(); // 팔로워 리스트 가져오기
-  }, []);
+  }, [userId]);
 
   return (
     <>
-      {userInfo && curtPosts ? (
-        <styles.Container>
-          {/*보라색 세로 그룹 바  */}
+      {userInfo && posts ? (
+        <styles.Container
+          style={responsiveBackgroundImageSize(
+            device,
+            { imageUrl: ProfileBackgroundImage1920 },
+            { imageUrl: ProfileBackgroundImage1920 },
+            { imageUrl: ProfileBackgroundImage1680 },
+            { imageUrl: ProfileBackgroundImage1680 },
+            { imageUrl: ProfileBackgroundImage1440 },
+            { imageUrl: ProfileBackgroundImage1440 },
+          )}
+        >
+          {/* 그룹 바 */}
           <GroupBarComponent color="purple" direction="row" />
 
-          {/* {
-            !isFriend && <div>프로필 수정 버튼</div>
-          } */}
+          {/* 게시물이 클릭이 된 경우  */}
+          {clickedPost && (
+            <styles.Overlay>
+              <PostComponent
+                post={clickedPost}
+                posts={posts}
+                setPosts={setPosts}
+                scrabPosts={scrabPosts}
+                setScrabPosts={setScrabPosts}
+                setClickedPost={setClickedPost}
+                canDelete={true}
+              />
+            </styles.Overlay>
+          )}
 
-          {/* 이것도 밖으로 빼고 */}
-          {/*리뷰어가 클릭이 됐을 때와 리뷰잉이 클릭이 됐을 때 다른 창이 뜨게끔하고 post클릭 이벤트 같이 클릭과 관련된 컴포넌트  */}
-          <ProfileClickComponent
-            followings={followings}
-            followers={followers}
-            post={post}
-            friendListOpen={friendListOpen}
-            isClicked={isClicked}
-            setFriendListOpen={setFriendListOpen}
-            setPostIsClicked={setPostIsClicked}
-            postIsClicked={postIsClicked}
-          />
+          {/* 유저 프로필 */}
+          <styles.ProfilePictureContainer>
+            <styles.ProfileContainer>
+              {/*좌측의 이름과 프로필 사진이 뜨는 컨테이너 */}
+              <styles.NameImageContainer>
+                {/* 유저가 고른 이미지가 있을 경우 해당 이미지 url 아닌 경우 기본 이미지 주소 */}
+                <styles.UserProfileImage
+                  src={
+                    selectedImage
+                      ? URL.createObjectURL(selectedImage)
+                      : userInfo.profileUrl
+                  }
+                  alt="ProfileImage"
+                />
+                {/* 프로필 수정시에 투명한 input태그를 통해 이미지 파일 받아오고 카메라 아이콘 표시 */}
+                {isEditProfile && (
+                  <>
+                    <styles.EditUserProfile
+                      type="file"
+                      onChange={handleFileChange}
+                    />
+                    <styles.IconCamera src={CameraImage} />
+                  </>
+                )}
+                <styles.UserNameContainer isEditProfile={isEditProfile}>
+                  {/*프로필 수정시에는 컨테이너 밑에 밑줄을 위한 props*/}
+                  <styles.UserName>
+                    {/* 프로필 수정시에 유저 이름 받을 input*/}
+                    {isEditProfile && (
+                      <styles.EditUserName
+                        type="text"
+                        value={userName}
+                        onChange={(e) => changeInputValue(e, setUserName)}
+                      />
+                    )}
+                    {/* input 태그에 입력하는 중에 기존 이름이 동시에 뜨지 않도록 프로필 수정이 끝나면 userName이 뜨도록 함*/}
+                    {!isEditProfile && userInfo && userName}
+                  </styles.UserName>
+                </styles.UserNameContainer>
+                {/* 프로필 수정시에 인풋 태그 옆에 뜰 연필 아이콘  */}
+                {isEditProfile && <styles.IconEditUserName src={PencilImage} />}
+              </styles.NameImageContainer>
 
-          {/* 이거 없애요 */}
-          <LogoComponent />
+              {/*게시물,리뷰어,리뷰잉 수와 프로필 수정 버튼 */}
+              <div>
+                <styles.UserProfileStatsContainer>
+                  <styles.UserProfileStats>
+                    게시물 {posts.length}
+                  </styles.UserProfileStats>
+                  <styles.UserProfileStats
+                    onClick={() => {
+                      setIsClicked([false, true, false]);
+                      setLikeListOpen(true);
+                    }}
+                  >
+                    리뷰어 {userInfo.followerNum}
+                  </styles.UserProfileStats>
+                  <styles.UserProfileStats
+                    onClick={() => {
+                      setIsClicked([false, false, true]);
+                      setLikeListOpen(true);
+                    }}
+                  >
+                    리뷰잉 {userInfo.followingNum}
+                  </styles.UserProfileStats>
+                </styles.UserProfileStatsContainer>
 
-          {/* 이거 밖으로 빼세요 */}
-          {/*프로필 (프로필 사진, 이름, 게시물 컴포넌트 등등) 상위 컴포넌트  */}
-          <ProfileComponent
-            isEditProfile={isEditProfile}
-            isFriend={isFriend}
-            userInfo={userInfo}
-            userId={userId}
-            setIsClicked={setIsClicked}
-            setIsEditProfile={setIsEditProfile}
-            setFriendListOpen={setFriendListOpen}
-            postItemIsClicked={postItemIsClicked}
-            setPostClicked={setPostClicked}
-            storageIsClicked={storageIsClicked}
-            setStorageClicked={setStorageClicked}
-            setIsScrab={setIsScrab}
-            setPostIsClicked={setPostIsClicked}
-            curtPosts={curtPosts}
-            setPostId={setPostId}
-          />
+                <styles.EditProfileButtonContainer>
+                  {/* 친구이고 팔로우가 안되어있는 경우 */}
+                  {isFriend && !userInfo.following && (
+                    <styles.FollowButton onClick={() => followUser(userInfo)}>
+                      팔로우
+                    </styles.FollowButton>
+                  )}
+
+                  {/* 친구이고 팔로우가 되어있는 경우 */}
+                  {isFriend && userInfo.following && (
+                    <styles.FollowButton onClick={() => unFollowUser(userInfo)}>
+                      언팔로우
+                    </styles.FollowButton>
+                  )}
+
+                  {/* 나인경우  */}
+                  {!isFriend && (
+                    <styles.EditProfileButton
+                      onClick={() => {
+                        setIsEditProfile(!isEditProfile);
+                      }}
+                    >
+                      프로필 수정
+                    </styles.EditProfileButton>
+                  )}
+
+                  <Link to="/mapPage">
+                    <styles.MapButton src={Map} />
+                  </Link>
+                </styles.EditProfileButtonContainer>
+              </div>
+            </styles.ProfileContainer>
+
+            {/* 게시물 ,저장소 버튼 컨테이너  */}
+            <styles.TopButtonContainer>
+              {/* 게시물 버튼 클릭시에 위에 표시될 보라색 도형 */}
+              {postButtonClicked && <styles.LeftPurpleRectangle />}
+              {/* 저장소 버튼 클릭시에 위에 표시될 보라색 도형 */}
+              {!postButtonClicked && <styles.RightPurpleRectangle />}
+              <styles.ButtonContainer
+                onClick={() => {
+                  setPostButtonClicked(true); //게시물 버튼 클릭 시 true
+                }}
+              >
+                <styles.Buttonimg src={PostItem} />
+                <styles.ButtonName>게시물</styles.ButtonName>
+              </styles.ButtonContainer>
+
+              {/* 스크랩 게시물 버튼 */}
+              <styles.ButtonContainer
+                onClick={() => {
+                  setPostButtonClicked(false); //저장소 버튼 클릭시 false
+                }}
+              >
+                <styles.Buttonimg src={Storage} />
+                <styles.ButtonName>저장소</styles.ButtonName>
+              </styles.ButtonContainer>
+            </styles.TopButtonContainer>
+
+            {/* 내가 작성한 게시물*/}
+            {postButtonClicked && posts && (
+              <PostListComponent
+                setClickedPost={setClickedPost}
+                post={posts}
+                isFriend={isFriend}
+              />
+            )}
+
+            {/* 저장소에 저장한 게시물*/}
+            {!postButtonClicked && scrabPosts && (
+              <ScrabPostListComponent
+                setClickedPost={setClickedPost}
+                scrabPost={scrabPosts}
+                isFriend={isFriend}
+              />
+            )}
+          </styles.ProfilePictureContainer>
+
+          {/*리뷰어용 <LikeListComponent />*/}
+          {isClicked[1] && (
+            <LikeListComponent
+              users={followers}
+              setUsers={setFollowers}
+              closeLikeListModal={closeLikeListModal}
+              likeListOpen={likeListOpen}
+              isReviewer={isClicked[1]}
+              isReviewing={isClicked[2]}
+            />
+          )}
 
           {/* 리뷰잉용 <LikeListComponent /> */}
-
-          {/* 리뷰어용 <ListListComponent /> */}
-
-          {/* 스크랩 한건지? 내가 작성한 것들인지? */}
-          {/* <PostListComponent /> */}
-          {/* <ScrabPostListComponent /> */}
-          {/* 밑에 사진 나오는 것들 props={posts} 이 compoennt안에서 map으로 보여줄 수 있게 -> 여기만 overflow: auto */}
+          {isClicked[2] && (
+            <LikeListComponent
+              users={followings}
+              setUsers={setFollowings}
+              closeLikeListModal={closeLikeListModal}
+              likeListOpen={likeListOpen}
+              isReviewer={isClicked[1]}
+              isReviewing={isClicked[2]}
+            />
+          )}
         </styles.Container>
       ) : (
         <LoadingModalComponent message="데이터 로딩중" />

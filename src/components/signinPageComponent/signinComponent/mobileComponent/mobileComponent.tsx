@@ -1,15 +1,23 @@
-import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
 interface MobileComponentProps {
   kakaoLoginUrl: string;
+  requestSignin: () => Promise<void>;
+  email: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
+const MobileComponent: React.FC<MobileComponentProps> = ({
+  kakaoLoginUrl,
+  requestSignin,
+  email,
+  password,
+  setEmail,
+  setPassword,
+}) => {
   return (
     <styles.Container>
       <styles.Right>
@@ -23,7 +31,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
             placeholder="Enter ID or Email Adress"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
+              changeInputValue(e, setEmail)
             }
           />
         </styles.InputContainer>
@@ -48,10 +56,12 @@ const MobileComponent: React.FC<MobileComponentProps> = ({ kakaoLoginUrl }) => {
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="/mainPage">&gt; SIGN IN</styles.SignInBtn>
+        <styles.SignInBtn onClick={requestSignin}>
+          &gt; SIGN IN
+        </styles.SignInBtn>
 
         <styles.Footer>
-          <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
+          <styles.SignUp>Sign Up</styles.SignUp>
           <styles.ForgotPwd to="/passwordRecoveryPage">
             Forgot the Password ?
           </styles.ForgotPwd>

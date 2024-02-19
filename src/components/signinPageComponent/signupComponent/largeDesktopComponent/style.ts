@@ -19,97 +19,90 @@ const styles = {
     top: 0px;
     right: 0px;
     background-image: url('images/signinPage/PerkyMilkyWay.png');
-    background-size: 125% 110%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: 100px -100px;
-    width: 1200px;
-    height: 800px;
+    background-position: 50px 30px;
+    width: 973px;
+    height: 565px;
     z-index: 0;
   `,
   PurpleCloud: styled.div`
     position: absolute;
-    bottom: 0vh;
+    bottom: 0px;
+    left: 0px;
     background-image: url('images/signinPage/PurpleCloud.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: bottom;
-    width: 1800px;
-    height: 85vh;
+    width: 1231px;
+    height: 658px;
     z-index: 0;
   `,
   Ellipse: styled.div`
     position: absolute;
-    top: 32.5%;
+    top: 292px;
+    left: -15px;
     background-image: url('images/signinPage/Ellipse.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 1100px;
-    height: 40vh;
+    width: 824px;
+    height: 395px;
+    transform: rotate(0deg);
     z-index: 2;
-  `,
-
-  MilkyWay: styled.div`
-    position: absolute;
-    bottom: 0;
-    background-image: url('images/signinPage/MilkyWay.png');
-    background-size: 1125px 600px;
-    width: 1125px;
-    height: 50vh;
-    z-index: 3;
   `,
 
   Title: styled.div`
     position: absolute;
-    top: 43.5%;
-    left: 300px;
+    top: 423.94px;
+    left: 200px;
     background-image: url('images/signinPage/Title.png');
     background-size: 100% 100%;
-    width: 800px;
-    height: 12vh;
+    width: 602px;
+    height: 85px;
     z-index: 3;
   `,
 
   LargeStart: styled.div`
     position: absolute;
     display: flex;
-    top: 62.5%;
-    left: 150px;
+    top: 574px;
+    left: 130px;
     background-image: url('images/signinPage/LargeStar.png');
     background-size: 100% 100%;
-    width: 250px;
-    height: 17.5vh;
+    width: 225px;
+    height: 232px;
     z-index: 4;
   `,
 
   Union: styled.div`
     position: absolute;
-    top: 20vh;
-    left: 325px;
+    top: 216px;
+    left: 230px;
     background-image: url('images/signinPage/Union.png');
     background-size: 100% 100%;
-    width: 100px;
-    height: 8vh;
+    width: 81px;
+    height: 78px;
   `,
 
   MiniStart: styled.div`
     position: absolute;
-    top: 30vh;
-    left: 1000px;
+    top: 266px;
+    left: 750px;
     background-image: url('images/signinPage/MiniStar.png');
     background-size: 100% 100%;
-    width: 100px;
-    height: 8vh;
-    z-index: 3;
-  `,
-  FormContainer: styled.form`
-    postion: relative;
-    width: 625px;
-    height: 750px;
-    margin: 250px 0px 0px 60vw;
+    width: 88px;
+    height: 91px;
     z-index: 3;
   `,
 
-  InputContainer: styled.div`
+  FormContainer: styled.div`
+    postion: relative;
+    width: 540px;
+    height: 650px;
+    margin: 150px 0px 0px 60vw;
+    z-index: 3;
+  `,
+
+  InputContainer: styled.form`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -117,6 +110,8 @@ const styles = {
   `,
 
   InputTitle: styled.p`
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 16px;
     margin: 20px 0px 20px 0px;
@@ -128,10 +123,11 @@ const styles = {
     position: relative;
     background-color: rgba(255, 255, 255, 0.3);
     width: 100%;
-    height: 40px;
+    height: 26.5px;
     padding-left: 10px;
     box-sizing: border-box;
     border-radius: 100px;
+    border: 0;
     color: white;
     outline: none;
     font-size: 90%;
@@ -139,29 +135,60 @@ const styles = {
       color: white;
     }
   `,
-  CheckNickName: styled.div`
-    display: none;
-    position: relative;
-    background-image: url('images/signinPage/Check.png');
-    background-size: 100% 100%;
-    width: 25px;
-    height: 25px;
-    z-index: 4;
-    left: 580px;
-    bottom: 32.5px;
-    border: 1px solid white;
+
+  CheckEmail: styled.p`
+    display: flex;
+    align-items: center;
+    visbilty: hidden;
+    width: 50%;
+    height: 16px;
+    color: red;
+    opacity: 0.8;
+    font-size: 70%;
+    font-weight: normal;
+
+    margin: 0px 0px 0px 50px;
   `,
-  CheckPassWord: styled.div`
-    display: none;
-    position: relative;
-    background-image: url('images/signinPage/Check.png');
-    background-size: 100% 100%;
-    width: 25px;
-    height: 25px;
-    z-index: 3;
-    left: 580px;
-    bottom: 32.5px;
+
+  CheckPhoneNum: styled.p`
+    display: flex;
+    align-items: center;
+    visbilty: hidden;
+    width: 50%;
+    height: 16px;
+    color: red;
+    opacity: 0.8;
+    font-size: 70%;
+    font-weight: normal;
+    margin: 0px 0px 0px 50px;
   `,
+
+  CheckNickName: styled.p`
+    display: flex;
+    align-items: center;
+    visbilty: hidden;
+    width: 50%;
+    height: 16px;
+    color: red;
+    opacity: 0.8;
+    font-size: 70%;
+    font-weight: normal;
+    margin: 0px 0px 0px 50px;
+  `,
+
+  CheckPassWord: styled.p`
+    display: flex;
+    align-items: center;
+    visbilty: hidden;
+    width: 50%;
+    height: 16px;
+    color: red;
+    opacity: 0.8;
+    font-size: 70%;
+    font-weight: normal;
+    margin: 0px 0px 0px 50px;
+  `,
+
   WarnText: styled.p`
     margin: 15px 0px 30px 15px;
     color: white;
@@ -178,6 +205,7 @@ const styles = {
     margin: 40px 0px 0px 0px;
     background-color: rgba(255, 255, 255, 0);
     border: 0;
+    outline: none;
     font-size: 0%;
     cursor: pointer;
   `,

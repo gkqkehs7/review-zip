@@ -5,24 +5,27 @@ import LoadingModalComponent from '@/components/common/loadingModalComponent/loa
 
 import { Post } from '@/types/common.types';
 import { GetRandomPostResponse } from '@/types/response.types';
-import { DeleteAxiosInstance, GetAxiosInstance } from '@/api/axios.methods';
+import { GetAxiosInstance } from '@/api/axios.methods';
+
+import { checkDevice } from '@/utils/checkDeviceSize';
+import { responsiveBackgroundImageSize } from '@/utils/responsiveBackgroundImageSize';
 
 import styles from './style';
 import DownArrowImage from '/images/mainPage/DownArrow.png';
 import TopButtonImage from '/images/mainPage/TopButton.png';
-import AlertComponent from '@/components/common/alertComponent/alertComponent';
+import MainBottomBackgroundImage1440 from '/images/mainPage/MainBottomBackground1440.png';
+import MainBottomBackgroundImage1680 from '/images/mainPage/MainBottomBackground1680.png';
+import MainBottomBackgroundImage1920 from '/images/mainPage/MainBottomBackground1920.png';
 
 interface MainBottomComponentProps {
-  modalOpen: () => void;
-  modalClose: () => void;
   scrollToTop: () => void;
 }
 
 const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
-  modalOpen,
-  modalClose,
   scrollToTop,
 }) => {
+  const device = checkDevice();
+
   const [randomPost, setRandomPost] = useState<Post>();
   const [loading, setLoading] = useState<boolean>(false); // loading modal 띄우기용
   const [blur, setBlur] = useState<boolean>(false); // 모자이크 처리용
@@ -40,29 +43,6 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
       console.error(error);
     }
   };
-
-  // 게시글 삭제
-  const deletePost = useCallback(async () => {
-    try {
-      setAlertModalOpen(false);
-      await DeleteAxiosInstance(`/v1/posts/${randomPost?.postId}`);
-
-      // 삭제하고 새로운 게시글 불러오기
-      await newPost();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  // alert창 열기
-  const openAlertModal = useCallback(() => {
-    setAlertModalOpen(true);
-  }, []);
-
-  // alert창 닫기
-  const closeAlertModal = useCallback(() => {
-    setAlertModalOpen(false);
-  }, []);
 
   // 새로운 게시글 가져오기
   const newPost = async () => {
@@ -111,7 +91,18 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
   }, []);
 
   return (
-    <styles.Container onWheel={(e) => DetectScrollDown(e)}>
+    <styles.Container
+      onWheel={(e) => DetectScrollDown(e)}
+      style={responsiveBackgroundImageSize(
+        device,
+        { imageUrl: MainBottomBackgroundImage1920 },
+        { imageUrl: MainBottomBackgroundImage1920 },
+        { imageUrl: MainBottomBackgroundImage1680 },
+        { imageUrl: MainBottomBackgroundImage1680 },
+        { imageUrl: MainBottomBackgroundImage1440 },
+        { imageUrl: MainBottomBackgroundImage1440 },
+      )}
+    >
       <styles.InnerContainer
         style={{
           filter: blur ? 'blur(10px)' : 'blur(0px)',
@@ -120,14 +111,7 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
         }}
       >
         {/* 게시글 component */}
-        {randomPost && (
-          <PostComponent
-            post={randomPost}
-            modalOpen={modalOpen}
-            modalClose={modalClose}
-            openAlertModal={openAlertModal}
-          />
-        )}
+        {randomPost && <PostComponent post={randomPost} canDelete={false} />}
 
         {/* 아래 화살표 */}
         <styles.ArrowImage onClick={newPost} src={DownArrowImage} />
@@ -139,13 +123,6 @@ const MainBottomComponent: React.FC<MainBottomComponentProps> = ({
       {loading && (
         <LoadingModalComponent
           message={'새로운 게시글을 불러오는 중입니다...'}
-        />
-      )}
-
-      {alertModalOpen && (
-        <AlertComponent
-          closeAlertModal={closeAlertModal}
-          deletePost={deletePost}
         />
       )}
     </styles.Container>

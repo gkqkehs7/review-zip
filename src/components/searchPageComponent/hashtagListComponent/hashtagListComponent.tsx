@@ -22,8 +22,9 @@ const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
   // 검색 기록 저장하면서 hashtag 페이지로 이동
   const toHashtag = async (hashtag: Hashtag) => {
     try {
-      navigate(`/hashtagPage/${hashtag.id}`);
-      await saveSearchHashtagHistory(hashtag.name);
+      await saveSearchHashtagHistory(hashtag.tagName);
+
+      return navigate(`/hashtagPage/${hashtag.hashtagId}`);
     } catch (error) {
       console.error(error);
     }
@@ -43,12 +44,12 @@ const HashtagListComponent: React.FC<HashtaglistComponentProps> = ({
     >
       {hashtags.map((hashtag) => (
         <styles.HashtagContainer
-          key={hashtag.id}
+          key={hashtag.hashtagId}
           onClick={() => toHashtag(hashtag)}
         >
           {/* 해시 태그 */}
           <styles.HashTagLink>
-            <styles.Content>#{hashtag.name}</styles.Content>
+            <styles.Content>#{hashtag.tagName}</styles.Content>
           </styles.HashTagLink>
 
           {/* 리뷰 보기 버튼 */}

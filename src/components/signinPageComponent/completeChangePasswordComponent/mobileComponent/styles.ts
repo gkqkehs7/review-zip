@@ -11,7 +11,7 @@ const styles = {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    font-size: 115%;
+    font-size: 100%;
     font-weight: bold;
     z-index: 0;
   `,
@@ -19,7 +19,7 @@ const styles = {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 500px;
+    width: 400px;
     height: 500px;
     z-index: 3;
   `,
@@ -27,18 +27,27 @@ const styles = {
     background-image: url('images/signinPage/SuccessIcon.png');
     background-size: 100% 100%;
     margin: 0px 0px 0px 0px;
-    width: 20%;
-    height: 20%;
+    width: 64px;
+    height: 64px;
   `,
 
   SuccessText: styled(Link)`
     background-image: url('images/signinPage/SuccessText.png');
     background-size: 100% 100%;
-    margin: 0px 0px 0px 0px;
-    width: 100%;
-    height: 7%;
+    margin: -70px 0px 0px 0px;
+    width: 350px;
+    height: 25px;
   `,
-
+  SignUp: styled(Link)`
+    position: relative;
+    width: 69px;
+    height: 16px;
+    color: white;
+    white-space: nowrap;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px;
+    z-index: 3;
+  `,
   PrivacyPolicy: styled.p`
     width: fit-content;
     margin: 0px 0px 0px 0px;
@@ -47,15 +56,6 @@ const styles = {
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
-  `,
-  SignUp: styled(Link)`
-    position: relative;
-    width: fit-content;
-    color: white;
-    font-size: 125%;
-    font-weight: bold;
-    margin: 0px 0px 0px 0px;
-    z-index: 3;
   `,
 };
 export default styles;

@@ -3,8 +3,7 @@ import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
-import { PlaceInfo } from '@/pages/mapPage/mapPage';
-import { GetAxiosInstance } from '@/api/axios.methods';
+import { PlaceInfo } from '@/types/common.types';
 
 interface LocationSearchprops {
   mapRef: React.RefObject<kakao.maps.Map>;

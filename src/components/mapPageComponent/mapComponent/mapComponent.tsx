@@ -1,17 +1,18 @@
-import { Map } from 'react-kakao-maps-sdk';
-import ZoomController from '@/components/mapPageComponent/zoomControllerComponent/zoomControllerComponent';
-import styles from './styles';
 import React, { useEffect, useRef, useState } from 'react';
+import { Map } from 'react-kakao-maps-sdk';
+import styles from './styles';
+import ZoomController from '@/components/mapPageComponent/zoomControllerComponent/zoomControllerComponent';
 import LocationSearchComponent from '../locationSearchComponent/loactionSearchComponent';
+import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
-import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
-import { PlaceInfo } from '@/pages/mapPage/mapPage';
+import { PlaceInfo } from '@/types/common.types';
 
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
   placeDataStroage: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
+  closeMapModal?: () => void;
   setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 
@@ -20,6 +21,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
   height,
   placeDataStroage,
   setplaceDataStroage,
+  closeMapModal,
 }) => {
   const [previous, setPrevious] = useState<number>(6); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
@@ -49,8 +51,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
           setplaceDataStroage={setplaceDataStroage}
         />
         <styles.MapContainer>
-          <styles.CloseBtn onClick={() => alert('close')} />
           <GroupBarComponent direction="col" color="white" />
+          <styles.CloseBtn onClick={closeMapModal} />
 
           <Map
             id="map"

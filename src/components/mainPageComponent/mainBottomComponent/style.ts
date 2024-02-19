@@ -37,6 +37,11 @@ const styles = {
     justify-content: center;
     align-items: center;
     position: relative;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
   `,
 
   InnerContainer: styled.div`
@@ -55,7 +60,7 @@ const styles = {
     width: 30px;
     height: 30px;
     bottom: 0;
-    left: 50%;
+    left: 49%;
     transform: translateX(-50%);
     z-index: 999;
 

@@ -1,12 +1,28 @@
-import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
-const LaptopComponent: React.FC = () => {
-  const [password, setPassword] = useState<string>('');
-  const [newpassword, setNewPassword] = useState<string>('');
+interface LaptopComponentProps {
+  newPassword: string;
+  setNewPassword: React.Dispatch<React.SetStateAction<string>>;
+  reEnterPassword: string;
+  setReEnterPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const LaptopComponent: React.FC<LaptopComponentProps> = ({
+  newPassword,
+  reEnterPassword,
+  setNewPassword,
+  setReEnterPassword,
+}) => {
   return (
     <styles.Container>
+      <styles.PerkyMilkyWay />
+      <styles.PurpleCloud />
+      <styles.Ellipse />
+      <styles.Title />
+      <styles.LargeStart />
+      <styles.Union />
+      <styles.MiniStart />
       <styles.Right>
         {/* 비밀번호 입력 */}
         <styles.InputContainer>
@@ -14,10 +30,10 @@ const LaptopComponent: React.FC = () => {
           <styles.Input
             type="password"
             placeholder="Enter Password"
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
-            value={password}
+            pattern="/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/;"
+            value={newPassword}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setPassword)
+              changeInputValue(e, setNewPassword)
             }
           />
         </styles.InputContainer>
@@ -28,10 +44,10 @@ const LaptopComponent: React.FC = () => {
           <styles.Input
             type="password"
             placeholder="Enter Password Again"
-            value={newpassword}
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
+            value={reEnterPassword}
+            pattern="/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/;"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setNewPassword)
+              changeInputValue(e, setReEnterPassword)
             }
           />
         </styles.InputContainer>

@@ -1,8 +1,7 @@
-import { PlaceInfo } from '@/pages/mapPage/mapPage';
+import { PlaceInfo } from '@/types/common.types';
 import { Status } from 'kakao-maps-sdk';
-import { GetAxiosInstance } from '@/api/axios.methods';
+
 import React from 'react';
-import { MarkerClusterer } from 'react-kakao-maps-sdk';
 
 //카카오 공식문서 Sample "장소검색 후 목록으로 나타내기" 코드참고
 

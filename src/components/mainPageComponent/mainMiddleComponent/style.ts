@@ -26,6 +26,8 @@ const styles = {
     background-position: center;
     text-align: center;
     position: relative;
+
+    background: linear-gradient(#251a34 50%, #331b50 50%);
   `,
 
   InnerConainer: styled.div``,
@@ -62,8 +64,8 @@ const styles = {
     cursor: pointer;
 
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     bottom: 0;
     left: 49%;
     transform: translateX(-50%);

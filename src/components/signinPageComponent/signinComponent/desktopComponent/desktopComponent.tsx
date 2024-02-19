@@ -1,17 +1,23 @@
-import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
 interface DesktopComponentProps {
   kakaoLoginUrl: string;
+  requestSignin: () => Promise<void>;
+  email: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const desktopComponent: React.FC<DesktopComponentProps> = ({
   kakaoLoginUrl,
+  requestSignin,
+  email,
+  password,
+  setEmail,
+  setPassword,
 }) => {
-  const [email, setEamil] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -32,7 +38,7 @@ const desktopComponent: React.FC<DesktopComponentProps> = ({
             placeholder="Enter ID or Email Adress"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setEamil)
+              changeInputValue(e, setEmail)
             }
           ></styles.Input>
         </styles.InputContainer>
@@ -57,7 +63,9 @@ const desktopComponent: React.FC<DesktopComponentProps> = ({
         </styles.OrSignContainer>
 
         {/* 로그인 버튼 */}
-        <styles.SignInBtn to="/mainPage">&gt; SIGN IN</styles.SignInBtn>
+        <styles.SignInBtn onClick={requestSignin}>
+          &gt; SIGN IN
+        </styles.SignInBtn>
 
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>

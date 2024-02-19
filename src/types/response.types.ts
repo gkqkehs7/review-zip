@@ -1,4 +1,4 @@
-import { User, Post, CurtPost, Hashtag, History } from './common.types';
+import { User, Post, Hashtag, History } from './common.types';
 
 // KAKAO CONTROLLER
 // /v1/oauth/kakao
@@ -6,16 +6,15 @@ interface KakaoLoginType {
   accessToken: string;
 }
 
+interface LocalSignInResponse {
+  accessToken: string;
+  refreshToken: string;
+  grantType: string;
+}
+
 // USER CONTROLLER
 // /v1/users/{userId}/posts
-interface GetUserPostsResponse {
-  postList: CurtPost[];
-  listSize: number;
-  totalPage: number;
-  totalElements: number;
-  isFirst: boolean;
-  isLast: boolean;
-}
+interface GetUserPostsResponse extends Array<Post> {}
 
 // /v1/users/{userId}
 interface GetUserInfoResponse {
@@ -42,13 +41,7 @@ interface GetFollowersResponse extends Array<User> {}
 
 // POST CONTROLLER
 // [Post] /v1/posts
-interface CreatePostResponse {
-  postId: number;
-  userId: number;
-  comment: string;
-  point: number;
-  imageIds: number[];
-}
+interface CreatePostResponse extends Post {}
 
 // [Get] /v1/posts/random-one
 interface GetRandomPostResponse extends Post {}
@@ -63,6 +56,10 @@ interface GetPostResponse extends Post {}
 interface GetPostLikedUsersResponse extends Array<User> {}
 
 // HASHTAG CONTROLLER
+// [Get] /v1/hashtags/{hashtagId}
+interface GetHashtagInfoResponse extends Hashtag {}
+
+// [Get] /v1/hashtags/search
 interface SearchHashtagResponse extends Array<Hashtag> {}
 
 // IMAGE CONTROLLER
@@ -73,6 +70,7 @@ interface CreateImagesResponse {
 
 export type {
   KakaoLoginType,
+  LocalSignInResponse,
   CreatePostResponse,
   CreateImagesResponse,
   GetRandomPostsResponse,
@@ -84,6 +82,7 @@ export type {
   GetRandomPostResponse,
   GetPostResponse,
   GetPostLikedUsersResponse,
+  GetHashtagInfoResponse,
   SearchHashtagResponse,
   GetSearchHistoriesResponse,
 };

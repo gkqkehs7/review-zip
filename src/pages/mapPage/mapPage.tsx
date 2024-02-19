@@ -1,16 +1,7 @@
 import MapComponent from '@/components/mapPageComponent/mapComponent/mapComponent';
 import styles from './styles';
-
+import { PlaceInfo } from '@/types/common.types';
 import { useState } from 'react';
-
-export interface PlaceInfo {
-  place_name: string;
-  address_name: string;
-  road_address_name: string;
-  phone: string;
-  x: string;
-  y: string;
-}
 
 const MapPage: React.FC = () => {
   const [placeDataStroage, setplaceDataStroage] = useState<PlaceInfo[]>([]);
@@ -18,8 +9,8 @@ const MapPage: React.FC = () => {
   return (
     <styles.Container>
       <MapComponent
-        width={80}
-        height={80}
+        width={100}
+        height={100}
         placeDataStroage={placeDataStroage}
         setplaceDataStroage={setplaceDataStroage}
       />

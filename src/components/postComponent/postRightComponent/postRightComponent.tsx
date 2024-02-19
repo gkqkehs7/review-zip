@@ -8,6 +8,7 @@ import LikeButtonImage from '/images/post/LikeButton.png';
 import NotScrabButtonImage from '/images/post/NotScrabButton.png';
 import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
+import { useNavigate } from 'react-router-dom';
 
 interface PostRightComponentProps {
   post: Post;
@@ -21,6 +22,7 @@ interface PostRightComponentProps {
   scrabPost: () => Promise<void>;
   unScrabPost: () => Promise<void>;
   openAlertModal: () => void;
+  canDelete: boolean;
 }
 
 const PostRightComponent: React.FC<PostRightComponentProps> = ({
@@ -35,18 +37,27 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
   scrabPost,
   unScrabPost,
   openAlertModal,
+  canDelete,
 }) => {
+  const navigation = useNavigate();
+
   return (
     <styles.Container splitPost={split}>
       {/* 유저 정보 */}
       <styles.TopContainer>
-        <styles.TopLeftContainer>
-          <styles.UserImage src={post.userInfo.profileUrl} />
-          <styles.UserName>{post.userInfo.nickname}</styles.UserName>
+        <styles.TopLeftContainer
+          onClick={() => {
+            navigation(`/profilePage/${post.user.userId}`);
+          }}
+        >
+          <styles.UserImage src={post.user.profileUrl} />
+          <styles.UserName>{post.user.nickname}</styles.UserName>
         </styles.TopLeftContainer>
 
         <styles.TopRightContainer>
-          {post.checkMine && <styles.DeleteButton onClick={openAlertModal} />}
+          {canDelete && post.checkMine && (
+            <styles.DeleteButton onClick={openAlertModal} />
+          )}
 
           <styles.PostDate>{post.createdAt}</styles.PostDate>
         </styles.TopRightContainer>
@@ -62,8 +73,13 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
       {/* 해시태그들 */}
       <styles.HashTagContainer>
         {post.hashtags.map((hashtag, index) => (
-          <styles.HashTag key={index}>
-            <styles.HashTagText># {hashtag}</styles.HashTagText>
+          <styles.HashTag
+            key={hashtag.hashtagId}
+            onClick={() => {
+              navigation(`/hashtagPage/${hashtag.hashtagId}`);
+            }}
+          >
+            <styles.HashTagText># {hashtag.tagName}</styles.HashTagText>
           </styles.HashTag>
         ))}
       </styles.HashTagContainer>
@@ -73,7 +89,7 @@ const PostRightComponent: React.FC<PostRightComponentProps> = ({
         <styles.LikeText onClick={openLikeListModal}>
           {postLikeNum}명이 이 게시글을 좋아합니다
         </styles.LikeText>
-        <styles.LikeUserImage src={post.userInfo.profileUrl} />
+        <styles.LikeUserImage src={post.user.profileUrl} />
       </styles.LikeContainer>
 
       {/* 아래 선 */}

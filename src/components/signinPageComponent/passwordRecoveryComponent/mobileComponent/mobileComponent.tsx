@@ -9,13 +9,6 @@ const MobileComponent: React.FC = () => {
   return (
     // 인증방식이 정해지면 추후 완성
     <styles.Container>
-      <styles.PerkyMilkyWay />
-      <styles.PurpleCloud />
-      <styles.Ellipse />
-      <styles.Title />
-      <styles.LargeStart />
-      <styles.Union />
-      <styles.MiniStart />
       <styles.Right>
         {/* 성명 */}
         <styles.InputContainer>
@@ -46,16 +39,14 @@ const MobileComponent: React.FC = () => {
 
         {/* 카카오톡 */}
         <styles.CertificationContainer>
-          <styles.CertificationNumber>
-            <styles.InputMessage>
-              아래의 SMS 인증번호를 입력해주세요.
-            </styles.InputMessage>
-          </styles.CertificationNumber>
+          <styles.InputMessage>
+            아래의 SMS 인증번호를 입력해주세요.
+          </styles.InputMessage>
 
-          <styles.OrSignContainer>
-            <styles.OrSignBtn>or sign in with</styles.OrSignBtn>
-            <styles.KaKaoIcon />
-          </styles.OrSignContainer>
+          <styles.CheckContainer>
+            <styles.CheckIcon src="images/signinPage/Check.png" />
+            정상적으로 확인되셨습니다.
+          </styles.CheckContainer>
         </styles.CertificationContainer>
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>

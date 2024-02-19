@@ -6,7 +6,7 @@ const MobileComponent: React.FC = () => {
     <styles.Container>
       <styles.Right>
         <styles.SuccessIcon />
-        <styles.SuccessText to="/mainPage" />
+        <styles.SuccessSignin to="/mainPage" />
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
     </styles.Container>

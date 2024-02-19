@@ -1,20 +1,32 @@
-import { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
 
-const LargeDesktopComponent: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [nickname, setNickname] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const regex = new RegExp('[0-1]{3}-[0-9]{4}-[0-9]{4}');
-
-  if (phoneNumber.length > 12 && regex.test(phoneNumber) == false) {
-    setPhoneNumber('');
-  }
-
+interface LargeDesktopComponentProps {
+  requestSignup: () => Promise<void>;
+  email: string;
+  phoneNum: string;
+  name: string;
+  nickName: string;
+  password: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPhoneNum: React.Dispatch<React.SetStateAction<string>>;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  setNickName: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+const LargeDesktopComponent: React.FC<LargeDesktopComponentProps> = ({
+  requestSignup,
+  email,
+  phoneNum,
+  name,
+  nickName,
+  password,
+  setEmail,
+  setPhoneNum,
+  setName,
+  setNickName,
+  setPassword,
+}) => {
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -27,12 +39,15 @@ const LargeDesktopComponent: React.FC = () => {
       <styles.FormContainer>
         <styles.InputContainer>
           {/* 휴대폰 번호입력 */}
-          <styles.InputTitle>이메일 주소</styles.InputTitle>
+          <styles.InputTitle>
+            이메일 주소
+            <styles.CheckEmail>중복된 이메일입니다</styles.CheckEmail>
+          </styles.InputTitle>
           <styles.Input
             type="email"
             placeholder="Enter your Email Adress"
             value={email}
-            pattern=".+@example\.com"
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setEmail)
             }
@@ -40,14 +55,19 @@ const LargeDesktopComponent: React.FC = () => {
         </styles.InputContainer>
         <styles.InputContainer>
           {/* 휴대폰 번호입력 */}
-          <styles.InputTitle>휴대폰 번호</styles.InputTitle>
+          <styles.InputTitle>
+            휴대폰 번호
+            <styles.CheckPhoneNum>
+              이미 가입된 휴대폰 번호입니다
+            </styles.CheckPhoneNum>
+          </styles.InputTitle>
           <styles.Input
             type="tel"
             placeholder="Enter your Phone Number"
-            value={phoneNumber}
+            value={phoneNum}
             pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setPhoneNumber)
+              changeInputValue(e, setPhoneNum)
             }
           />
         </styles.InputContainer>
@@ -67,39 +87,48 @@ const LargeDesktopComponent: React.FC = () => {
 
         <styles.InputContainer>
           {/* 사용자 닉네임 입력 */}
-          <styles.InputTitle>사용자 닉네임</styles.InputTitle>
+          <styles.InputTitle>
+            사용자 닉네임
+            <styles.CheckNickName>
+              이미 사용중인 닉네임입니다.
+            </styles.CheckNickName>
+          </styles.InputTitle>
           <styles.Input
             type="text"
             placeholder="Enter user name"
-            value={nickname}
+            value={nickName}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              changeInputValue(e, setNickname)
+              changeInputValue(e, setNickName)
             }
           />
         </styles.InputContainer>
-        <styles.CheckNickName />
 
         <styles.InputContainer>
           {/* 비밀번호 입력 */}
-          <styles.InputTitle>비밀번호</styles.InputTitle>
+          <styles.InputTitle>
+            비밀번호
+            <styles.CheckPassWord>
+              이미 사용중인 비밀번호입니다.
+            </styles.CheckPassWord>
+          </styles.InputTitle>
           <styles.Input
             type="password"
             placeholder="Enter Password"
             value={password}
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,50}$"
+            pattern="/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/;"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               changeInputValue(e, setPassword)
             }
           />
-          <styles.CheckPassWord />
+
           {/* 비밀번호 입력시 주의사항 */}
           <styles.WarnText>
-            대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.{' '}
+            대문자 ,소문자가섞인 영문 6글자 이상 입력해주시길 바랍니다.
           </styles.WarnText>
         </styles.InputContainer>
 
         {/* 회원가입 완료Link */}
-        <styles.SignUpBtn type="submit"></styles.SignUpBtn>
+        <styles.SignUpBtn onClick={requestSignup}></styles.SignUpBtn>
 
         {/* 로그인 페이지로 가는 Link */}
         <styles.SignInContainer>

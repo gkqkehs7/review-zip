@@ -4,9 +4,10 @@ const RveiwPicturesContainer = styled.div`
   width: 600px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   margin: 0 auto;
-  overflow-y: auto;
+  overflow: auto;
 `;
 
 const IconContainer = styled.div`
@@ -38,17 +39,18 @@ const IconUnion = styled.img`
 const Picture = styled.img`
   display: flex;
   justify-content: center;
-  align-items: cneter;
+  align-items: center;
   width: 100%;
   height: 100%;
   flex: 1;
   border-radius: 20px;
   object-fit: cover;
 `;
+
 const PictureContainer = styled.div`
   overflow: hidden;
   position: relative;
-  margin: 10px;
+  margin: 20px 10px;
   width: 150px;
   height: 150px;
   cursor: pointer;
@@ -88,6 +90,31 @@ const Count = styled.p`
   font-size: 10px;
 `;
 
+const NoPostContainer = styled.div`
+  width: 736px;
+  height: 211px;
+  background-color: transparent;
+  border-radius: 21px;
+  border: 1px solid #d5b2ff;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NoPostText = styled.div`
+  color: white;
+  margin-bottom: 15px;
+`;
+
+const NoPostImage = styled.img`
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+`;
+
 export default {
   RveiwPicturesContainer,
   PictureBorder,
@@ -98,4 +125,7 @@ export default {
   Icon,
   Count,
   IconBox,
+  NoPostContainer,
+  NoPostText,
+  NoPostImage,
 };
