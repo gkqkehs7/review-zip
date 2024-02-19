@@ -6,77 +6,52 @@ import LocationSearchComponent from '../locationSearchComponent/loactionSearchCo
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
-import { GetAxiosInstance } from '@/api/axios.methods';
+import { PlaceInfo } from '@/pages/mapPage/mapPage';
 
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
+  placeDataStroage: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
+  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 
-export interface PlaceInfo {
-  place_name: string;
-  address_name: string;
-  road_address_name: string;
-  phone: string;
-  x: string;
-  y: string;
-}
-
-const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
+const MapComponent: React.FC<MapComponentProps> = ({
+  width,
+  height,
+  placeDataStroage,
+  setplaceDataStroage,
+}) => {
   const [previous, setPrevious] = useState<number>(6); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
 
-  //장소에 대한 데이터를 담는 변수. 서버로 전송될 데이터다.
-  const [placeData, setPlaceData] = useState<PlaceInfo>({
-    place_name: '',
-    address_name: '',
-    road_address_name: '',
-    phone: '',
-    x: '',
-    y: '',
-  });
+  //저장버튼 누를경우 해당값이 placeData에 담긴다.
 
-  if (width == 100 && height == 100) {
-    useEffect(() => {
-      /*
-      0. 서버에서 유저의 nickname을 가져온다
-      1. 서버에서 장소의 좌표값을 가져온다
-      2. 좌표에다 마커를 찍고. 마커에 윈도우 인포를 등록한다. 이때 등록된 윈도우 인포에는 장소, 주소 데이터가 담겨있으며 삭제기능도 되어있다.
-      3. 장소를 불러오는데 실패하였을 경우에는  alert 경고메시지를 준다.
-      */
-      const getData = async (userId: string) => {
-        try {
-          const response = await GetAxiosInstance(`v1/user/${userId}/stores`); // 받아온 좌표값을 hotplace함수에 넣어여함.
-          console.log(response);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      getData('');
-    }); // 이작업은 화면이 처음 랜더링 되었을때만 실행한다.
-  }
+  useEffect(() => {
+    console.log(placeDataStroage);
+  }, [placeDataStroage]);
+
   const mapRef = useRef<kakao.maps.Map>(null);
-
   var times = height / 2.8;
 
   const device = checkDevice();
   return (
-    <styles.Container>
-      <styles.InnerContainer
-        style={{
-          width: `${width}%`,
-          height: `${height}%`,
-        }}
-      >
+    <styles.Container
+      style={{
+        width: `${width}%`,
+        height: `${height}%`,
+      }}
+    >
+      <styles.InnerContainer>
         <LocationSearchComponent
           mapRef={mapRef}
           width={width}
           height={height}
-          setPlaceInnfo={setPlaceData}
+          setplaceDataStroage={setplaceDataStroage}
         />
         <styles.MapContainer>
           <styles.CloseBtn onClick={() => alert('close')} />
           <GroupBarComponent direction="col" color="white" />
+
           <Map
             id="map"
             ref={mapRef}
@@ -96,7 +71,6 @@ const MapComponent: React.FC<MapComponentProps> = ({ width, height }) => {
                 setDeltaY((deltaY) => deltaY - times * (previous - current));
               } else if (previous < current) {
                 setDeltaY((deltaY) => deltaY + times * (current - previous));
-                console.log('최대: ' + deltaY);
               }
             }}
           ></Map>

@@ -3,21 +3,21 @@ import styles from './styles';
 import { searchPlace } from '@/hooks/locationSearch';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
-import { PlaceInfo } from '../mapComponent/mapComponent';
+import { PlaceInfo } from '@/pages/mapPage/mapPage';
 import { GetAxiosInstance } from '@/api/axios.methods';
 
 interface LocationSearchprops {
   mapRef: React.RefObject<kakao.maps.Map>;
   width: number;
   height: number;
-  setPlaceInnfo: React.Dispatch<React.SetStateAction<PlaceInfo>>;
+  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 
 const LocationSearchComponent: React.FC<LocationSearchprops> = ({
   mapRef,
   width,
   height,
-  setPlaceInnfo,
+  setplaceDataStroage,
 }) => {
   const [keyword, setkeyword] = useState('');
   const ListRef = useRef<HTMLUListElement>(null);
@@ -26,17 +26,9 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({
     e.preventDefault();
 
     if (width == 80 && height == 80) {
-      searchPlace(keyword, ListRef, mapRef, setPlaceInnfo, false);
+      searchPlace(keyword, ListRef, mapRef, setplaceDataStroage, false);
     } else if (width == 100 && height == 100) {
-      searchPlace(keyword, ListRef, mapRef, setPlaceInnfo, true);
-      /*
-      검색기능과 장소찾기능은 동일. 그러나 해당장소의 저장기능은 없음. 이때 마커 2번누르면 해당위치의 마커 삭제
-      htmlString의 내용만 변경해서 제공.
-      1. 검색해서 얻은 장소는 두번 클릭시 마커가 지워지게 한다
-      2. 서버에서 가져와서 얻은 데이터는 관심장소에서 제거하지 않는 이상 마커를 제거하지 않는다
-      3.
-    
-      */
+      searchPlace(keyword, ListRef, mapRef, setplaceDataStroage, true);
     }
   };
 
