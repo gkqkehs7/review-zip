@@ -168,7 +168,7 @@ const styles = {
     font-size: 80%;
   `,
 
-  SignUp: styled(Link)`
+  SignUp: styled.div`
     display: flex;
     align-items: center;
     justify-content: center;

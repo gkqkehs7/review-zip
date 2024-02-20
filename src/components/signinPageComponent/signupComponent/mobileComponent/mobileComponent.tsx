@@ -36,7 +36,6 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         {/* 휴대폰 번호입력 */}
         <styles.InputTitle>
           이메일 주소
-          <styles.CheckEmail>중복된 이메일입니다</styles.CheckEmail>
         </styles.InputTitle>
         <styles.Input
           type="email"

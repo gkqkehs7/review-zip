@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './styles';
+import { useNavigate } from 'react-router';
 
 const LaptopComponent: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-
+  const navigate = useNavigate();
   return (
     // 인증방식이 정해지면 추후 완성
     <styles.Container>
@@ -59,6 +60,7 @@ const LaptopComponent: React.FC = () => {
         </styles.CertificationContainer>
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
+        <styles.SignUp onClick={()=>navigate('/signupPage')}>Sign Up</styles.SignUp>
       </styles.Right>
     </styles.Container>
   );
