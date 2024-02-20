@@ -24,8 +24,8 @@ export const searchPlace = (
   keyword: string,
   resultList: React.RefObject<HTMLUListElement>,
   mapRef: React.RefObject<kakao.maps.Map>,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
   fullScreen: boolean,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ) => {
   var ps = new kakao.maps.services.Places();
 
@@ -55,7 +55,7 @@ export const placeSearchCB = (
   searchResult: PlaceInfo[], //data
   status: Status,
   resultList: React.RefObject<HTMLUListElement>,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ) => {
   if (status === kakao.maps.services.Status.OK) {
     displayPlace(searchResult, resultList, setPlaceData);
@@ -72,7 +72,7 @@ export const placeSearchCB = (
 export const displayPlace = (
   result: PlaceInfo[], //검색한 장소의 데이터
   listEl: React.RefObject<HTMLUListElement>,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): void => {
   let fragment = document.createDocumentFragment();
 
@@ -99,7 +99,7 @@ export const displayPlace = (
       map.setCenter(placePostion);
       map.setLevel(1);
       if (clickCount[result[i].place_name] < 2) {
-        setMarker(clickPlace, setPlaceData, createMarker(lat, lng));
+        setMarker(clickPlace, createMarker(lat, lng), setPlaceData);
       }
     });
 
@@ -265,8 +265,8 @@ const createHotplaceMarker = (lat: number, lng: number): kakao.maps.Marker => {
 
 export const setMarker = (
   result: PlaceInfo,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
   marker: kakao.maps.Marker,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ) => {
   var open = false;
   marker.setMap(map);
@@ -289,7 +289,7 @@ const isHotPlace = async (result: PlaceInfo) => {};
 // 윈도우 인포객체를 생성하는 함수
 const createInfoWindow = (
   result: PlaceInfo,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): kakao.maps.InfoWindow => {
   const lat = parseFloat(result.y);
   const lng = parseFloat(result.x);
@@ -308,7 +308,7 @@ const createInfoWindow = (
 //윈도우 인포창에 들어갈 element를 문자열 형태로 전달해주는 함수
 const windowContents = (
   result: PlaceInfo,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): HTMLElement => {
   return setHtmlString(
     result,
@@ -322,9 +322,9 @@ const setHtmlString = (
   result: PlaceInfo,
   savePlace: (
     result: PlaceInfo,
-    setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+    setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
   ) => void,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): HTMLElement => {
   var container = document.createElement('div');
   container.style.display = 'flex';
@@ -396,7 +396,10 @@ const setHtmlString = (
     saveBtn.addEventListener('click', function () {
       saveBtn.style.color = '#ffff00';
 
-      setPlaceData(result);
+      if (setPlaceData) {
+        console.log('Result_PlaceName: ' + result.place_name);
+        setPlaceData(result);
+      }
 
       setTimeout(() => {
         saveBtn.style.color = ''; // 원래 색상으로 복원
@@ -433,7 +436,7 @@ const removeHotplace = async (storeId: number) => {
 // 클릭한 장소의 데이터를 변수에 저장
 const savePlace = (
   result: PlaceInfo,
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): void => {
   const clickPlace: PlaceInfo = {
     place_name: result.place_name,
@@ -443,6 +446,11 @@ const savePlace = (
     x: result.x,
     y: result.y,
   };
+
+  if (setPlaceData) {
+    console.log(result);
+    setPlaceData(result);
+  }
 
   // setPlaceData((prevPlace) => {
   //   // 중복 여부를 확인합니다.
