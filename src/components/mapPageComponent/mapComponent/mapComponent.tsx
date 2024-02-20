@@ -5,12 +5,13 @@ import LocationSearchComponent from '../locationSearchComponent/loactionSearchCo
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 import { PlaceInfo } from '@/types/common.types';
+import { displayPlace, showPlace } from '@/hooks/locationSearch';
 
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
   closeMapModal?: () => void;
-  placeDatas?: PlaceInfo[];
+  placeDatas?: PlaceInfo;
   savePlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
   placeDataStroage?: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
   setplaceDataStroage?: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
@@ -20,14 +21,18 @@ const MapComponent: React.FC<MapComponentProps> = ({
   width,
   height,
   placeDataStroage,
+  placeDatas,
   setplaceDataStroage,
   closeMapModal,
 }) => {
   const [previous, setPrevious] = useState<number>(1); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
+  const [location, setLoacation] = useState<{ x: number; y: number }>({
+    x: 37.44939909637399,
+    y: 126.65435131686084,
+  });
 
   //저장버튼 누를경우 해당값이 placeData에 담긴다.
-
   useEffect(() => {
     console.log(placeDataStroage);
   }, [placeDataStroage]);
@@ -48,6 +53,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
           mapRef={mapRef}
           width={width}
           height={height}
+          setplaceDataStroage={setplaceDataStroage}
         />
         <styles.MapContainer>
           <styles.CloseBtn onClick={closeMapModal} />
@@ -55,7 +61,10 @@ const MapComponent: React.FC<MapComponentProps> = ({
           <Map
             id="map"
             ref={mapRef}
-            center={{ lat: 37.44939909637399, lng: 126.65435131686084 }}
+            center={{
+              lat: location.x,
+              lng: location.y,
+            }}
             style={{
               display: 'flex',
               flexGrow: 1,
