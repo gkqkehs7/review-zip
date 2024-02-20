@@ -14,6 +14,7 @@ import {
   CreateImagesResponse,
 } from '@/types/response.types';
 import MapComponent from '../mapPageComponent/mapComponent/mapComponent';
+import imageCompression from 'browser-image-compression';
 
 interface UploadPostComponentProps {
   userInfo: User;
@@ -79,7 +80,6 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
     try {
       const formData = new FormData();
 
-      // 이미지들 파일에 저장
       files.forEach((file) => {
         formData.append('fileList', file.file);
       });
