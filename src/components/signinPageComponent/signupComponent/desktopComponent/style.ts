@@ -226,6 +226,7 @@ const styles = {
     color: white;
     font-size: 100%;
     font-weight: bold;
+    cursor: pointer;
     &:hover {
       transform: scale(1.1);
     }
