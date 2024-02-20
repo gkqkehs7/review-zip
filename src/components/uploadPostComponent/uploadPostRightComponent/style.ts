@@ -143,6 +143,7 @@ const styles = {
     background-color: white;
     padding: 5px;
     border: none;
+    color: black;
 
     &:focus {
       outline: none;

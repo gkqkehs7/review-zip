@@ -86,6 +86,7 @@ const styles = {
 
   Image: styled.img`
     width: 100%;
+    max-height: 460px;
     object-fit: cover;
   `,
 
