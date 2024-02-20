@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
 
         return axiosInstance(error.config);
       } catch (error) {
-        window.location.href = '/signinPage';
+        window.location.href = '/review-zip/signinPage';
         return Promise.reject(error);
       }
     }
