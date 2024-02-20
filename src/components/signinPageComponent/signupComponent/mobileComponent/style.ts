@@ -129,11 +129,14 @@ const styles = {
     color: white;
   `,
 
-  SignInBtn: styled(Link)`
+  SignInBtn: styled.div`
     margin: 0px 0px 0px 15px;
     color: white;
     font-size: 100%;
     font-weight: bold;
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 };
 export default styles;

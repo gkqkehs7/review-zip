@@ -128,7 +128,7 @@ const DesktopComponent: React.FC<DesktopComponentProps> = ({
         {/* 로그인 페이지로 가는 Link */}
         <styles.SignInContainer>
           <p>계정이 있으신가요?</p>
-          <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
+          <styles.SignInBtn onClick={()=>navigate('/signinPage')}>로그인</styles.SignInBtn>
         </styles.SignInContainer>
       </styles.FormContainer>
     </styles.Container>
