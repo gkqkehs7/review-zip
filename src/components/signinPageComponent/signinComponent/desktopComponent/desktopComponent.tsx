@@ -8,6 +8,8 @@ interface DesktopComponentProps {
   password: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
+  toSignUpPage: () => void;
+  toPasswordRecoveryPage: () => void;
 }
 
 const desktopComponent: React.FC<DesktopComponentProps> = ({
@@ -17,6 +19,8 @@ const desktopComponent: React.FC<DesktopComponentProps> = ({
   password,
   setEmail,
   setPassword,
+  toSignUpPage,
+  toPasswordRecoveryPage,
 }) => {
   return (
     <styles.Container>
@@ -71,8 +75,8 @@ const desktopComponent: React.FC<DesktopComponentProps> = ({
       </styles.Right>
 
       <styles.Footer>
-        <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
-        <styles.ForgotPwd to="/passwordRecoveryPage">
+        <styles.SignUp onClick={toSignUpPage}>Sign Up</styles.SignUp>
+        <styles.ForgotPwd onClick={toPasswordRecoveryPage}>
           Forgot the Password ?
         </styles.ForgotPwd>
       </styles.Footer>

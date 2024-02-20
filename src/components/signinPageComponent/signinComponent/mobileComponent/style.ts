@@ -60,6 +60,10 @@ const styles = {
     width: 100%;
     height: 63px;
     margin: 0px auto 50px auto;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   OrSignBtn: styled.p`
@@ -87,6 +91,10 @@ const styles = {
     color: white;
     font-size: 200%;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   Footer: styled.div`
@@ -99,7 +107,7 @@ const styles = {
     margin: 0px auto 0px auto;
   `,
 
-  ForgotPwd: styled(Link)`
+  ForgotPwd: styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,6 +117,10 @@ const styles = {
     color: white;
     white-space: nowrap;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   SignUp: styled.div`
@@ -121,6 +133,10 @@ const styles = {
     color: white;
     white-space: nowrap;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
   PrivacyPolicy: styled.p`
     width: 116px;

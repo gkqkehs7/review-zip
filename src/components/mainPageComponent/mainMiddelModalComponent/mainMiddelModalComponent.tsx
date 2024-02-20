@@ -2,6 +2,7 @@ import FrameComponent from '@/components/common/frameComponent/frameComponent';
 
 import styles from './style';
 import { Post } from '@/types/common.types';
+import { useNavigate } from 'react-router-dom';
 
 interface MainMiddelModalComponentProps {
   post: Post;
@@ -18,6 +19,12 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
   closeLoadingModal,
   openLoadingModal,
 }) => {
+  const navigate = useNavigate();
+
+  const toUserProfile = () => {
+    navigate(`/profilePage/${post.user.userId}`);
+  };
+
   return (
     <styles.Container
       style={{
@@ -29,7 +36,11 @@ const MainMiddelModalComponent: React.FC<MainMiddelModalComponentProps> = ({
     >
       <styles.InnerContainer>
         {/* 액자 */}
-        <FrameComponent post={post} openLoadingModal={openLoadingModal} />
+        <FrameComponent
+          post={post}
+          openLoadingModal={openLoadingModal}
+          toUserProfile={toUserProfile}
+        />
 
         {/* 게시글 내용 */}
         <styles.ContentContainer>

@@ -56,6 +56,14 @@ const SigninPage: React.FC = () => {
     }
   }, [email, password]);
 
+  const toSignUpPage = () => {
+    navigate('/signupPage');
+  };
+
+  const toPasswordRecoveryPage = () => {
+    navigate('passwordRecoveryPage');
+  };
+
   return (
     <>
       <div>
@@ -67,6 +75,8 @@ const SigninPage: React.FC = () => {
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
             requestSignin={requestSignin}
+            toSignUpPage={toSignUpPage}
+            toPasswordRecoveryPage={toPasswordRecoveryPage}
           />
         )}
         {isDesktop && (
@@ -77,6 +87,8 @@ const SigninPage: React.FC = () => {
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
             requestSignin={requestSignin}
+            toSignUpPage={toSignUpPage}
+            toPasswordRecoveryPage={toPasswordRecoveryPage}
           />
         )}
 
@@ -88,6 +100,8 @@ const SigninPage: React.FC = () => {
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
             requestSignin={requestSignin}
+            toSignUpPage={toSignUpPage}
+            toPasswordRecoveryPage={toPasswordRecoveryPage}
           />
         )}
         {isMobile && (
@@ -98,6 +112,8 @@ const SigninPage: React.FC = () => {
             setPassword={setPassword}
             kakaoLoginUrl={kakaoLoginUrl}
             requestSignin={requestSignin}
+            toSignUpPage={toSignUpPage}
+            toPasswordRecoveryPage={toPasswordRecoveryPage}
           />
         )}
       </div>

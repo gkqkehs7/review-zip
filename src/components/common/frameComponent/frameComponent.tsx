@@ -8,23 +8,26 @@ import { Post } from '@/types/common.types';
 import styles from './style';
 import MainMiddleStarImage from '/images/mainPage/MainMiddleStar.png';
 import MainMiddeleStickerImage from '/images/mainPage/MainMiddleSticker.png';
+import { useNavigate } from 'react-router-dom';
 
 interface FrameComponentProps {
   post: Post;
   blur?: boolean;
   openLoadingModal?: () => void;
+  toUserProfile?: () => void;
 }
 
 const FrameComponent: React.FC<FrameComponentProps> = ({
   post,
   blur,
   openLoadingModal,
+  toUserProfile,
 }) => {
   const deviceSize = checkDevice();
 
   return (
     <styles.Container
-      onClick={openLoadingModal}
+      onClick={toUserProfile}
       style={{
         filter: blur ? 'blur(10px)' : 'blur(0px)',
       }}

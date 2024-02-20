@@ -5,24 +5,20 @@ import LocationSearchComponent from '../locationSearchComponent/loactionSearchCo
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 import { PlaceInfo } from '@/types/common.types';
-import { displayPlace, showPlace } from '@/hooks/locationSearch';
 
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
   closeMapModal?: () => void;
   placeDatas?: PlaceInfo;
-  savePlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
-  placeDataStroage?: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
-  setplaceDataStroage?: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({
   width,
   height,
-  placeDataStroage,
   placeDatas,
-  setplaceDataStroage,
+  setPlaceData,
   closeMapModal,
 }) => {
   const [previous, setPrevious] = useState<number>(1); //지도의 이전 level을 나타내는 값
@@ -32,15 +28,43 @@ const MapComponent: React.FC<MapComponentProps> = ({
     y: 126.65435131686084,
   });
 
-  //저장버튼 누를경우 해당값이 placeData에 담긴다.
   useEffect(() => {
-    console.log(placeDataStroage);
-  }, [placeDataStroage]);
+    if (placeDatas) {
+      setLoacation({
+        x: parseFloat(placeDatas.x),
+        y: parseFloat(placeDatas.y),
+      });
+    }
+  }, [placeDatas]);
 
   const mapRef = useRef<kakao.maps.Map>(null);
   var times = height / 2.8;
 
+  useEffect(() => {
+    if (placeDatas) {
+      const lat = parseFloat(placeDatas.x);
+      const lng = parseFloat(placeDatas.y);
+      var placePostion = new kakao.maps.LatLng(lat, lng);
+      mapRef.current?.setCenter(placePostion);
+      mapRef.current?.setLevel(1);
+
+      const imageSrc = 'images/mapPage/Marker.png';
+      let imageSize = new kakao.maps.Size(30, 30);
+
+      let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+      var markerPosition = new kakao.maps.LatLng(lat, lng);
+
+      var marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage,
+      });
+
+      marker.setMap(mapRef.current);
+    }
+  }, [mapRef.current, location]);
+
   const device = checkDevice();
+
   return (
     <styles.Container
       style={{
@@ -53,7 +77,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
           mapRef={mapRef}
           width={width}
           height={height}
-          setplaceDataStroage={setplaceDataStroage}
+          setPlaceData={setPlaceData}
         />
         <styles.MapContainer>
           <styles.CloseBtn onClick={closeMapModal} />

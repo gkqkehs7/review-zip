@@ -23,7 +23,7 @@ const styles = {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 검은색 배경, 투명도 조절 */
+    background-color: #1a0e29; /* 검은색 배경, 투명도 조절 */
     z-index: 2;
     cursor: pointer;
   `,
@@ -85,7 +85,7 @@ const styles = {
   // 유저 이름 컨테이너
   UserNameContainer: styled.div<NameProps>`
     width: 200px;
-    min-width: 100px;
+    min-width: 200px;
     height: 100px;
     margin: 0 20px;
     //이름 수정시에 밑에만 border
@@ -167,6 +167,26 @@ const styles = {
     font-weight: bolder;
     color: black;
     border-radius: 7px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
+
+  SignOutButton: styled.div`
+    background-color: #957db3;
+    width: 95px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+    border-radius: 7px;
+    margin-right: 10px;
     cursor: pointer;
 
     &:hover {
@@ -181,7 +201,6 @@ const styles = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20px;
 
     &:hover {
       opacity: 0.8;
@@ -200,8 +219,12 @@ const styles = {
     align-items: center;
     width: 5vw;
     min-width: 80px;
-    height: 10vh;
+    height: 60px;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
   //게시글 클릭시 왼쪽에 뜰 보라색 도형
   LeftPurpleRectangle: styled.div`

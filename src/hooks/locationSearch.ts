@@ -24,7 +24,7 @@ export const searchPlace = (
   keyword: string,
   resultList: React.RefObject<HTMLUListElement>,
   mapRef: React.RefObject<kakao.maps.Map>,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
   fullScreen: boolean,
 ) => {
   var ps = new kakao.maps.services.Places();
@@ -45,7 +45,7 @@ export const searchPlace = (
   ps.keywordSearch(
     keyword,
     (PlaceData, status) =>
-      placeSearchCB(PlaceData, status, resultList, setplaceDataStroage),
+      placeSearchCB(PlaceData, status, resultList, setPlaceData),
     { useMapBounds: true },
   );
 };
@@ -55,10 +55,10 @@ export const placeSearchCB = (
   searchResult: PlaceInfo[], //data
   status: Status,
   resultList: React.RefObject<HTMLUListElement>,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ) => {
   if (status === kakao.maps.services.Status.OK) {
-    displayPlace(searchResult, resultList, setplaceDataStroage);
+    displayPlace(searchResult, resultList, setPlaceData);
   } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
     alert('검색 결과가 존재하지 않습니다.');
     return;
@@ -72,7 +72,7 @@ export const placeSearchCB = (
 export const displayPlace = (
   result: PlaceInfo[], //검색한 장소의 데이터
   listEl: React.RefObject<HTMLUListElement>,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): void => {
   let fragment = document.createDocumentFragment();
 
@@ -99,7 +99,7 @@ export const displayPlace = (
       map.setCenter(placePostion);
       map.setLevel(1);
       if (clickCount[result[i].place_name] < 2) {
-        setMarker(clickPlace, setplaceDataStroage, createMarker(lat, lng));
+        setMarker(clickPlace, setPlaceData, createMarker(lat, lng));
       }
     });
 
@@ -265,12 +265,12 @@ const createHotplaceMarker = (lat: number, lng: number): kakao.maps.Marker => {
 
 export const setMarker = (
   result: PlaceInfo,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
   marker: kakao.maps.Marker,
 ) => {
   var open = false;
   marker.setMap(map);
-  var infoWindow = createInfoWindow(result, setplaceDataStroage);
+  var infoWindow = createInfoWindow(result, setPlaceData);
 
   kakao.maps.event.addListener(marker, 'click', () => {
     //핫플레이스인지 아닌지에 따라 이벤트가 다르게 적용
@@ -289,12 +289,12 @@ const isHotPlace = async (result: PlaceInfo) => {};
 // 윈도우 인포객체를 생성하는 함수
 const createInfoWindow = (
   result: PlaceInfo,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): kakao.maps.InfoWindow => {
   const lat = parseFloat(result.y);
   const lng = parseFloat(result.x);
 
-  var iwContent = windowContents(result, setplaceDataStroage);
+  var iwContent = windowContents(result, setPlaceData);
   var iwPosition = new kakao.maps.LatLng(lat, lng); //윈도우 인포를 띄울 위치
 
   var infoWindow = new kakao.maps.InfoWindow({
@@ -308,12 +308,12 @@ const createInfoWindow = (
 //윈도우 인포창에 들어갈 element를 문자열 형태로 전달해주는 함수
 const windowContents = (
   result: PlaceInfo,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): HTMLElement => {
   return setHtmlString(
     result,
-    () => savePlace(result, setplaceDataStroage),
-    setplaceDataStroage,
+    () => savePlace(result, setPlaceData),
+    setPlaceData,
   );
 };
 
@@ -322,9 +322,9 @@ const setHtmlString = (
   result: PlaceInfo,
   savePlace: (
     result: PlaceInfo,
-    setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+    setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
   ) => void,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): HTMLElement => {
   var container = document.createElement('div');
   container.style.display = 'flex';
@@ -396,12 +396,13 @@ const setHtmlString = (
     saveBtn.addEventListener('click', function () {
       saveBtn.style.color = '#ffff00';
 
+      setPlaceData(result);
+
       setTimeout(() => {
         saveBtn.style.color = ''; // 원래 색상으로 복원
       }, 200);
 
-      // 저장 함수 호출
-      savePlace(result, setplaceDataStroage);
+      return alert('장소 설정이 완료되었습니다.');
     });
   } else {
     /*클릭한 장소가 저잘되어있는 장소일때.
@@ -432,7 +433,7 @@ const removeHotplace = async (storeId: number) => {
 // 클릭한 장소의 데이터를 변수에 저장
 const savePlace = (
   result: PlaceInfo,
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>,
+  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo>>,
 ): void => {
   const clickPlace: PlaceInfo = {
     place_name: result.place_name,
@@ -443,20 +444,20 @@ const savePlace = (
     y: result.y,
   };
 
-  setplaceDataStroage((prevPlace) => {
-    // 중복 여부를 확인합니다.
-    const isDuplicate = prevPlace.some(
-      (place) =>
-        place.place_name === clickPlace.place_name &&
-        place.address_name === clickPlace.address_name &&
-        place.x === clickPlace.x &&
-        place.y === clickPlace.y,
-    );
+  // setPlaceData((prevPlace) => {
+  //   // 중복 여부를 확인합니다.
+  //   const isDuplicate = prevPlace.some(
+  //     (place) =>
+  //       place.place_name === clickPlace.place_name &&
+  //       place.address_name === clickPlace.address_name &&
+  //       place.x === clickPlace.x &&
+  //       place.y === clickPlace.y,
+  //   );
 
-    if (!isDuplicate) {
-      return [...prevPlace, clickPlace];
-    } else {
-      return prevPlace;
-    }
-  });
+  //   if (!isDuplicate) {
+  //     return [...prevPlace, clickPlace];
+  //   } else {
+  //     return prevPlace;
+  //   }
+  // });
 };
