@@ -13,6 +13,7 @@ import {
   PostAxiosInstance,
 } from '@/api/axios.methods';
 import { GetPostLikedUsersResponse } from '@/types/response.types';
+import MapComponent from '../mapPageComponent/mapComponent/mapComponent';
 
 interface PostComponentProps {
   post: Post;
@@ -43,6 +44,16 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const [postLikeNum, setPostLikeNum] = useState<number>(post.likeNum);
 
   const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false); // delete modal 띄우기용
+  const [mapModalOpen, setMapModalOpen] = useState<boolean>(false); // 맵 모달 띄우기용 변수
+
+  // map 모달 열기
+  const openMapModal = useCallback(() => {
+    setMapModalOpen(true);
+  }, [mapModalOpen]);
+
+  const closeMapModal = useCallback(() => {
+    setMapModalOpen(false);
+  }, [mapModalOpen]);
 
   // 좋아요 누른 목록 가져오기 나중에 postId로 변경
   const getLikeUsers = async () => {
@@ -236,6 +247,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
         unLikePost={unLikePost}
         scrabPost={scrabPost}
         unScrabPost={unScrabPost}
+        openMapModal={openMapModal}
       />
 
       <LikeListComponent
@@ -251,6 +263,10 @@ const PostComponent: React.FC<PostComponentProps> = ({
           closeAlertModal={closeAlertModal}
           deletePost={deletePost}
         />
+      )}
+
+      {mapModalOpen && (
+        <MapComponent width={80} height={80} closeMapModal={closeMapModal} />
       )}
     </styles.Container>
   );

@@ -10,6 +10,7 @@ import LikeButtonImage from '/images/post/LikeButton.png';
 import NotScrabButtonImage from '/images/post/NotScrabButton.png';
 import NotLikeButtonImage from '/images/post/NotLikeButton.png';
 import SpaceShipImage from '/images/post/SpaceShip.png';
+import MapButtonImage from '/images/uploadPost/MapButton.png';
 
 interface PostLeftComponentProps {
   post: Post;
@@ -22,6 +23,7 @@ interface PostLeftComponentProps {
   unLikePost: () => Promise<void>;
   scrabPost: () => Promise<void>;
   unScrabPost: () => Promise<void>;
+  openMapModal: () => void;
 }
 
 const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
@@ -35,6 +37,7 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
   unLikePost,
   scrabPost,
   unScrabPost,
+  openMapModal,
 }) => {
   const navigation = useNavigate();
 
@@ -111,6 +114,8 @@ const PostLeftComponent: React.FC<PostLeftComponentProps> = ({
                   onClick={scrabPost}
                 />
               )}
+
+              <styles.MapButton src={MapButtonImage} onClick={openMapModal} />
             </styles.LikeSrabButtons>
 
             <StarRatingComponent count={post.point} all={true} />

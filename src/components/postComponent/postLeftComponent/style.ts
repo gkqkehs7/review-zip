@@ -170,10 +170,29 @@ const styles = {
     width: 26px;
     height: auto;
     margin-right: 10px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   ScrabButton: styled.img`
     cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  `,
+
+  MapButton: styled.img`
+    cursor: pointer;
+    width: 26px;
+    height: auto;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   LikeContainer: styled.div`

@@ -203,7 +203,7 @@ const MyProfilePage: React.FC = () => {
           )}
         >
           {/* 그룹 바 */}
-          <GroupBarComponent color="purple" direction="row" />
+          <GroupBarComponent color="purple" direction="col" />
 
           {/* 게시물이 클릭이 된 경우  */}
           {clickedPost && (

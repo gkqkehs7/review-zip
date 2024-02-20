@@ -11,8 +11,9 @@ import { PlaceInfo } from '@/types/common.types';
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
-  placeDataStroage: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
   closeMapModal?: () => void;
+  placeDatas: PlaceInfo[];
+  placeDataStroage: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
   setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 

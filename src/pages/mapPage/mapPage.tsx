@@ -9,8 +9,8 @@ const MapPage: React.FC = () => {
   return (
     <styles.Container>
       <MapComponent
-        width={100}
-        height={100}
+        width={80}
+        height={80}
         placeDataStroage={placeDataStroage}
         setplaceDataStroage={setplaceDataStroage}
       />
