@@ -29,6 +29,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
   setNickName,
   setPassword,
 }) => {
+  const navigate = useNavigate();
   return (
     <styles.Container>
       <styles.InputContainer>
@@ -117,7 +118,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
       {/* 로그인 페이지로 가는 Link */}
       <styles.SignInContainer>
         <p>계정이 있으신가요?</p>
-        <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
+        <styles.SignInBtn onClick={()=>navigate('/signinPage')}>로그인</styles.SignInBtn>
       </styles.SignInContainer>
     </styles.Container>
   );
