@@ -247,22 +247,6 @@ export const createMarker = (lat: number, lng: number): kakao.maps.Marker => {
   return marker;
 };
 
-//핫플레이스의 좌표값을 통해 마커를 생성하는 함수
-const createHotplaceMarker = (lat: number, lng: number): kakao.maps.Marker => {
-  const imageSrc = 'images/mapPage/Marker.png';
-  let imageSize = new kakao.maps.Size(30, 30);
-
-  let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-  var markerPosition = new kakao.maps.LatLng(lat, lng);
-
-  var marker = new kakao.maps.Marker({
-    position: markerPosition,
-    image: markerImage,
-  });
-
-  return marker;
-};
-
 export const setMarker = (
   result: PlaceInfo,
   marker: kakao.maps.Marker,
@@ -283,8 +267,6 @@ export const setMarker = (
     }
   });
 };
-
-const isHotPlace = async (result: PlaceInfo) => {};
 
 // 윈도우 인포객체를 생성하는 함수
 const createInfoWindow = (
@@ -310,20 +292,12 @@ const windowContents = (
   result: PlaceInfo,
   setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): HTMLElement => {
-  return setHtmlString(
-    result,
-    () => savePlace(result, setPlaceData),
-    setPlaceData,
-  );
+  return setHtmlString(result, setPlaceData);
 };
 
 //htmlString을 작성해주는 함수
 const setHtmlString = (
   result: PlaceInfo,
-  savePlace: (
-    result: PlaceInfo,
-    setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
-  ) => void,
   setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
 ): HTMLElement => {
   var container = document.createElement('div');
@@ -397,7 +371,15 @@ const setHtmlString = (
       saveBtn.style.color = '#ffff00';
 
       if (setPlaceData) {
-        console.log('Result_PlaceName: ' + result.place_name);
+        result = {
+          place_name: result.place_name,
+          address_name: result.address_name,
+          road_address_name: result.road_address_name,
+          phone: result.phone,
+          x: result.x,
+          y: result.y,
+        };
+
         setPlaceData(result);
       }
 
@@ -425,47 +407,4 @@ const setHtmlString = (
   return container;
 };
 
-//제거한 다음. 윈도우 인포를 닫은뒤 마커를 삭제.
-const removeHotplace = async (storeId: number) => {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// 클릭한 장소의 데이터를 변수에 저장
-const savePlace = (
-  result: PlaceInfo,
-  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>,
-): void => {
-  const clickPlace: PlaceInfo = {
-    place_name: result.place_name,
-    address_name: result.address_name,
-    road_address_name: result.road_address_name,
-    phone: result.phone,
-    x: result.x,
-    y: result.y,
-  };
-
-  if (setPlaceData) {
-    console.log(result);
-    setPlaceData(result);
-  }
-
-  // setPlaceData((prevPlace) => {
-  //   // 중복 여부를 확인합니다.
-  //   const isDuplicate = prevPlace.some(
-  //     (place) =>
-  //       place.place_name === clickPlace.place_name &&
-  //       place.address_name === clickPlace.address_name &&
-  //       place.x === clickPlace.x &&
-  //       place.y === clickPlace.y,
-  //   );
-
-  //   if (!isDuplicate) {
-  //     return [...prevPlace, clickPlace];
-  //   } else {
-  //     return prevPlace;
-  //   }
-  // });
-};
+//
