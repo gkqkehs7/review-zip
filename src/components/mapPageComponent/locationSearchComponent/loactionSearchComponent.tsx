@@ -9,7 +9,7 @@ interface LocationSearchprops {
   mapRef: React.RefObject<kakao.maps.Map>;
   width: number;
   height: number;
-  setPlaceData: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
+  setPlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
 }
 
 const LocationSearchComponent: React.FC<LocationSearchprops> = ({
@@ -25,9 +25,9 @@ const LocationSearchComponent: React.FC<LocationSearchprops> = ({
     e.preventDefault();
 
     if (width == 80 && height == 80) {
-      searchPlace(keyword, ListRef, mapRef, setPlaceData, false);
+      searchPlace(keyword, ListRef, mapRef, false, setPlaceData);
     } else if (width == 100 && height == 100) {
-      searchPlace(keyword, ListRef, mapRef, setPlaceData, true);
+      searchPlace(keyword, ListRef, mapRef, true, setPlaceData);
     }
   };
 
