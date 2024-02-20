@@ -6,6 +6,7 @@ import { changeInputValue } from '@/hooks/chageInputValue';
 import {
   DeleteAxiosInstance,
   GetAxiosInstance,
+  PatchAxiosInstance,
   PostAxiosInstance,
 } from '@/api/axios.methods';
 import { Post, User } from '@/types/common.types';
@@ -14,6 +15,7 @@ import {
   GetUserInfoResponse,
   GetFollowingsResponse,
   GetFollowersResponse,
+  CreateImagesResponse,
 } from '@/types/response.types';
 
 import { checkDevice } from '@/utils/checkDeviceSize';
@@ -66,8 +68,8 @@ const MyProfilePage: React.FC = () => {
   //프로필 변경시 고른 이미지
   const [selectedImage, setSelectedImage] = useState<File | null>();
 
-  //유저 이름 프로필 수정시에 업데이트
-  const [userName, setUserName] = useState<string>('');
+  //유저 프로필 수정시에 업데이트
+  const [userNickname, setUserNickname] = useState<string>('');
 
   // '친구 목록' 모달을 닫는 함수
   const closeLikeListModal = () => {
@@ -83,53 +85,37 @@ const MyProfilePage: React.FC = () => {
 
   // 올린 게시글들 가져오기
   const getPosts = useCallback(async () => {
-    try {
-      const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts`,
-      );
+    const response = await GetAxiosInstance<GetUserPostsResponse>(
+      `/v1/users/${userId}/posts`,
+    );
 
-      setPosts(response.data.result);
-    } catch (error) {
-      console.log(error);
-    }
+    setPosts(response.data.result);
   }, []);
 
   // 스크랩한 게시글들 가져오기
   const getScrabPosts = useCallback(async () => {
-    try {
-      const response = await GetAxiosInstance<GetUserPostsResponse>(
-        `/v1/users/${userId}/posts/scrabs`,
-      );
-      setScrabPosts(response.data.result);
-    } catch (error) {
-      console.log(error);
-    }
+    const response = await GetAxiosInstance<GetUserPostsResponse>(
+      `/v1/users/${userId}/posts/scrabs`,
+    );
+    setScrabPosts(response.data.result);
   }, []);
 
   // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
   const getUserInfo = useCallback(async () => {
-    try {
-      const response = await GetAxiosInstance<GetUserInfoResponse>(
-        `/v1/users/${userId}`,
-      );
-      setUserInfo(response.data.result);
-      setUserName(response.data.result.nickname);
-    } catch (error) {
-      console.log(error);
-    }
+    const response = await GetAxiosInstance<GetUserInfoResponse>(
+      `/v1/users/${userId}`,
+    );
+    setUserInfo(response.data.result);
+    setUserNickname(response.data.result.nickname);
   }, [userId]);
 
   // 팔로잉 목록 가져오기
   const getFollowingList = useCallback(async () => {
-    try {
-      const response = await GetAxiosInstance<GetFollowingsResponse>(
-        `/v1/users/${userId}/followings`,
-      );
+    const response = await GetAxiosInstance<GetFollowingsResponse>(
+      `/v1/users/${userId}/followings`,
+    );
 
-      setFollowings(response.data.result);
-    } catch (error) {
-      console.log(error);
-    }
+    setFollowings(response.data.result);
   }, [userId]);
 
   // 팔로워 목록 가져오기
@@ -148,7 +134,6 @@ const MyProfilePage: React.FC = () => {
       await PostAxiosInstance(`/v1/follows/users/${userId}`);
     } catch (error) {
       setUserInfo({ ...user, following: false });
-      console.error(error);
     }
   };
 
@@ -158,7 +143,40 @@ const MyProfilePage: React.FC = () => {
       await DeleteAxiosInstance(`/v1/follows/users/${userId}`);
     } catch (error) {
       setUserInfo({ ...user, following: true });
-      console.error(error);
+    }
+  };
+
+  const editProfile = async () => {
+    try {
+      // 이미지 변경
+      if (selectedImage) {
+        const formData = new FormData();
+
+        formData.append('fileList', selectedImage);
+
+        const response = await PostAxiosInstance<CreateImagesResponse>(
+          '/v1/images/upload',
+          formData,
+        );
+
+        const { imageIds } = response.data.result;
+
+        await PatchAxiosInstance('/v1/users/me/profileUrl', {
+          imageId: imageIds[0],
+        });
+      }
+
+      // 닉네임 변경
+      await PatchAxiosInstance('/v1/users/me/nickname', {
+        nickname: userNickname,
+      });
+
+      if (userInfo) {
+        setUserInfo({ ...userInfo, nickname: userNickname });
+      }
+      setIsEditProfile(!isEditProfile);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -185,7 +203,7 @@ const MyProfilePage: React.FC = () => {
           )}
         >
           {/* 그룹 바 */}
-          <GroupBarComponent color="purple" direction="row" />
+          <GroupBarComponent color="purple" direction="col" />
 
           {/* 게시물이 클릭이 된 경우  */}
           {clickedPost && (
@@ -233,12 +251,12 @@ const MyProfilePage: React.FC = () => {
                     {isEditProfile && (
                       <styles.EditUserName
                         type="text"
-                        value={userName}
-                        onChange={(e) => changeInputValue(e, setUserName)}
+                        value={userNickname}
+                        onChange={(e) => changeInputValue(e, setUserNickname)}
                       />
                     )}
                     {/* input 태그에 입력하는 중에 기존 이름이 동시에 뜨지 않도록 프로필 수정이 끝나면 userName이 뜨도록 함*/}
-                    {!isEditProfile && userInfo && userName}
+                    {!isEditProfile && userInfo && userNickname}
                   </styles.UserName>
                 </styles.UserNameContainer>
                 {/* 프로필 수정시에 인풋 태그 옆에 뜰 연필 아이콘  */}
@@ -284,8 +302,15 @@ const MyProfilePage: React.FC = () => {
                     </styles.FollowButton>
                   )}
 
+                  {/* 프로필 수정 */}
+                  {!isFriend && isEditProfile && (
+                    <styles.EditProfileButton onClick={editProfile}>
+                      수정 완료
+                    </styles.EditProfileButton>
+                  )}
+
                   {/* 나인경우  */}
-                  {!isFriend && (
+                  {!isFriend && !isEditProfile && (
                     <styles.EditProfileButton
                       onClick={() => {
                         setIsEditProfile(!isEditProfile);

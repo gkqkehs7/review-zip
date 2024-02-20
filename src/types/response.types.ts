@@ -4,6 +4,7 @@ import { User, Post, Hashtag, History } from './common.types';
 // /v1/oauth/kakao
 interface KakaoLoginType {
   accessToken: string;
+  refreshToken: string;
 }
 
 interface LocalSignInResponse {

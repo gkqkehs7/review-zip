@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
 import styles from './styles';
-import ZoomController from '@/components/mapPageComponent/zoomControllerComponent/zoomControllerComponent';
 import LocationSearchComponent from '../locationSearchComponent/loactionSearchComponent';
-import GroupBarComponent from '@/components/common/groupBarComponent/groupBarComponent';
 import { responsiveWidthHeight } from '@/utils/reponsiveSize';
 import { checkDevice } from '@/utils/checkDeviceSize';
 import { PlaceInfo } from '@/types/common.types';
@@ -11,9 +9,11 @@ import { PlaceInfo } from '@/types/common.types';
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
-  placeDataStroage: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
   closeMapModal?: () => void;
-  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
+  placeDatas?: PlaceInfo[];
+  savePlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
+  placeDataStroage?: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
+  setplaceDataStroage?: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({
@@ -23,7 +23,7 @@ const MapComponent: React.FC<MapComponentProps> = ({
   setplaceDataStroage,
   closeMapModal,
 }) => {
-  const [previous, setPrevious] = useState<number>(6); //지도의 이전 level을 나타내는 값
+  const [previous, setPrevious] = useState<number>(1); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
 
   //저장버튼 누를경우 해당값이 placeData에 담긴다.
@@ -48,16 +48,14 @@ const MapComponent: React.FC<MapComponentProps> = ({
           mapRef={mapRef}
           width={width}
           height={height}
-          setplaceDataStroage={setplaceDataStroage}
         />
         <styles.MapContainer>
-          <GroupBarComponent direction="col" color="white" />
           <styles.CloseBtn onClick={closeMapModal} />
 
           <Map
             id="map"
             ref={mapRef}
-            center={{ lat: 37.566826, lng: 126.9786567 }}
+            center={{ lat: 37.44939909637399, lng: 126.65435131686084 }}
             style={{
               display: 'flex',
               flexGrow: 1,
@@ -76,7 +74,6 @@ const MapComponent: React.FC<MapComponentProps> = ({
               }
             }}
           ></Map>
-          <ZoomController deltaY={deltaY} height={height} width={width} />
         </styles.MapContainer>
 
         <styles.PurpleStar

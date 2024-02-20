@@ -3,6 +3,7 @@ interface CreatePostRequest {
   comment: string;
   point: number;
   imageIds: number[];
+  hashtags: string[];
   storeInfo: {
     name: string;
     addressName: string;

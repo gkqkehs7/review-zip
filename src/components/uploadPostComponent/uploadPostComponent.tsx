@@ -96,11 +96,14 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
 
       const { imageIds } = response.data.result;
 
+      const postHashtags = hashTags.map((hashTag) => hashTag.tag);
+
       const createPostRequest: CreatePostRequest = {
         userId: 1,
         comment: textInput,
         point: starCount,
         imageIds: imageIds,
+        hashtags: postHashtags,
         storeInfo: {
           name: placeData.place_name,
           addressName: placeData.address_name,
@@ -111,15 +114,10 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
       };
 
       // 받아온 이미지 id들로 게시글 업로드
-      const createPostResponse = await PostAxiosInstance<CreatePostResponse>(
+      await PostAxiosInstance<CreatePostResponse>(
         '/v1/posts',
         createPostRequest,
       );
-
-      const { postId } = createPostResponse.data.result;
-
-      // 받은 게시글 id로 해시태그 생성
-      await PostAxiosInstance(`/v1/posts/${postId}/hashtags`, {});
 
       return navigate('/mainPage');
     } catch (error) {
