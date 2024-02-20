@@ -284,7 +284,12 @@ const PostComponent: React.FC<PostComponentProps> = ({
       )}
 
       {mapModalOpen && (
-        <MapComponent width={80} height={80} closeMapModal={closeMapModal} />
+        <MapComponent
+          width={80}
+          height={80}
+          closeMapModal={closeMapModal}
+          placeDatas={postPlace}
+        />
       )}
     </styles.Container>
   );
