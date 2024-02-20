@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style';
 
@@ -52,10 +52,6 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
 
   const closeMapModal = useCallback(() => {
     setMapModalOpen(false);
-
-    if (placeData) {
-      return alert('장소 설정이 완료되었습니다.');
-    }
   }, [mapModalOpen]);
 
   // 게시글 보내기 - post이후 success가 오면 mainPage로 이동
@@ -125,6 +121,9 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
     }
   };
 
+  useEffect(() => {
+    console.log(placeData);
+  }, [placeData]);
   return (
     <styles.Container>
       {/* 게시글 업로드 부분 */}
@@ -159,7 +158,7 @@ const UploadPostComponent: React.FC<UploadPostComponentProps> = ({
           width={80}
           height={80}
           closeMapModal={closeMapModal}
-          savePlaceData={setPlaceData}
+          setPlaceData={setPlaceData}
         />
       )}
     </styles.Container>
