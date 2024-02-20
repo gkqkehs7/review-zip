@@ -13,7 +13,7 @@ const NotFoundPage: React.FC = () => {
         <styles.Right>
           <div>
             <styles.Text as="h2">
-              원하시는 페이지를 찾을 수 없습니다.{' '}
+              원하시는 페이지를 찾을 수 없습니다.
             </styles.Text>
             <styles.Text>
               찾으려는 페이지의 주소가 잘못 입력되었거나
@@ -26,14 +26,6 @@ const NotFoundPage: React.FC = () => {
           </div>
         </styles.Right>
       </styles.Container>
-
-      {/* 무료 아이콘 출처 표시 */}
-      <a
-        href="https://www.flaticon.com/kr/free-icons/404-"
-        title="404 오류 아이콘"
-      >
-        404 오류 아이콘 제작자: Freepik - Flaticon
-      </a>
     </>
   );
 };
