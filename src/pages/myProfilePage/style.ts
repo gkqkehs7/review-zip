@@ -149,6 +149,10 @@ const styles = {
     color: black;
     border-radius: 7px;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   `,
 
   //프로필 수정 버튼 다른 유저인 경우 리뷰잉 버튼

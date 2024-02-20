@@ -21,6 +21,7 @@ interface Post {
   user: User;
   hashtags: Hashtag[];
   postImages: PostImages[];
+  store: Store;
 }
 
 interface PostImages {
@@ -39,6 +40,14 @@ interface Hashtag {
   hashtagId: number;
   tagName: string;
   postNum?: number;
+}
+
+interface Store {
+  latitude: string;
+  longitude: string;
+  name: string;
+  roadAddressName: string;
+  addressName: string;
 }
 
 interface PlaceInfo {

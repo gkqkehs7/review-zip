@@ -232,7 +232,7 @@ const styleElement = (el: HTMLElement): void => {
 };
 
 //클릭한 장소의 좌표값을 가진 마커를 생성해줌
-const createMarker = (lat: number, lng: number): kakao.maps.Marker => {
+export const createMarker = (lat: number, lng: number): kakao.maps.Marker => {
   const imageSrc = 'images/mapPage/Marker.png';
   let imageSize = new kakao.maps.Size(30, 30);
 

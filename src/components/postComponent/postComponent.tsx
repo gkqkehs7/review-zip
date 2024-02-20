@@ -6,7 +6,7 @@ import LikeListComponent from '@/components/common/likeListComponent/likeListCom
 import AlertComponent from '../common/alertComponent/alertComponent';
 
 import styles from './style';
-import { Post, User } from '@/types/common.types';
+import { PlaceInfo, Post, User } from '@/types/common.types';
 import {
   DeleteAxiosInstance,
   GetAxiosInstance,
@@ -42,6 +42,24 @@ const PostComponent: React.FC<PostComponentProps> = ({
   const [checkScrab, setCheckScrab] = useState<boolean>(post.checkScrab!);
 
   const [postLikeNum, setPostLikeNum] = useState<number>(post.likeNum);
+
+  const [postPlace, setPostPlace] = useState<PlaceInfo>({
+    place_name: '인하대학교 용현캠퍼스',
+    address_name: '인천 미추홀구 용현동 253',
+    road_address_name: '인천 미추홀구 인하로 100',
+    phone: 'any',
+    x: '37.44939909637399',
+    y: '126.65435131686084',
+  });
+
+  // const [postPlace, setPostPlace] = useState<PlaceInfo>({
+  //   place_name: post.store?.name,
+  //   address_name: post.store?.addressName,
+  //   road_address_name: post.store?.roadAddressName,
+  //   phone: 'any',
+  //   x: post.store?.latitude,
+  //   y: post.store?.longitude,
+  // });
 
   const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false); // delete modal 띄우기용
   const [mapModalOpen, setMapModalOpen] = useState<boolean>(false); // 맵 모달 띄우기용 변수
@@ -100,7 +118,7 @@ const PostComponent: React.FC<PostComponentProps> = ({
     if (scrabPosts && setScrabPosts && posts && setPosts) {
       const updatedPost = { ...post, checkScrab: true };
 
-      const updatedScrabPosts = [...scrabPosts, updatedPost];
+      const updatedScrabPosts = [updatedPost, ...scrabPosts];
 
       const updatedPosts = posts.map((post_) => {
         if (post_.postId === post.postId) {
