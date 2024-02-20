@@ -164,6 +164,10 @@ const styles = {
     color: black;
     border-radius: 7px;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   `,
 
   //다른 유저인 경우 띄울 지도 버튼
@@ -174,6 +178,10 @@ const styles = {
     justify-content: center;
     align-items: center;
     margin-left: 20px;
+
+    &:hover {
+      opacity: 0.8;
+    }
   `,
   //최상위 버튼 컨테이너 (게시글, 저장소 버튼)
   TopButtonContainer: styled.div`

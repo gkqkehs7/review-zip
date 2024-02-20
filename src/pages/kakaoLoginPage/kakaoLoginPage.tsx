@@ -51,13 +51,14 @@ const KakaoLoginPage: React.FC = () => {
             },
           );
 
-          const { accessToken } = response.data.result;
+          const { accessToken, refreshToken } = response.data.result;
 
           localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
 
           navigate('/mainPage');
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error('why', error);
         }
       }
     })();
