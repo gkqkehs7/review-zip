@@ -6,7 +6,7 @@ import LaptopComponent from '@/components/signinPageComponent/signinComponent/la
 import MobileComponent from '@/components/signinPageComponent/signinComponent/mobileComponent/mobileComponent';
 import { useNavigate } from 'react-router-dom';
 import { PostAxiosInstance } from '@/api/axios.methods';
-import { LocalSignInResponse } from '@/types/response.types';
+import { ErrorResponseType, LocalSignInResponse } from '@/types/response.types';
 
 const SigninPage: React.FC = () => {
   const isLargeDesktop: boolean = useMediaQuery({
@@ -50,9 +50,8 @@ const SigninPage: React.FC = () => {
       localStorage.setItem('refreshToken', refreshToken);
 
       navigate('/mainPage');
-    } catch (error) {
-      alert('이메일 또는 비밀번호를 다시 입력해주세요');
-      console.log(error);
+    } catch (error: any) {
+      alert(error.response.data.message);
     }
   }, [email, password]);
 

@@ -32,10 +32,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
     <styles.Container>
       <styles.InputContainer>
         {/* 휴대폰 번호입력 */}
-        <styles.InputTitle>
-          이메일 주소
-          <styles.CheckEmail>중복된 이메일입니다</styles.CheckEmail>
-        </styles.InputTitle>
+        <styles.InputTitle>이메일 주소</styles.InputTitle>
         <styles.Input
           type="email"
           placeholder="Enter your Email Adress"
@@ -50,9 +47,9 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         {/* 휴대폰 번호입력 */}
         <styles.InputTitle>
           휴대폰 번호
-          <styles.CheckPhoneNum>
+          {/* <styles.CheckPhoneNum>
             이미 가입된 휴대폰번호 입니다
-          </styles.CheckPhoneNum>
+          </styles.CheckPhoneNum> */}
         </styles.InputTitle>
         <styles.Input
           type="tel"
@@ -69,7 +66,6 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         {/* 사용자 성명입력 */}
         <styles.InputTitle>성명</styles.InputTitle>
         <styles.Input
-          type="text"
           placeholder="Enter your name"
           value={name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -80,14 +76,8 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
 
       <styles.InputContainer>
         {/* 사용자 닉네임 입력 */}
-        <styles.InputTitle>
-          사용자 닉네임
-          <styles.CheckNickName>
-            이미 사용중인 닉네임입니다
-          </styles.CheckNickName>
-        </styles.InputTitle>
+        <styles.InputTitle>사용자 닉네임</styles.InputTitle>
         <styles.Input
-          type="text"
           placeholder="Enter user name"
           value={nickName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -98,12 +88,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
 
       <styles.InputContainer>
         {/* 비밀번호 입력 */}
-        <styles.InputTitle>
-          비밀번호
-          <styles.CheckPassWord>
-            이미 사용중인 비밀번호입니다
-          </styles.CheckPassWord>
-        </styles.InputTitle>
+        <styles.InputTitle>비밀번호</styles.InputTitle>
         <styles.Input
           type="password"
           placeholder="Enter Password"

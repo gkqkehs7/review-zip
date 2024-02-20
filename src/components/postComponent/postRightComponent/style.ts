@@ -96,6 +96,8 @@ const styles = {
   `,
 
   PostContentContainer: styled.div`
+    display: flex;
+    justify-content: flex-start;
     flex: 1;
   `,
 
@@ -124,7 +126,9 @@ const styles = {
     font-weight: 600;
   `,
 
-  PostContent: styled.div``,
+  PostContent: styled.div`
+    text-align: left;
+  `,
 
   Buttons: styled.div`
     display: flex;
