@@ -176,7 +176,7 @@ const MyProfilePage: React.FC = () => {
       }
       setIsEditProfile(!isEditProfile);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

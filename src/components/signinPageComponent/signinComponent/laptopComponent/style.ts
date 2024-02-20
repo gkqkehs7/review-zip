@@ -193,13 +193,8 @@ const styles = {
     color: white;
     white-space: nowrap;
     cursor: pointer;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-    
   `,
-  ForgotPwd: styled.div`
+  ForgotPwd: styled(Link)`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,9 +204,6 @@ const styles = {
     color: white;
     white-space: nowrap;
     cursor: pointer;
-    &:hover {
-        transform: scale(1.1);
-    }
   `,
 
   PrivacyPolicy: styled.p`

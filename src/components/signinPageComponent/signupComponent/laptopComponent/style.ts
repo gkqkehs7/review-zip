@@ -217,15 +217,11 @@ const styles = {
     color: white;
   `,
 
-  SignInBtn: styled.div`
+  SignInBtn: styled(Link)`
     margin: 0px 0px 0px 15px;
     color: white;
     font-size: 100%;
     font-weight: bold;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.1);
-    }
   `,
 };
 export default styles;

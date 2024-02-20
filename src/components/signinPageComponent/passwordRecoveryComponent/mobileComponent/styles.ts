@@ -179,19 +179,7 @@ const styles = {
     height: 14px;
     margin: 0px 10px 0px 0px;
   `,
-  SignUp: styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 69px;
-  height: 16px;
-  margin: -80px 0px 0px 400px;
-  color: white;
-  font-weight: bold;
-  white-space: nowrap;
-  cursor: pointer;
-`,
+
   PrivacyPolicy: styled.p`
     width: fit-content;
     margin: 100px 0px 0px 0px;

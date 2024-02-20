@@ -1,8 +1,5 @@
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import { useNavigate } from 'react-router';
-
-
 
 interface MobileComponentProps {
   kakaoLoginUrl: string;
@@ -21,7 +18,6 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
   setEmail,
   setPassword,
 }) => {
-  const navigate = useNavigate();
   return (
     <styles.Container>
       <styles.Right>
@@ -31,7 +27,7 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
           <styles.InputTitle>EMAIL</styles.InputTitle>
           <styles.Input
             type="email"
-            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+            pattern=".+@example\.com"
             placeholder="Enter ID or Email Adress"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -65,10 +61,10 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         </styles.SignInBtn>
 
         <styles.Footer>
-          <styles.SignUp onClick={()=>navigate('/signupPage')}>Sign Up</styles.SignUp>
-          <styles.ForgotPwd onClick={()=>navigate('/passwordRecoveryPage')}>
-          Forgot the Password?
-        </styles.ForgotPwd>
+          <styles.SignUp>Sign Up</styles.SignUp>
+          <styles.ForgotPwd to="/passwordRecoveryPage">
+            Forgot the Password ?
+          </styles.ForgotPwd>
         </styles.Footer>
 
         {/*보안정책 */}

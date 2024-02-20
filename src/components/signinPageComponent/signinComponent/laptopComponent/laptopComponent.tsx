@@ -1,6 +1,5 @@
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
-import { useNavigate } from 'react-router';
 
 interface LaptopComponentProps {
   kakaoLoginUrl: string;
@@ -19,11 +18,6 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
   setEmail,
   setPassword,
 }) => {
-
-  const navigate = useNavigate();
-
-
-
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -40,7 +34,7 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
           <styles.InputTitle>EMAIL</styles.InputTitle>
           <styles.Input
             type="email"
-            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+            pattern=".+@example\.com"
             placeholder="Enter ID or Email Adress"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -77,9 +71,9 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
       </styles.Right>
 
       <styles.Footer>
-        <styles.SignUp onClick={()=>navigate('/signupPage')}>Sign Up</styles.SignUp>
-        <styles.ForgotPwd onClick={()=>navigate('/passwordRecoveryPage')}>
-          Forgot the Password?
+        <styles.SignUp>Sign Up</styles.SignUp>
+        <styles.ForgotPwd to="/passwordRecoveryPage">
+          Forgot the Password ?
         </styles.ForgotPwd>
       </styles.Footer>
     </styles.Container>

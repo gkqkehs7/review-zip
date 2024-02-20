@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './styles';
-import { useNavigate } from 'react-router';
-
 
 const DesktopComponent: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-
-
-  const navigate = useNavigate();
 
   return (
     // 인증방식이 정해지면 추후 완성
@@ -64,7 +59,7 @@ const DesktopComponent: React.FC = () => {
         {/* 보안정책 */}
         <styles.PrivacyPolicy>Privacy Policy</styles.PrivacyPolicy>
       </styles.Right>
-      <styles.SignUp onClick={()=>navigate('/signupPage')}>Sign Up</styles.SignUp>
+      <styles.SignUp to="/signupPage">Sign Up</styles.SignUp>
     </styles.Container>
   );
 };
