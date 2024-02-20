@@ -9,21 +9,26 @@ interface LocationSearchprops {
   mapRef: React.RefObject<kakao.maps.Map>;
   width: number;
   height: number;
-  setPlaceInnfo: React.Dispatch<React.SetStateAction<PlaceInfo>>;
+  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 
 const LocationSearchComponent: React.FC<LocationSearchprops> = ({
   mapRef,
   width,
   height,
-  setPlaceInnfo,
+  setplaceDataStroage,
 }) => {
   const [keyword, setkeyword] = useState('');
   const ListRef = useRef<HTMLUListElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    searchPlace(keyword, ListRef, mapRef, setPlaceInnfo);
+
+    if (width == 80 && height == 80) {
+      searchPlace(keyword, ListRef, mapRef, setplaceDataStroage, false);
+    } else if (width == 100 && height == 100) {
+      searchPlace(keyword, ListRef, mapRef, setplaceDataStroage, true);
+    }
   };
 
   const device = checkDevice();

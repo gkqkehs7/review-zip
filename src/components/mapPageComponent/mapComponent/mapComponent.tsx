@@ -11,59 +11,49 @@ import { PlaceInfo } from '@/types/common.types';
 interface MapComponentProps {
   width: 80 | 100;
   height: 80 | 100;
+  placeDataStroage: PlaceInfo[]; //placeData를 여러개 담을수 있는 데이터가필요하다.
   closeMapModal?: () => void;
-  savePlaceData?: React.Dispatch<React.SetStateAction<PlaceInfo | undefined>>;
+  setplaceDataStroage: React.Dispatch<React.SetStateAction<PlaceInfo[]>>;
 }
 
 const MapComponent: React.FC<MapComponentProps> = ({
   width,
   height,
+  placeDataStroage,
+  setplaceDataStroage,
   closeMapModal,
-  savePlaceData,
 }) => {
-  const device = checkDevice();
-
-  const mapRef = useRef<kakao.maps.Map>(null);
-
   const [previous, setPrevious] = useState<number>(6); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
-  // 장소에 대한 데이터를 담는 변수
-  const [placeData, setPlaceData] = useState<PlaceInfo>({
-    place_name: '',
-    address_name: '',
-    road_address_name: '',
-    phone: '',
-    x: '',
-    y: '',
-  });
 
-  // 장소 저장
+  //저장버튼 누를경우 해당값이 placeData에 담긴다.
+
   useEffect(() => {
-    if (savePlaceData) {
-      savePlaceData(placeData);
-    }
-  }, [placeData]);
+    console.log(placeDataStroage);
+  }, [placeDataStroage]);
 
+  const mapRef = useRef<kakao.maps.Map>(null);
   var times = height / 2.8;
 
+  const device = checkDevice();
   return (
-    <styles.Container>
-      <styles.InnerContainer
-        style={{
-          width: `${width}%`,
-          height: `${height}%`,
-        }}
-      >
+    <styles.Container
+      style={{
+        width: `${width}%`,
+        height: `${height}%`,
+      }}
+    >
+      <styles.InnerContainer>
         <LocationSearchComponent
           mapRef={mapRef}
           width={width}
           height={height}
-          setPlaceInnfo={setPlaceData}
+          setplaceDataStroage={setplaceDataStroage}
         />
         <styles.MapContainer>
           <GroupBarComponent direction="col" color="white" />
           <styles.CloseBtn onClick={closeMapModal} />
-          <styles.CloseBtn onClick={closeMapModal} />
+
           <Map
             id="map"
             ref={mapRef}
