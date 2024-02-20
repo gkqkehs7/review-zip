@@ -43,6 +43,7 @@ const styles = {
     max-height: 6vh;
     color: white;
     font-weight: bold;
+    text-align: left;
   `,
 
   HashTagContainer: styled.div`

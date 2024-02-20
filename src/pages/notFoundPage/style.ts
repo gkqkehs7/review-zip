@@ -9,7 +9,7 @@ const styles = {
     display: flex;
     width: 100vw;
     height: 100vh;
-    over-flow: hidden;
+    overflow: hidden;
   `,
   Left: styled.div`
     flex: 1;

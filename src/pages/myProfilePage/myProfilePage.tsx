@@ -92,7 +92,7 @@ const MyProfilePage: React.FC = () => {
     );
 
     setPosts(response.data.result);
-  }, []);
+  }, [userId]);
 
   // 스크랩한 게시글들 가져오기
   const getScrabPosts = useCallback(async () => {
@@ -100,7 +100,7 @@ const MyProfilePage: React.FC = () => {
       `/v1/users/${userId}/posts/scrabs`,
     );
     setScrabPosts(response.data.result);
-  }, []);
+  }, [userId]);
 
   // 유저들의 정보(닉네임, 프로필 이미지 등) 가져오기
   const getUserInfo = useCallback(async () => {
@@ -130,23 +130,29 @@ const MyProfilePage: React.FC = () => {
   }, [userId]);
 
   // 팔로우 하기
-  const followUser = async (user: User) => {
-    setUserInfo({ ...user, following: true });
-    try {
-      await PostAxiosInstance(`/v1/follows/users/${userId}`);
-    } catch (error) {
-      setUserInfo({ ...user, following: false });
-    }
-  };
-
-  const unFollowUser = async (user: User) => {
-    setUserInfo({ ...user, following: false });
-    try {
-      await DeleteAxiosInstance(`/v1/follows/users/${userId}`);
-    } catch (error) {
+  const followUser = useCallback(
+    async (user: User) => {
       setUserInfo({ ...user, following: true });
-    }
-  };
+      try {
+        await PostAxiosInstance(`/v1/follows/users/${userId}`);
+      } catch (error) {
+        setUserInfo({ ...user, following: false });
+      }
+    },
+    [userInfo],
+  );
+
+  const unFollowUser = useCallback(
+    async (user: User) => {
+      setUserInfo({ ...user, following: false });
+      try {
+        await DeleteAxiosInstance(`/v1/follows/users/${userId}`);
+      } catch (error) {
+        setUserInfo({ ...user, following: true });
+      }
+    },
+    [userInfo],
+  );
 
   const editProfile = async () => {
     try {
