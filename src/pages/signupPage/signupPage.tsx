@@ -34,6 +34,36 @@ const SignupPage: React.FC = () => {
 
   const requestSignup = useCallback(async () => {
     try {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email) {
+        return alert('이메일을 입력해주세요!');
+      }
+
+      if (!phoneNum) {
+        return alert('핸드폰 번호를 입력해주세요!');
+      }
+
+      if (!name) {
+        return alert('이름을 입력해주세요!');
+      }
+
+      if (!nickname) {
+        return alert('닉네임을 입력해주세요!');
+      }
+
+      if (!password) {
+        return alert('비밀번호를 입력해주세요!');
+      }
+
+      if (!emailRegex.test(email)) {
+        return alert('이메일 형식이 맞지 않습니다!');
+      }
+
+      if (password.length < 8) {
+        return alert('비밀번호는 8글자 이상 입력해주세요!');
+      }
+
       const response = await PostAxiosInstance('/v1/auth/local/sign-up', {
         email: email,
         phoneNum: phoneNum,
@@ -44,7 +74,6 @@ const SignupPage: React.FC = () => {
       navigate('/completeSigninPage');
     } catch (error: any) {
       alert(error.response.data.message);
-      console.log(error);
     }
   }, [email, phoneNum, name, nickname, password]);
   return (

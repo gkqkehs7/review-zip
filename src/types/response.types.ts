@@ -1,5 +1,16 @@
 import { User, Post, Hashtag, History } from './common.types';
 
+// Error Type
+interface ErrorResponseType {
+  response: {
+    data: {
+      code: string;
+      isSuccess: false;
+      message: string;
+    };
+  };
+}
+
 // KAKAO CONTROLLER
 // /v1/oauth/kakao
 interface KakaoLoginType {
@@ -70,6 +81,7 @@ interface CreateImagesResponse {
 }
 
 export type {
+  ErrorResponseType,
   KakaoLoginType,
   LocalSignInResponse,
   CreatePostResponse,
