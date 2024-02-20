@@ -72,7 +72,6 @@ function App() {
         <Route path="/*" element={<NotFoundPage />} />
       </Route>,
     ),
-    { basename: '/review-zip' },
   );
 
   return (
