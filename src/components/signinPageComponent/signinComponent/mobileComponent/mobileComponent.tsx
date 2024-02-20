@@ -8,6 +8,8 @@ interface MobileComponentProps {
   password: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
+  toSignUpPage: () => void;
+  toPasswordRecoveryPage: () => void;
 }
 
 const MobileComponent: React.FC<MobileComponentProps> = ({
@@ -17,6 +19,8 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
   password,
   setEmail,
   setPassword,
+  toSignUpPage,
+  toPasswordRecoveryPage,
 }) => {
   return (
     <styles.Container>
@@ -61,8 +65,8 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         </styles.SignInBtn>
 
         <styles.Footer>
-          <styles.SignUp>Sign Up</styles.SignUp>
-          <styles.ForgotPwd to="/passwordRecoveryPage">
+          <styles.SignUp onClick={toSignUpPage}>Sign Up</styles.SignUp>
+          <styles.ForgotPwd onClick={toPasswordRecoveryPage}>
             Forgot the Password ?
           </styles.ForgotPwd>
         </styles.Footer>

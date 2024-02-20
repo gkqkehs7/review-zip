@@ -167,6 +167,26 @@ const styles = {
     font-weight: bolder;
     color: black;
     border-radius: 7px;
+    margin-right: 10px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
+
+  SignOutButton: styled.div`
+    background-color: #957db3;
+    width: 95px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+    border-radius: 7px;
+    margin-right: 10px;
     cursor: pointer;
 
     &:hover {
@@ -181,7 +201,6 @@ const styles = {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20px;
 
     &:hover {
       opacity: 0.8;

@@ -6,6 +6,7 @@ const styles = {
     background-image: url('images/signinPage/Background.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -142,6 +143,10 @@ const styles = {
     width: 100%;
     height: 63px;
     margin: 55px 0px 80px 0px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   OrSignBtn: styled.p`
@@ -168,6 +173,10 @@ const styles = {
     color: white;
     font-size: 250%;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   Footer: styled.div`
@@ -181,7 +190,7 @@ const styles = {
 
     z-index: 3;
   `,
-  SignUp: styled(Link)`
+  SignUp: styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,8 +201,12 @@ const styles = {
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
-  ForgotPwd: styled(Link)`
+  ForgotPwd: styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,6 +217,10 @@ const styles = {
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   PrivacyPolicy: styled.p`

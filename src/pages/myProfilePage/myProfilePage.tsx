@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import { changeInputValue } from '@/hooks/chageInputValue';
 
@@ -40,6 +40,8 @@ import PostItem from '/images/myProfilePage/PostItemImage.png';
 
 const MyProfilePage: React.FC = () => {
   const device = checkDevice();
+
+  const navigate = useNavigate();
 
   const { userId } = useParams(); // me or number
 
@@ -182,11 +184,16 @@ const MyProfilePage: React.FC = () => {
 
   useEffect(() => {
     getPosts(); // 내 게시글 가져오기
-    getScrabPosts(); //스크랩한 게시글 가져오기
+    getScrabPosts(); //스크랩한 게시글 가져오기signOut
     getUserInfo(); // 유저 정보 가져오기
     getFollowingList(); // 팔로잉 리스트 가져오기
     getFollowerList(); // 팔로워 리스트 가져오기
   }, [userId]);
+
+  const signOut = () => {
+    localStorage.clear();
+    navigate('/signinPage');
+  };
 
   return (
     <>
@@ -318,6 +325,12 @@ const MyProfilePage: React.FC = () => {
                     >
                       프로필 수정
                     </styles.EditProfileButton>
+                  )}
+
+                  {!isFriend && (
+                    <styles.SignOutButton onClick={signOut}>
+                      로그아웃
+                    </styles.SignOutButton>
                   )}
 
                   <Link to="/mapPage">
