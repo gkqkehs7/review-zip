@@ -1,5 +1,6 @@
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
+import { useNavigate } from 'react-router';
 
 interface MobileComponentProps {
   requestSignup: () => Promise<void>;
@@ -50,9 +51,6 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         {/* 휴대폰 번호입력 */}
         <styles.InputTitle>
           휴대폰 번호
-          <styles.CheckPhoneNum>
-            이미 가입된 휴대폰번호 입니다
-          </styles.CheckPhoneNum>
         </styles.InputTitle>
         <styles.Input
           type="tel"
@@ -82,9 +80,6 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         {/* 사용자 닉네임 입력 */}
         <styles.InputTitle>
           사용자 닉네임
-          <styles.CheckNickName>
-            이미 사용중인 닉네임입니다
-          </styles.CheckNickName>
         </styles.InputTitle>
         <styles.Input
           type="text"
@@ -100,9 +95,6 @@ const MobileComponent: React.FC<MobileComponentProps> = ({
         {/* 비밀번호 입력 */}
         <styles.InputTitle>
           비밀번호
-          <styles.CheckPassWord>
-            이미 사용중인 비밀번호입니다
-          </styles.CheckPassWord>
         </styles.InputTitle>
         <styles.Input
           type="password"
