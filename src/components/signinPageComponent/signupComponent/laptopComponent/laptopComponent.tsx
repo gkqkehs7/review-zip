@@ -1,5 +1,6 @@
 import { changeInputValue } from '@/hooks/chageInputValue';
 import styles from './style';
+import { useNavigate } from 'react-router';
 
 interface LaptopComponentProps {
   requestSignup: () => Promise<void>;
@@ -28,6 +29,7 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
   setNickName,
   setPassword,
 }) => {
+  const navigate = useNavigate();
   return (
     <styles.Container>
       <styles.PerkyMilkyWay />
@@ -43,7 +45,6 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
           {/* 휴대폰 번호입력 */}
           <styles.InputTitle>
             이메일 주소
-            <styles.CheckEmail>중복된 이메일입니다</styles.CheckEmail>
           </styles.InputTitle>
           <styles.Input
             type="email"
@@ -59,9 +60,6 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
           {/* 휴대폰 번호입력 */}
           <styles.InputTitle>
             휴대폰 번호
-            <styles.CheckPhoneNum>
-              이미 가입된 휴대폰번호 입니다
-            </styles.CheckPhoneNum>
           </styles.InputTitle>
           <styles.Input
             type="tel"
@@ -91,9 +89,6 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
           {/* 사용자 닉네임 입력 */}
           <styles.InputTitle>
             사용자 닉네임
-            <styles.CheckNickName>
-              이미 사용중인 닉네임입니다
-            </styles.CheckNickName>
           </styles.InputTitle>
           <styles.Input
             type="text"
@@ -109,9 +104,6 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
           {/* 비밀번호 입력 */}
           <styles.InputTitle>
             비밀번호
-            <styles.CheckPassWord>
-              이미 사용중인 비밀번호입니다
-            </styles.CheckPassWord>
           </styles.InputTitle>
           <styles.Input
             type="password"
@@ -135,7 +127,7 @@ const LaptopComponent: React.FC<LaptopComponentProps> = ({
         {/* 로그인 페이지로 가는 Link */}
         <styles.SignInContainer>
           <p>계정이 있으신가요?</p>
-          <styles.SignInBtn to="/signInPage">로그인</styles.SignInBtn>
+          <styles.SignInBtn onClick={()=>navigate('/signinPage')}>로그인</styles.SignInBtn>
         </styles.SignInContainer>
       </styles.FormContainer>
     </styles.Container>

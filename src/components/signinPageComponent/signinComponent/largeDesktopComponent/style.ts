@@ -192,8 +192,12 @@ const styles = {
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
+
   `,
-  ForgotPwd: styled(Link)`
+  ForgotPwd: styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,6 +208,9 @@ const styles = {
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
   `,
 
   PrivacyPolicy: styled.p`
