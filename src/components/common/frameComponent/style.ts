@@ -41,7 +41,7 @@ const styles = {
     object-fit: cover;
     width: 100%;
     height: auto;
-    height: 300px;
+    height: 200px;
   `,
 
   StarContainer: styled.div`

@@ -8,6 +8,7 @@ const styles = {
     justify-content: center;
     align-items: center;
     position: relative;
+    background-color: transparent;
   `,
 };
 

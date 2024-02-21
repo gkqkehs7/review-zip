@@ -35,7 +35,7 @@ const styles = {
     position: absolute;
     width: 30px;
     height: 30px;
-    bottom: 0;
+    bottom: 25px;
     left: 49%;
     transform: translateX(-50%);
     z-index: 999;
