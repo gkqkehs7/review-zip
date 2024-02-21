@@ -24,8 +24,8 @@ const MapComponent: React.FC<MapComponentProps> = ({
   const [previous, setPrevious] = useState<number>(1); //지도의 이전 level을 나타내는 값
   const [deltaY, setDeltaY] = useState<number>(0);
   const [location, setLoacation] = useState<{ x: number; y: number }>({
-    x: 37.44939909637399,
-    y: 126.65435131686084,
+    x: 37.52052924893572,
+    y: 126.888016282421,
   });
 
   useEffect(() => {
